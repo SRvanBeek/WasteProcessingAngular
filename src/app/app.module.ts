@@ -9,6 +9,7 @@ import { OrderListComponent } from './orders/order-list/order-list.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OrderComponent } from './orders/order-list/order/order.component';
 import { OrderDetailsComponent } from './orders/order-list/order-details/order-details.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { OrderDetailsComponent } from './orders/order-list/order-details/order-d
     OrderListComponent,
     OrdersComponent,
     OrderComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    AdminPanelComponent,
   ],
   imports: [
     BrowserModule,
