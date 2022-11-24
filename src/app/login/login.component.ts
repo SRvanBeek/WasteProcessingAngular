@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  imageURL: string = "";
+  loginImagePath: string = "assets/images/Login-Image.png";
+  logoImagePath: string = "assets/images/logo_dark_big.png";
 }

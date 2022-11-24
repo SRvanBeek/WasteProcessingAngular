@@ -9,10 +9,9 @@
 #container {
   display: grid;
   justify-content: center;
+  width: 80%;
+  height: 80%;
+  margin: auto;
 }
 
-//@media (min-width: 1025px) {
-//  .h-custom-2 {
-//    height: 100%;
-//  }
-//}
+
