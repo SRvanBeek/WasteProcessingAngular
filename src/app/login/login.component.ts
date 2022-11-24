@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from "../auth.service";
-import {Router} from "@angular/router";
+import {AuthService} from "../_services/auth.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -12,27 +13,56 @@ export class LoginComponent {
   loginImagePath: string = "assets/images/Login-Image.png";
   logoImagePath: string = "assets/images/logo_dark_big.png";
 
-  form: FormGroup;
+  loginForm!: FormGroup;
+  loading = false;
+  submitted = false;
+  error = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
-    this.form = this.fb.group({
-      username: ['', Validators.required],
-      password: ['',Validators.required]
-    })
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService
+  ) {
+    if (this.authService.tokenValue) {
+      this.router.navigate(['/']);
+    }
   }
 
+  ngOnInit() {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+
+  get f() {
+    return this.loginForm.controls;
+  }
 
   login() {
-    const value = this.form.value;
+    this.submitted = true;
 
-    if(value.username && value.password) {
-      this.authService.login(value.username, value.password);
-      console.log(value.username)
-      console.log(value.password)
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      return;
     }
-    else {
-      console.log("faied auth")
 
-    }
+    this.error = '';
+    this.loading = true;
+    this.authService.login(this.f['username'].value, this.f['password'].value)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          // get return url from route parameters or default to '/'
+          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          this.router.navigate([returnUrl]);
+        },
+        error: error => {
+          this.error = error;
+          this.loading = false;
+        }
+      });
   }
 }
+
