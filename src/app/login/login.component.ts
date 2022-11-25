@@ -19,6 +19,7 @@ export class LoginComponent {
   loading = false;
   submitted = false;
   error = '';
+  failedAuth = false;
 
   constructor(
     private fb: FormBuilder,
@@ -53,6 +54,7 @@ export class LoginComponent {
 
     this.error = '';
     this.loading = true;
+    this.failedAuth = false;
     this.authService.login(this.f['username'].value, this.f['password'].value)
       .pipe(first())
       .subscribe({
@@ -60,28 +62,13 @@ export class LoginComponent {
           // get return url from route parameters or default to '/'
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
           this.router.navigate([returnUrl]);
-
         },
         error: error => {
           this.error = error;
           this.loading = false;
+          this.failedAuth = true;
         }
       });
-  }
-
-  getData(): Observable<string[]> {
-    return this.http.get<any>(environment.apiUrl+'/api/orders');
-  }
-
-  test() {
-    this.getData().subscribe({
-      next: data => {
-        console.log(data);
-      },
-      error: error => {
-        console.error(error);
-      }
-    });
   }
 }
 

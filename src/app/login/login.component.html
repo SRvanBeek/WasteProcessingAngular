@@ -15,7 +15,7 @@
 
             <form [formGroup]="loginForm" style="width: 23rem;">
 
-              <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
+              <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Welcome Back</h3>
 
               <div class="form-outline mb-4">
                 <input type="username" id="formUsername" class="form-control form-control-lg"
@@ -33,9 +33,8 @@
                 <button [disabled]="loading" class="btn btn-info btn-lg btn-block" type="button" (click)="login()">
                   Login
                 </button>
+                <p [hidden]="!failedAuth" class="mt-1" style="color: red">Invalid credentials, please try again</p>
               </div>
-              <button class="btn btn-warning" (click)="test()"></button>
-
               <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
             </form>
 
