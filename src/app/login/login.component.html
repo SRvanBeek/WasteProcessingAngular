@@ -4,9 +4,10 @@
       <div class="row">
         <div class="col-sm-6 text-black">
 
-          <div class="px-5 ms-xl-4">
+          <div >
             <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>
             <img src="{{ logoImagePath }}"
+                 class="img-fluid"
                  alt="Logo image">
           </div>
 
@@ -27,7 +28,7 @@
               </div>
 
               <div class="pt-1 mb-4">
-                <button class="btn btn-info btn-lg btn-block" type="button" (click)="login()">Login</button>
+                <button [disabled]="loading" class="btn btn-info btn-lg btn-block" type="button" (click)="login()">Login</button>
               </div>
 
               <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
@@ -38,11 +39,12 @@
           </div>
 
         </div>
-        <div class="col-sm-6 px-0 d-none d-sm-block">
+        <div class="col px-0 d-none d-sm-block">
           <img src="{{ loginImagePath }}"
-               alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
+               alt="Login image" class="vh-100 img-fluid" style="object-fit: cover; ">
         </div>
       </div>
+      <button class="btn btn-warning" (click)="test()"></button>
     </div>
   </section>
 </div>

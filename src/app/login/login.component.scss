@@ -1,5 +1,5 @@
 .bg-image-vertical {
-  position: static;
+  position: relative;
   overflow: hidden;
   background-repeat: no-repeat;
   background-position: right center;
@@ -8,10 +8,10 @@
 
 #container {
   display: grid;
-  justify-content: center;
-  width: 80%;
+  justify-content: right;
+  width: 90%;
   height: 80%;
-  margin: auto;
+  margin-left: auto;
 }
 
 

@@ -3,8 +3,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {JwtToken} from "../_models/JwtToken";
+import {environment} from "../../environments/environment";
 
-const apiUrl: string = 'http://localhost:8080/api/login'
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +29,6 @@ export class AuthService {
     let options = {
       headers: new HttpHeaders({
         'content-type': 'application/x-www-form-urlencoded',
-        // 'Access-Control-Request-Method': 'POST',
-        // 'Access-Control-Request-Headers': 'content-type',
         }
       )
     };
@@ -39,12 +37,11 @@ export class AuthService {
     body.set('username', username);
     body.set('password', password);
 
-    return this.http.post<any>(apiUrl, body, options)
+    return this.http.post<any>(environment.apiUrl+'/api/login', body, options)
       .pipe(map(token => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('JwtToken', JSON.stringify(token));
         this.tokenSubject.next(token);
-        console.log(token)
         return token;
       }));
   }
