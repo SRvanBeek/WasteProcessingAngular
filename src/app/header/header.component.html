@@ -1,22 +1,62 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark noPadding" style="background-color: #3D4B62;">
-
+<nav class="navbar navbar-expand-lg navbar-dark noPadding" style="background-color: #3D4B62;">
   <img class="navbar-brand" src="assets/white_logo.png" alt="Logo Van der Lelie"/>
-
-  <div class="collapse navbar-collapse h-100" id="navbarNav">
+  <div class="navbar-collapse h-100">
     <ul class="navbar-nav  ms-auto">
       <li [routerLinkActive]="['active']" class="nav-item">
-        <a [routerLink]="['WasteProcessing']" class="nav-link" href="#">Waste Processing</a>
+        <a [routerLink]="['WasteProcessing']" class="nav-link">
+          <span data-bs-target=".collapse.show" data-bs-toggle="collapse">Waste Processing</span></a>
       </li>
-      <li [routerLinkActive]="['active']" class="nav-item">
-        <a [routerLink]="['orders']" class="nav-link" href="app/orders">Orders</a>
+      <li class="nav-item">
+        <a class="nav-link" type="button" data-bs-toggle="collapse" data-bs-target="#history"
+           aria-controls="collapseExample" aria-expanded="false" aria-label="Toggle navigation">History</a>
       </li>
-      <li [routerLinkActive]="['active']" class="nav-item">
-        <a [routerLink]="['adminPanel']" class="nav-link" href="app/admin-panel">Admin Panel</a>
+      <li class="nav-item">
+        <a class="nav-link" type="button" data-bs-toggle="collapse" data-bs-target="#admin"
+           aria-controls="collapseExample" aria-expanded="false" aria-label="Toggle navigation">Admin Panel</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Log Out</a>
       </li>
     </ul>
   </div>
-
 </nav>
+
+<div id="collapsable">
+  <div class="collapse" id="history" data-bs-parent="#collapsable">
+    <div class="p-3 subMenu" style="background-color: #283242;">
+      <ul class="navbar-nav  ms-auto">
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a [routerLink]="['orders']" class="nav-link"><span data-bs-target=".collapse.show"
+                                                              data-bs-toggle="collapse">Orders</span></a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a [routerLink]="['adminPanel']" class="nav-link"><span data-bs-target=".collapse.show"
+                                                                  data-bs-toggle="collapse">Waste</span></a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a [routerLink]="['storage']" class="nav-link"><span data-bs-target=".collapse.show"
+                                                               data-bs-toggle="collapse">Storage</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="collapse" id="admin" data-bs-parent="#collapsable">
+    <div class="p-3 subMenu" style="background-color: #283242;">
+      <ul class="navbar-nav  ms-auto">
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a [routerLink]="['a']" class="nav-link"><span data-bs-target=".collapse.show"
+                                                         data-bs-toggle="collapse">Categories</span></a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a [routerLink]="['b']" class="nav-link"><span data-bs-target=".collapse.show"
+                                                         data-bs-toggle="collapse">Register</span></a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a [routerLink]="['c']" class="nav-link"><span data-bs-target=".collapse.show"
+                                                         data-bs-toggle="collapse">Customer</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

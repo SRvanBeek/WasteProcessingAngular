@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -10,6 +9,8 @@ import { OrdersComponent } from './orders/orders.component';
 import { OrderComponent } from './orders/order-list/order/order.component';
 import { OrderDetailsComponent } from './orders/order-list/order-details/order-details.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
