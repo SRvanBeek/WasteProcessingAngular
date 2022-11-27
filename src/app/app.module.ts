@@ -10,6 +10,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { OrderComponent } from './orders/order-list/order/order.component';
 import { OrderDetailsComponent } from './orders/order-list/order-details/order-details.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

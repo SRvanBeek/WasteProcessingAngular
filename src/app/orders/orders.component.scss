@@ -41,7 +41,7 @@
   margin: 25px auto;
 }
 .styled-table thead tr {
-  background-color: #3D4B62;
+  background-color: rgba(61, 75, 98, 1);
   color: #ffffff;
   text-align: center;
 }
@@ -62,12 +62,13 @@
 .styled-table tbody tr:last-of-type {
   border-bottom: 1px solid #009879;
 }
-.vergrootglas{
+.vergrootglas {
   height: 40px;
   width: 40px;
   margin-left: 25px;
   margin-bottom: -15px;
   position: center;
 }
+.styled-table tr:nth-child(even){background-color: rgba(61, 75, 98, 0.2);}
 
 
