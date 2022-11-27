@@ -1,28 +1,41 @@
 .box{
-  position: relative;
-  top: 10%;
+  margin-top: 20vh;
+
 }
 
 .btn-primary{
-  border-radius: 15%;
+  border-radius: 15px;
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 14px;
   margin-right: 25px;
-  margin-left: 500px;
+  margin-left: 55%;
   width: 5%;
 
 }
 .btn-primary:hover{
-  background-color: lightblue;
+  background-color:  rgba(61, 75, 98, 0.2);
 }
 .btn-secondary:hover{
-  background-color: lightblue;
+  background-color:  rgba(61, 75, 98, 0.2);
+}
+.searchknop{
+  all: unset;
+  font-size: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-right: 25px;
+  margin-left: 10px;
+  cursor: pointer;
+
+
+
 }
 .btn-secondary{
-  border-radius: 15%;
+  border-radius: 15px;
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
@@ -36,9 +49,9 @@
   border-collapse: collapse;
   font-size: 0.9em;
   font-family: sans-serif;
-  min-width: 400px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   margin: 25px auto;
+  width: 75%;
 }
 .styled-table thead tr {
   background-color: rgba(61, 75, 98, 1);
@@ -48,7 +61,7 @@
 .styled-table th,
 .styled-table td {
   padding: 12px 15px;
-  width: 10%;
+  width: 20%;
 }
 
 .styled-table tbody tr {
@@ -70,5 +83,11 @@
   position: center;
 }
 .styled-table tr:nth-child(even){background-color: rgba(61, 75, 98, 0.2);}
+
+.styled-table th:first-child,
+.styled-table td:first-child {
+  width: 3%;
+}
+
 
 
