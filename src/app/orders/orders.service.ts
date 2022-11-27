@@ -6,6 +6,7 @@ import { HttpClient } from "@angular/common/http";
   providedIn: 'root'
 })
 export class OrdersService {
+
   private baseUrl = "http://localhost:8080/api/orders"
   constructor(private http: HttpClient) { }
   getData(): Observable<string[]> {

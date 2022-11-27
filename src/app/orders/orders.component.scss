@@ -1,11 +1,36 @@
+.box{
+  position: relative;
+  top: 10%;
+}
+
 .btn-primary{
-  background-color: blue;
-  border-radius: 50%;
-  padding: 15px 32px;
+  border-radius: 15%;
+  padding: 5px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
+  margin-right: 25px;
+  margin-left: 500px;
+  width: 5%;
+
+}
+.btn-primary:hover{
+  background-color: lightblue;
+}
+.btn-secondary:hover{
+  background-color: lightblue;
+}
+.btn-secondary{
+  border-radius: 15%;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-right: 25px;
+  margin-left: 10px;
+  width: 5%;
 }
 .styled-table {
   border-collapse: collapse;
@@ -16,30 +41,33 @@
   margin: 25px auto;
 }
 .styled-table thead tr {
-  background-color: #009879;
+  background-color: #3D4B62;
   color: #ffffff;
-  text-align: left;
+  text-align: center;
 }
 .styled-table th,
 .styled-table td {
   padding: 12px 15px;
-}
-.styled-table tbody tr.active-row {
-  font-weight: bold;
-  color: #009879;
-}
-.styled-table tbody tr {
-  border-bottom: 1px solid #dddddd;
+  width: 10%;
 }
 
-.styled-table tbody tr:nth-of-type(even) {
-  background-color: #f3f3f3;
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+  border-left: 1px solid;
+}
+.styled-table tbody tr td {
+  border-left: 1px solid;
 }
 
 .styled-table tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
+  border-bottom: 1px solid #009879;
 }
-.div{
-  background-color: blue;
+.vergrootglas{
+  height: 40px;
+  width: 40px;
+  margin-left: 25px;
+  margin-bottom: -15px;
+  position: center;
 }
+
 
