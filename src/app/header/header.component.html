@@ -1,1 +1,108 @@
-<p>header works!</p>
+<nav class="navbar navbar-dark navbar-expand-lg  noPadding" id="navBar" style="background-color: #3D4B62;">
+  <div class="container-fluid">
+    <img class="navbar-brand" src="assets/white_logo.png" alt="Logo Van der Lelie"/>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg"
+            aria-controls="navbarOffcanvasLg">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-dark " tabindex="-1" id="navbarOffcanvasLg"
+         aria-labelledby="navbarOffcanvasLgLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav  ms-auto">
+          <li [routerLinkActive]="['active']" class="nav-item">
+            <a [routerLink]="['WasteProcessing']" class="nav-link">
+              <span data-bs-target=".collapse.show" data-bs-toggle="collapse">Waste Processing</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" type="button" id="historyButton" data-bs-toggle="collapse"
+               [attr.data-bs-target]="'#'+ typeHistory"
+               [attr.aria-controls]="typeHistory" aria-expanded="false" aria-label="Toggle navigation">History</a>
+          </li>
+          <div class="collapse d-lg-none" id="historyOff" data-bs-parent="#collapsable">
+            <div class="p-3 subMenuOff">
+              <ul class="navbar-nav  ms-auto">
+                <li class="nav-item" [routerLinkActive]="['active']">
+                  <a [routerLink]="['orders']" class="nav-link"><span data-bs-target=".offcanvas"
+                                                                      data-bs-toggle="offcanvas">Orders</span></a>
+                </li>
+                <li class="nav-item" [routerLinkActive]="['active']">
+                  <a [routerLink]="['adminPanel']" class="nav-link"><span data-bs-target=".offcanvas"
+                                                                          data-bs-toggle="offcanvas">Waste</span></a>
+                </li>
+                <li class="nav-item" [routerLinkActive]="['active']">
+                  <a [routerLink]="['storage']" class="nav-link"><span data-bs-target=".offcanvas"
+                                                                       data-bs-toggle="offcanvas">Storage</span></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <li class="nav-item">
+            <a class="nav-link" type="button" id="adminButton" data-bs-toggle="collapse"
+               [attr.data-bs-target]="'#'+ typeAdmin"
+               [attr.aria-controls]="typeAdmin" aria-expanded="false" aria-label="Toggle navigation">Admin Panel</a>
+          </li>
+          <div class="collapse d-lg-none " id="adminOff" data-bs-parent="#collapsable">
+            <div class="p-3 subMenuOff">
+              <ul class="navbar-nav  ms-auto">
+                <li class="nav-item" [routerLinkActive]="['active']">
+                  <a [routerLink]="['a']" class="nav-link"><span data-bs-target=".offcanvas"
+                                                                 data-bs-toggle="offcanvas">Categories</span></a>
+                </li>
+                <li class="nav-item" [routerLinkActive]="['active']">
+                  <a [routerLink]="['b']" class="nav-link"><span data-bs-target=".offcanvas"
+                                                                 data-bs-toggle="offcanvas">Register</span></a>
+                </li>
+                <li class="nav-item" [routerLinkActive]="['active']">
+                  <a [routerLink]="['c']" class="nav-link"><span data-bs-target=".offcanvas"
+                                                                 data-bs-toggle="offcanvas">Customer</span></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Log Out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div id="collapsable">
+  <div class="collapse" id="history" data-bs-parent="#collapsable">
+    <div class="p-3 subMenu d-none d-lg-block" style="background-color: #283242;">
+      <ul class="navbar-nav  ms-auto">
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a [routerLink]="['orders']" class="nav-link">Orders</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a [routerLink]="['adminPanel']" class="nav-link">Waste</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a [routerLink]="['storage']" class="nav-link">Storage</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="collapse " id="admin" data-bs-parent="#collapsable">
+    <div class="p-3 subMenu d-none d-lg-block" style="background-color: #283242;">
+      <ul class="navbar-nav  ms-auto">
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a [routerLink]="['a']" class="nav-link">Categories</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a [routerLink]="['b']" class="nav-link">Register</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="['active']">
+          <a [routerLink]="['c']" class="nav-link">Customer</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
