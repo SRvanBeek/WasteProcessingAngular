@@ -56,12 +56,12 @@
   font-family: 'Maven Pro', sans-serif;
 }
 
-.navbar-nav > .subMenuOff > .active > a, .navbar-toggler {
-  color: white;
+.subMenuOff > .navbar-nav > .active > a, {
+  color: #4BC8B6;
 }
 
-.navbar-nav > .subMenu > .active > a, .navbar-toggler {
-  color: black;
+.subMenu > .navbar-nav > .active > a {
+  color: #4BC8B6 !important;
 }
 
 .navbar-nav > .active {
@@ -81,7 +81,7 @@
 
 @keyframes slideIn {
   from {
-    border-bottom: none;
+    border-bottom: 0;
   }
   to {
     border-bottom: 6px solid #4BC8B6;
