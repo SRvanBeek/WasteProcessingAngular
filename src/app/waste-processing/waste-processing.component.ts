@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import jsPDF from 'jspdf';
 import {Waste} from "./waste.model";
 import {WasteService} from "./waste.service";
 
@@ -40,5 +41,19 @@ export class WasteProcessingComponent implements OnInit{
       }
       }
     );
+  }
+
+  @ViewChild('content',{static: false}) el!: ElementRef;
+
+
+  makePdf() {
+    let pdf = new jsPDF('p', 'pt', 'a4');
+
+    pdf.html(this.el.nativeElement, {
+      callback: (pdf) => {
+        pdf.save("label.pdf");
+      }
+     
+})
   }
 }
