@@ -1,13 +1,13 @@
 export class Waste {
-  constructor(afvalId: string, artikelId: string, metrage: string, categories: string) {
+  constructor(afvalId: number, artikelId: number, metrage: number, categories: string) {
     this.afvalId = afvalId;
     this.artikelId = artikelId;
     this.metrage = metrage;
     this.categories = categories;
   }
 
-  afvalId!: string;
-  artikelId!: string;
-  metrage!: string;
+  afvalId!: number;
+  artikelId!: number;
+  metrage!: number;
   categories!: string;
 }

@@ -1,30 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Waste} from "./waste.model";
-import {WasteProcessingComponent} from "./waste-processing.component";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class WasteService {
 
-  private baseUrl = "http://localhost:8080/api/snij";
-
   constructor(private http: HttpClient) { }
 
-  getData(): Observable<any> {
-    return this.http.get<any>(this.baseUrl,{responseType:'String'});
+  getSnijData(): Observable<string> {
+    return this.http.get(environment.apiUrl+ '/api/snij', {responseType: 'text'});
   }
 
-  test() {
-    this.getData().subscribe({
-      next: data => {
-        console.log(data);
-      },
-      error: error => {
-        console.error(error);
-      }
-    });
+  getWasteCategorieData(articleId: any): Observable<string> {
+    return this.http.get(environment.apiUrl+ '/api/waste/perArticle/' + articleId, {responseType: 'text'});
+  }
+  getOrderByArticleData(articleId: any): Observable<string> {
+    return this.http.get(environment.apiUrl+ '/api/orders/perArticle/' + articleId, {responseType: 'text'});
   }
 }
