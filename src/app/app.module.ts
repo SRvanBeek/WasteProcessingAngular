@@ -18,10 +18,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
   declarations: [
     AppComponent,
     HeaderComponent,
-    OrderListComponent,
-    OrdersComponent,
-    OrderComponent,
-    OrderDetailsComponent,
     AdminPanelComponent,
   ],
   imports: [
