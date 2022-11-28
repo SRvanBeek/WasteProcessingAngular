@@ -10,22 +10,21 @@
   <table>
     <thead>
       <tr>
-        <th>Naam</th>
-        <th>Odernummer</th>
-        <th>Categorieen</th>
+        <th>AfvalId</th>
+        <th>ArtikelId</th>
         <th>Metrage</th>
         <th>Samenstellingen</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>Fiorella</td>
-        <td>123456</td>
-        <td>Groot</td>
-        <td>1</td>
+        <td>{{waste?.afvalId}}</td>
+        <td>{{waste?.artikelId}}</td>
+        <td>{{waste?.metrage}}</td>
+        <td>{{waste?.categories}}</td>
         <td>80%Poly20%katoen</td>
       </tr>
     </tbody>
   </table>
-  <button> (click)="makePdf()"> Genereer PDF</button>
+  <button (click)="makePdf()"> Genereer PDF</button>
 </div>

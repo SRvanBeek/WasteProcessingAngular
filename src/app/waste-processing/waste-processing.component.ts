@@ -4,6 +4,7 @@ import {Waste} from "./waste.model";
 import {WasteService} from "./waste.service";
 import {Order} from "../orders/order-list/order/order.model";
 import {OrderInterface} from "../orders/order-list/order/order-interface";
+import jsPDF from 'jspdf';
 
 
 @Component({
@@ -80,6 +81,17 @@ export class WasteProcessingComponent implements OnInit{
 
   @ViewChild('content',{static: false}) el!: ElementRef;
 
+
+  makePdf() {
+    let pdf = new jsPDF('p', 'pt', 'a4');
+
+    pdf.html(this.el.nativeElement, {
+      callback: (pdf) => {
+        pdf.save("label.pdf");
+      }
+
+})
+  }
 
 
 }
