@@ -12,6 +12,7 @@ import { OrderComponent } from './orders/order-list/order/order.component';
 import { OrderDetailsComponent } from './orders/order-list/order-details/order-details.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {WasteProcessingComponent} from "./waste-processing/waste-processing.component";
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     OrderComponent,
     OrderDetailsComponent,
     AdminPanelComponent,
+    WasteProcessingComponent,
   ],
   imports: [
     BrowserModule,
