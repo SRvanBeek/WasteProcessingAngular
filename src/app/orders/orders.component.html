@@ -1,16 +1,17 @@
-<div id = box>
-  <ul>
+<div class="box">
     <form id="form">
-      <button type="button" class="btn-primary" id="button-pdf" (click)="OrdersService.test()">PDF</button>
-      <button type="button" class="btn-primary" (click)="OrdersService.test()">delete</button>
+      <button type="button" class="btn-primary" id="button-pdf" (click)="OrdersService.test()" >PDF</button>
+      <button type="button" class="btn-secondary" >delete</button>
       <input type="search" id="query" name="q" placeholder="Search...">
-      <button type="button" class="btn btn-primary" (click)="OrdersService.test()">Search</button>
+<!--      <input type="image" class="vergrootglas" src="assets/vergrootglas.png">-->
+      <button type="button" class="searchknop" >🔍</button>
     </form>
-  </ul>
-  <table class="styled-table" style="margin-left: 100px">
+</div>
+<div>
+  <table class="styled-table">
     <thead>
     <tr>
-      <th></th>
+      <th class="check"></th>
       <th>ID</th>
       <th>ArticleID</th>
       <th>CustomerID</th>
@@ -19,14 +20,14 @@
     </thead>
     <tbody>
     <tr>
-      <td><input type="checkbox" id="order1"></td>
+      <td class="check"><input type="checkbox" id="order1"></td>
       <td>Dom</td>
       <td>6000</td>
       <td>3</td>
       <td>24</td>
     </tr>
     <tr class="active-row">
-      <td><input type="checkbox" id="order2"></td>
+      <td class="check"><input type="checkbox" id="order2"></td>
       <td>Melissa</td>
       <td>5150</td>
       <td>6</td>
@@ -34,5 +35,4 @@
     </tr>
     </tbody>
   </table>
-
 </div>
