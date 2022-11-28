@@ -40,7 +40,7 @@
               </ul>
             </div>
           </div>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isAdmin">
             <a class="nav-link" type="button" id="adminButton" data-bs-toggle="collapse"
                [attr.data-bs-target]="'#'+ typeAdmin"
                [attr.aria-controls]="typeAdmin" aria-expanded="false" aria-label="Toggle navigation">Admin Panel</a>
@@ -64,7 +64,7 @@
             </div>
           </div>
           <li class="nav-item">
-            <a class="nav-link" href="#">Log Out</a>
+            <a [routerLink]="['']" class="nav-link" (click)="logout()">Log Out</a>
           </li>
         </ul>
       </div>
