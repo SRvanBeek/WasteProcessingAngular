@@ -19,7 +19,6 @@ export class OrdersComponent {
   showOrder(){
     this.OrdersService.getOrders().subscribe({
       next: value => {
-        //console.log(value);
         this.orderList  = <Order[]>JSON.parse(value)
 
 
