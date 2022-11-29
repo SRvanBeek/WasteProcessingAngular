@@ -13,6 +13,16 @@ export class OrdersComponent {
   orderList: Order[];
 
   constructor(public OrdersService: OrdersService) {
+    this.OrdersService.getOrders().subscribe({
+      next: value => {
+        console.log(value)
+        this.orderList = value;
+        // this.orderList = <Order[]>JSON.parse(value)
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 
 
@@ -27,6 +37,7 @@ export class OrdersComponent {
         console.log(err);
       }
     });
+
   }
 
 
