@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {JwtToken} from "../_models/JwtToken";
-import {environment} from "../../environments/environment";
+import {environment} from "../../../environments/environment";
 
 
 @Injectable({
