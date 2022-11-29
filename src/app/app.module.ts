@@ -8,8 +8,8 @@ import {JwtInterceptor} from "./shared/_helper/jwt.interceptor";
 import {AdminPanelComponent} from './admin-panel/admin-panel.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {WasteProcessingModule} from "./waste-processing/waste-processing.module";
-import {WasteProcessingComponent} from "./waste-processing/waste-processing.component";
 import {SharedModule} from "./shared/shared.module";
+import {HeaderModule} from "./header/header.module";
 
 
 @NgModule({
@@ -23,7 +23,8 @@ import {SharedModule} from "./shared/shared.module";
     HttpClientModule,
     LoginModule,
     WasteProcessingModule,
-    SharedModule
+    SharedModule,
+    HeaderModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
