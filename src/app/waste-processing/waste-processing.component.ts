@@ -32,7 +32,6 @@ export class WasteProcessingComponent implements OnInit{
   showAfval() {
     this.wasteService.getSnijData().subscribe({
       next: value => {
-        console.log(value);
         this.message = value;
         let splitted = value.split(", ");
         this.showDetailsVanArtikel(splitted[1], splitted[0]);
@@ -63,7 +62,6 @@ export class WasteProcessingComponent implements OnInit{
       this.wasteService.getOrderByArticleData(articleId).subscribe({
           next: value => {
             let order: OrderInterface = JSON.parse(value);
-            console.log(order);
             this.order = new Order(order.id, order.customerID, order.artikelID, order.metrage);
             this.details = 'Ordernummer: ' + this.order.id;
             this.metrage = 'Metrage: ' + order.metrage;

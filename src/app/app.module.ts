@@ -7,6 +7,7 @@ import {LoginModule} from "./login/login.module";
 import {JwtInterceptor} from "./shared/_helper/jwt.interceptor";
 import {AdminPanelComponent} from './admin-panel/admin-panel.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {WasteProcessingModule} from "./waste-processing/waste-processing.module";
 import {WasteProcessingComponent} from "./waste-processing/waste-processing.component";
 import {SharedModule} from "./shared/shared.module";
 
@@ -15,13 +16,13 @@ import {SharedModule} from "./shared/shared.module";
   declarations: [
     AppComponent,
     AdminPanelComponent,
-    WasteProcessingComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     LoginModule,
+    WasteProcessingModule,
     SharedModule
   ],
   providers: [
