@@ -1,5 +1,30 @@
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab animi assumenda culpa doloribus
-  eum fugiat incidunt
-  libero nihil pariatur porro, possimus quia quo rem sequi tempore temporibus veniam voluptate voluptates. Animi
-  assumenda delectus, dolor dolorum eveniet exercitationem iure, nemo numquam officiis pariatur repudiandae voluptates.
-  A aperiam deserunt quos sed sequi.</p>
+<div class="box">
+  <form id="form">
+    <button type="button" class="btn-primary" id="button-pdf" (click)="showOrder()">Show Orders</button>
+    <button type="button" class="btn-secondary">delete</button>
+    <input type="search" id="query" name="q" placeholder="Search...">
+    <button type="button" class="searchknop">🔍</button>
+  </form>
+</div>
+<div class="scrollMenu">
+  <table class="styled-table float-end">
+    <thead>
+    <tr>
+      <th class="check"></th>
+      <th>ID</th>
+      <th>ArticleID</th>
+      <th>CustomerID</th>
+      <th>Metrage</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of orderList">
+      <td class="check"><input type="checkbox" id="order1"></td>
+      <td>{{item.id}}</td>
+      <td>{{item.artikelID}}</td>
+      <td>{{item.customerID}}</td>
+      <td>{{item.metrage}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
