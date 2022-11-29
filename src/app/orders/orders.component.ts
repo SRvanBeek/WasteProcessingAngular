@@ -30,9 +30,9 @@ export class OrdersComponent {
 
   disableOrder() {
     for (let order of this.checkedList) {
-      console.log(order)
-      // this.OrdersService.disableOrderByID(order).subscribe();
+      this.OrdersService.disableOrderByID(order).subscribe();
     }
+    this.showOrder();
   }
 
   showOrder() {
@@ -52,9 +52,7 @@ export class OrdersComponent {
   }
 
   checked(order: Order) {
-    let bool = this.checkedList.includes(order);
-    console.log(bool)
-    return bool;
+    return this.checkedList.includes(order);
   }
 
   onCheck(order: Order) {
