@@ -1,30 +1,38 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {LoginModule} from "./login/login.module";
+import {JwtInterceptor} from "./shared/_helper/jwt.interceptor";
+import {AdminPanelComponent} from './admin-panel/admin-panel.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {WasteProcessingModule} from "./waste-processing/waste-processing.module";
+import {SharedModule} from "./shared/shared.module";
+import {HeaderModule} from "./header/header.module";
+import {OrdersModule} from "./orders/orders.module";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { HeaderComponent } from './header/header.component';
-import { OrderListComponent } from './orders/order-list/order-list.component';
-import { OrdersComponent } from './orders/orders.component';
-import { OrderComponent } from './orders/order-list/order/order.component';
-import { OrderDetailsComponent } from './orders/order-list/order-details/order-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    HeaderComponent,
-    OrderListComponent,
-    OrdersComponent,
-    OrderComponent,
-    OrderDetailsComponent
+    AdminPanelComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    LoginModule,
+    WasteProcessingModule,
+    SharedModule,
+    HeaderModule,
+    OrdersModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    BrowserAnimationsModule,
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
