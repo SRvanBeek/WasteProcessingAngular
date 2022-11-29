@@ -1,13 +1,13 @@
 export class Order {
-  constructor(id: number, articleID: number, customerID: number, metrage: number) {
+  constructor(id: number, artikelID: number, customerID: number, metrage: number) {
     this.id = id;
-    this.articleID = articleID;
+    this.artikelID = artikelID;
     this.customerID = customerID;
     this.metrage = metrage;
   }
 
   id: number;
-  articleID: number;
+  artikelID: number;
   customerID: number;
   metrage: number;
 }

@@ -1,17 +1,20 @@
-import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {map, Observable} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {Orders} from "./order.model";
+import {Order} from "./order.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrdersService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
+
   getOrders(): Observable<any> {
-    return this.http.get(environment.apiUrl+ '/api/orders/');
+    let data = this.http.get<any[]>(environment.apiUrl + '/api/orders/');
+    return data;
 
   }
 

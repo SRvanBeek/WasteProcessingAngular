@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {OrdersService} from "./orders.service";
-import {OrdersInterface} from "./orders-interface";
 import {Order} from "./order.model";
+import {map} from "rxjs";
 
 @Component({
   selector: 'app-orders',
@@ -16,12 +16,12 @@ export class OrdersComponent {
   constructor(public OrdersService: OrdersService) {
   }
 
-  showOrder(){
+  showOrder() {
     this.OrdersService.getOrders().subscribe({
       next: value => {
-        this.orderList  = <Order[]>JSON.parse(value)
-
-
+        console.log(value)
+        this.orderList = value;
+        // this.orderList = <Order[]>JSON.parse(value)
       },
       error: err => {
         console.log(err);
