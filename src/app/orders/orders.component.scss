@@ -1,5 +1,5 @@
 .box{
-  margin-top: 20vh;
+  margin-top: 5vh;
 
 }
 
@@ -88,6 +88,17 @@
 .styled-table td:first-child {
   width: 3%;
 }
+div.scrollMenu{
+  width: 85%;
+  height: 600px;
+  overflow-y: auto;
 
+}
+div.scrollMenu tr {
+  display: table;
+  text-align: center;
+  padding: 5px;
+  text-decoration: none;
+}
 
 

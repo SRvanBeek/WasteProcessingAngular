@@ -11,10 +11,10 @@ import {map} from "rxjs";
 export class OrdersComponent {
   order: Order | undefined
   orderList: Order[];
-  orderstring: string = '';
 
   constructor(public OrdersService: OrdersService) {
   }
+
 
   showOrder() {
     this.OrdersService.getOrders().subscribe({
