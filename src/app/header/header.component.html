@@ -14,8 +14,8 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav  ms-auto">
           <li [routerLinkActive]="['active']" class="nav-item">
-            <a [routerLink]="['WasteProcessing']" class="nav-link">
-              <span data-bs-target=".collapse.show" data-bs-toggle="collapse">WasteInterface Processing</span></a>
+            <a class="nav-link" [routerLink]="['wasteProc']">
+              <span data-bs-target=".collapse.show" data-bs-toggle="collapse">Waste Processing</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" type="button" id="historyButton" data-bs-toggle="collapse"
@@ -31,7 +31,7 @@
                 </li>
                 <li class="nav-item" [routerLinkActive]="['active']">
                   <a [routerLink]="['adminPanel']" class="nav-link"><span data-bs-target=".offcanvas"
-                                                                          data-bs-toggle="offcanvas">WasteInterface</span></a>
+                                                                          data-bs-toggle="offcanvas">Waste</span></a>
                 </li>
                 <li class="nav-item" [routerLinkActive]="['active']">
                   <a [routerLink]="['storage']" class="nav-link"><span data-bs-target=".offcanvas"
@@ -81,7 +81,7 @@
           <a [routerLink]="['orders']" class="nav-link">Orders</a>
         </li>
         <li class="nav-item" [routerLinkActive]="['active']">
-          <a [routerLink]="['adminPanel']" class="nav-link">WasteInterface</a>
+          <a [routerLink]="['adminPanel']" class="nav-link">Waste</a>
         </li>
         <li class="nav-item" [routerLinkActive]="['active']">
           <a [routerLink]="['storage']" class="nav-link">Storage</a>
