@@ -29,7 +29,6 @@ export class OrdersComponent {
   }
 
   disableOrder() {
-
     for (let order of this.checkedList) {
       this.OrdersService.disableOrderByID(order).subscribe();
     }

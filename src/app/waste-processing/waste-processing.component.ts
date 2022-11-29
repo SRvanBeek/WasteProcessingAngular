@@ -2,7 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {WasteInterface} from "./wasteInterface";
 import {Waste} from "./waste.model";
 import {WasteService} from "./waste.service";
-import {Order} from "../orders/order-list/order/order.model";
+import {Order} from "../orders/order.model";
 import {OrderInterface} from "../orders/order-list/order/order-interface";
 import jsPDF from 'jspdf';
 
@@ -12,7 +12,7 @@ import jsPDF from 'jspdf';
   templateUrl: './waste-processing.component.html',
   styleUrls: ['./waste-processing.component.scss']
 })
-export class WasteProcessingComponent implements OnInit{
+export class WasteProcessingComponent implements OnInit {
 
   waste: Waste | undefined;
   order: Order | undefined;
@@ -31,14 +31,14 @@ export class WasteProcessingComponent implements OnInit{
 
   showAfval() {
     this.wasteService.getSnijData().subscribe({
-      next: value => {
-        this.message = value;
-        let splitted = value.split(", ");
-        this.showDetailsVanArtikel(splitted[1], splitted[0]);
-      },
-      error: err => {
-        console.log(err);
-      }
+        next: value => {
+          this.message = value;
+          let splitted = value.split(", ");
+          this.showDetailsVanArtikel(splitted[1], splitted[0]);
+        },
+        error: err => {
+          console.log(err);
+        }
       }
     );
 
@@ -61,10 +61,9 @@ export class WasteProcessingComponent implements OnInit{
     } else if (soort == 'Order') {
       this.wasteService.getOrderByArticleData(articleId).subscribe({
           next: value => {
-            let order: OrderInterface = JSON.parse(value);
-            this.order = new Order(order.id, order.customerID, order.artikelID, order.metrage);
-            this.details = 'Ordernummer: ' + this.order.id;
-            this.metrage = 'Metrage: ' + order.metrage;
+            this.order = value;
+            this.details = 'Ordernummer: ' + this.order.id + "Back to customer!";
+            this.metrage = 'Metrage: ' + this.order.metrage;
           },
           error: err => {
             console.log(err);
@@ -77,7 +76,7 @@ export class WasteProcessingComponent implements OnInit{
     }
   }
 
-  @ViewChild('content',{static: false}) el!: ElementRef;
+  @ViewChild('content', {static: false}) el!: ElementRef;
 
 
   makePdf() {
@@ -88,7 +87,7 @@ export class WasteProcessingComponent implements OnInit{
         pdf.save("label.pdf");
       }
 
-})
+    })
   }
 
 

@@ -7,10 +7,6 @@ export class Order {
     this.visibility = visibility;
   }
 
-  getID() {
-    return this.id;
-  }
-
   id: number;
   artikelID: number;
   customerID: number;
