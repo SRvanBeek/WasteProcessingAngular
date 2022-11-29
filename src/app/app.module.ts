@@ -8,7 +8,7 @@ import {LoginModule} from "./login/login.module";
 import {JwtInterceptor} from "./_helper/jwt.interceptor";
 import {AdminPanelComponent} from './admin-panel/admin-panel.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {WasteProcessingComponent} from "./waste-processing/waste-processing.component";
+import {WasteProcessingModule} from "./waste-processing/waste-processing.module";
 
 
 @NgModule({
@@ -16,13 +16,13 @@ import {WasteProcessingComponent} from "./waste-processing/waste-processing.comp
     AppComponent,
     HeaderComponent,
     AdminPanelComponent,
-    WasteProcessingComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    LoginModule
+    LoginModule,
+    WasteProcessingModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
