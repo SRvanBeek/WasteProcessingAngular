@@ -12,23 +12,21 @@ import { OrderComponent } from './orders/order-list/order/order.component';
 import { OrderDetailsComponent } from './orders/order-list/order-details/order-details.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {OrdersModule} from "./orders/orders.module";
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    OrderListComponent,
-    OrdersComponent,
-    OrderComponent,
-    OrderDetailsComponent,
     AdminPanelComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    LoginModule
+    LoginModule,
+    OrdersModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
