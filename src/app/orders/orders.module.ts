@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {OrderListComponent} from "./order-list/order-list.component";
 import {OrdersComponent} from "./orders.component";
 import {OrderComponent} from "./order-list/order/order.component";
 import {OrderDetailsComponent} from "./order-list/order-details/order-details.component";
-
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -15,7 +15,8 @@ import {OrderDetailsComponent} from "./order-list/order-details/order-details.co
     OrderDetailsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatCheckboxModule
   ],
   exports: [
     OrderListComponent,
@@ -24,4 +25,5 @@ import {OrderDetailsComponent} from "./order-list/order-details/order-details.co
     OrderDetailsComponent
   ]
 })
-export class OrdersModule { }
+export class OrdersModule {
+}

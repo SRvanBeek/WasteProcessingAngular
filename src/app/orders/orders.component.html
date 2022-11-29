@@ -1,7 +1,7 @@
 <div class="box">
   <form id="form">
     <button type="button" class="btn-primary" id="button-pdf" (click)="showOrder()">Refresh</button>
-    <button type="button" class="btn-secondary">delete</button>
+    <button type="button" class="btn-secondary" (click)="disableOrder()">disable</button>
     <input type="search" id="query" name="q" placeholder="Search...">
     <button type="button" class="searchknop">🔍</button>
   </form>
@@ -9,7 +9,7 @@
 <div class="scrollMenu">
   <table class="styled-table float-end">
     <thead>
-    <tr>
+    <tr class="tableHead">
       <th class="check"></th>
       <th>ID</th>
       <th>ArticleID</th>
@@ -18,8 +18,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of orderList">
-      <td class="check"><input type="checkbox"></td>
+    <tr *ngFor="let item of orderList; let i = index">
+      <td>
+        <mat-checkbox id="{{'check' + i}}" (change)="onCheck(item)"></mat-checkbox>
+      </td>
       <td>{{item.id}}</td>
       <td>{{item.artikelID}}</td>
       <td>{{item.customerID}}</td>

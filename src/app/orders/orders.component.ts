@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {OrdersService} from "./orders.service";
 import {Order} from "./order.model";
-import {map} from "rxjs";
 
 @Component({
   selector: 'app-orders',
@@ -11,13 +10,17 @@ import {map} from "rxjs";
 export class OrdersComponent {
   order: Order | undefined
   orderList: Order[];
+  checkedList: Order[] = [];
 
   constructor(public OrdersService: OrdersService) {
     this.OrdersService.getOrders().subscribe({
       next: value => {
-        console.log(value)
-        this.orderList = value;
-        // this.orderList = <Order[]>JSON.parse(value)
+        this.orderList = [];
+        for (let order of value) {
+          if (order.visibility) {
+            this.orderList.push(order);
+          }
+        }
       },
       error: err => {
         console.log(err);
@@ -25,20 +28,38 @@ export class OrdersComponent {
     });
   }
 
+  disableOrder() {
+    for (let order of this.checkedList) {
+      this.OrdersService.disableOrderByID(order).subscribe();
+    }
+    this.showOrder();
+  }
 
   showOrder() {
     this.OrdersService.getOrders().subscribe({
       next: value => {
-        console.log(value)
-        this.orderList = value;
-        // this.orderList = <Order[]>JSON.parse(value)
+        this.orderList = [];
+        for (let order of value) {
+          if (order.visibility) {
+            this.orderList.push(order);
+          }
+        }
       },
       error: err => {
         console.log(err);
       }
     });
-
   }
 
+  checked(order: Order) {
+    return this.checkedList.includes(order);
+  }
 
+  onCheck(order: Order) {
+    if (!this.checked(order)) {
+      this.checkedList.push(order);
+    } else {
+      this.checkedList.splice(this.checkedList.indexOf(order), 1)
+    }
+  }
 }
