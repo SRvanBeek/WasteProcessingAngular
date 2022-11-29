@@ -29,9 +29,11 @@ export class OrdersComponent {
   }
 
   disableOrder() {
+
     for (let order of this.checkedList) {
       this.OrdersService.disableOrderByID(order).subscribe();
     }
+    this.showOrder();
     this.showOrder();
   }
 
@@ -44,6 +46,7 @@ export class OrdersComponent {
             this.orderList.push(order);
           }
         }
+        console.log(this.orderList);
       },
       error: err => {
         console.log(err);
