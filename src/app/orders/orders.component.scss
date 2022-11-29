@@ -1,9 +1,9 @@
-.box{
+.box {
   margin-top: 5vh;
 
 }
 
-.btn-primary{
+.btn-primary {
   border-radius: 15px;
   padding: 5px 10px;
   text-align: center;
@@ -15,13 +15,16 @@
   width: 5%;
 
 }
-.btn-primary:hover{
-  background-color:  rgba(61, 75, 98, 0.2);
+
+.btn-primary:hover {
+  background-color: rgba(61, 75, 98, 0.2);
 }
-.btn-secondary:hover{
-  background-color:  rgba(61, 75, 98, 0.2);
+
+.btn-secondary:hover {
+  background-color: rgba(61, 75, 98, 0.2);
 }
-.searchknop{
+
+.searchknop {
   all: unset;
   font-size: 20px;
   text-align: center;
@@ -32,9 +35,9 @@
   cursor: pointer;
 
 
-
 }
-.btn-secondary{
+
+.btn-secondary {
   border-radius: 15px;
   padding: 5px 10px;
   text-align: center;
@@ -45,6 +48,11 @@
   margin-left: 10px;
   width: 5%;
 }
+
+.tableHead {
+  width: 100%;
+}
+
 .styled-table {
   border-collapse: collapse;
   font-size: 0.9em;
@@ -53,11 +61,13 @@
   margin: 25px auto;
   width: 75%;
 }
+
 .styled-table thead tr {
   background-color: rgba(61, 75, 98, 1);
   color: #ffffff;
   text-align: center;
 }
+
 .styled-table th,
 .styled-table td {
   padding: 12px 15px;
@@ -68,6 +78,7 @@
   border-bottom: 1px solid #dddddd;
   border-left: 1px solid;
 }
+
 .styled-table tbody tr td {
   border-left: 1px solid;
 }
@@ -75,6 +86,7 @@
 .styled-table tbody tr:last-of-type {
   border-bottom: 1px solid black;
 }
+
 .vergrootglas {
   height: 40px;
   width: 40px;
@@ -82,18 +94,23 @@
   margin-bottom: -15px;
   position: center;
 }
-.styled-table tr:nth-child(even){background-color: rgba(61, 75, 98, 0.2);}
+
+.styled-table tr:nth-child(even) {
+  background-color: rgba(61, 75, 98, 0.2);
+}
 
 .styled-table th:first-child,
 .styled-table td:first-child {
   width: 3%;
 }
-div.scrollMenu{
+
+div.scrollMenu {
   width: 85%;
   height: 600px;
   overflow-y: auto;
 
 }
+
 div.scrollMenu tr {
   display: table;
   text-align: center;
