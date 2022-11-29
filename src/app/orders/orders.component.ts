@@ -46,7 +46,6 @@ export class OrdersComponent {
             this.orderList.push(order);
           }
         }
-        console.log(this.orderList);
       },
       error: err => {
         console.log(err);
