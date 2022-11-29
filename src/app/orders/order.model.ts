@@ -1,10 +1,9 @@
-export class Orders {
-  constructor(id: number, articleID: number, customerID: number, metrgage: number) {
+export class Order {
+  constructor(id: number, articleID: number, customerID: number, metrage: number) {
     this.id = id;
     this.articleID = articleID;
     this.customerID = customerID;
-    this.metrage = metrgage;
-
+    this.metrage = metrage;
   }
 
   id: number;
