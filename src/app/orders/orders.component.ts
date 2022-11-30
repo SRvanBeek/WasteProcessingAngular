@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {OrdersService} from "./orders.service";
 import {Order} from "./order.model";
 
@@ -7,10 +7,11 @@ import {Order} from "./order.model";
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })
-export class OrdersComponent {
+export class OrdersComponent implements OnInit {
   order: Order | undefined
   orderList: Order[];
   checkedList: Order[] = [];
+  isAdmin: boolean = false;
 
   constructor(public OrdersService: OrdersService) {
     this.OrdersService.getOrders().subscribe({
@@ -26,6 +27,21 @@ export class OrdersComponent {
         console.log(err);
       }
     });
+  }
+
+  ngOnInit() {
+    this.setAdmin();
+  }
+
+  setAdmin(): void {
+    let jwt = localStorage.getItem('JwtToken');
+    if (jwt) {
+      let jwtData = jwt.split('.')[1];
+      let decodedJwtJsonData = window.atob(jwtData);
+      let decodedJwtData = JSON.parse(decodedJwtJsonData);
+      let roles = decodedJwtData.roles;
+      this.isAdmin = roles[0] == 'ROLE_ADMIN';
+    }
   }
 
   disableOrder() {

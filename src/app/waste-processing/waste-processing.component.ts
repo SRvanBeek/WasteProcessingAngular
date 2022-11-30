@@ -48,8 +48,7 @@ export class WasteProcessingComponent implements OnInit {
     if (soort == 'Waste') {
       this.wasteService.getWasteCategorieData(articleId).subscribe({
           next: value => {
-            let waste: WasteInterface = JSON.parse(value);
-            this.waste = new Waste(waste.afvalId, waste.artikelId, waste.metrage, waste.categories);
+            this.waste = value;
             this.details = 'Categorieen: ' + this.waste.categories;
             this.metrage = 'Metrage: ' + this.waste.metrage;
           },
