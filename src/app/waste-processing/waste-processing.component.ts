@@ -62,7 +62,7 @@ export class WasteProcessingComponent implements OnInit {
       this.wasteService.getOrderByArticleData(articleId).subscribe({
           next: value => {
             this.order = value;
-            this.details = 'Ordernummer: ' + this.order.id + "Back to customer!";
+            this.details = 'Ordernummer: ' + this.order.id + "\nBack to customer!";
             this.metrage = 'Metrage: ' + this.order.metrage;
           },
           error: err => {
