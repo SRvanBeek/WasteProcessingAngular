@@ -1,0 +1,37 @@
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Waste</h5>
+      <select class="form-select" #category (change)="selectCategory(category.value)" style="width: 10rem">
+        <option value="A1" selected="selected">A1</option>
+        <option value="A2">A2</option>
+        <option value="A3">A3</option>
+      </select>
+    </div>
+    <div class="modal-body">
+      <div class="row align-items-start">
+        <div class="col-sm-6">
+          <app-gauge
+            [wasteForCategory]="selectedWasteAmount"
+            [totalWaste]="totalWaste"
+          ></app-gauge>
+        </div>
+        <div class="col-sm-3">
+          <h3>Total m2:</h3>
+          <h4>50.2</h4>
+        </div>
+        <div class="col-sm-3">
+          <h3>Composition:</h3>
+          <h4>65% PL</h4>
+          <h4>35% PES</h4>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+
+
+
