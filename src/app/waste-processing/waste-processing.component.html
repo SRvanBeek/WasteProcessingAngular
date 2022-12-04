@@ -1,32 +1,30 @@
-<div class="container">
-  <div class="text-center mt-5">
-    <h1>{{ message }}</h1>
-    <h1 style="white-space: pre-wrap;">{{ details }}</h1>
-    <h1>{{ metrage }}</h1>
+<div class="wasteProc">
+
+  <mat-tab-group>
+    <mat-tab label="First"> Content 1</mat-tab>
+    <mat-tab label="Second"> Content 2</mat-tab>
+    <mat-tab label="Third"> Content 3</mat-tab>
+  </mat-tab-group>
+
+  <!--  <div>-->
+  <!--    <h1>Amount of waste to go: 1</h1>-->
+  <!--  </div>-->
+  <!--  <div class="todoList">-->
+  <!--    <ul>-->
+  <!--      <li class="toDoItem" *ngFor="let todo of todoList">-->
+  <!--        <div class="toDoButton">-->
+  <!--        <span data-bs-toggle="modal" data-bs-target="#todoModal"-->
+  <!--              (click)="todoDetail(todo)">Article number: {{todo.articleNumber}}</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+  <!--    </ul>-->
+  <!--  </div>-->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="todoModal" tabindex="-1" aria-labelledby="todoModel" aria-hidden="true">
+    <app-to-do-modal [type]="selectedType" [todo]="selectedTodo" [isShownInput]="showModal"
+                     (isShownOutput)="setShown($event)"></app-to-do-modal>
   </div>
-  <button type="button" id="afvalknop" class="btn btn-lg border float-end shadow p-3 mb-5 bg-light"
-          (click)="showAfval()">Waste!
-  </button>
-</div>
-<div id="dummyset" #content>
-  <!--  <table>-->
-  <!--    <thead>-->
-  <!--      <tr>-->
-  <!--        <th>AfvalId</th>-->
-  <!--        <th>ArtikelId</th>-->
-  <!--        <th>Metrage</th>-->
-  <!--        <th>Samenstellingen</th>-->
-  <!--      </tr>-->
-  <!--    </thead>-->
-  <!--    <tbody>-->
-  <!--      <tr>-->
-  <!--        <td>{{waste?.afvalId}}</td>-->
-  <!--        <td>{{waste?.artikelId}}</td>-->
-  <!--        <td>{{waste?.metrage}}</td>-->
-  <!--        <td>{{waste?.categories}}</td>-->
-  <!--        <td>80%Poly20%katoen</td>-->
-  <!--      </tr>-->
-  <!--    </tbody>-->
-  <!--  </table>-->
-  <!--  <button (click)="makePdf()"> Genereer PDF</button>-->
+
 </div>

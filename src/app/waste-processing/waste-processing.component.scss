@@ -1,6 +1,33 @@
-#afvalknop {
-  margin-top: 30%;
-  position: absolute;
-  right: 10%;
-  bottom: 15%;
+
+.mat-tab-label-active {
+  border-width: 9px;
+  border-style: solid;
+  border-color: orange;
 }
+
+.wasteProc {
+  height: 87vh;
+  overflow: hidden;
+}
+
+.todoList {
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.todoList > ul {
+  padding: 0;
+}
+
+.toDoButton {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100vw;
+  height: 4rem;
+  border-bottom: #002147 2px solid;
+}
+
+
