@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {WasteService} from "./_services/waste.service";
 import {CutWaste} from "./_models/cut-waste.model";
-import {MatTabsModule} from '@angular/material/tabs';
+import {CutWasteService} from "./_services/cut-waste.service";
 
 
 @Component({
@@ -12,15 +11,17 @@ import {MatTabsModule} from '@angular/material/tabs';
 export class WasteProcessingComponent implements OnInit {
   selectedTodo: CutWaste;
   selectedType: string;
-  todoList: CutWaste[] = [new CutWaste(1, '1', false, 12, 12, "now"), new CutWaste(2, '2', false, 12, 13, "now"), new CutWaste(1, '1', false, 12, 12, "now"), new CutWaste(1, '1', false, 12, 12, "now"), new CutWaste(1, '1', false, 12, 12, "now"), new CutWaste(1, '1', false, 12, 12, "now"), new CutWaste(1, '1', false, 12, 12, "now"), new CutWaste(1, '1', false, 12, 12, "now"), new CutWaste(1, '1', false, 12, 12, "now"), new CutWaste(1, '1', false, 12, 12, "now"), new CutWaste(1, '1', false, 12, 12, "now"),];
+  todoList: CutWaste[] = [];
   showModal: boolean = false;
 
 
-  constructor(public wasteService: WasteService) {
+  constructor(public cutWasteService: CutWasteService) {
 
   }
 
+
   ngOnInit(): void {
+    this.fillListAllTypes();
   }
 
   ngAfterViewInit() {
@@ -31,11 +32,48 @@ export class WasteProcessingComponent implements OnInit {
 
   todoDetail(todo: CutWaste): void {
     this.selectedTodo = todo;
-    this.selectedType = 'catWaste';
+    this.selectedType = todo.type;
     this.showModal = true;
+  }
+
+  setType(type: string) {
+    if (type == 'all') {
+      this.fillListAllTypes()
+    } else {
+      this.fillByType(type);
+    }
   }
 
   setShown(value: boolean) {
     this.showModal = value;
+  }
+
+  fillListAllTypes() {
+    this.cutWasteService.getAllCutWaste().subscribe({
+      next: value => {
+        this.todoList = [];
+        for (let todo of value) {
+          if (!todo.processed) {
+            this.todoList.push(todo);
+          }
+        }
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
+  }
+
+  fillByType(type: string) {
+    this.cutWasteService.getAllByType(type).subscribe({
+      next: value => {
+        this.todoList = [];
+        for (let todo of value) {
+          if (!todo.processed) {
+            this.todoList.push(todo);
+          }
+        }
+      }
+    })
   }
 }

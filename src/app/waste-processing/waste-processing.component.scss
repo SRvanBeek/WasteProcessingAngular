@@ -1,8 +1,5 @@
-
-.mat-tab-label-active {
-  border-width: 9px;
-  border-style: solid;
-  border-color: orange;
+.topBar {
+  display: flex;
 }
 
 .wasteProc {
@@ -22,12 +19,18 @@
 }
 
 .toDoButton {
-  justify-content: center;
-  align-items: center;
   display: flex;
   width: 100vw;
   height: 4rem;
   border-bottom: #002147 2px solid;
+}
+
+.toDoButton > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
 

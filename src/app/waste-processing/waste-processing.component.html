@@ -1,29 +1,30 @@
 <div class="wasteProc">
 
-  <mat-tab-group>
-    <mat-tab label="First"> Content 1</mat-tab>
-    <mat-tab label="Second"> Content 2</mat-tab>
-    <mat-tab label="Third"> Content 3</mat-tab>
-  </mat-tab-group>
+  <div class="topBar">
+    <h1>Amount of waste to go: 1</h1>
+    <select class="form-select" aria-label="Select type" (change)="setType(typeSelection.value)" #typeSelection>
+      <option value="all" selected>All</option>
+      <option value="order">Orders</option>
+      <option value="catWaste">Categorized waste</option>
+      <option value="storage">Storage</option>
+    </select>
+  </div>
 
-  <!--  <div>-->
-  <!--    <h1>Amount of waste to go: 1</h1>-->
-  <!--  </div>-->
-  <!--  <div class="todoList">-->
-  <!--    <ul>-->
-  <!--      <li class="toDoItem" *ngFor="let todo of todoList">-->
-  <!--        <div class="toDoButton">-->
-  <!--        <span data-bs-toggle="modal" data-bs-target="#todoModal"-->
-  <!--              (click)="todoDetail(todo)">Article number: {{todo.articleNumber}}</span>-->
-  <!--        </div>-->
-  <!--      </li>-->
-  <!--    </ul>-->
-  <!--  </div>-->
+  <div class="todoList">
+    <ul>
+      <li class="toDoItem" *ngFor="let todo of todoList">
+        <div class="toDoButton">
+          <span data-bs-toggle="modal" data-bs-target="#todoModal"
+                (click)="todoDetail(todo)">id: {{todo.id}}, Type:  {{todo.type}}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
 
 
   <!-- Modal -->
   <div class="modal fade" id="todoModal" tabindex="-1" aria-labelledby="todoModel" aria-hidden="true">
-    <app-to-do-modal [type]="selectedType" [todo]="selectedTodo" [isShownInput]="showModal"
+    <app-to-do-modal [todo]="selectedTodo" [type]="selectedType" [isShownInput]="showModal"
                      (isShownOutput)="setShown($event)"></app-to-do-modal>
   </div>
 
