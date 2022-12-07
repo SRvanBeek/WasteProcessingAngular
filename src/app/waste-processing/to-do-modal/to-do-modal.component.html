@@ -1,0 +1,30 @@
+<div class="modal-dialog modal-dialog-centered modal-fullscreen-lg-down">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title" *ngIf="isShownInput">Article:   {{todo.artikelnummer}}</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+    </div>
+    <div class="modal-body">
+      <ng-template [ngIf]="type == 'catWaste'">
+        <div>
+          <h2 *ngIf="isShownInput">Gewicht:   {{todo.gewicht}}</h2>
+          <h2 *ngIf="isShownInput">Metrage:   {{todo.metrage}}</h2>
+          <h2 *ngIf="isShownInput">catWaste ID:   {{todo.id}}</h2>
+          <h2 *ngIf="isShownInput">Type:   {{todo.type}}</h2>
+        </div>
+      </ng-template>
+      <ng-template [ngIf]="type == 'order'">
+        <div>
+          <h2 *ngIf="isShownInput">Gewicht:   {{todo.gewicht}}</h2>
+          <h2 *ngIf="isShownInput">Metrage:   {{todo.metrage}}</h2>
+          <h2 *ngIf="isShownInput">Order ID:   {{todo.id}}</h2>
+          <h2 *ngIf="isShownInput">Type:   {{todo.type}}</h2>
+        </div>
+      </ng-template>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="close()">Close</button>
+    </div>
+  </div>
+</div>
+
