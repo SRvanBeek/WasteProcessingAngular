@@ -18,7 +18,9 @@ export class OrdersComponent implements OnInit {
       next: value => {
         this.orderList = [];
         for (let order of value) {
-          if (order.visibility) {
+          console.log(value)
+          if (order.enabled) {
+            console.log(order)
             this.orderList.push(order);
           }
         }
@@ -59,7 +61,7 @@ export class OrdersComponent implements OnInit {
       next: value => {
         this.orderList = [];
         for (let order of value) {
-          if (order.visibility) {
+          if (order.enabled) {
             this.orderList.push(order);
           }
         }

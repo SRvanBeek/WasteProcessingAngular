@@ -62,7 +62,7 @@ export class WasteProcessingComponent implements OnInit {
           next: value => {
             this.order = value;
             this.details = 'Ordernummer: ' + this.order.id + "\nBack to customer!";
-            this.metrage = 'Metrage: ' + this.order.metrage;
+            //this.metrage = 'Metrage: ' + this.order.metrage;
           },
           error: err => {
             console.log(err);
