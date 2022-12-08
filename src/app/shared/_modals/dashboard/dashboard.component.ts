@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {DashboardService} from "./service/dashboard.service";
+import {WasteService} from "../../../waste-processing/waste.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -6,28 +8,46 @@ import {Component} from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  totalWaste: number = 3650.70;
-  selectedWasteAmount: number;
+  totalWasteWeight: number;
+  totalWasteMetrage: number;
+  selectedWasteWeight: number;
+  selectedWasteMetrage: number;
 
-  A1: number= 300;
-  A2: number = 800;
-  A3: number = 2500;
+  categories:string[];
+
+  constructor(public dashboardService: DashboardService) {
+
+  }
 
   ngOnInit() {
-    this.selectedWasteAmount = this.A1;
+    this.setTotalWaste();
+    this.getCategoryNames();
+  }
+
+  private setTotalWaste() {
+    this.dashboardService.getTotalWaste().subscribe({
+      next: value => {
+        this.totalWasteWeight = value[0];
+        this.totalWasteMetrage = value[1];
+      }
+    });
+  }
+
+  private getCategoryNames() {
+    this.dashboardService.getCategories().subscribe({
+      next: categories => {
+          this.categories = categories;
+          this.selectCategory(this.categories[0])
+      }
+    })
   }
 
   selectCategory(category:string) {
-    switch (category) {
-      case "A1":
-        this.selectedWasteAmount = this.A1
-        break;
-      case "A2":
-        this.selectedWasteAmount = this.A2
-        break;
-      case "A3":
-        this.selectedWasteAmount = this.A3
-        break;
-    }
+    this.dashboardService.getTotalWastePerCategory(category).subscribe({
+      next: value => {
+        this.selectedWasteWeight = value[0];
+        this.selectedWasteMetrage = value[1];
+      }
+    });
   }
 }

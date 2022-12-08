@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import { GaugeComponent } from './dashboard/gauge/gauge.component';
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -11,7 +12,8 @@ import { GaugeComponent } from './dashboard/gauge/gauge.component';
     GaugeComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [
     DashboardComponent,

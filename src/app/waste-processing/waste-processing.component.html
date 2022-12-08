@@ -8,25 +8,11 @@
           (click)="showAfval()">Waste!
   </button>
 </div>
-<div id="dummyset" #content>
-  <!--  <table>-->
-  <!--    <thead>-->
-  <!--      <tr>-->
-  <!--        <th>AfvalId</th>-->
-  <!--        <th>ArtikelId</th>-->
-  <!--        <th>Metrage</th>-->
-  <!--        <th>Samenstellingen</th>-->
-  <!--      </tr>-->
-  <!--    </thead>-->
-  <!--    <tbody>-->
-  <!--      <tr>-->
-  <!--        <td>{{waste?.afvalId}}</td>-->
-  <!--        <td>{{waste?.artikelId}}</td>-->
-  <!--        <td>{{waste?.metrage}}</td>-->
-  <!--        <td>{{waste?.categories}}</td>-->
-  <!--        <td>80%Poly20%katoen</td>-->
-  <!--      </tr>-->
-  <!--    </tbody>-->
-  <!--  </table>-->
-  <!--  <button (click)="makePdf()"> Genereer PDF</button>-->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <app-dashboard></app-dashboard>
 </div>

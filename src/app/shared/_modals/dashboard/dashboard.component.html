@@ -1,24 +1,24 @@
 <div class="modal-dialog modal-dialog-centered">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Waste</h5>
+      <h5 class="modal-title">Waste</h5>
       <select class="form-select" #category (change)="selectCategory(category.value)" style="width: 10rem">
-        <option value="A1" selected="selected">A1</option>
-        <option value="A2">A2</option>
-        <option value="A3">A3</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{category}}
+        </option>
       </select>
     </div>
     <div class="modal-body">
       <div class="row align-items-start">
         <div class="col-sm-6">
           <app-gauge
-            [wasteForCategory]="selectedWasteAmount"
-            [totalWaste]="totalWaste"
+            [wasteForCategory]="selectedWasteWeight"
+            [totalWaste]="totalWasteWeight"
           ></app-gauge>
         </div>
         <div class="col-sm-3">
           <h3>Total m2:</h3>
-          <h4>50.2</h4>
+          <h4>{{selectedWasteMetrage}}</h4>
         </div>
         <div class="col-sm-3">
           <h3>Composition:</h3>
