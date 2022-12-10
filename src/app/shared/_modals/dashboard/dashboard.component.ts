@@ -25,6 +25,10 @@ export class DashboardComponent {
     this.getCategoryNames();
   }
 
+  /**
+   * gets the total waste weight and metrage from the database.
+   * @private
+   */
   private setTotalWaste() {
     this.dashboardService.getTotalWaste().subscribe({
       next: value => {
@@ -34,6 +38,10 @@ export class DashboardComponent {
     });
   }
 
+  /**
+   * gets every category name from the database.
+   * @private
+   */
   private getCategoryNames() {
     this.dashboardService.getCategories().subscribe({
       next: categories => {
@@ -43,6 +51,10 @@ export class DashboardComponent {
     })
   }
 
+  /**
+   * calls dashboardService to set the weight, metrage and composition of the selected category.
+   * @param category the selected category in the view.
+   */
   selectCategory(category:string) {
     this.dashboardService.getTotalWastePerCategory(category).subscribe({
       next: value => {
