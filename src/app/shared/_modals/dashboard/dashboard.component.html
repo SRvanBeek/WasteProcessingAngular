@@ -10,19 +10,34 @@
     </div>
     <div class="modal-body">
       <div class="row align-items-start">
-        <div class="col-sm-6">
+        <div class="col-sm-5">
           <app-gauge
             [wasteForCategory]="selectedWasteWeight"
             [totalWaste]="totalWasteWeight"
           ></app-gauge>
         </div>
-        <div class="col-sm-3">
-          <h3>Total m2:</h3>
-          <h4>{{selectedWasteMetrage}}</h4>
+        <div class="col-sm-2">
+          <h3>Total m<sup>2</sup>:</h3>
+          <h4 style="padding-left: 0.5rem">{{selectedWasteMetrage}}</h4>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-5">
           <h3>Composition:</h3>
-          <h4 *ngFor="let item of composition">{{item}} kg</h4>
+
+          <table class="table">
+            <thead>
+              <th scope="col" style="padding-left: 0.5rem">Material</th>
+              <th scope="col" style="padding-left: 0.5rem">kg</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of composition">
+              <td *ngFor="let part of item.split(': ')">{{part}}</td>
+            </tr>
+            </tbody>
+          </table>
+
+
+
+
         </div>
       </div>
     </div>

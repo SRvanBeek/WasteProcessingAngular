@@ -5,6 +5,9 @@ import {environment} from "../../environments/environment";
 import {Order} from "../orders/order.model";
 import {Waste} from "./waste.model";
 
+/**
+ * @author Stijn van Beek
+ */
 @Injectable({
   providedIn: 'root'
 })

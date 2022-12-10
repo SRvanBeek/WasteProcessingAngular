@@ -4,6 +4,9 @@ import {environment} from "../../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {CategoryModel} from "../../../_models/category.model";
 
+/**
+ * @author Stijn van Beek
+ */
 @Injectable({
   providedIn: 'root'
 })

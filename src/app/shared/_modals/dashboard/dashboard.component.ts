@@ -2,6 +2,9 @@ import {Component} from '@angular/core';
 import {DashboardService} from "./service/dashboard.service";
 import {WasteService} from "../../../waste-processing/waste.service";
 
+/**
+ * @author Stijn van Beek
+ */
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',

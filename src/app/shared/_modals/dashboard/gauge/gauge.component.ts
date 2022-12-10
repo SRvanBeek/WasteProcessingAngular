@@ -1,5 +1,9 @@
 import {Component, Input} from '@angular/core';
 
+/**
+ * @author Stijn van Beek
+ */
+
 @Component({
   selector: 'app-gauge',
   templateUrl: './gauge.component.html',
