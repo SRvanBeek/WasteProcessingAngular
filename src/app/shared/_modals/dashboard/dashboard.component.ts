@@ -13,7 +13,8 @@ export class DashboardComponent {
   selectedWasteWeight: number;
   selectedWasteMetrage: number;
 
-  categories:string[];
+  categories: string[];
+  composition: string[];
 
   constructor(public dashboardService: DashboardService) {
 
@@ -49,5 +50,11 @@ export class DashboardComponent {
         this.selectedWasteMetrage = value[1];
       }
     });
+    this.dashboardService.getComposition(category).subscribe({
+      next: value => {
+        this.composition = value;
+      }
+    });
   }
+
 }

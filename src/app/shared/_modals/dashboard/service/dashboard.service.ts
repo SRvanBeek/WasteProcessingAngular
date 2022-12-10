@@ -14,10 +14,13 @@ export class DashboardService {
   getTotalWaste(): Observable<any> {
     return this.http.get(environment.apiUrl + '/api/waste/details');
   }
-  getTotalWastePerCategory(category: String): Observable<any> {
+  getTotalWastePerCategory(category: string): Observable<any> {
     return this.http.get(environment.apiUrl + '/api/waste/details/' + category);
   }
   getCategories(): Observable<string[]> {
     return this.http.get<string[]>(environment.apiUrl + '/api/categories/names');
+  }
+  getComposition(category: string): Observable<string[]> {
+    return this.http.get<string[]>(environment.apiUrl + '/api/waste/composition/' + category);
   }
 }

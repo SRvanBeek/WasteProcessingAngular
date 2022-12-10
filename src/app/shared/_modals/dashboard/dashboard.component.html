@@ -22,8 +22,7 @@
         </div>
         <div class="col-sm-3">
           <h3>Composition:</h3>
-          <h4>65% PL</h4>
-          <h4>35% PES</h4>
+          <h4 *ngFor="let item of composition">{{item}} kg</h4>
         </div>
       </div>
     </div>
