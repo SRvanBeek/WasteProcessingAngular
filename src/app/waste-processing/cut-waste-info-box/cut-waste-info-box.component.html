@@ -1,0 +1,25 @@
+<div class="mainBox" *ngIf="todo != null">
+  <div class="header">
+    <h1>{{type}}: {{todo.id}}</h1>
+  </div>
+  <div class="content">
+    <ul>
+      <ng-template [ngIf]="todo.type == 'catWaste'">
+        <li>
+          <h2>
+            Article ID: {{todo.artikelnummer}}
+          </h2>
+        <li>
+        <li>
+          <h2>
+            Color: {{article.kleur}}
+          </h2>
+        <li>
+
+      </ng-template>
+      <ng-template [ngIf]="todo.type != 'catWaste'">
+
+      </ng-template>
+    </ul>
+  </div>
+</div>
