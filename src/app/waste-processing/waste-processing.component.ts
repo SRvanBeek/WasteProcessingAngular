@@ -1,8 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {CutWaste} from "./_models/cut-waste.model";
 import {CutWasteService} from "./_services/cut-waste.service";
-import {CutProgramService} from "../shared/_services/cut-program.service";
-import {subscribeOn} from "rxjs";
 
 
 @Component({
@@ -19,9 +17,11 @@ export class WasteProcessingComponent implements OnInit {
   screenLGSize: number = 992;
   isDesktop: boolean;
   showInfoBox: boolean = false;
+  userID: number;
+  filterList: string = 'all';
 
 
-  constructor(private cutWasteService: CutWasteService, private cutProgramService: CutProgramService) {
+  constructor(private cutWasteService: CutWasteService) {
   }
 
   @HostListener("window:resize", []) updateIsDesktop() {
@@ -32,9 +32,20 @@ export class WasteProcessingComponent implements OnInit {
   ngOnInit(): void {
     this.fillListAllTypes();
     this.updateIsDesktop();
+    this.setUserID();
   }
 
   ngAfterViewInit() {
+  }
+
+  setUserID(): void {
+    let jwt = localStorage.getItem('JwtToken');
+    if (jwt) {
+      let jwtData = jwt.split('.')[1];
+      let decodedJwtJsonData = window.atob(jwtData);
+      let decodedJwtData = JSON.parse(decodedJwtJsonData);
+      this.userID = decodedJwtData.userId;
+    }
   }
 
   todoDetail(todo: CutWaste, index: number): void {
@@ -47,6 +58,7 @@ export class WasteProcessingComponent implements OnInit {
   }
 
   setType(type: string) {
+    this.filterList = type;
     if (type == 'all') {
       this.fillListAllTypes()
     } else {
@@ -85,5 +97,9 @@ export class WasteProcessingComponent implements OnInit {
         }
       }
     })
+  }
+
+  refresh(list: CutWaste[]) {
+    this.todoList = list;
   }
 }

@@ -13,9 +13,9 @@
       <ul>
         <li class="toDoItem" *ngFor="let todo of todoList; let i = index">
           <div class="toDoButton">
-              <span *ngIf="!isDesktop" data-bs-toggle="modal" data-bs-target="#todoModal"
-                    (click)="todoDetail(todo,i)" [class.active]="selectedIndex === i">id: {{todo.id}}
-                , Type:  {{todo.type}}</span>
+                <span *ngIf="!isDesktop" data-bs-toggle="modal" data-bs-target="#todoModal"
+                      (click)="todoDetail(todo,i)" [class.active]="selectedIndex === i">id: {{todo.id}}
+                  , Type:  {{todo.type}}</span>
             <span *ngIf="isDesktop" (click)="todoDetail(todo, i)" [class.active]="selectedIndex === i">id: {{todo.id}}
               , Type:  {{todo.type}}</span>
           </div>
@@ -24,7 +24,8 @@
     </div>
   </div>
   <div *ngIf="isDesktop" class="todoShow">
-    <app-cut-waste-info-box [todo]="selectedTodo "></app-cut-waste-info-box>
+    <app-cut-waste-info-box [list]="todoList" [todo]="selectedTodo" [userId]="userID"
+                            (doneOutput)="refresh($event)"></app-cut-waste-info-box>
   </div>
 
 

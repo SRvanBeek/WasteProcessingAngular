@@ -12,8 +12,11 @@ export class WasteService {
   constructor(private http: HttpClient) {
   }
 
-  getWasteCategorieData(articleId: any): Observable<Waste> {
-    return this.http.get<Waste>(environment.apiUrl + '/api/waste/perArticle/' + articleId);
+  putWaste(waste: Waste): Observable<string> {
+    return this.http.put<string>(environment.apiUrl + '/api/waste/', waste);
   }
 
+  getOneWasteByCutWasteID(cutWasteId: number): Observable<Waste> {
+    return this.http.get<Waste>(environment.apiUrl + '/api/waste/perCutWaste/' + cutWasteId);
+  }
 }
