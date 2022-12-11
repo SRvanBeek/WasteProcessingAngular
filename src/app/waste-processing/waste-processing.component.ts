@@ -1,6 +1,8 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {CutWaste} from "./_models/cut-waste.model";
 import {CutWasteService} from "./_services/cut-waste.service";
+import {CutProgramService} from "../shared/_services/cut-program.service";
+import {subscribeOn} from "rxjs";
 
 
 @Component({
@@ -19,7 +21,7 @@ export class WasteProcessingComponent implements OnInit {
   showInfoBox: boolean = false;
 
 
-  constructor(public cutWasteService: CutWasteService) {
+  constructor(private cutWasteService: CutWasteService, private cutProgramService: CutProgramService) {
   }
 
   @HostListener("window:resize", []) updateIsDesktop() {

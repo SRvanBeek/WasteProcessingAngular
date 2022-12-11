@@ -2,6 +2,9 @@ import {Component, Input} from '@angular/core';
 import {CutWaste} from "../_models/cut-waste.model";
 import {ArticleService} from "../../shared/_services/article.service";
 import {Article} from "../../shared/_models/article";
+import {CutWasteService} from "../_services/cut-waste.service";
+import {OrdersService} from "../../orders/orders.service";
+import {WasteService} from "../_services/waste.service";
 
 @Component({
   selector: 'app-cut-waste-info-box',
@@ -14,7 +17,7 @@ export class CutWasteInfoBoxComponent {
   type: string;
   Object = Object;
 
-  constructor(private articleService: ArticleService) {
+  constructor(private articleService: ArticleService, private cutWasteService: CutWasteService, private orderService: OrdersService, private wasteService: WasteService) {
   }
 
   ngOnChanges() {
@@ -35,5 +38,11 @@ export class CutWasteInfoBoxComponent {
       .subscribe(value => {
         this.article = value;
       });
+  }
+
+  done() {
+    this.cutWasteService.setWasteDone(this.todo.type, this.todo.id).subscribe(value => {
+      console.log(value);
+    });
   }
 }

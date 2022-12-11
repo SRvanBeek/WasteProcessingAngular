@@ -31,6 +31,7 @@ export class HeaderComponent implements OnInit {
 
   setAdmin(): void {
     let jwt = localStorage.getItem('JwtToken');
+    console.log(jwt);
     if (jwt) {
       let jwtData = jwt.split('.')[1];
       let decodedJwtJsonData = window.atob(jwtData);

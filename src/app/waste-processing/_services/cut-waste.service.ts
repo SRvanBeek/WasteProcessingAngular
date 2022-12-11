@@ -23,4 +23,8 @@ export class CutWasteService {
   getAllByType(type: string): Observable<CutWaste[]> {
     return this.http.get<CutWaste[]>(environment.apiUrl + '/api/cutWaste/' + type);
   }
+
+  setWasteDone(type: string, id: number) {
+    return this.http.put<CutWaste>(environment.apiUrl + '/api/cutWaste/done/' + id, type);
+  }
 }
