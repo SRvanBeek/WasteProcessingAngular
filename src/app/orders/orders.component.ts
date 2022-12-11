@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {OrdersService} from "./orders.service";
 import {Order} from "./order.model";
+import {cutWaste} from "../shared/_models/cutWaste.model";
+import {User} from "../shared/_models/user.model"
 
 @Component({
   selector: 'app-orders',
@@ -8,8 +10,12 @@ import {Order} from "./order.model";
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
-  order: Order | undefined
+  order: Order | undefined;
+  cutwaste: cutWaste | undefined;
+  user: User | undefined
+  userList: User[];
   orderList: Order[];
+  cutWasteList: cutWaste[];
   checkedList: Order[] = [];
   isAdmin: boolean = false;
 
@@ -18,10 +24,40 @@ export class OrdersComponent implements OnInit {
       next: value => {
         this.orderList = [];
         for (let order of value) {
-          console.log(value)
           if (order.enabled) {
-            console.log(order)
             this.orderList.push(order);
+            for (let i = 0; i < this.orderList.length; i++) {
+              this.OrdersService.getUser(this.orderList[i].userID).subscribe({
+                next: value1 => {
+                  this.userList = [];
+                  this.userList.push(value1)
+                  }
+              })
+            }
+            for (let i = 0; i < this.orderList.length; i++) {
+              this.OrdersService.getCutWaste(this.orderList[i].cutwasteID).subscribe(
+                {
+                  next: value2 => {
+                    console.log(value2)
+                    this.cutWasteList = [];
+                    this.cutWasteList.push(value2);
+                    console.log(this.cutWasteList[0].artikelnummer)
+
+                  }
+                }
+              )
+            }
+            for (let i = 0; i < this.cutWasteList.length; i++) {
+              this.OrdersService.getArticleById(this.cutWasteList[0].artikelnummer).subscribe({
+                next: value3 => {
+                  console.log(value3);
+                }
+              })
+
+            }
+
+
+
           }
         }
       },
@@ -57,19 +93,10 @@ export class OrdersComponent implements OnInit {
   }
 
   showOrder() {
-    this.OrdersService.getOrders().subscribe({
-      next: value => {
-        this.orderList = [];
-        for (let order of value) {
-          if (order.enabled) {
-            this.orderList.push(order);
-          }
-        }
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
+    this.OrdersService.getUser(1).subscribe(value => {
+      console.log(value);
+    })
+
   }
 
   checked(order: Order) {
