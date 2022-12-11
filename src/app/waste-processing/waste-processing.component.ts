@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {CutWaste} from "./_models/cut-waste.model";
 import {CutWasteService} from "./_services/cut-waste.service";
 
@@ -9,31 +9,39 @@ import {CutWasteService} from "./_services/cut-waste.service";
   styleUrls: ['./waste-processing.component.scss']
 })
 export class WasteProcessingComponent implements OnInit {
+  selectedIndex: number = -1;
   selectedTodo: CutWaste;
   selectedType: string;
   todoList: CutWaste[] = [];
   showModal: boolean = false;
+  screenLGSize: number = 992;
+  isDesktop: boolean;
+  showInfoBox: boolean = false;
 
 
   constructor(public cutWasteService: CutWasteService) {
+  }
 
+  @HostListener("window:resize", []) updateIsDesktop() {
+    this.isDesktop = window.innerWidth >= this.screenLGSize;
   }
 
 
   ngOnInit(): void {
     this.fillListAllTypes();
+    this.updateIsDesktop();
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      window.dispatchEvent(new Event('resize'));
-    }, 250);
   }
 
-  todoDetail(todo: CutWaste): void {
+  todoDetail(todo: CutWaste, index: number): void {
+    this.selectedIndex = index;
     this.selectedTodo = todo;
     this.selectedType = todo.type;
-    this.showModal = true;
+    if (!this.isDesktop) {
+      this.showModal = true;
+    }
   }
 
   setType(type: string) {
