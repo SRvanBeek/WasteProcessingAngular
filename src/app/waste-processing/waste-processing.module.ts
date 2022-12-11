@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {WasteProcessingComponent} from "./waste-processing.component";
+import {ModalModule} from "../shared/_modals/modal.module";
 
 
 
@@ -8,9 +9,10 @@ import {WasteProcessingComponent} from "./waste-processing.component";
   declarations: [
     WasteProcessingComponent,
   ],
-  imports: [
-    CommonModule
-  ],
+    imports: [
+        CommonModule,
+        ModalModule
+    ],
   exports: [
     WasteProcessingComponent,
   ]
