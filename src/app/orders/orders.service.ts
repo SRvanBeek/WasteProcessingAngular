@@ -5,6 +5,7 @@ import {environment} from "../../environments/environment";
 import {Order} from "./order.model";
 import {User} from "../shared/_models/user.model"
 import {Article} from "../shared/_models/article.model";
+import {Waste} from "../waste-processing/waste.model";
 
 
 @Injectable({
@@ -30,8 +31,12 @@ export class OrdersService {
   }
 
   getArticleById(articleID: String): Observable<Article> {
-    console.log("hihi")
+
     return this.http.get<Article>(environment.apiUrl + '/api/article/' + articleID )
+  }
+  getWaste(): Observable<Waste[]> {
+    return this.http.get<Waste[]>(environment.apiUrl + '/api/waste/');
+
   }
 
 }

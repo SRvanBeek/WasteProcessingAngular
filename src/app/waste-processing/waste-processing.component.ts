@@ -49,8 +49,8 @@ export class WasteProcessingComponent implements OnInit {
       this.wasteService.getWasteCategorieData(articleId).subscribe({
           next: value => {
             this.waste = value;
-            this.details = 'Categorieen: ' + this.waste.categories;
-            this.metrage = 'Metrage: ' + this.waste.metrage;
+            //this.details = 'Categorieen: ' + this.waste.categories;
+            //this.metrage = 'Metrage: ' + this.waste.metrage;
           },
           error: err => {
             console.log(err);
