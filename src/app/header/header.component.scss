@@ -3,6 +3,24 @@
   z-index: 1;
 }
 
+.offcanvas.show {
+  overflow: auto;
+}
+
+.hamburgerBut {
+  padding: 1px 6px;
+}
+
+.container-fluid {
+  height: 100%;
+}
+
+.logo {
+  width: 20%;
+  height: auto;
+  object-fit: cover;
+}
+
 .subMenuOff {
   color: transparent;
 }

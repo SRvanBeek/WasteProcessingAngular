@@ -1,15 +1,17 @@
 export class Order {
-  constructor(id: number, artikelID: number, customerID: number, metrage: number, visibility: boolean) {
+  id: number;
+  cutWasteID: number;
+  enabled: boolean;
+  userId: number;
+  dateProcessed: number;
+
+  constructor(id: number, cutWasteID: number, dateProcessed: number, userId: number, enabled: boolean) {
     this.id = id;
-    this.artikelID = artikelID;
-    this.customerID = customerID;
-    this.metrage = metrage;
-    this.visibility = visibility;
+    this.cutWasteID = cutWasteID;
+    this.enabled = enabled;
+    this.userId = userId;
+    this.dateProcessed = dateProcessed;
   }
 
-  id: number;
-  artikelID: number;
-  customerID: number;
-  metrage: number;
-  visibility: boolean;
+
 }

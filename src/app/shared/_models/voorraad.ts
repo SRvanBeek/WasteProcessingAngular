@@ -1,20 +1,26 @@
-export class Waste {
-
-  id: number;
+export class Voorraad {
+  private _id: number;
   private _cutWasteId: number;
-  private _userId: number;
-  private _categoryId: number;
+  private _userID: number;
   private _enabled: boolean;
   private _dateProcessed: number;
 
-  constructor(cutWasteId: number, userId: number, categoryId: number, enabled: boolean, dateProcessed: number) {
+
+  constructor(cutWasteId: number, userID: number, enabled: boolean, dateProcessed: number) {
     this._cutWasteId = cutWasteId;
-    this._userId = userId;
-    this._categoryId = categoryId;
+    this._userID = userID;
     this._enabled = enabled;
     this._dateProcessed = dateProcessed;
   }
 
+
+  get id(): number {
+    return this._id;
+  }
+
+  set id(value: number) {
+    this._id = value;
+  }
 
   get cutWasteId(): number {
     return this._cutWasteId;
@@ -25,19 +31,11 @@ export class Waste {
   }
 
   get userId(): number {
-    return this._userId;
+    return this._userID;
   }
 
   set userId(value: number) {
-    this._userId = value;
-  }
-
-  get categoryId(): number {
-    return this._categoryId;
-  }
-
-  set categoryId(value: number) {
-    this._categoryId = value;
+    this._userID = value;
   }
 
   get enabled(): boolean {
