@@ -1,17 +1,14 @@
-export class CategoryModel {
+export class Category{
   id: number;
-  name: string;
-  voorwaarde:string;
-  customerid: string;
+  name: String;
+  voorwaarde: String;
+  enabled: boolean;
 
-  constructor(id: number, name: string, voorwaarde: string, customerid: string) {
+  constructor(id: number, name: String, voorwaarde: String, enabled: boolean) {
     this.id = id;
     this.name = name;
     this.voorwaarde = voorwaarde;
-    this.customerid = customerid;
+    this.enabled = enabled;
   }
 
-  get getName(): string {
-    return this.name;
-  }
 }
