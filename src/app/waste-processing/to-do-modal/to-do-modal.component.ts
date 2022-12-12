@@ -8,6 +8,9 @@ import {WasteService} from "../_services/waste.service";
 import {CategoryService} from "../../shared/_services/category.service";
 import {VoorraadService} from "../../shared/_services/voorraad.service";
 
+/**
+ * @Author Dino Yang
+ */
 @Component({
   selector: 'app-to-do-modal',
   templateUrl: './to-do-modal.component.html',
@@ -31,7 +34,7 @@ export class ToDoModalComponent {
 
   ngOnChanges() {
     if (this.isShownInput) {
-      this.getArticle(this.todo.artikelnummer);
+      this.setArticle(this.todo.artikelnummer);
       if (this.todo.type == 'catWaste') {
         this.wasteService.getOneWasteByCutWasteID(this.todo.id).subscribe(waste => {
           this.categoryService.getCategoryNameById(waste.categoryId).subscribe(categoryName => {
@@ -46,13 +49,20 @@ export class ToDoModalComponent {
     this.isShownOutput.emit(false);
   }
 
-  getArticle(id: string) {
+  /**
+   * setArticle() sets this.article with the article that is connected to the selected cutWaste.
+   * @param id of the article
+   */
+  setArticle(id: string) {
     this.articleService.getOneArticle(id)
       .subscribe(value => {
         this.article = value;
       });
   }
 
+  /**
+   * done() sets the processed attribute of the selected cutWaste to true and updates the catWaste/storage/order with the right userId, date and enabled.
+   */
   done() {
     this.cutWasteService.getOneCutWaste(this.todo.id).subscribe(cutWaste => {
       cutWaste.processed = true;

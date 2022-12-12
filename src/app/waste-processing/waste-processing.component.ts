@@ -3,7 +3,9 @@ import {CutWaste} from "./_models/cut-waste.model";
 import {CutWasteService} from "./_services/cut-waste.service";
 import {Toast} from "bootstrap";
 
-
+/**
+ * @Author Dino Yang
+ */
 @Component({
   selector: 'app-waste-processing',
   templateUrl: './waste-processing.component.html',
@@ -39,6 +41,9 @@ export class WasteProcessingComponent implements OnInit {
   ngAfterViewInit() {
   }
 
+  /**
+   * setUserID() gets the userId from the jwt in localStorage and sets this.userID to it.
+   */
   setUserID(): void {
     let jwt = localStorage.getItem('JwtToken');
     if (jwt) {
@@ -49,10 +54,15 @@ export class WasteProcessingComponent implements OnInit {
     }
   }
 
-  todoDetail(todo: CutWaste, index: number): void {
+  /**
+   * todoDetail() sets selectedIndex, selectedTodo and selectedType with the right values after clicking on a cutWaste.
+   * @param cutWaste cutWaste that is selected.
+   * @param index in the list.
+   */
+  todoDetail(cutWaste: CutWaste, index: number): void {
     this.selectedIndex = index;
-    this.selectedTodo = todo;
-    this.selectedType = todo.type;
+    this.selectedTodo = cutWaste;
+    this.selectedType = cutWaste.type;
     if (!this.isDesktop) {
       this.showModal = true;
     }
@@ -61,6 +71,10 @@ export class WasteProcessingComponent implements OnInit {
     }, 100);
   }
 
+  /**
+   * setType() is used for sorting the list based on cutWaste type.
+   * @param type of waste.
+   */
   setType(type: string) {
     this.filterList = type;
     if (type == 'all') {
@@ -74,6 +88,9 @@ export class WasteProcessingComponent implements OnInit {
     this.showModal = value;
   }
 
+  /**
+   * fillListAllTypes() fills the todoList with every CutWaste in the db.
+   */
   fillListAllTypes() {
     this.cutWasteService.getAllCutWaste().subscribe({
       next: value => {
@@ -90,6 +107,10 @@ export class WasteProcessingComponent implements OnInit {
     });
   }
 
+  /**
+   * fillByType() fills the todoList with every CutWaste from a single type in the db.
+   * @param type of waste
+   */
   fillByType(type: string) {
     this.cutWasteService.getAllByType(type).subscribe({
       next: value => {
@@ -108,6 +129,9 @@ export class WasteProcessingComponent implements OnInit {
     this.selectedIndex = -1;
   }
 
+  /**
+   * openToast() makes it so that when one clicks on the done button a Toast pops up on screen.
+   */
   openToast() {
     let toastTrigger;
     if (this.isDesktop) {

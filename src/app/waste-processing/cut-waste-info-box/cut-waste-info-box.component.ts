@@ -8,6 +8,9 @@ import {WasteService} from "../_services/waste.service";
 import {CategoryService} from "../../shared/_services/category.service";
 import {VoorraadService} from "../../shared/_services/voorraad.service";
 
+/**
+ * @Author Dino Yang
+ */
 @Component({
   selector: 'app-cut-waste-info-box',
   templateUrl: './cut-waste-info-box.component.html',
@@ -41,17 +44,24 @@ export class CutWasteInfoBoxComponent {
       } else {
         this.type = 'Storage';
       }
-      this.getArticle(this.todo.artikelnummer);
+      this.setArticle(this.todo.artikelnummer);
     }
   }
 
-  getArticle(id: string) {
+  /**
+   * setArticle() sets this.article with the article that is connected to the selected cutWaste.
+   * @param id of the article
+   */
+  setArticle(id: string) {
     this.articleService.getOneArticle(id)
       .subscribe(value => {
         this.article = value;
       });
   }
 
+  /**
+   * done() sets the processed attribute of the selected cutWaste to true and updates the catWaste/storage/order with the right userId, date and enabled.
+   */
   done() {
     this.cutWasteService.getOneCutWaste(this.todo.id).subscribe(cutWaste => {
       cutWaste.processed = true;
