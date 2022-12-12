@@ -1,11 +1,30 @@
-.topBar {
-  display: flex;
-}
-
 .wasteProc {
   display: flex;
   height: 87vh;
   overflow: hidden;
+}
+
+.topBar {
+  display: flex;
+}
+
+.topBar > h1 {
+  font-size: 1.5rem;
+}
+
+.topBar > p {
+  font-size: 1rem;
+}
+
+.selector {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.selector > p {
+  font-size: 1rem;
+  margin-bottom: 0;
 }
 
 .todoShow {
@@ -41,9 +60,6 @@
   width: 30vw;
 }
 
-.topBar {
-  height: 5vh;
-}
 
 .todoList {
   display: flex;
@@ -76,11 +92,6 @@
   color: black;
 }
 
-.toDoButton:hover {
-  background-color: #002147;
-  color: #4BC8B6;
-}
-
 .toDoButton > .active {
   background-color: #002147;
   color: #4BC8B6;
@@ -92,6 +103,13 @@
   align-items: center;
   height: 100%;
   width: 100%;
+}
+
+@media (hover: hover) {
+  .toDoButton:hover {
+    background-color: #002147;
+    color: #4BC8B6;
+  }
 }
 
 

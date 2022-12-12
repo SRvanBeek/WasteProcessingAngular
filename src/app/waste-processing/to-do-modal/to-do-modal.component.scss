@@ -9,3 +9,18 @@ h1 {
 h2 {
   font-size: medium;
 }
+
+.green {
+  background-color: #2ea44f;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn {
+  font-family: 'Maven Pro', sans-serif;
+}

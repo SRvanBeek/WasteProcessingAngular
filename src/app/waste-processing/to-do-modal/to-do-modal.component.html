@@ -7,24 +7,37 @@
     <div class="modal-body">
       <ng-template [ngIf]="type == 'catWaste'">
         <div>
-          <h2 *ngIf="isShownInput">Gewicht:   {{todo.gewicht}}</h2>
-          <h2 *ngIf="isShownInput">Metrage:   {{todo.metrage}}</h2>
-          <h2 *ngIf="isShownInput">catWaste ID:   {{todo.id}}</h2>
-          <h2 *ngIf="isShownInput">Type:   {{todo.type}}</h2>
+          <h2 *ngIf="isShownInput">Weight:   {{todo.gewicht}} g</h2>
+          <h2 *ngIf="isShownInput">Size:   {{todo.metrage}}m&#178;</h2>
+          <h2 *ngIf="isShownInput">Type: Categorized Waste</h2>
+          <h2 *ngIf="isShownInput && article != null">Color:   {{article.kleur}}</h2>
+          <h2 *ngIf="isShownInput">Category:   {{category}}</h2>
         </div>
       </ng-template>
       <ng-template [ngIf]="type == 'order'">
         <div>
-          <h2 *ngIf="isShownInput">Gewicht:   {{todo.gewicht}}</h2>
-          <h2 *ngIf="isShownInput">Metrage:   {{todo.metrage}}</h2>
-          <h2 *ngIf="isShownInput">Order ID:   {{todo.id}}</h2>
-          <h2 *ngIf="isShownInput">Type:   {{todo.type}}</h2>
+          <h2 *ngIf="isShownInput">Weight:   {{todo.gewicht}} g</h2>
+          <h2 *ngIf="isShownInput">Size:   {{todo.metrage}}m&#178;</h2>
+          <h2 *ngIf="isShownInput">Type: Order</h2>
+          <h2 *ngIf="isShownInput && article != null">Color:   {{article.kleur}}</h2>
+        </div>
+      </ng-template>
+      <ng-template [ngIf]="type == 'storage'">
+        <div>
+          <h2 *ngIf="isShownInput">Weight:   {{todo.gewicht}} g</h2>
+          <h2 *ngIf="isShownInput">Size:   {{todo.metrage}}m&#178;</h2>
+          <h2 *ngIf="isShownInput">Type: Voorraad</h2>
+          <h2 *ngIf="isShownInput && article != null">Color:   {{article.kleur}}</h2>
         </div>
       </ng-template>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="close()">Close</button>
+      <button type="button" class="btn btn-secondary green" data-bs-dismiss="modal" id="modalDone" (click)="done()">Done
+      </button>
     </div>
   </div>
 </div>
+
+
 

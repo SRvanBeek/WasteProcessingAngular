@@ -84,8 +84,4 @@ export class CutWasteInfoBoxComponent {
     })
     this.doneOutput.emit(outputList);
   }
-
-  filterList() {
-
-  }
 }

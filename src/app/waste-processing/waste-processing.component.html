@@ -1,13 +1,16 @@
 <div class="wasteProc">
   <div class="todoComp" [ngClass]="isDesktop? 'desktop' : 'mobile'">
     <div class="topBar">
-      <p>Amount of waste to go: 1</p>
-      <select class="form-select" aria-label="Select type" (change)="setType(typeSelection.value)" #typeSelection>
-        <option value="all" selected>All</option>
-        <option value="order">Orders</option>
-        <option value="catWaste">Categorized waste</option>
-        <option value="storage">Storage</option>
-      </select>
+      <h1>Amount of waste to go: {{todoList.length}}</h1>
+      <div class="selector">
+        <p>Type:</p>
+        <select class="form-select" aria-label="Select type" (change)="setType(typeSelection.value)" #typeSelection>
+          <option value="all" selected>All</option>
+          <option value="order">Orders</option>
+          <option value="catWaste">Categorized waste</option>
+          <option value="storage">Storage</option>
+        </select>
+      </div>
     </div>
     <div class="todoList">
       <ul>
@@ -32,8 +35,23 @@
   <!-- Modal -->
   <div class="modal fade" id="todoModal" tabindex="-1" aria-labelledby="todoModel"
        aria-hidden="true">
-    <app-to-do-modal [todo]="selectedTodo" [type]="selectedType" [isShownInput]="showModal"
-                     (isShownOutput)="setShown($event)"></app-to-do-modal>
+    <app-to-do-modal [list]="todoList" [userId]="userID" [todo]="selectedTodo" [type]="selectedType"
+                     [isShownInput]="showModal"
+                     (isShownOutput)="setShown($event)" (doneOutput)="refresh($event)"></app-to-do-modal>
   </div>
 
+  <!-- Toast-->
+  <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+    <div id="doneToast" class="toast text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header  text-bg-primary">
+        <strong class="me-auto">Alert</strong>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        You've just processed something!<br>
+        Good job!
+      </div>
+    </div>
+  </div>
 </div>

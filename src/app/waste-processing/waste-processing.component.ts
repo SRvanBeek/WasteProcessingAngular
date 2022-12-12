@@ -1,6 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {CutWaste} from "./_models/cut-waste.model";
 import {CutWasteService} from "./_services/cut-waste.service";
+import {Toast} from "bootstrap";
 
 
 @Component({
@@ -55,6 +56,9 @@ export class WasteProcessingComponent implements OnInit {
     if (!this.isDesktop) {
       this.showModal = true;
     }
+    setTimeout(() => {
+      this.openToast();
+    }, 100);
   }
 
   setType(type: string) {
@@ -101,5 +105,24 @@ export class WasteProcessingComponent implements OnInit {
 
   refresh(list: CutWaste[]) {
     this.todoList = list;
+    this.selectedIndex = -1;
+  }
+
+  openToast() {
+    let toastTrigger;
+    if (this.isDesktop) {
+      toastTrigger = document.getElementById('done');
+    } else {
+      toastTrigger = document.getElementById('modalDone');
+    }
+    const toastLiveExample = document.getElementById('doneToast')
+    if (toastTrigger) {
+      toastTrigger.addEventListener('click', () => {
+        if (toastLiveExample != null) {
+          const toast = new Toast(toastLiveExample);
+          toast.show()
+        }
+      })
+    }
   }
 }
