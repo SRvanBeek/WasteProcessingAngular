@@ -5,6 +5,8 @@ import {ToDoModalComponent} from "./to-do-modal/to-do-modal.component";
 import {CutWasteInfoBoxComponent} from './cut-waste-info-box/cut-waste-info-box.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatButtonModule} from "@angular/material/button";
+import {ModalModule} from "../shared/_modals/modal.module";
+
 
 
 @NgModule({
@@ -17,6 +19,7 @@ import {MatButtonModule} from "@angular/material/button";
     CommonModule,
     MatSnackBarModule,
     MatButtonModule,
+    ModalModule
   ],
   exports: [
     WasteProcessingComponent,
