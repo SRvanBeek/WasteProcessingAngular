@@ -7,6 +7,7 @@ import {User} from "../shared/_models/user.model"
 import {Article} from "../shared/_models/article.model";
 import {Waste} from "../waste-processing/waste.model";
 import {cutWaste} from "../shared/_models/cutWaste.model";
+import {voorraad} from "../shared/_models/voorraad.model";
 
 
 @Injectable({
@@ -24,15 +25,32 @@ export class OrdersService {
   disableOrderByID(order: Order): Observable<any> {
     return this.http.put(environment.apiUrl + '/api/orders/', order);
   }
+
   getCutWaste(cutWasteID: number): Observable<cutWaste> {
     return this.http.get<cutWaste>(environment.apiUrl + '/api/cutWaste/id/' + cutWasteID);
   }
+
   getUser(userID: number): Observable<User> {
     return this.http.get<User>(environment.apiUrl + '/api/users/id/' + userID);
   }
+
   getArticleByOrderId(OrderId: number): Observable<Article> {
     return this.http.get<Article>(environment.apiUrl + '/api/orders/artikel/' + OrderId)
   }
 
+  getArticleByVoorraadId(VoorraadID: number): Observable<Article> {
+    return this.http.get<Article>(environment.apiUrl + '/api/voorraad/artikel/' + VoorraadID)
+  }
+
+  getArticleByWasteId(WasteID: number): Observable<Article> {
+    return this.http.get<Article>(environment.apiUrl + '/api/waste/artikel/' + WasteID)
+
+  }
+  getVoorraad(): Observable<voorraad[]> {
+    return this.http.get<voorraad[]>(environment.apiUrl + '/api/voorraad/')
+  }
+  getWaste(): Observable<Waste[]> {
+    return this.http.get<Waste[]>(environment.apiUrl + '/api/waste/')
+  }
 }
 

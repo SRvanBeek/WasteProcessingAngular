@@ -1,5 +1,5 @@
 export class voorraad{
-  constructor(id: String, cutwasteID: number, userID: number, enabled: boolean, dateProcessed: number) {
+  constructor(id: number, cutwasteID: number, userID: number, enabled: boolean, dateProcessed: number) {
     this.id = id;
     this.cutwasteID = cutwasteID;
     this.userID = userID;
@@ -7,7 +7,7 @@ export class voorraad{
     this.dateProcessed = dateProcessed;
   }
 
-  id: String;
+  id: number;
   cutwasteID: number;
   userID: number;
   enabled: boolean;
