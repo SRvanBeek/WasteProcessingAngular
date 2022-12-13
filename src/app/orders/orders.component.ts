@@ -89,6 +89,8 @@ export class OrdersComponent implements OnInit {
     this.OrdersService.getVoorraad().subscribe({
       next: value => {
         this.voorraadList = [];
+        this.voorradenList = [];
+        this.voorraad = [];
         for (let voorraad of value) {
           if (voorraad.enabled) {
             this.voorraadList.push(voorraad);
