@@ -19,16 +19,13 @@ export class OrdersComponent implements OnInit {
   article: Article | undefined;
   userList: User[];
   orderList: Order[];
-  articleList: Article[];
-  cutWasteList: cutWaste[];
-  cutWasteList2: cutWaste[];
-  wasteList: Waste[];
+  ordersList: String[];
+  allOrdersList: String[][];
   checkedList: Order[] = [];
   isAdmin: boolean = false;
 
   constructor(public OrdersService: OrdersService) {
-    this.getAllOrders()
-    //this.getWaste()
+   this.getAllOrders()
 
   }
 
@@ -37,6 +34,7 @@ export class OrdersComponent implements OnInit {
   }
 
   getAllOrders() {
+    this.allOrdersList = [];
     this.OrdersService.getOrders().subscribe({
       next: value => {
         this.orderList = [];
@@ -46,115 +44,38 @@ export class OrdersComponent implements OnInit {
           }
           }
         for (let i = 0; i < this.orderList.length; i++) {
-          console.log(this.orderList[0].userId)
-          this.getOrderCutWaste()
-          this.getOrderUser()
-          this.OrderArticle()
-      }
-      },
-      error: err => {
-        console.log("help");
-      }
-    })
-  }
-
-
-  getWaste() {
-    this.OrdersService.getWaste().subscribe({
-      next: value => {
-        this.wasteList = [];
-        for (let waste of value) {
-          if (waste.enabled) {
-            this.wasteList.push(waste);
-            for (let i = 0; i < this.wasteList.length; i++) {
-              this.getWasteUser();
-              this.getWasteCutWaste();
+          this.ordersList = [];
+          this.OrdersService.getUser(this.orderList[i].userId).subscribe({
+            next: value1 => {
+              this.ordersList.push(this.orderList[i].id.toString())
+              this.ordersList.push(this.orderList[i].dateProcessed.toString())
+              this.ordersList.push(value1.name)
             }
-          }
+          })
+          this.OrdersService.getArticleByOrderId(this.orderList[i].id).subscribe({
+            next: value2 => {
+              this.ordersList.push(value2.kleur.toString())
+              this.ordersList.push(value2.leverancier)
+            }
+          })
+          this.OrdersService.getCutWaste(this.orderList[i].cutwasteID).subscribe({
+            next: value3 => {
+              this.ordersList.push(value3.gewicht.toString())
+              this.ordersList.push(value3.metrage.toString())
+              this.ordersList.push(value3.type.toString())
+              console.log(this.ordersList)
+            }
+          })
+          this.allOrdersList.push(this.ordersList)
         }
+        console.log(this.allOrdersList)
+
       },
       error: err => {
         console.log(err);
       }
     })
   }
-
-
-  getWasteCutWaste(){
-      for (let i = 0; i < this.wasteList.length; i++) {
-        this.OrdersService.getCutWaste(this.wasteList[i].cutwasteId).subscribe({
-          next: value2 => {
-            this.cutWasteList2 = [];
-            this.cutWasteList2.push(value2);
-          },
-          error: err => {
-            console.log(err);
-          }
-        })
-      }
-    }
-
-  getWasteUser(){
-    for (let i = 0; i < this.wasteList.length; i++)
-      this.OrdersService.getUser(this.wasteList[i].userID).subscribe({
-        next: value1 => {
-          this.userList = []
-          this.userList.push(value1)
-        },
-        error: err => {
-          console.log(err);
-        }
-      })
-    }
-
-
-  getOrderCutWaste(){
-    for (let i = 0; i < this.orderList.length; i++) {
-      this.OrdersService.getCutWaste(this.orderList[i].cutwasteID).subscribe(
-        {
-          next: value2 => {
-            this.cutWasteList = [];
-            this.cutWasteList.push(value2);
-
-          },
-          error: err => {
-            console.log(err);
-          }
-        }
-      )
-    }
-  }
-
-  getOrderUser(){
-      for (let i = 0; i < this.orderList.length; i++)
-        this.OrdersService.getUser(this.orderList[i].userId).subscribe({
-          next: value1 => {
-            this.userList = [];
-            this.userList.push(value1)
-        },
-          error: err => {
-            console.log(err);
-          }
-      })
-    }
-
-    OrderArticle(){
-      for (let i = 0; i < this.cutWasteList.length; i++) {
-        console.log(this.cutWasteList[0].artikelnummer)
-        this.OrdersService.getArticleById(this.cutWasteList[i].artikelnummer).subscribe({
-          next: value3 => {
-            console.log(value3);
-            this.articleList = []
-            this.articleList.push(value3)
-
-          },
-          error:err => {
-            console.log(err);
-          }
-        })
-      }
-    }
-
 
   setAdmin(): void {
     let jwt = localStorage.getItem('JwtToken');
@@ -178,11 +99,20 @@ export class OrdersComponent implements OnInit {
   }
 
   showOrder() {
-    this.OrdersService.getUser(1).subscribe(value => {
-      console.log(value);
-    })
+    for (let i = 1; i < 2; i++) {
+      this.OrdersService.getArticleByOrderId(i).subscribe({
+        next: value => {
+          console.log(value.kleur);
+        },
+        error:err => {
+          console.log(err);
+        }
 
+      })
+    }
   }
+
+
 
   checked(order: Order) {
     return this.checkedList.includes(order);

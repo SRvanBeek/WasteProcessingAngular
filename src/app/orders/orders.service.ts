@@ -6,6 +6,7 @@ import {Order} from "./order.model";
 import {User} from "../shared/_models/user.model"
 import {Article} from "../shared/_models/article.model";
 import {Waste} from "../waste-processing/waste.model";
+import {cutWaste} from "../shared/_models/cutWaste.model";
 
 
 @Injectable({
@@ -23,20 +24,14 @@ export class OrdersService {
   disableOrderByID(order: Order): Observable<any> {
     return this.http.put(environment.apiUrl + '/api/orders/', order);
   }
-  getCutWaste(cutWasteID: number): Observable<any> {
-    return this.http.get(environment.apiUrl + '/api/cutWaste/id/' + cutWasteID);
+  getCutWaste(cutWasteID: number): Observable<cutWaste> {
+    return this.http.get<cutWaste>(environment.apiUrl + '/api/cutWaste/id/' + cutWasteID);
   }
   getUser(userID: number): Observable<User> {
     return this.http.get<User>(environment.apiUrl + '/api/users/id/' + userID);
   }
-
-  getArticleById(articleID: String): Observable<Article> {
-
-    return this.http.get<Article>(environment.apiUrl + '/api/article/' + articleID )
-  }
-  getWaste(): Observable<Waste[]> {
-    return this.http.get<Waste[]>(environment.apiUrl + '/api/waste/');
-
+  getArticleByOrderId(OrderId: number): Observable<Article> {
+    return this.http.get<Article>(environment.apiUrl + '/api/orders/artikel/' + OrderId)
   }
 
 }

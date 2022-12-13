@@ -1,5 +1,5 @@
 export class Order {
-  constructor(id: String, cutwasteID: number, userId: number, enabled: boolean, dateProcessed: number) {
+  constructor(id: number, cutwasteID: number, userId: number, enabled: boolean, dateProcessed: number) {
     this.id = id;
     this.cutwasteID = cutwasteID;
     this.userId = userId;
@@ -7,7 +7,7 @@ export class Order {
     this.dateProcessed = dateProcessed;
   }
 
-  id: String;
+  id: number;
   cutwasteID: number;
   userId: number;
   enabled: boolean;
