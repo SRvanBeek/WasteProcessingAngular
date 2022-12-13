@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import { GaugeComponent } from './dashboard/gauge/gauge.component';
 import {FormsModule} from "@angular/forms";
+import { LabelPreviewComponent } from '../label-preview/label-preview.component';
 
 
 
