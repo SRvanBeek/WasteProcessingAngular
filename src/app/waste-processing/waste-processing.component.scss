@@ -6,6 +6,8 @@
 
 .topBar {
   display: flex;
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .topBar > h1 {
@@ -16,10 +18,19 @@
   font-size: 1rem;
 }
 
-.selector {
+#detailsButton {
+  display: flex;
   margin-left: auto;
+  justify-content: center;
+  flex-direction: column;
+  align-self: flex-end;
+  margin-right: 1rem;
+}
+
+.selector {
   display: flex;
   flex-direction: column;
+  align-self: flex-end;
 }
 
 .selector > p {
