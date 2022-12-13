@@ -22,18 +22,18 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of orderList; let i = index">
+    <tr *ngFor="let item of ordersList; let i = index">
       <td>
-        <mat-checkbox id="{{'check' + i}}" (change)="onCheck(item)"></mat-checkbox>
+        <mat-checkbox id="{{'check' + i}}"></mat-checkbox>
       </td>
-      <td>{{item.id}}</td>
-      <td>customer</td>
-      <td>{{this.cutWasteList[0].metrage}}</td>
-      <td>{{this.articleList[0].kleur}}</td>
-      <td>{{this.cutWasteList[0].gewicht}}</td>
-      <td>{{this.cutWasteList[0].type}}</td>
-      <td>{{this.userList[0].name}}</td>
-      <td>{{item.dateProcessed}}</td>
+      <td>{{item}}</td>
+      <td>{{item}}</td>
+<!--      <td>{{}}</td>-->
+<!--      <td>{{}}</td>-->
+<!--      <td>{{}}</td>-->
+<!--      <td>{{}}</td>-->
+<!--      <td>{{}}</td>-->
+<!--      <td>{{item[1]}}</td>-->
     </tr>
 <!--    <tr *ngFor="let item of wasteList; let i = index">-->
 <!--      <td>-->
