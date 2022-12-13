@@ -21,34 +21,20 @@
       <th>Date</th>
     </tr>
     </thead>
-    <tbody>
-    <tr *ngFor="let item of ordersList; let i = index">
+    <tbody *ngFor="let item of allOrdersList; let i = index">
+    <tr>
       <td>
         <mat-checkbox id="{{'check' + i}}"></mat-checkbox>
       </td>
-      <td>{{item}}</td>
-      <td>{{item}}</td>
-<!--      <td>{{}}</td>-->
-<!--      <td>{{}}</td>-->
-<!--      <td>{{}}</td>-->
-<!--      <td>{{}}</td>-->
-<!--      <td>{{}}</td>-->
-<!--      <td>{{item[1]}}</td>-->
+      <td>{{item[0]}}</td>
+      <td>{{item[4]}}</td>
+      <td>{{item[6]}}</td>
+      <td>{{item[3]}}</td>
+      <td>{{item[5]}}</td>
+      <td>{{item[7]}}</td>
+      <td>{{item[2]}}</td>
+      <td>{{item[1]}}</td>
     </tr>
-<!--    <tr *ngFor="let item of wasteList; let i = index">-->
-<!--      <td>-->
-<!--        <mat-checkbox id="{{'check' + i}}"></mat-checkbox>-->
-<!--      </td>-->
-<!--      <td>{{item.id}}</td>-->
-<!--      <td>customer</td>-->
-<!--      <td>{{this.cutWasteList2[0].metrage}}</td>-->
-<!--      <td>kleur</td>-->
-<!--      <td>{{this.cutWasteList2[0].gewicht}}</td>-->
-<!--      <td>{{this.cutWasteList2[0].type}}</td>-->
-<!--      <td>{{this.userList[0].name}}</td>-->
-<!--      <td>{{item.date_processed}}</td>-->
-<!--    </tr>-->
-
     </tbody>
   </table>
 </div>
