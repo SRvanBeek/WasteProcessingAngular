@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {CutWaste} from "./_models/cut-waste.model";
-import {CutWasteService} from "./_services/cut-waste.service";
+import {CutWaste} from "../shared/_models/cut-waste.model";
+import {CutWasteService} from "../shared/_services/cut-waste.service";
 import {Toast} from "bootstrap";
 
 /**

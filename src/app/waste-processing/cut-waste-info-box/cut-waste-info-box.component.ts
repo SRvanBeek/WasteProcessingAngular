@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {CutWaste} from "../_models/cut-waste.model";
+import {CutWaste} from "../../shared/_models/cut-waste.model";
 import {ArticleService} from "../../shared/_services/article.service";
 import {Article} from "../../shared/_models/article";
-import {CutWasteService} from "../_services/cut-waste.service";
-import {OrdersService} from "../../orders/orders.service";
-import {WasteService} from "../_services/waste.service";
+import {CutWasteService} from "../../shared/_services/cut-waste.service";
+import {OrdersService} from "../../shared/_services/orders.service";
+import {WasteService} from "../../shared/_services/waste.service";
 import {CategoryService} from "../../shared/_services/category.service";
 import {VoorraadService} from "../../shared/_services/voorraad.service";
 
