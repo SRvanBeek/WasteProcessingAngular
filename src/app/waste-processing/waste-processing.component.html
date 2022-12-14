@@ -2,15 +2,25 @@
   <div class="todoComp" [ngClass]="isDesktop? 'desktop' : 'mobile'">
     <div class="topBar">
       <h1>Amount of waste to go: {{todoList.length}}</h1>
-      <div class="selector">
-        <p>Type:</p>
-        <select class="form-select" aria-label="Select type" (change)="setType(typeSelection.value)" #typeSelection>
-          <option value="all" selected>All</option>
-          <option value="order">Orders</option>
-          <option value="catWaste">Categorized waste</option>
-          <option value="storage">Storage</option>
-        </select>
+<!--      modal button-->
+
+      <!-- Modal -->
+      <div class="modal fade" id="wasteDetails" tabindex="-1" aria-labelledby="Waste Details" aria-hidden="true">
+        <app-dashboard></app-dashboard>
       </div>
+        <button type="button"  id="detailsButton" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#wasteDetails">
+          Details
+        </button>
+        <div class="selector">
+          <p>Type:</p>
+          <select class="form-select" aria-label="Select type" (change)="setType(typeSelection.value)" #typeSelection>
+            <option value="all" selected>All</option>
+            <option value="order">Orders</option>
+            <option value="catWaste">Categorized waste</option>
+            <option value="storage">Storage</option>
+          </select>
+        </div>
+
     </div>
     <div class="todoList">
       <ul>
