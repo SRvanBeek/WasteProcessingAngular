@@ -1,12 +1,12 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {CutWaste} from "../_models/cut-waste.model";
-import {ArticleService} from "../../shared/_services/article.service";
-import {Article} from "../../shared/_models/article";
-import {CutWasteService} from "../_services/cut-waste.service";
-import {OrdersService} from "../../orders/orders.service";
-import {WasteService} from "../_services/waste.service";
-import {CategoryService} from "../../shared/_services/category.service";
-import {VoorraadService} from "../../shared/_services/voorraad.service";
+import {CutWaste} from "../../_models/cut-waste.model";
+import {ArticleService} from "../../_services/article.service";
+import {Article} from "../../_models/article";
+import {CutWasteService} from "../../_services/cut-waste.service";
+import {OrdersService} from "../../_services/orders.service";
+import {WasteService} from "../../_services/waste.service";
+import {CategoryService} from "../../_services/category.service";
+import {VoorraadService} from "../../_services/voorraad.service";
 
 /**
  * @Author Dino Yang
