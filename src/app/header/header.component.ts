@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../shared/_services/auth.service'
 
 @Component({
@@ -8,9 +8,6 @@ import {AuthService} from '../shared/_services/auth.service'
 })
 
 export class HeaderComponent implements OnInit {
-  screenLGSize: number = 992;
-  typeHistory: string;
-  typeAdmin: string;
   token: string;
   isAdmin: boolean = false;
 
@@ -20,13 +17,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.setAdmin();
-    if (window.innerWidth >= this.screenLGSize) {
-      this.typeHistory = 'history';
-      this.typeAdmin = 'admin';
-    } else {
-      this.typeHistory = 'historyOff';
-      this.typeAdmin = 'adminOff';
-    }
   }
 
   setAdmin(): void {
@@ -37,33 +27,6 @@ export class HeaderComponent implements OnInit {
       let decodedJwtData = JSON.parse(decodedJwtJsonData);
       let roles = decodedJwtData.roles;
       this.isAdmin = roles[0] == 'ROLE_ADMIN';
-    }
-  }
-
-  @HostListener("window:resize", []) updateHistory() {
-    if (window.innerWidth >= this.screenLGSize) {
-      this.typeHistory = 'history';
-      this.typeAdmin = 'admin';
-    } else {
-      this.typeHistory = 'historyOff';
-      this.typeAdmin = 'adminOff';
-    }
-  }
-
-  @HostListener("document:click", ['$event.target']) clickNavbar(clickPosition: any) {
-    let shownEl = document.getElementsByClassName('show');
-    if (shownEl.length != 0) {
-      let buttonID = shownEl[0].id + 'Button';
-      let subMenu = document.getElementById(shownEl[0].id);
-      if (subMenu) {
-        let subMenuString = subMenu.id;
-        let button = document.getElementById(buttonID);
-        if (button) {
-          if (!clickPosition.closest('#navBar') && !clickPosition.closest('#' + subMenuString)) {
-            button.dispatchEvent(new CustomEvent('click'));
-          }
-        }
-      }
     }
   }
 
