@@ -1,0 +1,12 @@
+<div class="wrapper">
+  <div class="container ">
+    <div class="gauge-a"></div>
+    <div class="gauge-b"></div>
+    <div class="gauge-c" [ngStyle]="{ 'transform': 'rotate('+gaugeRotation(percentageWaste())+'deg)'}"></div>
+    <div class="gauge-data">
+      <h1 id="wasteCategory">{{_wasteForCategory}} kg</h1>
+      <h3>total: {{_totalWaste}} kg</h3>
+    </div>
+  </div>
+</div>
+

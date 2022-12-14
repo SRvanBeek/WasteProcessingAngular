@@ -1,93 +1,152 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {WasteInterface} from "./wasteInterface";
-import {Waste} from "./waste.model";
-import {WasteService} from "./waste.service";
-import {Order} from "../orders/order.model";
-import {OrderInterface} from "../orders/order-list/order/order-interface";
-import jsPDF from 'jspdf';
+import {Component, HostListener, OnInit} from '@angular/core';
+import {CutWaste} from "../shared/_models/cut-waste.model";
+import {CutWasteService} from "../shared/_services/cut-waste.service";
+import {Toast} from "bootstrap";
 
-
+/**
+ * @Author Dino Yang
+ */
 @Component({
   selector: 'app-waste-processing',
   templateUrl: './waste-processing.component.html',
   styleUrls: ['./waste-processing.component.scss']
 })
 export class WasteProcessingComponent implements OnInit {
+  selectedIndex: number = -1;
+  selectedTodo: CutWaste;
+  selectedType: string;
+  todoList: CutWaste[] = [];
+  showModal: boolean = false;
+  screenLGSize: number = 992;
+  isDesktop: boolean;
+  showInfoBox: boolean = false;
+  userID: number;
+  filterList: string = 'all';
 
-  waste: Waste | undefined;
-  order: Order | undefined;
 
-  message: string = '';
-  details: string = '';
-  metrage: string = '';
-
-  constructor(public wasteService: WasteService) {
-
+  constructor(private cutWasteService: CutWasteService) {
   }
+
+  @HostListener("window:resize", []) updateIsDesktop() {
+    this.isDesktop = window.innerWidth >= this.screenLGSize;
+  }
+
 
   ngOnInit(): void {
-
+    this.fillListAllTypes();
+    this.updateIsDesktop();
+    this.setUserID();
   }
 
-  showAfval() {
-    this.wasteService.getSnijData().subscribe({
-        next: value => {
-          this.message = value;
-          let splitted = value.split(", ");
-          this.showDetailsVanArtikel(splitted[1], splitted[0]);
-        },
-        error: err => {
-          console.log(err);
-        }
-      }
-    );
-
+  ngAfterViewInit() {
   }
 
-  showDetailsVanArtikel(articleId: any, soort: string) {
-    if (soort == 'Waste') {
-      this.wasteService.getWasteCategorieData(articleId).subscribe({
-          next: value => {
-            this.waste = value;
-            this.details = 'Categorieen: ' + this.waste.categories;
-            this.metrage = 'Metrage: ' + this.waste.metrage;
-          },
-          error: err => {
-            console.log(err);
-          }
-        }
-      )
-    } else if (soort == 'Order') {
-      this.wasteService.getOrderByArticleData(articleId).subscribe({
-          next: value => {
-            this.order = value;
-            this.details = 'Ordernummer: ' + this.order.id + "\nBack to customer!";
-            this.metrage = 'Metrage: ' + this.order.metrage;
-          },
-          error: err => {
-            console.log(err);
-          }
-        }
-      )
-    } else if (soort == 'Voorraad') {
-      this.details = "Back to storage!";
-      this.metrage = "";
+  /**
+   * setUserID() gets the userId from the jwt in localStorage and sets this.userID to it.
+   */
+  setUserID(): void {
+    let jwt = localStorage.getItem('JwtToken');
+    if (jwt) {
+      let jwtData = jwt.split('.')[1];
+      let decodedJwtJsonData = window.atob(jwtData);
+      let decodedJwtData = JSON.parse(decodedJwtJsonData);
+      this.userID = decodedJwtData.userId;
     }
   }
 
-  @ViewChild('content', {static: false}) el!: ElementRef;
+  /**
+   * todoDetail() sets selectedIndex, selectedTodo and selectedType with the right values after clicking on a cutWaste.
+   * @param cutWaste cutWaste that is selected.
+   * @param index in the list.
+   */
+  todoDetail(cutWaste: CutWaste, index: number): void {
+    this.selectedIndex = index;
+    this.selectedTodo = cutWaste;
+    this.selectedType = cutWaste.type;
+    if (!this.isDesktop) {
+      this.showModal = true;
+    }
+    setTimeout(() => {
+      this.openToast();
+    }, 100);
+  }
 
+  /**
+   * setType() is used for sorting the list based on cutWaste type.
+   * @param type of waste.
+   */
+  setType(type: string) {
+    this.filterList = type;
+    if (type == 'all') {
+      this.fillListAllTypes()
+    } else {
+      this.fillByType(type);
+    }
+  }
 
-  makePdf() {
-    let pdf = new jsPDF('p', 'pt', 'a4');
+  setShown(value: boolean) {
+    this.showModal = value;
+  }
 
-    pdf.html(this.el.nativeElement, {
-      callback: (pdf) => {
-        pdf.save("label.pdf");
+  /**
+   * fillListAllTypes() fills the todoList with every CutWaste in the db.
+   */
+  fillListAllTypes() {
+    this.cutWasteService.getAllCutWaste().subscribe({
+      next: value => {
+        this.todoList = [];
+        for (let todo of value) {
+          if (!todo.processed) {
+            this.todoList.push(todo);
+          }
+        }
+      },
+      error: err => {
+        console.log(err);
       }
+    });
+  }
 
+  /**
+   * fillByType() fills the todoList with every CutWaste from a single type in the db.
+   * @param type of waste
+   */
+  fillByType(type: string) {
+    this.cutWasteService.getAllByType(type).subscribe({
+      next: value => {
+        this.todoList = [];
+        for (let todo of value) {
+          if (!todo.processed) {
+            this.todoList.push(todo);
+          }
+        }
+      }
     })
   }
 
+  refresh(list: CutWaste[]) {
+    this.todoList = list;
+    this.selectedIndex = -1;
+  }
 
+  /**
+   * openToast() makes it so that when one clicks on the done button a Toast pops up on screen.
+   */
+  openToast() {
+    let toastTrigger;
+    if (this.isDesktop) {
+      toastTrigger = document.getElementById('done');
+    } else {
+      toastTrigger = document.getElementById('modalDone');
+    }
+    const toastLiveExample = document.getElementById('doneToast')
+    if (toastTrigger) {
+      toastTrigger.addEventListener('click', () => {
+        if (toastLiveExample != null) {
+          const toast = new Toast(toastLiveExample);
+          toast.show()
+        }
+      })
+    }
+  }
 }
