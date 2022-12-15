@@ -19,12 +19,17 @@ export class DashboardComponent {
   composition: string[];
 
   constructor(public dashboardService: DashboardService) {
-
   }
 
   ngOnInit() {
     this.setTotalWaste();
     this.getCategoryNames();
+  }
+
+  refresh() {
+    this.setTotalWaste();
+    this.getCategoryNames();
+    this.selectCategory(this.categories[0]);
   }
 
   /**

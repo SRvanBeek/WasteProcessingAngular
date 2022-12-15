@@ -1,13 +1,13 @@
 export class Voorraad {
   private _id: number;
-  private _cutWasteId: number;
+  private _leftoverId: number;
   private _userID: number;
   private _enabled: boolean;
   private _dateProcessed: number;
 
 
-  constructor(cutWasteId: number, userID: number, enabled: boolean, dateProcessed: number) {
-    this._cutWasteId = cutWasteId;
+  constructor(leftoverId: number, userID: number, enabled: boolean, dateProcessed: number) {
+    this._leftoverId = leftoverId;
     this._userID = userID;
     this._enabled = enabled;
     this._dateProcessed = dateProcessed;
@@ -22,12 +22,12 @@ export class Voorraad {
     this._id = value;
   }
 
-  get cutWasteId(): number {
-    return this._cutWasteId;
+  get leftoverId(): number {
+    return this._leftoverId;
   }
 
-  set cutWasteId(value: number) {
-    this._cutWasteId = value;
+  set leftoverId(value: number) {
+    this._leftoverId = value;
   }
 
   get userId(): number {

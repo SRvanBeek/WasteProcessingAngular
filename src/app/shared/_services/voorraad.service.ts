@@ -20,7 +20,7 @@ export class VoorraadService {
     return this.http.put<string>(environment.apiUrl + '/api/voorraad/', voorraad);
   }
 
-  getOneVoorraadByCutWasteID(id: number): Observable<Voorraad> {
+  getOneVoorraadByLeftoverID(id: number): Observable<Voorraad> {
     return this.http.get<Voorraad>(environment.apiUrl + '/api/voorraad/' + id);
   }
 }
