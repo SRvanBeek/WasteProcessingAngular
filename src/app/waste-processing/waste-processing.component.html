@@ -1,7 +1,7 @@
 <div class="wasteProc">
   <div class="todoComp" [ngClass]="isDesktop? 'desktop' : 'mobile'">
     <div class="topBar">
-      <h1>Amount of waste to go: {{todoList.length}}</h1>
+      <h1>Leftovers Remaining: {{todoList.length}}</h1>
 <!--      modal button-->
 
       <!-- Modal -->
@@ -41,8 +41,8 @@
     </div>
   </div>
   <div *ngIf="isDesktop" class="todoShow">
-    <app-cut-waste-info-box [list]="todoList" [todo]="selectedTodo" [userId]="userID"
-                            (doneOutput)="refresh($event)"></app-cut-waste-info-box>
+    <app-leftover-info-box [list]="todoList" [todo]="selectedTodo" [userId]="userID"
+                            (doneOutput)="refresh($event)"></app-leftover-info-box>
   </div>
 
 

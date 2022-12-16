@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {CutWaste} from "../../shared/_models/cut-waste.model";
+import {Leftover} from "../../shared/_models/leftover.model";
 import {ArticleService} from "../../shared/_services/article.service";
 import {Article} from "../../shared/_models/article";
-import {CutWasteService} from "../../shared/_services/cut-waste.service";
+import {LeftoverService} from "../../shared/_services/leftover.service";
 import {OrdersService} from "../../shared/_services/orders.service";
 import {WasteService} from "../../shared/_services/waste.service";
 import {CategoryService} from "../../shared/_services/category.service";
@@ -12,20 +12,20 @@ import {VoorraadService} from "../../shared/_services/voorraad.service";
  * @Author Dino Yang
  */
 @Component({
-  selector: 'app-cut-waste-info-box',
-  templateUrl: './cut-waste-info-box.component.html',
-  styleUrls: ['./cut-waste-info-box.component.scss']
+  selector: 'app-leftover-info-box',
+  templateUrl: './leftover-info-box.component.html',
+  styleUrls: ['./leftover-info-box.component.scss']
 })
-export class CutWasteInfoBoxComponent {
+export class LeftoverInfoBoxComponent {
   @Input() userId: number;
-  @Input() list: CutWaste[];
-  @Input() todo: CutWaste;
-  @Output() doneOutput = new EventEmitter<CutWaste[]>();
+  @Input() list: Leftover[];
+  @Input() todo: Leftover;
+  @Output() doneOutput = new EventEmitter<Leftover[]>();
   article: Article;
   type: string;
   category: any;
 
-  constructor(private articleService: ArticleService, private cutWasteService: CutWasteService,
+  constructor(private articleService: ArticleService, private leftoverService: LeftoverService,
               private orderService: OrdersService, private wasteService: WasteService,
               private categoryService: CategoryService, private voorraadService: VoorraadService) {
   }
@@ -34,7 +34,7 @@ export class CutWasteInfoBoxComponent {
     if (this.todo != null) {
       if (this.todo.type == 'catWaste') {
         this.type = 'Categorized Waste'
-        this.wasteService.getOneWasteByCutWasteID(this.todo.id).subscribe(waste => {
+        this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(waste => {
           this.categoryService.getCategoryNameById(waste.categoryId).subscribe(categoryName => {
             this.category = categoryName.name;
           })
@@ -49,7 +49,7 @@ export class CutWasteInfoBoxComponent {
   }
 
   /**
-   * setArticle() sets this.article with the article that is connected to the selected cutWaste.
+   * setArticle() sets article with the article that is connected to the selected leftover.
    * @param id of the article
    */
   setArticle(id: string) {
@@ -60,37 +60,37 @@ export class CutWasteInfoBoxComponent {
   }
 
   /**
-   * done() sets the processed attribute of the selected cutWaste to true and updates the catWaste/storage/order with the right userId, date and enabled.
+   * done() sets the processed attribute of the selected leftover to true and updates the catWaste/storage/order with the right userId, date and enabled.
    */
   done() {
-    this.cutWasteService.getOneCutWaste(this.todo.id).subscribe(cutWaste => {
-      cutWaste.processed = true;
-      this.cutWasteService.putCutWaste(cutWaste).subscribe();
+    this.leftoverService.getOneLeftover(this.todo.id).subscribe(leftover => {
+      leftover.processed = true;
+      this.leftoverService.putLeftover(leftover).subscribe();
     })
     if (this.todo.type == 'catWaste') {
-      this.wasteService.getOneWasteByCutWasteID(this.todo.id).subscribe(waste => {
+      this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(waste => {
         waste.userId = this.userId;
         waste.dateProcessed = Date.now();
         waste.enabled = true;
         this.wasteService.putWaste(waste).subscribe();
       });
     } else if (this.todo.type == 'storage') {
-      this.voorraadService.getOneVoorraadByCutWasteID(this.todo.id).subscribe(voorraad => {
+      this.voorraadService.getOneVoorraadByLeftoverID(this.todo.id).subscribe(voorraad => {
         voorraad.userId = this.userId;
         voorraad.dateProcessed = Date.now();
         voorraad.enabled = true;
         this.voorraadService.putVoorraad(voorraad).subscribe();
       })
     } else {
-      this.orderService.getOrderByCutWasteID(this.todo.id).subscribe(order => {
+      this.orderService.getOrderByLeftoverID(this.todo.id).subscribe(order => {
         order.userId = this.userId;
         order.dateProcessed = Date.now();
         order.enabled = true;
         this.orderService.putOrder(order).subscribe();
       })
     }
-    let outputList = this.list.filter(cutWaste => {
-      return cutWaste.id !== this.todo.id;
+    let outputList = this.list.filter(leftover => {
+      return leftover.id !== this.todo.id;
     })
     this.doneOutput.emit(outputList);
   }

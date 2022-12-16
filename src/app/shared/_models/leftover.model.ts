@@ -1,4 +1,4 @@
-export class CutWaste {
+export class Leftover {
 
   id: number;
   artikelnummer: string;

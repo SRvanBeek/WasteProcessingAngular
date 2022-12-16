@@ -20,8 +20,8 @@ export class OrdersService {
     return this.http.put(environment.apiUrl + '/api/orders/disable', order);
   }
 
-  getOrderByCutWasteID(id: number): Observable<Order> {
-    return this.http.get<Order>(environment.apiUrl + '/api/orders/perCutWaste/' + id)
+  getOrderByLeftoverID(id: number): Observable<Order> {
+    return this.http.get<Order>(environment.apiUrl + '/api/orders/perleftover/' + id)
   }
 
   putOrder(order: Order): Observable<string> {

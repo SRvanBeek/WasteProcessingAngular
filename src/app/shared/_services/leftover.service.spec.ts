@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CutWasteService } from './cut-waste.service';
+import { LeftoverService } from './leftover.service';
 
-describe('CutWasteService', () => {
-  let service: CutWasteService;
+describe('LeftoverService', () => {
+  let service: LeftoverService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CutWasteService);
+    service = TestBed.inject(LeftoverService);
   });
 
   it('should be created', () => {

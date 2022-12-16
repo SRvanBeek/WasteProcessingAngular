@@ -1,13 +1,13 @@
 export class Order {
   id: number;
-  cutWasteID: number;
+  leftoverID: number;
   enabled: boolean;
   userId: number;
   dateProcessed: number;
 
-  constructor(id: number, cutWasteID: number, dateProcessed: number, userId: number, enabled: boolean) {
+  constructor(id: number, leftoverID: number, dateProcessed: number, userId: number, enabled: boolean) {
     this.id = id;
-    this.cutWasteID = cutWasteID;
+    this.leftoverID = leftoverID;
     this.enabled = enabled;
     this.userId = userId;
     this.dateProcessed = dateProcessed;

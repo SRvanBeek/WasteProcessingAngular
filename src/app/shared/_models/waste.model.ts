@@ -1,14 +1,14 @@
 export class Waste {
 
   id: number;
-  private _cutWasteId: number;
+  private _leftoverId: number;
   private _userId: number;
   private _categoryId: number;
   private _enabled: boolean;
   private _dateProcessed: number;
 
-  constructor(cutWasteId: number, userId: number, categoryId: number, enabled: boolean, dateProcessed: number) {
-    this._cutWasteId = cutWasteId;
+  constructor(leftoverId: number, userId: number, categoryId: number, enabled: boolean, dateProcessed: number) {
+    this._leftoverId = leftoverId;
     this._userId = userId;
     this._categoryId = categoryId;
     this._enabled = enabled;
@@ -16,12 +16,12 @@ export class Waste {
   }
 
 
-  get cutWasteId(): number {
-    return this._cutWasteId;
+  get leftoverId(): number {
+    return this._leftoverId;
   }
 
-  set cutWasteId(value: number) {
-    this._cutWasteId = value;
+  set leftoverId(value: number) {
+    this._leftoverId = value;
   }
 
   get userId(): number {

@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {CutWaste} from "../shared/_models/cut-waste.model";
-import {CutWasteService} from "../shared/_services/cut-waste.service";
+import {Leftover} from "../shared/_models/leftover.model";
+import {LeftoverService} from "../shared/_services/leftover.service";
 import {Toast} from "bootstrap";
 
 /**
@@ -13,9 +13,9 @@ import {Toast} from "bootstrap";
 })
 export class WasteProcessingComponent implements OnInit {
   selectedIndex: number = -1;
-  selectedTodo: CutWaste;
+  selectedTodo: Leftover;
   selectedType: string;
-  todoList: CutWaste[] = [];
+  todoList: Leftover[] = [];
   showModal: boolean = false;
   screenLGSize: number = 992;
   isDesktop: boolean;
@@ -24,7 +24,7 @@ export class WasteProcessingComponent implements OnInit {
   filterList: string = 'all';
 
 
-  constructor(private cutWasteService: CutWasteService) {
+  constructor(private leftoverService: LeftoverService) {
   }
 
   @HostListener("window:resize", []) updateIsDesktop() {
@@ -55,14 +55,14 @@ export class WasteProcessingComponent implements OnInit {
   }
 
   /**
-   * todoDetail() sets selectedIndex, selectedTodo and selectedType with the right values after clicking on a cutWaste.
-   * @param cutWaste cutWaste that is selected.
+   * todoDetail() sets selectedIndex, selectedTodo and selectedType with the right values after clicking on a leftover.
+   * @param leftover leftover that is selected.
    * @param index in the list.
    */
-  todoDetail(cutWaste: CutWaste, index: number): void {
+  todoDetail(leftover: Leftover, index: number): void {
     this.selectedIndex = index;
-    this.selectedTodo = cutWaste;
-    this.selectedType = cutWaste.type;
+    this.selectedTodo = leftover;
+    this.selectedType = leftover.type;
     if (!this.isDesktop) {
       this.showModal = true;
     }
@@ -72,7 +72,7 @@ export class WasteProcessingComponent implements OnInit {
   }
 
   /**
-   * setType() is used for sorting the list based on cutWaste type.
+   * setType() is used for sorting the list based on leftover type.
    * @param type of waste.
    */
   setType(type: string) {
@@ -89,10 +89,10 @@ export class WasteProcessingComponent implements OnInit {
   }
 
   /**
-   * fillListAllTypes() fills the todoList with every CutWaste in the db.
+   * fillListAllTypes() fills the todoList with every leftover in the db.
    */
   fillListAllTypes() {
-    this.cutWasteService.getAllCutWaste().subscribe({
+    this.leftoverService.getAllLeftovers().subscribe({
       next: value => {
         this.todoList = [];
         for (let todo of value) {
@@ -108,11 +108,11 @@ export class WasteProcessingComponent implements OnInit {
   }
 
   /**
-   * fillByType() fills the todoList with every CutWaste from a single type in the db.
+   * fillByType() fills the todoList with every leftover from a single type in the db.
    * @param type of waste
    */
   fillByType(type: string) {
-    this.cutWasteService.getAllByType(type).subscribe({
+    this.leftoverService.getAllByType(type).subscribe({
       next: value => {
         this.todoList = [];
         for (let todo of value) {
@@ -124,7 +124,7 @@ export class WasteProcessingComponent implements OnInit {
     })
   }
 
-  refresh(list: CutWaste[]) {
+  refresh(list: Leftover[]) {
     this.todoList = list;
     this.selectedIndex = -1;
   }
