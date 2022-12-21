@@ -95,7 +95,7 @@ export class WasteProcessingComponent implements OnInit {
     this.leftoverService.getAllLeftovers().subscribe({
       next: value => {
         this.todoList = [];
-        for (let todo of value) {
+        for (let todo of value.payload) {
           if (!todo.processed) {
             this.todoList.push(todo);
           }
@@ -111,11 +111,11 @@ export class WasteProcessingComponent implements OnInit {
    * fillByType() fills the todoList with every leftover from a single type in the db.
    * @param type of waste
    */
-  fillByType(type: string) {
+  fillByType(type: any) {
     this.leftoverService.getAllByType(type).subscribe({
       next: value => {
         this.todoList = [];
-        for (let todo of value) {
+        for (let todo of value.payload) {
           if (!todo.processed) {
             this.todoList.push(todo);
           }

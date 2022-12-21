@@ -12,16 +12,16 @@ export class OrdersService {
   constructor(private http: HttpClient) {
   }
 
-  getOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(environment.apiUrl + '/api/orders/');
+  getOrders(): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/orders/');
   }
 
   disableOrderByID(order: Order): Observable<any> {
     return this.http.put(environment.apiUrl + '/api/orders/disable', order);
   }
 
-  getOrderByLeftoverID(id: number): Observable<Order> {
-    return this.http.get<Order>(environment.apiUrl + '/api/orders/perleftover/' + id)
+  getOrderByLeftoverID(id: number): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/orders/perleftover/' + id)
   }
 
   putOrder(order: Order): Observable<string> {
