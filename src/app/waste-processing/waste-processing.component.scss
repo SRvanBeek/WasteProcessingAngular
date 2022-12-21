@@ -1,21 +1,56 @@
 .wasteProc {
   display: flex;
-  height: 87vh;
+  height: 100vh;
   overflow: hidden;
+  width: 100%;
+}
+
+.mobile {
+  width: 100%;
+}
+
+.desktop {
+  width: 40%;
 }
 
 .topBar {
   display: flex;
-  margin-left: 0.5rem;
+  margin-left: 1rem;
   margin-bottom: 0.5rem;
+  flex-direction: column;
 }
 
-.topBar > h1 {
-  font-size: 1.5rem;
+.topBarTitle {
+  margin-top: .5rem;
+  margin-bottom: 2rem;
+}
+
+.topBarContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.topBarContent > h1 {
+  font-size: 1rem;
+}
+
+.topBarTitle > h1 {
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .topBar > p {
   font-size: 1rem;
+}
+
+.listIdentifiers {
+  display: flex;
+  flex-direction: row;
+
+  h1 {
+    font-size: 1rem;
+  }
 }
 
 #detailsButton {
@@ -31,19 +66,21 @@
   display: flex;
   flex-direction: column;
   align-self: flex-end;
+  margin-left: auto;
+  margin-right: 1rem;
 }
 
-.selector > p {
+.selector > h1 {
   font-size: 1rem;
   margin-bottom: 0;
 }
 
 .todoShow {
-  margin: .5rem;
+  margin: 2rem;
   position: relative;
-  width: 100%;
-  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
-  border-radius: .4em;
+  width: 60%;
+  background-color: white;
+  border: #DCDDE1 1px solid;
 }
 
 .todoShow:after {
@@ -54,7 +91,6 @@
 
 .todoShowContent {
   position: absolute;
-  width: 100%;
   height: 100%;
 }
 
@@ -62,55 +98,52 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  margin: .5rem;
-  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
-  border-radius: .4em;
-}
-
-.desktop {
-  width: 30vw;
+  background-color: white;
+  border-right: 2px solid #DCDDE1;
 }
 
 
 .todoList {
   display: flex;
   flex: auto;
-  width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   justify-content: center;
 }
 
-.todoListContent > ul {
-  margin-left: 0;
+.list {
+  width: 100%;
   padding: 0;
 }
 
 .toDoItem {
   display: flex;
-  width: 100%;
 }
 
 .toDoButton {
   display: flex;
-  width: 100vw;
+  width: 100%;
   height: 4rem;
-  border-bottom: #002147 2px solid;
+  border-bottom: #DCDDE1 2px solid;
   -webkit-transition: all 0.3s 0s ease;
   -moz-transition: all 0.3s 0s ease;
   -o-transition: all 0.3s 0s ease;
   transition: all 0.3s 0s ease;
   color: black;
+
+  p {
+
+    font-size: 1rem;
+  }
 }
 
 .toDoButton > .active {
-  background-color: #002147;
-  color: #4BC8B6;
+  background-color: #E9E9E9;
+  font-weight: bold;
 }
 
 .toDoButton > span {
   display: flex;
-  justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -118,8 +151,17 @@
 
 @media (hover: hover) {
   .toDoButton:hover {
-    background-color: #002147;
-    color: #4BC8B6;
+    background-color: #E9E9E9;
+    font-weight: bold;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .topBarTitle {
+    margin-bottom: 0;
+  }
+  .wasteProc {
+    height: 85vh;
   }
 }
 
