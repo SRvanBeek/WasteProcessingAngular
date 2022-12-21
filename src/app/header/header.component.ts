@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../shared/_services/auth.service'
 
 @Component({
   selector: 'app-header',
@@ -10,10 +9,6 @@ import {AuthService} from '../shared/_services/auth.service'
 export class HeaderComponent implements OnInit {
   token: string;
   isAdmin: boolean = false;
-
-  constructor(private authService: AuthService) {
-  }
-
 
   ngOnInit() {
     this.setAdmin();
@@ -28,9 +23,5 @@ export class HeaderComponent implements OnInit {
       let roles = decodedJwtData.roles;
       this.isAdmin = roles[0] == 'ROLE_ADMIN';
     }
-  }
-
-  logout() {
-    this.authService.logout();
   }
 }
