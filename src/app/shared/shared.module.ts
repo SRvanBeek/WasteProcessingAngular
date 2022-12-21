@@ -4,11 +4,13 @@ import {HeaderModule} from "../header/header.module";
 import { DashboardComponent } from './_modals/dashboard/dashboard.component';
 import {ModalModule} from "./_modals/modal.module";
 import { LabelPreviewComponent } from './label-preview/label-preview.component';
+import { WasteLabelComponent } from './waste-label/waste-label.component';
 
 
 @NgModule({
   declarations: [
-    LabelPreviewComponent
+    LabelPreviewComponent,
+    WasteLabelComponent
   ],
   imports: [
     CommonModule,

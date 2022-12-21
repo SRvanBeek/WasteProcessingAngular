@@ -9,12 +9,10 @@ import { CutWaste } from 'src/app/waste-processing/_models/cut-waste.model';
 })
 export class LabelPreviewComponent {
   @Input() todo: CutWaste;
-  
+
   @ViewChild('modal', { static: false }) el!:ElementRef;
 
   makePdf() {
-    const labelHeight = 155;
-    const labelWidth = 100;
     let pdf= new jsPDF('p', 'pt', 'a4');
 
     pdf.html(this.el.nativeElement, {
