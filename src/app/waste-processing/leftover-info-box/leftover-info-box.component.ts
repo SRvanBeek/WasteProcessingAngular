@@ -8,6 +8,9 @@ import {WasteService} from "../../shared/_services/waste.service";
 import {CategoryService} from "../../shared/_services/category.service";
 import {VoorraadService} from "../../shared/_services/voorraad.service";
 import {CategoryModel} from "../../shared/_models/category.model";
+import {Waste} from "../../shared/_models/waste.model";
+import {Voorraad} from "../../shared/_models/voorraad";
+import {Order} from "../../shared/_models/order.model";
 
 /**
  * @Author Dino Yang
@@ -35,7 +38,8 @@ export class LeftoverInfoBoxComponent {
     if (this.todo != null) {
       if (this.todo.type == 'catWaste') {
         this.type = 'Categorized Waste'
-        this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(waste => {
+        this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(value => {
+          let waste: Waste = value.payload;
           this.categoryService.getCategoryNameById(waste.categoryId).subscribe(value => {
             let category: CategoryModel = value.payload;
             this.category = category.name;
@@ -71,21 +75,24 @@ export class LeftoverInfoBoxComponent {
       this.leftoverService.putLeftover(leftover).subscribe();
     })
     if (this.todo.type == 'catWaste') {
-      this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(waste => {
+      this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(value => {
+        let waste: Waste = value.payload;
         waste.userId = this.userId;
         waste.dateProcessed = Date.now();
         waste.enabled = true;
         this.wasteService.putWaste(waste).subscribe();
       });
     } else if (this.todo.type == 'storage') {
-      this.voorraadService.getOneVoorraadByLeftoverID(this.todo.id).subscribe(voorraad => {
+      this.voorraadService.getOneVoorraadByLeftoverID(this.todo.id).subscribe(value => {
+        let voorraad: Voorraad = value.payload;
         voorraad.userId = this.userId;
         voorraad.dateProcessed = Date.now();
         voorraad.enabled = true;
         this.voorraadService.putVoorraad(voorraad).subscribe();
       })
     } else {
-      this.orderService.getOrderByLeftoverID(this.todo.id).subscribe(order => {
+      this.orderService.getOrderByLeftoverID(this.todo.id).subscribe(value => {
+        let order: Order = value.payload;
         order.userId = this.userId;
         order.dateProcessed = Date.now();
         order.enabled = true;

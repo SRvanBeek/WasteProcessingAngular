@@ -16,7 +16,7 @@ export class WasteService {
     return this.http.put<string>(environment.apiUrl + '/api/waste/', waste);
   }
 
-  getOneWasteByLeftoverID(leftoverId: number): Observable<Waste> {
-    return this.http.get<Waste>(environment.apiUrl + '/api/waste/perleftover/' + leftoverId);
+  getOneWasteByLeftoverID(leftoverId: number): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/waste/perleftover/' + leftoverId);
   }
 }
