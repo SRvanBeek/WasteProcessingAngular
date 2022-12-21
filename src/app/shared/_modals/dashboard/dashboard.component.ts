@@ -26,7 +26,7 @@ export class DashboardComponent {
     this.getCategoryNames();
   }
 
-  refresh() {
+  ngOnChanges() {
     this.setTotalWaste();
     this.getCategoryNames();
     this.selectCategory(this.categories[0]);
@@ -39,8 +39,9 @@ export class DashboardComponent {
   private setTotalWaste() {
     this.dashboardService.getTotalWaste().subscribe({
       next: value => {
-        this.totalWasteWeight = value[0];
-        this.totalWasteMetrage = value[1];
+        let array: number[] = value.payload;
+        this.totalWasteWeight = array[0];
+        this.totalWasteMetrage = array[1];
       }
     });
   }
@@ -52,7 +53,7 @@ export class DashboardComponent {
   private getCategoryNames() {
     this.dashboardService.getCategories().subscribe({
       next: categories => {
-          this.categories = categories;
+          this.categories = categories.payload;
           this.selectCategory(this.categories[0])
       }
     })
@@ -65,13 +66,14 @@ export class DashboardComponent {
   selectCategory(category:string) {
     this.dashboardService.getTotalWastePerCategory(category).subscribe({
       next: value => {
-        this.selectedWasteWeight = value[0];
-        this.selectedWasteMetrage = value[1];
+        let array: number[] = value.payload;
+        this.selectedWasteWeight = array[0];
+        this.selectedWasteMetrage = array[1];
       }
     });
     this.dashboardService.getComposition(category).subscribe({
       next: value => {
-        this.composition = value;
+        this.composition = value.payload;
       }
     });
   }
