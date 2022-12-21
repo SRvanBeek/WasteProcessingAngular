@@ -12,16 +12,16 @@ export class LeftoverService {
   constructor(private http: HttpClient) {
   }
 
-  getAllLeftovers(): Observable<Leftover[]> {
-    return this.http.get<Leftover[]>(environment.apiUrl + '/api/leftover');
+  getAllLeftovers(): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/leftover');
   }
 
   postLeftover(leftover: Leftover): Observable<Leftover> {
     return this.http.post<Leftover>(environment.apiUrl + '/api/leftover', leftover);
   }
 
-  getAllByType(type: string): Observable<Leftover[]> {
-    return this.http.get<Leftover[]>(environment.apiUrl + '/api/leftover/' + type);
+  getAllByType(type: any): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/leftover/' + type);
   }
 
   setWasteDone(type: string, id: number) {
@@ -32,7 +32,7 @@ export class LeftoverService {
     return this.http.put<string>(environment.apiUrl + '/api/leftover/', leftover);
   }
 
-  getOneLeftover(id: number): Observable<Leftover> {
-    return this.http.get<Leftover>(environment.apiUrl + '/api/leftover/id/' + id);
+  getOneLeftover(id: number): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/leftover/id/' + id);
   }
 }
