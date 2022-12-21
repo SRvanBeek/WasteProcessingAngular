@@ -7,6 +7,7 @@ import {OrdersService} from "../../shared/_services/orders.service";
 import {WasteService} from "../../shared/_services/waste.service";
 import {CategoryService} from "../../shared/_services/category.service";
 import {VoorraadService} from "../../shared/_services/voorraad.service";
+import {CategoryModel} from "../../shared/_models/category.model";
 
 /**
  * @Author Dino Yang
@@ -35,8 +36,9 @@ export class LeftoverInfoBoxComponent {
       if (this.todo.type == 'catWaste') {
         this.type = 'Categorized Waste'
         this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(waste => {
-          this.categoryService.getCategoryNameById(waste.categoryId).subscribe(categoryName => {
-            this.category = categoryName.name;
+          this.categoryService.getCategoryNameById(waste.categoryId).subscribe(value => {
+            let category: CategoryModel = value.payload;
+            this.category = category.name;
           })
         })
       } else if (this.todo.type == 'order') {
@@ -55,7 +57,7 @@ export class LeftoverInfoBoxComponent {
   setArticle(id: string) {
     this.articleService.getOneArticle(id)
       .subscribe(value => {
-        this.article = value;
+        this.article = value.payload;
       });
   }
 
@@ -63,7 +65,8 @@ export class LeftoverInfoBoxComponent {
    * done() sets the processed attribute of the selected leftover to true and updates the catWaste/storage/order with the right userId, date and enabled.
    */
   done() {
-    this.leftoverService.getOneLeftover(this.todo.id).subscribe(leftover => {
+    this.leftoverService.getOneLeftover(this.todo.id).subscribe(value => {
+      let leftover: Leftover = value.payload;
       leftover.processed = true;
       this.leftoverService.putLeftover(leftover).subscribe();
     })
