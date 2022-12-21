@@ -1,7 +1,8 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {Leftover} from "../shared/_models/leftover.model";
 import {LeftoverService} from "../shared/_services/leftover.service";
 import {Toast} from "bootstrap";
+import {DashboardComponent} from "../shared/_modals/dashboard/dashboard.component";
 
 /**
  * @Author Dino Yang
@@ -23,6 +24,7 @@ export class WasteProcessingComponent implements OnInit {
   userID: number;
   filterList: string = 'all';
 
+  @ViewChild(DashboardComponent) child !:DashboardComponent;
 
   constructor(private leftoverService: LeftoverService) {
   }
@@ -148,5 +150,9 @@ export class WasteProcessingComponent implements OnInit {
         }
       })
     }
+  }
+
+  refreshDetails() {
+    this.child.refresh()
   }
 }

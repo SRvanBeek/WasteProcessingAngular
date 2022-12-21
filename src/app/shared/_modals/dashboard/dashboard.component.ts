@@ -14,6 +14,7 @@ export class DashboardComponent {
   totalWasteMetrage: number;
   selectedWasteWeight: number;
   selectedWasteMetrage: number;
+  selectedCategory: string;
 
   categories: string[];
   composition: string[];
@@ -26,10 +27,9 @@ export class DashboardComponent {
     this.getCategoryNames();
   }
 
-  ngOnChanges() {
+  public refresh() {
     this.setTotalWaste();
-    this.getCategoryNames();
-    this.selectCategory(this.categories[0]);
+    this.selectCategory(this.selectedCategory);
   }
 
   /**
@@ -64,14 +64,17 @@ export class DashboardComponent {
    * @param category the selected category in the view.
    */
   selectCategory(category:string) {
-    this.dashboardService.getTotalWastePerCategory(category).subscribe({
+    if (this.selectedCategory != category) {
+      this.selectedCategory = category;
+    }
+    this.dashboardService.getTotalWastePerCategory(this.selectedCategory).subscribe({
       next: value => {
         let array: number[] = value.payload;
         this.selectedWasteWeight = array[0];
         this.selectedWasteMetrage = array[1];
       }
     });
-    this.dashboardService.getComposition(category).subscribe({
+    this.dashboardService.getComposition(this.selectedCategory).subscribe({
       next: value => {
         this.composition = value.payload;
       }
