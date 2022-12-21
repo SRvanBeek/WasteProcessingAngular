@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <h1>Settings</h1>
+  <h2>View</h2>
+  <hr>
+  <div class="settings">
+    <div class="settingsCheckbox"><input type="checkbox" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off">
+      <label id="HighDistanceButton" class="btn btn-outline-secondary" for="btn-check-2-outlined"></label>
+      <h3>High Distance View</h3></div>
+  </div>
+  <h2>Add Leftovers</h2>
+  <hr>
+  <div class="settings">
+    <form [formGroup]="leftoverForm" class="settingsForm">
+      <div class="form-outline mb-2 settingsInputField">
+        <input type="articleNumber" id="articleNumberForm" class="form-control form-control" formControlName="articleNumber" placeholder="article number"/>
+      </div>
+      <div class="form-outline mb-2 settingsInputField">
+        <input type="metrage" id="metrageForm" class="form-control form-control" formControlName="metrage" placeholder="metrage"/>
+      </div>
+    </form>
+    <button class="btn btn-primary">Submit</button>
+  </div>
+  <h2>Generate Random Leftovers</h2>
+  <hr>
+  <div class="settings">
+    <form [formGroup]="leftoverForm" class="settingsForm">
+      <div class="form-outline mb-2 settingsInputField">
+        <input type="leftoverAmount" id="leftoverAmountForm" class="form-control form-control" formControlName="leftoverAmount" placeholder="amount"/>
+      </div>
+    </form>
+    <button class="btn btn-primary">Submit</button>
+  </div>
+
+</div>

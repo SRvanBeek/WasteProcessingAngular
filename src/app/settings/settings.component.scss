@@ -1,0 +1,52 @@
+h2 {
+  color: gray;
+  margin-left: 2rem;
+  margin-top: 2rem;
+}
+
+hr {
+  margin-left: 2rem;
+  margin-top: 0;
+  width: 50vw;
+}
+
+.settings {
+  margin-left: 2rem;
+}
+
+.settingsCheckbox {
+  display: flex;
+  justify-content: left;
+}
+
+#HighDistanceButton {
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  border-width: medium;
+  border-color: gray;
+  margin-right: 1rem;
+}
+
+.settingsForm {
+  display: flex;
+  justify-content: left;
+}
+.settingsInputField {
+  margin-right: 1rem;
+}
+.btn-primary {
+  background-color: #4BC8B6;
+  border-color: #4BC8B6;
+  color: black;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  background-color: rgba(75, 200, 182, 0.8);
+}
+.btn-primary:active {
+  background-color: rgba(75, 200, 182, 0.8);
+  border-color: rgba(75, 200, 182, 0.8);
+;
+}

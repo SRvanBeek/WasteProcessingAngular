@@ -8,11 +8,13 @@ import {JwtInterceptor} from "./shared/_helper/jwt.interceptor";
 import {WasteProcessingModule} from "./waste-processing/waste-processing.module";
 import {SharedModule} from "./shared/shared.module";
 import {HeaderModule} from "./header/header.module";
+import { SettingsComponent } from './settings/settings.component';
+import {SettingsModule} from "./settings/settings.module";
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -22,6 +24,7 @@ import {HeaderModule} from "./header/header.module";
     WasteProcessingModule,
     SharedModule,
     HeaderModule,
+    SettingsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
