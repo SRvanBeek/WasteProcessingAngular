@@ -1,1 +1,18 @@
+.desktopContainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #E9E9E9;
+}
 
+.sidebar {
+  width: 15vw;
+}
+
+@media only screen and (max-width: 1500px) {
+  .sidebar {
+    width: 20vw;
+  }
+}
