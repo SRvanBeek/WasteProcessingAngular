@@ -1,7 +1,60 @@
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v129/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons', serif;
+  font-weight: normal;
+  font-style: normal;
+  color: black;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+mat-icon {
+  font-size: 1.5rem;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.container-fluid {
+  margin-bottom: 2rem;
+}
+
+.tooltip-toggle {
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0);
+  height: 1.75rem;
+}
+
+h1 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 1rem;
+}
+
 h2 {
   color: gray;
   margin-left: 2rem;
   margin-top: 2rem;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: bold;
 }
 
 hr {
@@ -17,15 +70,22 @@ hr {
 .settingsCheckbox {
   display: flex;
   justify-content: left;
+  align-content: center;
 }
 
 #HighDistanceButton {
   display: flex;
-  height: 2rem;
-  width: 2rem;
+  height: 1.5rem;
+  width: 1.5rem;
   border-width: medium;
   border-color: gray;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
+  padding: 0;
+}
+
+#HighDistanceText {
+  align-self: center;
+  margin-bottom: 0;
 }
 
 .settingsForm {
@@ -48,5 +108,4 @@ hr {
 .btn-primary:active {
   background-color: rgba(75, 200, 182, 0.8);
   border-color: rgba(75, 200, 182, 0.8);
-;
 }

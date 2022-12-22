@@ -5,8 +5,13 @@
   <div class="settings">
     <div class="settingsCheckbox"><input type="checkbox" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off">
       <label id="HighDistanceButton" class="btn btn-outline-secondary" for="btn-check-2-outlined"></label>
-      <h3>High Distance View</h3></div>
+      <h3 id="HighDistanceText">High Distance View</h3>
+      <button class="tooltip-toggle" >
+        <mat-icon>help</mat-icon>
+      </button>
+    </div>
   </div>
+
   <h2>Add Leftovers</h2>
   <hr>
   <div class="settings">
@@ -18,17 +23,17 @@
         <input type="metrage" id="metrageForm" class="form-control form-control" formControlName="metrage" placeholder="metrage"/>
       </div>
     </form>
-    <button class="btn btn-primary">Submit</button>
+    <button class="btn btn-primary" (click)="addLeftover()">Submit</button>
   </div>
+
   <h2>Generate Random Leftovers</h2>
   <hr>
   <div class="settings">
-    <form [formGroup]="leftoverForm" class="settingsForm">
+    <form [formGroup]="randomLeftoverForm" class="settingsForm">
       <div class="form-outline mb-2 settingsInputField">
         <input type="leftoverAmount" id="leftoverAmountForm" class="form-control form-control" formControlName="leftoverAmount" placeholder="amount"/>
       </div>
     </form>
-    <button class="btn btn-primary">Submit</button>
+    <button class="btn btn-primary" (click)="addRandomLeftovers()">Submit</button>
   </div>
-
 </div>
