@@ -8,7 +8,8 @@ import {JwtInterceptor} from "./shared/_helper/jwt.interceptor";
 import {WasteProcessingModule} from "./waste-processing/waste-processing.module";
 import {SharedModule} from "./shared/shared.module";
 import {HeaderModule} from "./header/header.module";
-import { SettingsComponent } from './settings/settings.component';
+import {SidebarModule} from "./sidebar/sidebar.module";
+import {MatSidenavModule} from "@angular/material/sidenav";
 import {SettingsModule} from "./settings/settings.module";
 
 
@@ -24,6 +25,8 @@ import {SettingsModule} from "./settings/settings.module";
     WasteProcessingModule,
     SharedModule,
     HeaderModule,
+    SidebarModule,
+    MatSidenavModule,
     SettingsModule
   ],
   providers: [
