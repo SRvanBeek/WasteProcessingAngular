@@ -8,7 +8,7 @@
       <div class="modal fade" id="wasteDetails" tabindex="-1" aria-labelledby="Waste Details" aria-hidden="true">
         <app-dashboard></app-dashboard>
       </div>
-        <button type="button"  id="detailsButton" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#wasteDetails">
+        <button type="button"  id="detailsButton" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#wasteDetails" (click)="refreshDetails()">
           Details
         </button>
         <div class="selector">
