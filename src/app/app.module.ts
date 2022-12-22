@@ -8,6 +8,8 @@ import {JwtInterceptor} from "./shared/_helper/jwt.interceptor";
 import {WasteProcessingModule} from "./waste-processing/waste-processing.module";
 import {SharedModule} from "./shared/shared.module";
 import {HeaderModule} from "./header/header.module";
+import {SidebarModule} from "./sidebar/sidebar.module";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import {HeaderModule} from "./header/header.module";
     WasteProcessingModule,
     SharedModule,
     HeaderModule,
+    SidebarModule,
+    MatSidenavModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
