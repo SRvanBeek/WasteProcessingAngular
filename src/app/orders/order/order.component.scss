@@ -1,0 +1,13 @@
+.styled-table tr {
+  border-bottom: 1px solid #dddddd;
+  border-left: 1px solid;
+  border-right: 2px solid;
+}
+
+.styled-table  tr td {
+  border-left: 1px solid;
+}
+
+.styled-table tr:last-of-type {
+  border-bottom: 1px solid black;
+}

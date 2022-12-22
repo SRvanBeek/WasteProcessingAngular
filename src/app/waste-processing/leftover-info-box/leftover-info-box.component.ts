@@ -7,7 +7,7 @@ import {OrdersService} from "../../shared/_services/orders.service";
 import {WasteService} from "../../shared/_services/waste.service";
 import {CategoryService} from "../../shared/_services/category.service";
 import {VoorraadService} from "../../shared/_services/voorraad.service";
-import {CategoryModel} from "../../shared/_models/category.model";
+import {Category} from "../../shared/_models/category.model";
 import {Waste} from "../../shared/_models/waste.model";
 import {Voorraad} from "../../shared/_models/voorraad";
 import {Order} from "../../shared/_models/order.model";
@@ -41,7 +41,7 @@ export class LeftoverInfoBoxComponent {
         this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(value => {
           let waste: Waste = value.payload;
           this.categoryService.getCategoryNameById(waste.categoryId).subscribe(value => {
-            let category: CategoryModel = value.payload;
+            let category: Category = value.payload;
             this.category = category.name;
           })
         })

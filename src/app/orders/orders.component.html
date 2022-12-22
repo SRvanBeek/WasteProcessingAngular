@@ -11,30 +11,16 @@
     <thead>
     <tr class="tableHead">
       <th class="check"></th>
-      <th>ID</th>
+      <th>Article Number</th>
       <th>Customer</th>
-      <th>Metrage</th>
-      <th>Colour</th>
-      <th>Weight</th>
-      <th>Category</th>
+      <th>Type</th>
       <th>Employee</th>
+      <th>Metrage</th>
       <th>Date</th>
     </tr>
     </thead>
-    <tbody *ngFor="let item of allOrdersList; let i = index">
-    <tr>
-      <td>
-        <mat-checkbox id="{{'check' + i}}"></mat-checkbox>
-      </td>
-      <td>{{item[0]}}</td>
-      <td>{{item[4]}}</td>
-      <td>{{item[6]}}</td>
-      <td>{{item[3]}}</td>
-      <td>{{item[5]}}</td>
-      <td>{{item[7]}}</td>
-      <td>{{item[2]}}</td>
-      <td>{{item[1]}}</td>
-    </tr>
+    <tbody *ngFor="let item of orderList; let i = index">
+      <app-order></app-order>
     </tbody>
   </table>
 </div>

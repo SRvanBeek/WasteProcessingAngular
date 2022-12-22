@@ -8,6 +8,7 @@ import {JwtInterceptor} from "./shared/_helper/jwt.interceptor";
 import {WasteProcessingModule} from "./waste-processing/waste-processing.module";
 import {SharedModule} from "./shared/shared.module";
 import {HeaderModule} from "./header/header.module";
+import {OrdersModule} from "./orders/orders.module";
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {HeaderModule} from "./header/header.module";
     WasteProcessingModule,
     SharedModule,
     HeaderModule,
+    OrdersModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

@@ -26,7 +26,7 @@ export class OrdersComponent implements OnInit {
     this.OrdersService.getOrders().subscribe({
       next: value => {
         this.orderList = [];
-        for (let order of value) {
+        for (let order of value.payload) {
           if (order.enabled) {
             this.orderList.push(order);
           }

@@ -7,7 +7,7 @@ import {OrdersService} from "../../_services/orders.service";
 import {WasteService} from "../../_services/waste.service";
 import {CategoryService} from "../../_services/category.service";
 import {VoorraadService} from "../../_services/voorraad.service";
-import {CategoryModel} from "../../_models/category.model";
+import {Category} from "../../_models/category.model";
 import {Waste} from "../../_models/waste.model";
 import {Voorraad} from "../../_models/voorraad";
 import {Order} from "../../_models/order.model";
@@ -43,7 +43,7 @@ export class ToDoModalComponent {
         this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(value => {
           let waste: Waste = value.payload;
           this.categoryService.getCategoryNameById(waste.categoryId).subscribe(value => {
-            let category: CategoryModel = value.payload;
+            let category: Category = value.payload;
             this.category = category.name;
           })
         })

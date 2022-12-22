@@ -19,4 +19,7 @@ export class ArticleService {
   getOneArticle(id: string): Observable<any> {
     return this.http.get<any>(environment.apiUrl + '/api/articles/' + id);
   }
+  getArticleByOrderId(id: number): Observable<any> {
+    return this.http.get(environment.apiUrl + '/api/orders/artikel/' + id)
+  }
 }
