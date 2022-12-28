@@ -11,29 +11,50 @@
       </button>
     </div>
   </div>
+  <div class="adminSettings" *ngIf="isAdmin">
+    <h2>Add Leftovers</h2>
+    <hr>
+    <div class="settings">
+      <form [formGroup]="leftoverForm" class="settingsForm">
+        <div class="form-outline mb-2 settingsInputField">
+          <input type="articleNumber" id="articleNumberForm" class="form-control form-control"
+                 formControlName="articleNumber" placeholder="article number"/>
+        </div>
+        <div class="form-outline mb-2 settingsInputField">
+          <input type="metrage" id="metrageForm" class="form-control form-control" formControlName="metrage"
+                 placeholder="metrage"/>
+        </div>
+      </form>
+      <button class="btn btn-primary" id="submitButton1" (click)="addLeftover()">Submit</button>
+    </div>
 
-  <h2>Add Leftovers</h2>
-  <hr>
-  <div class="settings">
-    <form [formGroup]="leftoverForm" class="settingsForm">
-      <div class="form-outline mb-2 settingsInputField">
-        <input type="articleNumber" id="articleNumberForm" class="form-control form-control" formControlName="articleNumber" placeholder="article number"/>
-      </div>
-      <div class="form-outline mb-2 settingsInputField">
-        <input type="metrage" id="metrageForm" class="form-control form-control" formControlName="metrage" placeholder="metrage"/>
-      </div>
-    </form>
-    <button class="btn btn-primary" (click)="addLeftover()">Submit</button>
+    <h2>Generate Random Leftovers</h2>
+    <hr>
+    <div class="settings">
+      <form [formGroup]="randomLeftoverForm" class="settingsForm">
+        <div class="form-outline mb-2 settingsInputField">
+          <input type="leftoverAmount" id="leftoverAmountForm" class="form-control form-control"
+                 formControlName="leftoverAmount" placeholder="amount"/>
+        </div>
+      </form>
+      <button class="btn btn-primary" id="submitButton2" (click)="addRandomLeftovers()">Submit</button>
+    </div>
   </div>
+</div>
 
-  <h2>Generate Random Leftovers</h2>
-  <hr>
-  <div class="settings">
-    <form [formGroup]="randomLeftoverForm" class="settingsForm">
-      <div class="form-outline mb-2 settingsInputField">
-        <input type="leftoverAmount" id="leftoverAmountForm" class="form-control form-control" formControlName="leftoverAmount" placeholder="amount"/>
-      </div>
-    </form>
-    <button class="btn btn-primary" (click)="addRandomLeftovers()">Submit</button>
+<!--toast-->
+<div class="toast-container position-fixed top-0 end-0 p-2">
+  <div id="submitToast" [ngClass]="{'text-bg-success': success,
+                                      'text-bg-danger': !success}" class="toast border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div [ngClass]="{'text-bg-success': success, 'text-bg-danger': !success}" class="toast-header">
+      <strong *ngIf="success" class="me-auto">Success</strong>
+      <strong *ngIf="!success" class="me-auto">Error</strong>
+
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+              aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      {{toastMessage}}
+    </div>
   </div>
 </div>
