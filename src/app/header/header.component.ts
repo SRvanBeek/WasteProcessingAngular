@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
+import {OffcanvasComponent} from "./offcanvas/offcanvas.component";
 
 @Component({
   selector: 'app-header',
@@ -10,6 +12,12 @@ export class HeaderComponent implements OnInit {
   token: string;
   isAdmin: boolean = false;
 
+  constructor(private offcanvasService: NgbOffcanvas) {}
+
+  open() {
+    const offcanvasRef = this.offcanvasService.open(OffcanvasComponent,  { position: 'end' });
+    offcanvasRef.componentInstance.name = 'World';
+  }
   ngOnInit() {
     this.setAdmin();
   }
@@ -25,3 +33,4 @@ export class HeaderComponent implements OnInit {
     }
   }
 }
+

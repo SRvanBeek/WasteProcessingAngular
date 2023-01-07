@@ -10,6 +10,8 @@ import {SharedModule} from "./shared/shared.module";
 import {HeaderModule} from "./header/header.module";
 import {SidebarModule} from "./sidebar/sidebar.module";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -26,6 +28,8 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     HeaderModule,
     SidebarModule,
     MatSidenavModule,
+    BrowserAnimationsModule,
+    NgbModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
