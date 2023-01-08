@@ -25,7 +25,7 @@
                  placeholder="metrage"/>
         </div>
       </form>
-      <button class="btn btn-primary" id="submitButton1" (click)="addLeftover()">Submit</button>
+      <button class="btn btn-primary submitButton" id="submitButton1" [disabled]="!leftoverForm.valid" (click)="addLeftover()">Submit</button>
     </div>
 
     <h2>Generate Random Leftovers</h2>
@@ -37,7 +37,7 @@
                  formControlName="leftoverAmount" placeholder="amount"/>
         </div>
       </form>
-      <button class="btn btn-primary" id="submitButton2" (click)="addRandomLeftovers()">Submit</button>
+      <button class="btn btn-primary submitButton" id="submitButton2" [disabled]="!randomLeftoverForm.valid" (click)="addRandomLeftovers()">Submit</button>
     </div>
   </div>
 </div>

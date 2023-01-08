@@ -1,11 +1,8 @@
-import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import * as bootstrap from 'bootstrap';
 import {CutProgramService} from "../shared/_services/cut-program.service";
-import {first} from "rxjs";
-import {Toast} from "bootstrap";
-import {HttpStatusCode} from "@angular/common/http";
-
+import {first, Observable} from "rxjs";
 
 @Component({
   selector: 'app-settings',
@@ -32,16 +29,27 @@ export class SettingsComponent {
 
   ngOnInit() {
     this.leftoverForm = this.fb.group({
-      articleNumber: ['', Validators.required],
-      metrage: ['', Validators.required]
+      articleNumber: ['', [Validators.required, Validators.nullValidator]],
+      metrage: ['', Validators.required, this.numberValidator]
     });
 
     this.randomLeftoverForm = this.fb.group({
-      leftoverAmount: ['', Validators.required]
+      leftoverAmount: ['', Validators.required, this.numberValidator]
     })
 
     this.setAdmin();
   }
+
+  numberValidator(control: FormControl): Promise<any> | Observable<any> {
+    return new Promise<any>((resolve, reject) => {
+      if (isNaN(control.value)) {
+        resolve({isNumber: false});
+      } else {
+        resolve(null);
+      }
+    });
+  };
+
 
   setAdmin(): void {
     let jwt = localStorage.getItem('JwtToken');
@@ -67,16 +75,22 @@ export class SettingsComponent {
     let metrage: number = +(this.leftoverFormControls['metrage'].value);
     this.cutProgram.addLeftover(this.leftoverFormControls['articleNumber'].value, metrage)
       .pipe(first())
-      .subscribe({next: response => {
+      .subscribe({
+        next: response => {
           if (response.code == "ACCEPTED") {
-            this.openToast(true, response.message, 1)
+            this.toastMessage = response.message;
+            this.success = true
           }
           else {
-            this.openToast(false, response.message, 1)
+            this.toastMessage = response.message;
+            this.success = false
           }
         },
         error: err =>  {
           console.log(err)
+        },
+        complete: () => {
+          this.openToast()
         }
       })
     this.loading = false;
@@ -88,35 +102,30 @@ export class SettingsComponent {
       .pipe(first())
       .subscribe({next: response => {
           if (response.code == "ACCEPTED") {
-            this.openToast(true, response.message, 2)
+            this.toastMessage = response.message;
+            this.success = true
           }
           else {
-            this.openToast(false, response.message, 2)
+            this.toastMessage = response.message;
+            this.success = false
           }
         },
         error: err =>  {
           console.log(err)
+        },
+        complete: () => {
+          this.openToast()
         }
       })
     this.loading = false;
   }
 
-  openToast(success:boolean, message: string, buttonId: number) {
-    this.toastMessage = message;
-    this.success = success;
-
-    let toastTrigger;
-      toastTrigger = document.getElementById('submitButton' + buttonId);
-
+  openToast() {
     const toast = document.getElementById('submitToast')
-    if (toastTrigger) {
-      toastTrigger.addEventListener('click', () => {
-        if (toast != null) {
-          const toastr = new bootstrap.Toast(toast);
-          toastr.show();
-          this.toasts.push(toastr)
-        }
-      })
+    if (toast) {
+      const toastr = new bootstrap.Toast(toast);
+      toastr.show();
+      this.toasts.push(toastr)
     }
   }
 }
