@@ -20,6 +20,9 @@ export class LoginComponent implements OnInit, OnDestroy{
   submitted = false;
   error = '';
   failedAuth = false;
+  isDesktop: boolean = true;
+  desktopHeight: number = 600;
+  desktopWidth: number = 880;
 
   constructor(
     private fb: FormBuilder,
@@ -37,10 +40,22 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
     this.initLoginForm();
+    if (window.innerWidth < this.desktopWidth || window.innerHeight < this.desktopHeight) {
+      this.isDesktop = false
+    }
 
     this.resizeObservable$ = fromEvent(window, 'resize')
     this.resizeSubscription$ = this.resizeObservable$.subscribe(evt => {
-      this.initLoginForm()
+      if (this.isDesktop && (window.innerWidth < this.desktopWidth || window.innerHeight < this.desktopHeight)) {
+        this.initLoginForm()
+        this.isDesktop = false;
+        console.log(this.isDesktop)
+      }
+      if (!this.isDesktop && (window.innerWidth >= this.desktopWidth && window.innerHeight >= this.desktopHeight)) {
+        this.initLoginForm()
+        this.isDesktop = true;
+        console.log(this.isDesktop)
+      }
     })
   }
 
