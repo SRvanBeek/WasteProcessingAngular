@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import * as bootstrap from 'bootstrap';
 import {CutProgramService} from "../shared/_services/cut-program.service";
 import {first, Observable} from "rxjs";
+import {Tooltip} from "bootstrap";
 
 @Component({
   selector: 'app-settings',
@@ -30,6 +31,9 @@ export class SettingsComponent {
   }
 
   ngOnInit() {
+    Array.from(document.querySelectorAll('button[data-bs-toggle="popover"]'))
+      .forEach(tooltipNode => new Tooltip(tooltipNode))
+
     this.leftoverForm = this.fb.group({
       articleNumber: ['', [Validators.required, Validators.nullValidator]],
       metrage: ['', Validators.required, this.numberValidator]
@@ -44,7 +48,7 @@ export class SettingsComponent {
   }
 
   numberValidator(control: FormControl): Promise<any> | Observable<any> {
-    return new Promise<any>((resolve, reject) => {
+    return new Promise<any>((resolve) => {
       if (isNaN(control.value)) {
         resolve({isNumber: false});
       } else {

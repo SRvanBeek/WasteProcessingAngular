@@ -7,8 +7,13 @@
       <input type="checkbox" class="btn-check" id="hdv-checkbox" autocomplete="off" (click)="changeDistanceView()" [checked]="highDistanceView === 'enabled'" >
       <label id="HighDistanceButton" class="btn btn-outline-secondary" for="hdv-checkbox"></label>
       <h3 id="HighDistanceText">High Distance View</h3>
-      <button class="tooltip-toggle">
+      <button type="button" class="tooltip-toggle" data-bs-placement="right" data-bs-toggle="popover" title=
+        "
+              Makes the size of elements on the Leftover-Panel larger,
+              so that it's easier to read on higher distances
+        ">
         <mat-icon>help</mat-icon>
+
       </button>
     </div>
   </div>
