@@ -13,10 +13,12 @@ export class SettingsComponent {
   leftoverForm: FormGroup;
   randomLeftoverForm: FormGroup;
   toolTipMessage: string = "tooltip";
-  private loading: boolean = false;
+  loading: boolean = false;
   toastMessage: string;
   isAdmin: boolean;
   success: boolean;
+  highDistanceView: string | null;
+  static enabled: string = 'enabled'
 
   toasts: any[] = [];
 
@@ -37,6 +39,7 @@ export class SettingsComponent {
       leftoverAmount: ['', Validators.required, this.numberValidator]
     })
 
+    this.highDistanceView = localStorage.getItem("hdv")
     this.setAdmin();
   }
 
@@ -88,12 +91,14 @@ export class SettingsComponent {
         },
         error: err =>  {
           console.log(err)
+          this.loading = false
         },
         complete: () => {
           this.openToast()
+          this.loading = false
         }
       })
-    this.loading = false;
+
   }
 
   addRandomLeftovers() {
@@ -112,12 +117,13 @@ export class SettingsComponent {
         },
         error: err =>  {
           console.log(err)
+          this.loading = false
         },
         complete: () => {
           this.openToast()
+          this.loading = false;
         }
       })
-    this.loading = false;
   }
 
   openToast() {
@@ -127,5 +133,16 @@ export class SettingsComponent {
       toastr.show();
       this.toasts.push(toastr)
     }
+  }
+
+  changeDistanceView() {
+    if (localStorage.getItem("hdv") !== SettingsComponent.enabled) {
+      localStorage.setItem("hdv", SettingsComponent.enabled)
+    }
+    else {
+      localStorage.setItem("hdv", '')
+    }
+    this.highDistanceView = localStorage.getItem("hdv")
+    console.log(this.highDistanceView)
   }
 }

@@ -3,10 +3,11 @@
   <h2>View</h2>
   <hr>
   <div class="settings">
-    <div class="settingsCheckbox"><input type="checkbox" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off">
-      <label id="HighDistanceButton" class="btn btn-outline-secondary" for="btn-check-2-outlined"></label>
+    <div class="settingsCheckbox">
+      <input type="checkbox" class="btn-check" id="hdv-checkbox" autocomplete="off" (click)="changeDistanceView()" [checked]="highDistanceView === 'enabled'" >
+      <label id="HighDistanceButton" class="btn btn-outline-secondary" for="hdv-checkbox"></label>
       <h3 id="HighDistanceText">High Distance View</h3>
-      <button class="tooltip-toggle" >
+      <button class="tooltip-toggle">
         <mat-icon>help</mat-icon>
       </button>
     </div>
@@ -25,7 +26,12 @@
                  placeholder="metrage"/>
         </div>
       </form>
-      <button class="btn btn-primary submitButton" id="submitButton1" [disabled]="!leftoverForm.valid" (click)="addLeftover()">Submit</button>
+      <button class="btn btn-primary submitButton" id="submitButton1"  [disabled]="!leftoverForm.valid || loading" (click)="addLeftover()">
+        <strong *ngIf="!loading" style="color: rgba(23,22,22,0.84)">Submit</strong>
+
+        <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <strong *ngIf="loading"> Generating...</strong>
+      </button>
     </div>
 
     <h2>Generate Random Leftovers</h2>
@@ -37,7 +43,12 @@
                  formControlName="leftoverAmount" placeholder="amount"/>
         </div>
       </form>
-      <button class="btn btn-primary submitButton" id="submitButton2" [disabled]="!randomLeftoverForm.valid" (click)="addRandomLeftovers()">Submit</button>
+      <button class="btn btn-primary submitButton" id="submitButton2" [disabled]="!randomLeftoverForm.valid || loading" (click)="addRandomLeftovers()">
+        <strong *ngIf="!loading" style="color: rgba(23,22,22,0.84)">Submit</strong>
+        <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <strong *ngIf="loading"> Generating...</strong>
+
+      </button>
     </div>
   </div>
 </div>
