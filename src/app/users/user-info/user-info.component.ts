@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
 import {User} from "../../shared/_models/user";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ChangePassDialogComponent} from "../change-pass-dialog/change-pass-dialog.component";
@@ -11,10 +11,34 @@ import {ToastService} from "../../shared/_services/toast.service";
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss']
 })
-export class UserInfoComponent {
+export class UserInfoComponent implements OnInit {
   @Input() user: User;
+  isUserAdmin: boolean = false;
 
   constructor(private modelService: NgbModal, private userService: UserService, private toastService: ToastService) {
+
+  }
+
+  ngOnInit(): void {
+
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.user != null) {
+      this.setIsUserAdmin();
+    }
+  }
+
+  setIsUserAdmin() {
+    this.userService.getRoles(this.user.username).subscribe({
+      next: roles => {
+        if (roles.filter((e: { name: string; }) => e.name === 'ROLE_ADMIN').length > 0) {
+          this.isUserAdmin = true;
+        } else {
+          this.isUserAdmin = false;
+        }
+      }
+    });
   }
 
   openChangePass() {

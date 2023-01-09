@@ -32,7 +32,11 @@ export class UserService {
     return this.http.put<any>(environment.apiUrl + '/api/users/', user);
   }
 
-  registerAdmin(user: User) {
+  registerAdmin(user: User): Observable<any> {
     return this.http.post<any>(environment.apiUrl + '/api/users/admins/save', user);
+  }
+
+  getRoles(username: string | undefined): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/users/roles/' + username);
   }
 }
