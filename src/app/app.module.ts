@@ -12,11 +12,12 @@ import {SidebarModule} from "./sidebar/sidebar.module";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {SettingsModule} from "./settings/settings.module";
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +31,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatSidenavModule,
     BrowserAnimationsModule,
     NgbModule,
+    SettingsModule
+
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
