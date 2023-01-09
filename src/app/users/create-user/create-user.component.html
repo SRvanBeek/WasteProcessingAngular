@@ -47,10 +47,11 @@
         <mat-error *ngIf="this.f['confirmPassword'].errors?.['matching']">Confirm Password does not match</mat-error>
       </mat-form-field>
       <mat-checkbox labelPosition="after" formControlName="enabled">Enabled?</mat-checkbox>
+      <mat-checkbox *ngIf="isSuperAdmin" labelPosition="after" formControlName="admin">Admin?</mat-checkbox>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="submit" class="btn btn-primary submitButton" (click)="onSubmit()">Change Password</button>
+    <button type="submit" class="btn btn-primary submitButton" (click)="onSubmit()">Create User</button>
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
   </div>
 </div>

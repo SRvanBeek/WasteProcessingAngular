@@ -31,4 +31,8 @@ export class UserService {
   putUser(user: User): Observable<any> {
     return this.http.put<any>(environment.apiUrl + '/api/users/', user);
   }
+
+  registerAdmin(user: User) {
+    return this.http.post<any>(environment.apiUrl + '/api/users/admins/save', user);
+  }
 }
