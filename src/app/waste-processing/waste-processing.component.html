@@ -2,15 +2,12 @@
   <div class="todoComp" [ngClass]="isDesktop? 'desktop' : 'mobile'">
     <div class="topBar">
       <h1>Leftovers Remaining: {{todoList.length}}</h1>
-<!--      modal button-->
-
-      <!-- Modal -->
-      <div class="modal fade" id="wasteDetails" tabindex="-1" aria-labelledby="Waste Details" aria-hidden="true">
-        <app-dashboard></app-dashboard>
-      </div>
         <button type="button"  id="detailsButton" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#wasteDetails" (click)="refreshDetails()">
           Details
         </button>
+      <div class="modal fade" id="wasteDetails" tabindex="-1" aria-labelledby="Waste Details" aria-hidden="true">
+        <app-dashboard></app-dashboard>
+      </div>
         <div class="selector">
           <p>Type:</p>
           <select class="form-select" aria-label="Select type" (change)="setType(typeSelection.value)" #typeSelection>
@@ -53,6 +50,7 @@
                      [isShownInput]="showModal"
                      (isShownOutput)="setShown($event)" (doneOutput)="refresh($event)"></app-to-do-modal>
   </div>
+
 
   <!-- Toast-->
   <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">

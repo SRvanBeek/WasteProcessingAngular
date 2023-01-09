@@ -10,11 +10,12 @@ import {SharedModule} from "./shared/shared.module";
 import {HeaderModule} from "./header/header.module";
 import {SidebarModule} from "./sidebar/sidebar.module";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import {SettingsModule} from "./settings/settings.module";
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +27,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     HeaderModule,
     SidebarModule,
     MatSidenavModule,
+    SettingsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

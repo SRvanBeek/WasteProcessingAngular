@@ -22,7 +22,7 @@
             <a class="nav-link" type="button" id="historyButton">History</a>
           </li>
           <li class="nav-item" *ngIf="isAdmin">
-            <a class="nav-link" type="button" id="adminButton">Admin Panel</a>
+            <a class="nav-link" [routerLink]="['adminPanel']" id="adminButton">Admin Panel</a>
           </li>
           <li class="nav-item">
             <a [routerLink]="['']" class="nav-link" (click)="logout()">Log Out</a>
