@@ -1,0 +1,86 @@
+.mainBox {
+  background-color: white;
+}
+
+.header {
+  border-bottom: #DCDDE1 2px solid;
+
+  h1 {
+    margin: 1rem;
+  }
+}
+
+.content {
+  margin: 3rem 1rem;
+  height: 100%;
+}
+
+.first {
+  width: 50%;
+}
+
+.list > li > h2 {
+  margin-top: 1rem;
+}
+
+.list > li {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  border-bottom: 1px solid #DCDDE1;
+  width: 80%;
+}
+
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+  display: flex;
+  flex-direction: row;
+
+  button {
+    padding: .5rem;
+    white-space: nowrap;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 1.5rem;
+  }
+
+  .pwdButton {
+    margin-right: 5%;
+    background-color: #4BC8B6;
+    transition: .5s;
+  }
+
+  .pwdButton:hover {
+    background-color: #3da294;
+  }
+
+  .disableBtn {
+    background-color: #C78283;
+    transition: .5s;
+  }
+
+  .disableBtn:hover {
+    background-color: #865758;
+  }
+
+  .enableBtn {
+    background-color: #6eab61;
+    transition: .5s;
+  }
+
+  .enableBtn:hover {
+    background-color: #375631;
+  }
+}
