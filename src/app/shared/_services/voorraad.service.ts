@@ -21,6 +21,6 @@ export class VoorraadService {
   }
 
   getOneVoorraadByLeftoverID(id: number): Observable<any> {
-    return this.http.get<any>(environment.apiUrl + '/api/voorraad/' + id);
+    return this.http.get<any>(environment.apiUrl + '/api/voorraad/perLeftover/' + id);
   }
 }

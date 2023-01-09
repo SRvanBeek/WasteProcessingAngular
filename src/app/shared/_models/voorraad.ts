@@ -1,14 +1,14 @@
 export class Voorraad {
   private _id: number;
   private _leftoverId: number;
-  private _userID: number;
+  private _userId: number;
   private _enabled: boolean;
   private _dateProcessed: number;
 
 
-  constructor(leftoverId: number, userID: number, enabled: boolean, dateProcessed: number) {
+  constructor(leftoverId: number, userId: number, enabled: boolean, dateProcessed: number) {
     this._leftoverId = leftoverId;
-    this._userID = userID;
+    this._userId = userId;
     this._enabled = enabled;
     this._dateProcessed = dateProcessed;
   }
@@ -31,11 +31,11 @@ export class Voorraad {
   }
 
   get userId(): number {
-    return this._userID;
+    return this._userId;
   }
 
   set userId(value: number) {
-    this._userID = value;
+    this._userId = value;
   }
 
   get enabled(): boolean {
