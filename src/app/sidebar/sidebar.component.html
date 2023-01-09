@@ -1,10 +1,10 @@
 <div class="sideBar">
   <img class="logo" src="assets/images/white_logo.png" alt="Van der Lelie Logo"/>
   <div class="buttonList">
-    <button class="menu-button">
+    <button class="menu-button" routerLink="/wasteProc">
       <div class="activeOutline" [routerLinkActive]="['active']">
         <mat-icon>autorenew</mat-icon>
-        <a class="nav-link" routerLink="/wasteProc">Processing</a>
+        <a class="nav-link">Processing</a>
       </div>
     </button>
     <button class="menu-button">
@@ -26,19 +26,19 @@
           <a class="nav-link" [routerLink]="['history']">Categories</a>
         </div>
       </button>
-      <button class="menu-button">
+      <button class="menu-button" routerLink="/users">
         <div class="activeOutline" [routerLinkActive]="['active']">
           <mat-icon>group</mat-icon>
           <a class="nav-link" [routerLink]="['history']">Users</a>
         </div>
       </button>
-      <button class="menu-button">
-        <div class="activeOutline" [routerLinkActive]="['active']">
-          <mat-icon>settings</mat-icon>
-          <a class="nav-link" [routerLink]="['settings']">Settings</a>
-        </div>
-      </button>
     </div>
+    <button class="menu-button">
+      <div class="activeOutline" [routerLinkActive]="['active']">
+        <mat-icon>settings</mat-icon>
+        <a class="nav-link" [routerLink]="['settings']">Settings</a>
+      </div>
+    </button>
     <button class="menu-button">
       <div class="activeOutline">
         <mat-icon>logout</mat-icon>

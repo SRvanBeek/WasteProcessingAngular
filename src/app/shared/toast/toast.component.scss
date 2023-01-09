@@ -1,0 +1,14 @@
+:host {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 1rem;
+  z-index: 1200;
+}
+
+.addedToast {
+  background-color: #C78283;
+  font-family: 'Maven Pro', sans-serif;
+  color: black;
+  font-size: 1rem;
+}

@@ -48,29 +48,14 @@ h2 {
 }
 
 .doneButton {
-  appearance: none;
+  border-radius: 5px;
+  font-family: 'Maven Pro', sans-serif;
+  color: black;
+  padding: .5rem;
+  border: none;
   background-color: #4BC8B6;
-  border: 1px solid rgba(27, 31, 35, .15);
-  border-radius: 6px;
-  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
+  transition: .5s;
   font-size: 2rem;
-  font-weight: 600;
-  line-height: 20px;
-  padding: 1rem 2rem;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-  white-space: nowrap;
-  position: absolute;
-  bottom: 3rem;
-  right: 3rem;
 }
 
 .doneButton:focus:not(:focus-visible):not(.focus-visible) {
@@ -79,22 +64,9 @@ h2 {
 }
 
 .doneButton:hover {
-  background-color: #36a9a8;
-}
-
-.doneButton:focus {
-  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
-  outline: none;
-}
-
-.doneButton:disabled {
-  background-color: #94d3a2;
-  border-color: rgba(27, 31, 35, .1);
-  color: rgba(255, 255, 255, .8);
-  cursor: default;
+  background-color: #3da294;
 }
 
 .doneButton:active {
-  background-color: #4BC8B6;
-  box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+  background-color: #94d3a2;
 }

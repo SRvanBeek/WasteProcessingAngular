@@ -1,7 +1,9 @@
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {Leftover} from "../shared/_models/leftover.model";
 import {LeftoverService} from "../shared/_services/leftover.service";
-import {Toast} from "bootstrap";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ToDoModalComponent} from "../shared/_modals/to-do-modal/to-do-modal.component";
+import {ToastService} from "../shared/_services/toast.service";
 import {DashboardComponent} from "../shared/_modals/dashboard/dashboard.component";
 
 /**
@@ -17,16 +19,15 @@ export class WasteProcessingComponent implements OnInit {
   selectedTodo: Leftover;
   selectedType: string;
   todoList: Leftover[] = [];
-  showModal: boolean = false;
   screenLGSize: number = 992;
   isDesktop: boolean;
   showInfoBox: boolean = false;
   userID: number;
   filterList: string = 'all';
 
-  @ViewChild(DashboardComponent) child !:DashboardComponent;
+  @ViewChild(DashboardComponent) child !: DashboardComponent;
 
-  constructor(private leftoverService: LeftoverService) {
+  constructor(private leftoverService: LeftoverService, private modalService: NgbModal, private toastService: ToastService) {
   }
 
   @HostListener("window:resize", []) updateIsDesktop() {
@@ -38,9 +39,6 @@ export class WasteProcessingComponent implements OnInit {
     this.fillListAllTypes();
     this.updateIsDesktop();
     this.setUserID();
-  }
-
-  ngAfterViewInit() {
   }
 
   /**
@@ -66,11 +64,8 @@ export class WasteProcessingComponent implements OnInit {
     this.selectedTodo = leftover;
     this.selectedType = leftover.type;
     if (!this.isDesktop) {
-      this.showModal = true;
+      this.openMobileInfo();
     }
-    setTimeout(() => {
-      this.openToast();
-    }, 100);
   }
 
   /**
@@ -84,10 +79,6 @@ export class WasteProcessingComponent implements OnInit {
     } else {
       this.fillByType(type);
     }
-  }
-
-  setShown(value: boolean) {
-    this.showModal = value;
   }
 
   /**
@@ -131,25 +122,19 @@ export class WasteProcessingComponent implements OnInit {
     this.selectedIndex = -1;
   }
 
-  /**
-   * openToast() makes it so that when one clicks on the done button a Toast pops up on screen.
-   */
-  openToast() {
-    let toastTrigger;
-    if (this.isDesktop) {
-      toastTrigger = document.getElementById('done');
-    } else {
-      toastTrigger = document.getElementById('modalDone');
-    }
-    const toastLiveExample = document.getElementById('doneToast')
-    if (toastTrigger) {
-      toastTrigger.addEventListener('click', () => {
-        if (toastLiveExample != null) {
-          const toast = new Toast(toastLiveExample);
-          toast.show()
-        }
-      })
-    }
+  private openMobileInfo() {
+    const modalRef = this.modalService.open(ToDoModalComponent, {fullscreen: true});
+    console.log(this.userID)
+    modalRef.componentInstance.userId = this.userID;
+    modalRef.componentInstance.list = this.todoList;
+    modalRef.componentInstance.todo = this.selectedTodo;
+    modalRef.componentInstance.type = this.selectedType;
+    modalRef.result.then((data => {
+      if (data) {
+        this.refresh(data);
+        this.toastService.show('', "You've just processed a Leftover.\n Good Job!");
+      }
+    }))
   }
 
   refreshDetails() {
