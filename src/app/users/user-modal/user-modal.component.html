@@ -19,7 +19,9 @@
   </ul>
 </div>
 <div class="modal-footer">
-  <button class="pwdButton" style="border: none; border-radius: 5px" (click)="openChangePass()">Change password</button>
+  <button *ngIf="!isUserAdmin" class="pwdButton" style="border: none; border-radius: 5px" (click)="openChangePass()">
+    Change password
+  </button>
   <button style="border: none; border-radius: 5px" [ngClass]="user.enabled ? 'disableBtn':'enableBtn' "
           (click)="openConfirm()">{{user.enabled ? 'Disable' : 'Enable'}}</button>
 </div>
