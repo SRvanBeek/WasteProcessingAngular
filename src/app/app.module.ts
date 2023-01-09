@@ -10,8 +10,10 @@ import {SharedModule} from "./shared/shared.module";
 import {HeaderModule} from "./header/header.module";
 import {SidebarModule} from "./sidebar/sidebar.module";
 import {MatSidenavModule} from "@angular/material/sidenav";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule} from "@angular/forms";
+import {UsersModule} from "./users/users.module";
 
 
 @NgModule({
@@ -30,6 +32,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatSidenavModule,
     BrowserAnimationsModule,
     NgbModule,
+    FormsModule,
+    UsersModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

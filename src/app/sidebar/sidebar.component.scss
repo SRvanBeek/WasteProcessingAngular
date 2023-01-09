@@ -52,6 +52,16 @@
   }
 }
 
+.activeOutline:not(.active):hover {
+  background-color: rgba(75, 200, 182, .5);
+}
+
+.menu-button:active {
+  .activeOutline {
+    background-color: rgba(75, 200, 182, 1);
+  }
+}
+
 .active {
   background-color: #4BC8B6;
 }
