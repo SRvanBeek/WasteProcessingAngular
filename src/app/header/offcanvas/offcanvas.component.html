@@ -37,13 +37,13 @@
             <a class="nav-link" [routerLink]="['users']">Users</a>
           </div>
         </button>
-        <button class="menu-button" (click)="activeOffcanvas.dismiss('Cross click')">
-          <div class="activeOutline" [routerLinkActive]="['active']">
-            <mat-icon>settings</mat-icon>
-            <a class="nav-link" [routerLink]="['history']">Settings</a>
-          </div>
-        </button>
       </div>
+      <button class="menu-button" (click)="activeOffcanvas.dismiss('Cross click')">
+        <div class="activeOutline" [routerLinkActive]="['active']">
+          <mat-icon>settings</mat-icon>
+          <a class="nav-link" [routerLink]="['history']">Settings</a>
+        </div>
+      </button>
       <button class="menu-button" (click)="activeOffcanvas.dismiss('Cross click')">
         <div class="activeOutline">
           <mat-icon>logout</mat-icon>
