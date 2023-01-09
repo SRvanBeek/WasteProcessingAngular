@@ -34,7 +34,7 @@ import {SettingsModule} from "./settings/settings.module";
     BrowserAnimationsModule,
     NgbModule,
     FormsModule,
-    UsersModule
+    UsersModule,
     SettingsModule
   ],
   providers: [

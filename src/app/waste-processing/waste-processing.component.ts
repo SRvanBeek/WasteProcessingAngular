@@ -4,6 +4,7 @@ import {LeftoverService} from "../shared/_services/leftover.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ToDoModalComponent} from "../shared/_modals/to-do-modal/to-do-modal.component";
 import {ToastService} from "../shared/_services/toast.service";
+import {DashboardComponent} from "../shared/_modals/dashboard/dashboard.component";
 
 /**
  * @Author Dino Yang
@@ -24,7 +25,7 @@ export class WasteProcessingComponent implements OnInit {
   userID: number;
   filterList: string = 'all';
 
-  @ViewChild(DashboardComponent) child !:DashboardComponent;
+  @ViewChild(DashboardComponent) child !: DashboardComponent;
 
   constructor(private leftoverService: LeftoverService, private modalService: NgbModal, private toastService: ToastService) {
   }
