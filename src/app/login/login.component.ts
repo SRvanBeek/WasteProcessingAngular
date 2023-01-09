@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from "../shared/_services/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {first, Observable} from "rxjs";
+import {first, fromEvent, Observable, Subscription} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 
@@ -11,7 +11,7 @@ import {environment} from "../../environments/environment";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy{
   loginImagePath: string = "assets/images/Login-Image.png";
   logoImagePath: string = "assets/images/logo_dark_big.png";
 
@@ -20,6 +20,9 @@ export class LoginComponent {
   submitted = false;
   error = '';
   failedAuth = false;
+  isDesktop: boolean = true;
+  desktopHeight: number = 600;
+  desktopWidth: number = 880;
 
   constructor(
     private fb: FormBuilder,
@@ -32,11 +35,34 @@ export class LoginComponent {
       this.router.navigate(['/']);
     }
   }
+  resizeObservable$: Observable<Event>
+  resizeSubscription$: Subscription
 
   ngOnInit() {
+    this.initLoginForm();
+    if (window.innerWidth < this.desktopWidth || window.innerHeight < this.desktopHeight) {
+      this.isDesktop = false
+    }
+
+    this.resizeObservable$ = fromEvent(window, 'resize')
+    this.resizeSubscription$ = this.resizeObservable$.subscribe(evt => {
+      if (this.isDesktop && (window.innerWidth < this.desktopWidth || window.innerHeight < this.desktopHeight)) {
+        this.initLoginForm()
+        this.isDesktop = false;
+        console.log(this.isDesktop)
+      }
+      if (!this.isDesktop && (window.innerWidth >= this.desktopWidth && window.innerHeight >= this.desktopHeight)) {
+        this.initLoginForm()
+        this.isDesktop = true;
+        console.log(this.isDesktop)
+      }
+    })
+  }
+
+  initLoginForm() {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ['', [Validators.required, Validators.nullValidator]],
+      password: ['', [Validators.required, Validators.nullValidator]]
     });
   }
 
@@ -69,6 +95,10 @@ export class LoginComponent {
           this.failedAuth = true;
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    this.resizeSubscription$.unsubscribe()
   }
 }
 

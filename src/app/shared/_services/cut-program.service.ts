@@ -11,8 +11,12 @@ export class CutProgramService {
   constructor(private http: HttpClient) {
   }
 
-  cutProgram(): Observable<String> {
-    return this.http.get<String>(environment.apiUrl + '/api/snij/setup');
+  addLeftover(articleNumber: string, metrage: number): Observable<any> {
+    return this.http.post<any>(environment.apiUrl + '/api/generateLeftovers', {articleNumber, metrage})
+  }
+
+  addRandomLeftovers(amount: number): Observable<any> {
+    return this.http.post<any>(environment.apiUrl + '/api/generateLeftovers/random/' + amount, {})
   }
 
 }

@@ -12,15 +12,15 @@ export class VoorraadService {
   constructor(private http: HttpClient) {
   }
 
-  getOneVoorraad(id: string): Observable<Voorraad> {
-    return this.http.get<Voorraad>(environment.apiUrl + '/api/voorraad/' + id);
+  getOneVoorraad(id: string): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/voorraad/' + id);
   }
 
   putVoorraad(voorraad: Voorraad): Observable<string> {
     return this.http.put<string>(environment.apiUrl + '/api/voorraad/', voorraad);
   }
 
-  getOneVoorraadByCutWasteID(id: number): Observable<Voorraad> {
-    return this.http.get<Voorraad>(environment.apiUrl + '/api/voorraad/' + id);
+  getOneVoorraadByLeftoverID(id: number): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/voorraad/' + id);
   }
 }

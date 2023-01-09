@@ -1,34 +1,64 @@
 <div class="wasteProc">
   <div class="todoComp" [ngClass]="isDesktop? 'desktop' : 'mobile'">
     <div class="topBar">
-      <h1>Amount of waste to go: {{todoList.length}}</h1>
-      <div class="selector">
-        <p>Type:</p>
-        <select class="form-select" aria-label="Select type" (change)="setType(typeSelection.value)" #typeSelection>
-          <option value="all" selected>All</option>
-          <option value="order">Orders</option>
-          <option value="catWaste">Categorized waste</option>
-          <option value="storage">Storage</option>
-        </select>
+      <div class="topBarTitle">
+        <h1>Processing</h1>
+      </div>
+      <div class="topBarContent">
+        <h1>Leftovers Remaining: {{todoList.length}}</h1>
+        <div class="selector">
+          <h1>Type:</h1>
+          <select class="form-select" aria-label="Select type" (change)="setType(typeSelection.value)" #typeSelection>
+            <option value="all" selected>All</option>
+            <option value="order">Orders</option>
+            <option value="catWaste">Categorized waste</option>
+            <option value="storage">Storage</option>
+          </select>
+        </div>
+      </div>
+      <div class="listIdentifiers">
+        <h1 style="width: 20%">ID</h1>
+        <h1 style="width: 40%">Article Number</h1>
+        <h1 style="width: 30%">Type</h1>
       </div>
     </div>
     <div class="todoList">
-      <ul>
+      <ul class="list">
         <li class="toDoItem" *ngFor="let todo of todoList; let i = index">
           <div class="toDoButton">
-                <span *ngIf="!isDesktop" data-bs-toggle="modal" data-bs-target="#todoModal"
-                      (click)="todoDetail(todo,i)" [class.active]="selectedIndex === i">id: {{todo.id}}
-                  , Type:  {{todo.type}}</span>
-            <span *ngIf="isDesktop" (click)="todoDetail(todo, i)" [class.active]="selectedIndex === i">id: {{todo.id}}
-              , Type:  {{todo.type}}</span>
+            <span *ngIf="!isDesktop" data-bs-toggle="modal" data-bs-target="#todoModal"
+                  (click)="todoDetail(todo,i)" [class.active]="selectedIndex === i">
+              <ng-template [ngIf]="todo.type != 'catWaste'">
+                <p style="width: 20%; margin-left: 1rem">{{todo.id}}</p>
+                <p style="width: 40%">{{todo.artikelnummer}}</p>
+                <p style="width: 30%">{{todo.type}}</p>
+              </ng-template>
+              <ng-template [ngIf]="todo.type == 'catWaste'">
+                <p style="width: 20%; margin-left: 1rem">{{todo.id}}</p>
+                <p style="width: 40%">{{todo.artikelnummer}}</p>
+                <p style="width: 30%">categorized waste</p>
+              </ng-template>
+            </span>
+            <span *ngIf="isDesktop" (click)="todoDetail(todo, i)" [class.active]="selectedIndex === i">
+              <ng-template [ngIf]="todo.type != 'catWaste'">
+                <p style="width: 20%; margin-left: 1rem">{{todo.id}}</p>
+                <p style="width: 40%">{{todo.artikelnummer}}</p>
+                <p style="width: 30%">{{todo.type}}</p>
+              </ng-template>
+              <ng-template [ngIf]="todo.type == 'catWaste'">
+                <p style="width: 20%; margin-left: 1rem">{{todo.id}}</p>
+                <p style="width: 40%">{{todo.artikelnummer}}</p>
+                <p style="width: 30%">categorized waste</p>
+              </ng-template>
+            </span>
           </div>
         </li>
       </ul>
     </div>
   </div>
   <div *ngIf="isDesktop" class="todoShow">
-    <app-cut-waste-info-box [list]="todoList" [todo]="selectedTodo" [userId]="userID"
-                            (doneOutput)="refresh($event)"></app-cut-waste-info-box>
+    <app-leftover-info-box [list]="todoList" [todo]="selectedTodo" [userId]="userID"
+                           (doneOutput)="refresh($event)"></app-leftover-info-box>
   </div>
 
 
@@ -40,14 +70,11 @@
                      (isShownOutput)="setShown($event)" (doneOutput)="refresh($event)"></app-to-do-modal>
   </div>
 
+
   <!-- Toast-->
-  <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
-    <div id="doneToast" class="toast text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header  text-bg-primary">
-        <strong class="me-auto">Alert</strong>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                aria-label="Close"></button>
-      </div>
+  <div class="toast-container top-0 end-0 p-3">
+    <div id="doneToast" data-bs-config='{"delay":1000}' class="toast text-bg-primary border-0" role="alert"
+         aria-live="assertive" aria-atomic="true">
       <div class="toast-body">
         You've just processed something!<br>
         Good job!

@@ -2,7 +2,15 @@
 
 @font-face {
   font-family: 'Maven Pro', sans-serif;
-  src: url("/assets/mavenPro.ttf") format('truetype');
+  src: url("/src/assets/fonts/mavenPro.ttf") format('truetype');
+}
+
+a {
+  font-family: 'Maven Pro', sans-serif;
+}
+
+span {
+  font-family: 'Maven Pro', sans-serif;
 }
 
 p {
@@ -37,3 +45,7 @@ h3 {
   background-color: rgb(0 0 0 / 80%);
   border-radius: 10px;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

@@ -1,5 +1,6 @@
-import {Component, HostListener, OnInit} from '@angular/core';
-import {AuthService} from '../shared/_services/auth.service'
+import {Component, OnInit} from '@angular/core';
+import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
+import {OffcanvasComponent} from "./offcanvas/offcanvas.component";
 
 @Component({
   selector: 'app-header',
@@ -8,25 +9,17 @@ import {AuthService} from '../shared/_services/auth.service'
 })
 
 export class HeaderComponent implements OnInit {
-  screenLGSize: number = 992;
-  typeHistory: string;
-  typeAdmin: string;
   token: string;
   isAdmin: boolean = false;
 
-  constructor(private authService: AuthService) {
+  constructor(private offcanvasService: NgbOffcanvas) {}
+
+  open() {
+    const offcanvasRef = this.offcanvasService.open(OffcanvasComponent,  { position: 'end' });
+    offcanvasRef.componentInstance.name = 'World';
   }
-
-
   ngOnInit() {
     this.setAdmin();
-    if (window.innerWidth >= this.screenLGSize) {
-      this.typeHistory = 'history';
-      this.typeAdmin = 'admin';
-    } else {
-      this.typeHistory = 'historyOff';
-      this.typeAdmin = 'adminOff';
-    }
   }
 
   setAdmin(): void {
@@ -39,35 +32,5 @@ export class HeaderComponent implements OnInit {
       this.isAdmin = roles[0] == 'ROLE_ADMIN';
     }
   }
-
-  @HostListener("window:resize", []) updateHistory() {
-    if (window.innerWidth >= this.screenLGSize) {
-      this.typeHistory = 'history';
-      this.typeAdmin = 'admin';
-    } else {
-      this.typeHistory = 'historyOff';
-      this.typeAdmin = 'adminOff';
-    }
-  }
-
-  @HostListener("document:click", ['$event.target']) clickNavbar(clickPosition: any) {
-    let shownEl = document.getElementsByClassName('show');
-    if (shownEl.length != 0) {
-      let buttonID = shownEl[0].id + 'Button';
-      let subMenu = document.getElementById(shownEl[0].id);
-      if (subMenu) {
-        let subMenuString = subMenu.id;
-        let button = document.getElementById(buttonID);
-        if (button) {
-          if (!clickPosition.closest('#navBar') && !clickPosition.closest('#' + subMenuString)) {
-            button.dispatchEvent(new CustomEvent('click'));
-          }
-        }
-      }
-    }
-  }
-
-  logout() {
-    this.authService.logout();
-  }
 }
+

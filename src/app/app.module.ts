@@ -8,12 +8,16 @@ import {JwtInterceptor} from "./shared/_helper/jwt.interceptor";
 import {WasteProcessingModule} from "./waste-processing/waste-processing.module";
 import {SharedModule} from "./shared/shared.module";
 import {HeaderModule} from "./header/header.module";
-import {OrdersModule} from "./orders/orders.module";
+import {SidebarModule} from "./sidebar/sidebar.module";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {SettingsModule} from "./settings/settings.module";
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +27,12 @@ import {OrdersModule} from "./orders/orders.module";
     WasteProcessingModule,
     SharedModule,
     HeaderModule,
-    OrdersModule
+    SidebarModule,
+    MatSidenavModule,
+    BrowserAnimationsModule,
+    NgbModule,
+    SettingsModule
+
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
