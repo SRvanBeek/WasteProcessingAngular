@@ -6,6 +6,7 @@ import {LeftoverInfoBoxComponent} from './leftover-info-box/leftover-info-box.co
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatButtonModule} from "@angular/material/button";
 import {ModalModule} from "../shared/_modals/modal.module";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {ModalModule} from "../shared/_modals/modal.module";
     CommonModule,
     MatSnackBarModule,
     MatButtonModule,
-    ModalModule
+    ModalModule,
+    MatSidenavModule,
   ],
   exports: [
     WasteProcessingComponent,

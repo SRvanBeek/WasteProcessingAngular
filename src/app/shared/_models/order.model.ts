@@ -12,6 +12,4 @@ export class Order {
     this.userId = userId;
     this.dateProcessed = dateProcessed;
   }
-
-
 }

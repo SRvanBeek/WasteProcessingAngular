@@ -1,57 +1,48 @@
 <div class="mainBox" *ngIf="todo != null && article!= null">
   <div class="header">
-    <h1>Article: {{article.artikelnummer}}</h1>
+    <h1>{{article.artikelnummer}}</h1>
   </div>
   <div class="content">
     <ul class="list">
       <ng-template [ngIf]="todo.type == 'catWaste'">
         <li>
-          <h2>
-            Weight: {{todo.gewicht}} g
-          </h2>
+          <h2 class="first">Weight:</h2>
+          <h2>{{todo.gewicht}} g</h2>
+        </li>
         <li>
+          <h2 class="first">Size:</h2>
+          <h2>{{todo.metrage}}m&#178;</h2>
+        </li>
         <li>
-          <h2>
-            Size: {{todo.metrage}}m&#178;
-          </h2>
+          <h2 class="first">Type:</h2>
+          <h2 style="width: 50%">{{type}}</h2>
+        </li>
         <li>
+          <h2 class="first">Color:</h2>
+          <h2>{{article.kleur}}</h2>
+        </li>
         <li>
-          <h2>
-            Type: {{type}}
-          </h2>
-        <li>
-        <li>
-          <h2>
-            Color: {{article.kleur}}
-          </h2>
-        <li>
-        <li>
-          <h2>
-            Category: {{category}}
-          </h2>
+          <h2 class="first">Category:</h2>
+          <h2>{{category}}</h2>
         </li>
       </ng-template>
       <ng-template [ngIf]="todo.type != 'catWaste'">
         <li>
-          <h2>
-            Weight: {{todo.gewicht}} g
-          </h2>
+          <h2 class="first">Weight:</h2>
+          <h2>{{todo.gewicht}} g</h2>
+        </li>
         <li>
+          <h2 class="first">Size:</h2>
+          <h2>{{todo.metrage}}m&#178;</h2>
+        </li>
         <li>
-          <h2>
-            Size: {{todo.metrage}}m&#178;
-          </h2>
+          <h2 class="first">Type:</h2>
+          <h2>{{type}}</h2>
+        </li>
         <li>
-        <li>
-          <h2>
-            Type: {{type}}
-          </h2>
-        <li>
-        <li>
-          <h2>
-            Color: {{article.kleur}}
-          </h2>
-        <li>
+          <h2 class="first">Color:</h2>
+          <h2>{{article.kleur}}</h2>
+        </li>
       </ng-template>
     </ul>
     <button class="doneButton" id="done" (click)="done()">Done!</button>

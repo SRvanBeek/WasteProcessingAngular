@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../shared/_services/auth.service'
+import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
+import {OffcanvasComponent} from "./offcanvas/offcanvas.component";
 
 @Component({
   selector: 'app-header',
@@ -11,10 +12,12 @@ export class HeaderComponent implements OnInit {
   token: string;
   isAdmin: boolean = false;
 
-  constructor(private authService: AuthService) {
+  constructor(private offcanvasService: NgbOffcanvas) {}
+
+  open() {
+    const offcanvasRef = this.offcanvasService.open(OffcanvasComponent,  { position: 'end' });
+    offcanvasRef.componentInstance.name = 'World';
   }
-
-
   ngOnInit() {
     this.setAdmin();
   }
@@ -29,8 +32,5 @@ export class HeaderComponent implements OnInit {
       this.isAdmin = roles[0] == 'ROLE_ADMIN';
     }
   }
-
-  logout() {
-    this.authService.logout();
-  }
 }
+
