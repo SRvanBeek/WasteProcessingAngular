@@ -17,15 +17,18 @@ export class CreateUserComponent implements OnInit {
     fullName: new FormControl(''),
     password: new FormControl(''),
     confirmPassword: new FormControl(''),
-    enabled: new FormControl('')
+    enabled: new FormControl(''),
+    admin: new FormControl(false)
   });
   hide: boolean = true;
+  isSuperAdmin: boolean = false;
 
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder,
               private userService: UserService, private toastService: ToastService) {
   }
 
   ngOnInit(): void {
+    this.setAdmin();
     this.user = this.formBuilder.group(
       {
         fullName: [
@@ -52,12 +55,26 @@ export class CreateUserComponent implements OnInit {
           ]
         ],
         confirmPassword: ['', Validators.required],
-        enabled: [true, Validators.required]
+        enabled: [true, Validators.required],
+        admin: [false],
       },
       {
         validators: [Validation.match('password', 'confirmPassword')]
       }
     )
+  }
+
+  setAdmin(): void {
+    let jwt = localStorage.getItem('JwtToken');
+    if (jwt) {
+      let jwtData = jwt.split('.')[1];
+      let decodedJwtJsonData = window.atob(jwtData);
+      let decodedJwtData = JSON.parse(decodedJwtJsonData);
+      let roles = decodedJwtData.roles;
+      if (roles.includes('ROLE_SUPERADMIN')) {
+        this.isSuperAdmin = true;
+      }
+    }
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -78,12 +95,22 @@ export class CreateUserComponent implements OnInit {
     if (this.user.invalid) {
       return;
     }
-    let newUser = User.createUserWithoutId(this.user.value.fullName, this.user.value.username, this.user.value.password, this.user.value.enabled);
-    this.userService.registerUser(newUser).subscribe({
-      next: value => {
-        this.toastService.show("", "You've just created user with username " + this.user.value.username);
-        this.activeModal.close('Close click');
-      }
-    });
+    if (this.user.value.admin == false) {
+      let newUser = User.createUserWithoutId(this.user.value.fullName, this.user.value.username, this.user.value.password, this.user.value.enabled);
+      this.userService.registerUser(newUser).subscribe({
+        next: value => {
+          this.toastService.show("", "You've just created user with username " + this.user.value.username);
+          this.activeModal.close('Close click');
+        }
+      });
+    } else {
+      let newUser = User.createUserWithoutId(this.user.value.fullName, this.user.value.username, this.user.value.password, this.user.value.enabled);
+      this.userService.registerAdmin(newUser).subscribe({
+        next: value => {
+          this.toastService.show("", "You've just created user with username " + this.user.value.username);
+          this.activeModal.close('Close click');
+        }
+      });
+    }
   }
 }
