@@ -7,7 +7,7 @@ import {SettingsComponent} from "./settings/settings.component";
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'wasteProc', component: WasteProcessingComponent},
-  {path: 'adminPanel', component: SettingsComponent}
+  {path: 'settings', component: SettingsComponent}
 ];
 
 @NgModule({
