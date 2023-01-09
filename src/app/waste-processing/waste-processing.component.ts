@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {Leftover} from "../shared/_models/leftover.model";
 import {LeftoverService} from "../shared/_services/leftover.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
@@ -24,6 +24,7 @@ export class WasteProcessingComponent implements OnInit {
   userID: number;
   filterList: string = 'all';
 
+  @ViewChild(DashboardComponent) child !:DashboardComponent;
 
   constructor(private leftoverService: LeftoverService, private modalService: NgbModal, private toastService: ToastService) {
   }
@@ -133,5 +134,9 @@ export class WasteProcessingComponent implements OnInit {
         this.toastService.show('', "You've just processed a Leftover.\n Good Job!");
       }
     }))
+  }
+
+  refreshDetails() {
+    this.child.refresh()
   }
 }

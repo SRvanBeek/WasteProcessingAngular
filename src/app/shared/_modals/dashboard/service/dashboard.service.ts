@@ -32,15 +32,15 @@ export class DashboardService {
   /**
    * calls api to get the name of every category in the database.
    */
-  getCategories(): Observable<string[]> {
-    return this.http.get<string[]>(environment.apiUrl + '/api/categories/names');
+  getCategories(): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/categories/names');
   }
 
   /**
    * calls api to get the total composition in a given category.
    * @param category the given category to receive the composition from.
    */
-  getComposition(category: string): Observable<string[]> {
-    return this.http.get<string[]>(environment.apiUrl + '/api/waste/composition/' + category);
+  getComposition(category: string): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/waste/composition/' + category);
   }
 }
