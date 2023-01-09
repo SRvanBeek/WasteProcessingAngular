@@ -1,0 +1,55 @@
+.content {
+  margin: 3rem 1rem;
+  height: 100%;
+}
+
+.first {
+  width: 50%;
+}
+
+.list > li > h2 {
+  margin-top: 1rem;
+}
+
+.list > li {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  border-bottom: 1px solid #DCDDE1;
+  width: 80%;
+}
+
+h2 {
+  font-size: 1rem;
+}
+
+
+.pwdButton {
+  margin-right: 5%;
+  background-color: #4BC8B6;
+  transition: .5s;
+}
+
+.pwdButton:hover {
+  background-color: #3da294;
+}
+
+.disableBtn {
+  background-color: #C78283;
+  transition: .5s;
+}
+
+.disableBtn:hover {
+  background-color: #865758;
+}
+
+.enableBtn {
+  background-color: #6eab61;
+  transition: .5s;
+}
+
+.enableBtn:hover {
+  background-color: #446e3f;
+}
+
+
