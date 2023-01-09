@@ -1,0 +1,59 @@
+<div class="createUserBox">
+  <div class="modal-header">
+    <h4 class="modal-title">Create User</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="user" (ngSubmit)="onSubmit()" id="inputForm" class="form">
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username">
+        <mat-error *ngIf="this.f['username'].errors?.['required']">Username is required</mat-error>
+        <mat-error *ngIf="this.f['username'].errors?.['minlength']">Username must be at least 6 characters</mat-error>
+        <mat-error *ngIf="this.f['username'].errors?.['duplicate']">Username already exist</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Full Name</mat-label>
+        <input matInput formControlName="fullName">
+        <mat-error *ngIf="this.f['fullName'].errors?.['required']">Username is required</mat-error>
+        <mat-error *ngIf="this.f['fullName'].errors?.['minlength']">Username must be at least 3 characters</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+        <mat-icon matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-icon>
+        <mat-error *ngIf="this.f['password'].errors?.['required']">Password is required</mat-error>
+        <mat-error *ngIf="this.f['password'].errors?.['minlength']">Password must be at least 6 characters</mat-error>
+        <mat-error *ngIf="this.f['password'].errors?.['maxlength']">Password must not exceed 40 characters</mat-error>
+        <mat-error *ngIf="this.f['password'].errors?.['pattern']">Password requires at least one lowercase, one
+          Uppercase,
+          one number and one special character($@!%*?&)
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Confirm Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmPassword">
+        <mat-icon matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-icon>
+        <mat-error *ngIf="this.f['confirmPassword'].errors?.['required']">Password is required</mat-error>
+        <mat-error *ngIf="this.f['confirmPassword'].errors?.['matching']">Confirm Password does not match</mat-error>
+      </mat-form-field>
+      <mat-checkbox labelPosition="after" formControlName="enabled">Enabled?</mat-checkbox>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary submitButton" (click)="onSubmit()">Change Password</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>
+</div>
+
+
+
