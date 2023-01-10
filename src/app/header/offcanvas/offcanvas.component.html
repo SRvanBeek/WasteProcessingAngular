@@ -1,54 +1,55 @@
 <div class="offcanvasBox">
-<div class="offcanvas-header">
-  <h5 class="offcanvas-title">Menu</h5>
-  <button type="button" class="btn-close text-reset" aria-label="Close" (click)="activeOffcanvas.dismiss('Cross click')"></button>
-</div>
-<div class="offcanvas-body">
-  <div class="buttonList">
-    <button class="menu-button" (click)="activeOffcanvas.dismiss('Cross click')">
-      <div class="activeOutline" [routerLinkActive]="['active']">
-        <mat-icon>autorenew</mat-icon>
-        <a class="nav-link" routerLink="/wasteProc">Processing</a>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Menu</h5>
+    <button type="button" class="btn-close text-reset" aria-label="Close"
+            (click)="activeOffcanvas.dismiss('Cross click')"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="buttonList">
+      <button class="menu-button" (click)="activeOffcanvas.dismiss('Cross click')">
+        <div class="activeOutline" [routerLinkActive]="['active']">
+          <mat-icon>autorenew</mat-icon>
+          <a class="nav-link" routerLink="/wasteProc">Processing</a>
+        </div>
+      </button>
+      <button class="menu-button" (click)="activeOffcanvas.dismiss('Cross click')">
+        <div class="activeOutline" [routerLinkActive]="['active']">
+          <mat-icon>work_history</mat-icon>
+          <a class="nav-link" [routerLink]="['history']">History</a>
+        </div>
+      </button>
+      <div class="adminButtons" *ngIf="isAdmin">
+        <button class="menu-button" (click)="activeOffcanvas.dismiss('Cross click')">
+          <div class="activeOutline" [routerLinkActive]="['active']">
+            <mat-icon>support_agent</mat-icon>
+            <a class="nav-link" [routerLink]="['history']">Customers</a>
+          </div>
+        </button>
+        <button class="menu-button" (click)="activeOffcanvas.dismiss('Cross click')">
+          <div class="activeOutline" [routerLinkActive]="['active']">
+            <mat-icon>category</mat-icon>
+            <a class="nav-link" [routerLink]="['history']">Categories</a>
+          </div>
+        </button>
+        <button class="menu-button" (click)="activeOffcanvas.dismiss('Cross click')">
+          <div class="activeOutline" [routerLinkActive]="['active']">
+            <mat-icon>group</mat-icon>
+            <a class="nav-link" [routerLink]="['users']">Users</a>
+          </div>
+        </button>
       </div>
-    </button>
-    <button class="menu-button" (click)="activeOffcanvas.dismiss('Cross click')">
-      <div class="activeOutline" [routerLinkActive]="['active']">
-        <mat-icon>work_history</mat-icon>
-        <a class="nav-link" [routerLink]="['history']">History</a>
-      </div>
-    </button>
-    <div class="adminButtons" *ngIf="isAdmin">
-      <button class="menu-button" (click)="activeOffcanvas.dismiss('Cross click')">
-        <div class="activeOutline" [routerLinkActive]="['active']">
-          <mat-icon>support_agent</mat-icon>
-          <a class="nav-link" [routerLink]="['history']">Customers</a>
-        </div>
-      </button>
-      <button class="menu-button" (click)="activeOffcanvas.dismiss('Cross click')">
-        <div class="activeOutline" [routerLinkActive]="['active']">
-          <mat-icon>category</mat-icon>
-          <a class="nav-link" [routerLink]="['history']">Categories</a>
-        </div>
-      </button>
-      <button class="menu-button" (click)="activeOffcanvas.dismiss('Cross click')">
-        <div class="activeOutline" [routerLinkActive]="['active']">
-          <mat-icon>group</mat-icon>
-          <a class="nav-link" [routerLink]="['history']">Users</a>
-        </div>
-      </button>
       <button class="menu-button" (click)="activeOffcanvas.dismiss('Cross click')">
         <div class="activeOutline" [routerLinkActive]="['active']">
           <mat-icon>settings</mat-icon>
           <a class="nav-link" [routerLink]="['settings']">Settings</a>
         </div>
       </button>
+      <button class="menu-button" (click)="activeOffcanvas.dismiss('Cross click')">
+        <div class="activeOutline">
+          <mat-icon>logout</mat-icon>
+          <a routerLink="/" class="nav-link" (click)="logout()">Log Out</a>
+        </div>
+      </button>
     </div>
-    <button class="menu-button" (click)="activeOffcanvas.dismiss('Cross click')">
-      <div class="activeOutline">
-        <mat-icon>logout</mat-icon>
-        <a routerLink="/" class="nav-link" (click)="logout()">Log Out</a>
-      </div>
-    </button>
   </div>
-</div>
 </div>

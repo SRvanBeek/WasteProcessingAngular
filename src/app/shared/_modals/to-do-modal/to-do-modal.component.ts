@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Leftover} from "../../_models/leftover.model";
 import {ArticleService} from "../../_services/article.service";
 import {Article} from "../../_models/article";
@@ -7,10 +7,10 @@ import {OrdersService} from "../../_services/orders.service";
 import {WasteService} from "../../_services/waste.service";
 import {CategoryService} from "../../_services/category.service";
 import {VoorraadService} from "../../_services/voorraad.service";
-import {CategoryModel} from "../../_models/category.model";
 import {Waste} from "../../_models/waste.model";
 import {Voorraad} from "../../_models/voorraad";
 import {Order} from "../../_models/order.model";
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 /**
  * @Author Dino Yang
@@ -20,40 +20,23 @@ import {Order} from "../../_models/order.model";
   templateUrl: './to-do-modal.component.html',
   styleUrls: ['./to-do-modal.component.scss']
 })
-export class ToDoModalComponent {
+export class ToDoModalComponent implements OnInit {
   @Input() list: Leftover[];
   @Input() todo: Leftover;
   @Input() userId: number;
-  @Input() isShownInput: boolean;
-  @Output() isShownOutput = new EventEmitter<boolean>();
-  @Output() doneOutput = new EventEmitter<Leftover[]>();
   @Input() type: string;
   article: Article;
   category: any;
 
   constructor(private articleService: ArticleService, private leftoverService: LeftoverService,
               private orderService: OrdersService, private wasteService: WasteService,
-              private categoryService: CategoryService, private voorraadService: VoorraadService) {
+              private categoryService: CategoryService, private voorraadService: VoorraadService, public activeModal: NgbActiveModal) {
   }
 
-  ngOnChanges() {
-    if (this.isShownInput) {
-      this.setArticle(this.todo.artikelnummer);
-      if (this.todo.type == 'catWaste') {
-        this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(value => {
-          let waste: Waste = value.payload;
-          this.categoryService.getCategoryNameById(waste.categoryId).subscribe(value => {
-            let category: CategoryModel = value.payload;
-            this.category = category.name;
-          })
-        })
-      }
-    }
+  ngOnInit(): void {
+    this.setArticle(this.todo.artikelnummer);
   }
 
-  close() {
-    this.isShownOutput.emit(false);
-  }
 
   /**
    * setArticle() sets article with the article that is connected to the selected cutWaste.
@@ -103,7 +86,6 @@ export class ToDoModalComponent {
     let outputList = this.list.filter(leftover => {
       return leftover.id !== this.todo.id;
     })
-    this.doneOutput.emit(outputList);
-    this.close();
+    this.activeModal.close(outputList);
   }
 }

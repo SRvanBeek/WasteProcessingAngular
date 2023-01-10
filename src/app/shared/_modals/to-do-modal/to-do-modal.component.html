@@ -1,42 +1,37 @@
-<div class="modal-dialog modal-dialog-centered modal-fullscreen-lg-down">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h1 class="modal-title" *ngIf="isShownInput">Article:   {{todo.artikelnummer}}</h1>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+<div class="modal-header">
+  <h4 class="modal-title">Article: {{todo.artikelnummer}}</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close()"></button>
+</div>
+<div class="modal-body">
+  <ng-template [ngIf]="type == 'catWaste'">
+    <div>
+      <h2>Weight:   {{todo.gewicht}} g</h2>
+      <h2>Size:   {{todo.metrage}}m&#178;</h2>
+      <h2>Type: Categorized Waste</h2>
+      <h2 *ngIf="article !=null">Color:   {{article.kleur}}</h2>
+      <h2>Category:   {{category}}</h2>
     </div>
-    <div class="modal-body">
-      <ng-template [ngIf]="type == 'catWaste'">
-        <div>
-          <h2 *ngIf="isShownInput">Weight:   {{todo.gewicht}} g</h2>
-          <h2 *ngIf="isShownInput">Size:   {{todo.metrage}}m&#178;</h2>
-          <h2 *ngIf="isShownInput">Type: Categorized Waste</h2>
-          <h2 *ngIf="isShownInput && article != null">Color:   {{article.kleur}}</h2>
-          <h2 *ngIf="isShownInput">Category:   {{category}}</h2>
-        </div>
-      </ng-template>
-      <ng-template [ngIf]="type == 'order'">
-        <div>
-          <h2 *ngIf="isShownInput">Weight:   {{todo.gewicht}} g</h2>
-          <h2 *ngIf="isShownInput">Size:   {{todo.metrage}}m&#178;</h2>
-          <h2 *ngIf="isShownInput">Type: Order</h2>
-          <h2 *ngIf="isShownInput && article != null">Color:   {{article.kleur}}</h2>
-        </div>
-      </ng-template>
-      <ng-template [ngIf]="type == 'storage'">
-        <div>
-          <h2 *ngIf="isShownInput">Weight:   {{todo.gewicht}} g</h2>
-          <h2 *ngIf="isShownInput">Size:   {{todo.metrage}}m&#178;</h2>
-          <h2 *ngIf="isShownInput">Type: Voorraad</h2>
-          <h2 *ngIf="isShownInput && article != null">Color:   {{article.kleur}}</h2>
-        </div>
-      </ng-template>
+  </ng-template>
+  <ng-template [ngIf]="type == 'order'">
+    <div>
+      <h2>Weight:   {{todo.gewicht}} g</h2>
+      <h2>Size:   {{todo.metrage}}m&#178;</h2>
+      <h2>Type: Order</h2>
+      <h2 *ngIf="article !=null">Color:   {{article.kleur}}</h2>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="close()">Close</button>
-      <button type="button" class="btn btn-secondary green" data-bs-dismiss="modal" id="modalDone" (click)="done()">Done
-      </button>
+  </ng-template>
+  <ng-template [ngIf]="type == 'storage'">
+    <div>
+      <h2>Weight:   {{todo.gewicht}} g</h2>
+      <h2>Size:   {{todo.metrage}}m&#178;</h2>
+      <h2>Type: Voorraad</h2>
+      <h2 *ngIf="article !=null">Color:   {{article.kleur}}</h2>
     </div>
-  </div>
+  </ng-template>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary green" data-bs-dismiss="modal" id="modalDone" (click)="done()">Done
+  </button>
 </div>
 
 

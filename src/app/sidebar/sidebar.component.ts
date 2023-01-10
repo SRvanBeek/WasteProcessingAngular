@@ -24,7 +24,9 @@ export class SidebarComponent {
       let decodedJwtJsonData = window.atob(jwtData);
       let decodedJwtData = JSON.parse(decodedJwtJsonData);
       let roles = decodedJwtData.roles;
-      this.isAdmin = roles[0] == 'ROLE_ADMIN';
+      if (roles.includes('ROLE_ADMIN')) {
+        this.isAdmin = true;
+      }
     }
   }
 
