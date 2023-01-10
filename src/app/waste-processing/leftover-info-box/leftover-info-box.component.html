@@ -55,5 +55,5 @@
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <app-label-preview [todo]="todo"> </app-label-preview>
+  <app-label-preview *ngIf="todo!=null" [todo]="todo" > </app-label-preview>
 </div>
