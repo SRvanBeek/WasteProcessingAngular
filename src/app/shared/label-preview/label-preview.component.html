@@ -1,9 +1,7 @@
-
-  <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
+  <div class="label-modal">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Preview Label</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body" #modal *ngIf="article!=null && todo!=null">
           <table style="border-collapse:
@@ -20,40 +18,16 @@
               <td class="xl65" style="width:53pt"></td>
               <td class="xl67" style="width:15pt"></td>
             </tr>
-
-
-            <tr style="mso-height-source:userset;height:15.0pt" height="20">
-              <td class="xl65" style="height:15.0pt" height="20"></td>
-              <td class="xl82">&nbsp;</td>
-              <td class="xl82">&nbsp;</td>
-              <td class="xl82">&nbsp;</td>
-              <td class="xl82">&nbsp;</td>
-              <td class="xl82">&nbsp;</td>
-              <td class="xl82">&nbsp;</td>
-              <td class="xl82">&nbsp;</td>
-              <td class="xl82">&nbsp;</td>
-            </tr>
-            <tr style="mso-height-source:userset;height:15.0pt" height="20">
-              <td class="xl65" style="height:15.0pt" height="20"></td>
-              <td class="xl68" style="border-top:none">&nbsp;</td>
-
     <span style="mso-ignore:vglayout;
    position:absolute;z-index:1;margin-left:25px;margin-top:16px;width:291px;
-   height:97px"><img src="/assets/images/logo_dark.png" alt='Logo of van der Lelie' width="300" height="101"></span><span style="mso-ignore:vglayout2">
-   <table>
-    <tbody><tr>
-     <td class="xl72" style="height:15.0pt;border-top:none;
-     border-left:none;width:65pt" height="20"></td>
-    </tr>
-   </tbody></table>
-   </span>
+   height:97px"><img src="/assets/images/logo_dark.png" alt='Logo of van der Lelie' width="300" height="101"></span><span style="mso-ignore:vglayout2"></span>
               <td class="xl72" style="border-top:none;border-left:none"></td>
               <td class="xl72" style="border-top:none;border-left:none"></td>
               <td class="xl72" style="border-top:none;border-left:none"></td>
               <td class="xl72" style="border-top:none;border-left:none"></td>
               <td class="xl72" style="border-top:none;border-left:none"></td>
               <td class="xl68" style="border-top:none;border-left:none">&nbsp;</td>
-            </tr>
+
             <tr style="mso-height-source:userset;height:3.0pt" height="4">
               <td class="xl65" style="height:3.0pt" height="4"></td>
               <td class="xl69" style="border-top:none"></td>
@@ -127,7 +101,7 @@
               <td class="xl65" style="height:15.0pt" height="20"></td>
               <td class="xl69" style="border-top:none"></td>
               <td class="xl66">Order:</td>
-              <td colspan="5" class="xl85">SSAAAA.BBBBB.CCC.DDD</td>
+              <td colspan="5" class="xl85">{{article.artikelnummer}}</td>
               <td class="xl70" style="border-top:none"></td>
             </tr>
             <tr style="mso-height-source:userset;height:15.0pt" height="20">
@@ -169,14 +143,14 @@
               <td class="xl69" style="border-top:none"></td>
               <td class="xl79">Artikel:</td>
               <td colspan="2" class="xl78">Accent</td>
-              <td class="xl79">Kleur:</td>
+              <td class="artikelkleur">Kleur: {{article.kleur}}</td>
               <td colspan="2" class="xl78"></td>
               <td class="xl70" style="border-top:none"></td>
             </tr>
             <tr style="mso-height-source:userset;height:6.0pt" height="8">
               <td class="xl65" style="height:6.0pt" height="8"></td>
               <td class="xl69" style="border-top:none"></td>
-              <td colspan="6" class="xl79">{{article.kleur}}</td>
+              <td colspan="6" class="xl79"></td>
               <td class="xl70" style="border-top:none"></td>
             </tr>
             <tr style="mso-height-source:userset;height:15.0pt" height="20">
@@ -237,8 +211,7 @@
         </div>
         <div class="modal-footer">
             <button (click)="makePdf()" type="button" class="btn btn-primary">Download Label</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('close button click')">Close</button>
         </div>
-      </div>
-    </div>
+  </div>
 

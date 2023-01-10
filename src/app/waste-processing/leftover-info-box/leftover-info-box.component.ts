@@ -11,7 +11,9 @@ import {CategoryModel} from "../../shared/_models/category.model";
 import {Waste} from "../../shared/_models/waste.model";
 import {Voorraad} from "../../shared/_models/voorraad";
 import {Order} from "../../shared/_models/order.model";
-
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {LabelPreviewComponent} from "../../shared/label-preview/label-preview.component";
+import {CustomerService} from "../../shared/_services/customer.service";
 
 
 /**
@@ -34,6 +36,8 @@ export class LeftoverInfoBoxComponent {
   constructor(private articleService: ArticleService, private leftoverService: LeftoverService,
               private orderService: OrdersService, private wasteService: WasteService,
               private categoryService: CategoryService, private voorraadService: VoorraadService,
+              private modalService: NgbModal,
+              private customerService: CustomerService,
               ) {
   }
 
@@ -100,11 +104,24 @@ export class LeftoverInfoBoxComponent {
         order.dateProcessed = Date.now();
         order.enabled = true;
         this.orderService.putOrder(order).subscribe();
-      })
-    }
+          this.customerService.getCustomerByOrderID(order.id).subscribe(value =>{
+            console.log(value)
+
+
+        });
+
+    })}
     let outputList = this.list.filter(leftover => {
       return leftover.id !== this.todo.id;
     })
     this.doneOutput.emit(outputList);
   }
+
+  openPreview() {
+    const labelModal = this.modalService.open(LabelPreviewComponent)
+    labelModal.componentInstance.todo=this.todo
+
+  }
+
+
 }

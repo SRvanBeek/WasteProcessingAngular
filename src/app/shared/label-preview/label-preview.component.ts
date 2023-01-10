@@ -4,6 +4,9 @@ import {Leftover} from "../_models/leftover.model";
 import {Article} from "../_models/article";
 import {ArticleService} from "../_services/article.service";
 import {LeftoverService} from "../_services/leftover.service";
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {CustomerService} from "../_services/customer.service";
+
 
 @Component({
   selector: 'app-label-preview',
@@ -15,8 +18,10 @@ export class LabelPreviewComponent implements OnInit {
 
   article: Article
   leftover: Leftover
+  customerService: CustomerService
 
-  constructor(private articleService: ArticleService, private leftoverService: LeftoverService)
+
+  constructor(private articleService: ArticleService, private leftoverService: LeftoverService, public activeModal: NgbActiveModal)
    {
   }
 
@@ -25,6 +30,12 @@ export class LabelPreviewComponent implements OnInit {
       .subscribe(value => {
         this.article = value.payload;
       });
+  }
+
+  setCustomer(id: number){
+    this.customerService.getCustomerByOrderID(id).subscribe(value =>{
+      console.log(value)
+  })
   }
 
   @ViewChild('modal', { static: false }) el!:ElementRef;
@@ -41,7 +52,6 @@ export class LabelPreviewComponent implements OnInit {
 }
 
   ngOnInit(): void {
-    console.log(this.todo)
     this.setArticle(this.todo.artikelnummer)
   }
 }
