@@ -1,7 +1,10 @@
-import {Component, HostListener, OnInit} from '@angular/core';
-import {CutWaste} from "../shared/_models/cut-waste.model";
-import {CutWasteService} from "../shared/_services/cut-waste.service";
-import {Toast} from "bootstrap";
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Leftover} from "../shared/_models/leftover.model";
+import {LeftoverService} from "../shared/_services/leftover.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ToDoModalComponent} from "../shared/_modals/to-do-modal/to-do-modal.component";
+import {ToastService} from "../shared/_services/toast.service";
+import {DashboardComponent} from "../shared/_modals/dashboard/dashboard.component";
 
 /**
  * @Author Dino Yang
@@ -13,18 +16,18 @@ import {Toast} from "bootstrap";
 })
 export class WasteProcessingComponent implements OnInit {
   selectedIndex: number = -1;
-  selectedTodo: CutWaste;
+  selectedTodo: Leftover;
   selectedType: string;
-  todoList: CutWaste[] = [];
-  showModal: boolean = false;
+  todoList: Leftover[] = [];
   screenLGSize: number = 992;
   isDesktop: boolean;
   showInfoBox: boolean = false;
   userID: number;
   filterList: string = 'all';
 
+  @ViewChild(DashboardComponent) child !: DashboardComponent;
 
-  constructor(private cutWasteService: CutWasteService) {
+  constructor(private leftoverService: LeftoverService, private modalService: NgbModal, private toastService: ToastService) {
   }
 
   @HostListener("window:resize", []) updateIsDesktop() {
@@ -36,9 +39,6 @@ export class WasteProcessingComponent implements OnInit {
     this.fillListAllTypes();
     this.updateIsDesktop();
     this.setUserID();
-  }
-
-  ngAfterViewInit() {
   }
 
   /**
@@ -55,24 +55,21 @@ export class WasteProcessingComponent implements OnInit {
   }
 
   /**
-   * todoDetail() sets selectedIndex, selectedTodo and selectedType with the right values after clicking on a cutWaste.
-   * @param cutWaste cutWaste that is selected.
+   * todoDetail() sets selectedIndex, selectedTodo and selectedType with the right values after clicking on a leftover.
+   * @param leftover leftover that is selected.
    * @param index in the list.
    */
-  todoDetail(cutWaste: CutWaste, index: number): void {
+  todoDetail(leftover: Leftover, index: number): void {
     this.selectedIndex = index;
-    this.selectedTodo = cutWaste;
-    this.selectedType = cutWaste.type;
+    this.selectedTodo = leftover;
+    this.selectedType = leftover.type;
     if (!this.isDesktop) {
-      this.showModal = true;
+      this.openMobileInfo();
     }
-    setTimeout(() => {
-      this.openToast();
-    }, 100);
   }
 
   /**
-   * setType() is used for sorting the list based on cutWaste type.
+   * setType() is used for sorting the list based on leftover type.
    * @param type of waste.
    */
   setType(type: string) {
@@ -84,18 +81,14 @@ export class WasteProcessingComponent implements OnInit {
     }
   }
 
-  setShown(value: boolean) {
-    this.showModal = value;
-  }
-
   /**
-   * fillListAllTypes() fills the todoList with every CutWaste in the db.
+   * fillListAllTypes() fills the todoList with every leftover in the db.
    */
   fillListAllTypes() {
-    this.cutWasteService.getAllCutWaste().subscribe({
+    this.leftoverService.getAllLeftovers().subscribe({
       next: value => {
         this.todoList = [];
-        for (let todo of value) {
+        for (let todo of value.payload) {
           if (!todo.processed) {
             this.todoList.push(todo);
           }
@@ -108,14 +101,14 @@ export class WasteProcessingComponent implements OnInit {
   }
 
   /**
-   * fillByType() fills the todoList with every CutWaste from a single type in the db.
+   * fillByType() fills the todoList with every leftover from a single type in the db.
    * @param type of waste
    */
-  fillByType(type: string) {
-    this.cutWasteService.getAllByType(type).subscribe({
+  fillByType(type: any) {
+    this.leftoverService.getAllByType(type).subscribe({
       next: value => {
         this.todoList = [];
-        for (let todo of value) {
+        for (let todo of value.payload) {
           if (!todo.processed) {
             this.todoList.push(todo);
           }
@@ -124,29 +117,27 @@ export class WasteProcessingComponent implements OnInit {
     })
   }
 
-  refresh(list: CutWaste[]) {
+  refresh(list: Leftover[]) {
     this.todoList = list;
     this.selectedIndex = -1;
   }
 
-  /**
-   * openToast() makes it so that when one clicks on the done button a Toast pops up on screen.
-   */
-  openToast() {
-    let toastTrigger;
-    if (this.isDesktop) {
-      toastTrigger = document.getElementById('done');
-    } else {
-      toastTrigger = document.getElementById('modalDone');
-    }
-    const toastLiveExample = document.getElementById('doneToast')
-    if (toastTrigger) {
-      toastTrigger.addEventListener('click', () => {
-        if (toastLiveExample != null) {
-          const toast = new Toast(toastLiveExample);
-          toast.show()
-        }
-      })
-    }
+  private openMobileInfo() {
+    const modalRef = this.modalService.open(ToDoModalComponent, {fullscreen: true});
+    console.log(this.userID)
+    modalRef.componentInstance.userId = this.userID;
+    modalRef.componentInstance.list = this.todoList;
+    modalRef.componentInstance.todo = this.selectedTodo;
+    modalRef.componentInstance.type = this.selectedType;
+    modalRef.result.then((data => {
+      if (data) {
+        this.refresh(data);
+        this.toastService.show('', "You've just processed a Leftover.\n Good Job!");
+      }
+    }))
+  }
+
+  refreshDetails() {
+    this.child.refresh()
   }
 }

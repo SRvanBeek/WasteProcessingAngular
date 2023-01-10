@@ -1,34 +1,9 @@
-<nav class="navbar navbar-dark navbar-expand-lg  noPadding" id="navBar" style="background-color: #4D4E53;">
+<nav class="navbar navbar-dark  noPadding" id="navBar" style="background-color: #C78283; height: 15vh">
   <div class="container-fluid">
-    <img class="navbar-brand logo" src="assets/white_logo.png" alt="Logo Van der Lelie"/>
-    <button class="navbar-toggler hamburgerBut" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#navbarOffcanvasLg"
-            aria-controls="navbarOffcanvasLg">
+    <img class="navbar-brand logo" src="../../assets/images/white_logo.png" alt="Logo Van der Lelie"/>
+    <button class="navbar-toggler hamburgerBut" type="button" (click)="open()">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="offcanvas offcanvas-end text-bg-dark " tabindex="-1" id="navbarOffcanvasLg"
-         aria-labelledby="navbarOffcanvasLgLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav  ms-auto">
-          <li [routerLinkActive]="['active']" class="nav-item">
-            <a class="nav-link" [routerLink]="['wasteProc']">
-              <span data-bs-target=".collapse.show" data-bs-toggle="collapse">Waste Processing</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" type="button" id="historyButton">History</a>
-          </li>
-          <li class="nav-item" *ngIf="isAdmin">
-            <a class="nav-link" type="button" id="adminButton">Admin Panel</a>
-          </li>
-          <li class="nav-item">
-            <a [routerLink]="['']" class="nav-link" (click)="logout()">Log Out</a>
-          </li>
-        </ul>
-      </div>
-    </div>
   </div>
 </nav>
+

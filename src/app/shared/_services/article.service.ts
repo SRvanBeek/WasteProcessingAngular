@@ -13,10 +13,10 @@ export class ArticleService {
   }
 
   getAllArticles(): Observable<Article[]> {
-    return this.http.get<Article[]>(environment.apiUrl + '/api/article');
+    return this.http.get<Article[]>(environment.apiUrl + '/api/articles');
   }
 
-  getOneArticle(id: string): Observable<Article> {
-    return this.http.get<Article>(environment.apiUrl + '/api/article/' + id);
+  getOneArticle(id: string): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/articles/' + id);
   }
 }

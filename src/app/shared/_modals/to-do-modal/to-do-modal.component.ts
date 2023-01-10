@@ -1,12 +1,16 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {CutWaste} from "../../_models/cut-waste.model";
+import {Component, Input, OnInit} from '@angular/core';
+import {Leftover} from "../../_models/leftover.model";
 import {ArticleService} from "../../_services/article.service";
 import {Article} from "../../_models/article";
-import {CutWasteService} from "../../_services/cut-waste.service";
+import {LeftoverService} from "../../_services/leftover.service";
 import {OrdersService} from "../../_services/orders.service";
 import {WasteService} from "../../_services/waste.service";
 import {CategoryService} from "../../_services/category.service";
 import {VoorraadService} from "../../_services/voorraad.service";
+import {Waste} from "../../_models/waste.model";
+import {Voorraad} from "../../_models/voorraad";
+import {Order} from "../../_models/order.model";
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 /**
  * @Author Dino Yang
@@ -16,47 +20,32 @@ import {VoorraadService} from "../../_services/voorraad.service";
   templateUrl: './to-do-modal.component.html',
   styleUrls: ['./to-do-modal.component.scss']
 })
-export class ToDoModalComponent {
-  @Input() list: CutWaste[];
-  @Input() todo: CutWaste;
+export class ToDoModalComponent implements OnInit {
+  @Input() list: Leftover[];
+  @Input() todo: Leftover;
   @Input() userId: number;
-  @Input() isShownInput: boolean;
-  @Output() isShownOutput = new EventEmitter<boolean>();
-  @Output() doneOutput = new EventEmitter<CutWaste[]>();
   @Input() type: string;
   article: Article;
   category: any;
 
-  constructor(private articleService: ArticleService, private cutWasteService: CutWasteService,
+  constructor(private articleService: ArticleService, private leftoverService: LeftoverService,
               private orderService: OrdersService, private wasteService: WasteService,
-              private categoryService: CategoryService, private voorraadService: VoorraadService) {
+              private categoryService: CategoryService, private voorraadService: VoorraadService, public activeModal: NgbActiveModal) {
   }
 
-  ngOnChanges() {
-    if (this.isShownInput) {
-      this.setArticle(this.todo.artikelnummer);
-      if (this.todo.type == 'catWaste') {
-        this.wasteService.getOneWasteByCutWasteID(this.todo.id).subscribe(waste => {
-          this.categoryService.getCategoryNameById(waste.categoryId).subscribe(categoryName => {
-            this.category = categoryName.name;
-          })
-        })
-      }
-    }
+  ngOnInit(): void {
+    this.setArticle(this.todo.artikelnummer);
   }
 
-  close() {
-    this.isShownOutput.emit(false);
-  }
 
   /**
-   * setArticle() sets this.article with the article that is connected to the selected cutWaste.
+   * setArticle() sets article with the article that is connected to the selected cutWaste.
    * @param id of the article
    */
   setArticle(id: string) {
     this.articleService.getOneArticle(id)
       .subscribe(value => {
-        this.article = value;
+        this.article = value.payload;
       });
   }
 
@@ -64,36 +53,39 @@ export class ToDoModalComponent {
    * done() sets the processed attribute of the selected cutWaste to true and updates the catWaste/storage/order with the right userId, date and enabled.
    */
   done() {
-    this.cutWasteService.getOneCutWaste(this.todo.id).subscribe(cutWaste => {
-      cutWaste.processed = true;
-      this.cutWasteService.putCutWaste(cutWaste).subscribe();
+    this.leftoverService.getOneLeftover(this.todo.id).subscribe(value => {
+      let leftover: Leftover = value.payload;
+      leftover.processed = true;
+      this.leftoverService.putLeftover(leftover).subscribe();
     })
     if (this.todo.type == 'catWaste') {
-      this.wasteService.getOneWasteByCutWasteID(this.todo.id).subscribe(waste => {
+      this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(value => {
+        let waste: Waste = value.payload;
         waste.userId = this.userId;
         waste.dateProcessed = Date.now();
         waste.enabled = true;
         this.wasteService.putWaste(waste).subscribe();
       });
     } else if (this.todo.type == 'storage') {
-      this.voorraadService.getOneVoorraadByCutWasteID(this.todo.id).subscribe(voorraad => {
+      this.voorraadService.getOneVoorraadByLeftoverID(this.todo.id).subscribe(value => {
+        let voorraad: Voorraad = value.payload;
         voorraad.userId = this.userId;
         voorraad.dateProcessed = Date.now();
         voorraad.enabled = true;
         this.voorraadService.putVoorraad(voorraad).subscribe();
       })
     } else {
-      this.orderService.getOrderByCutWasteID(this.todo.id).subscribe(order => {
+      this.orderService.getOrderByLeftoverID(this.todo.id).subscribe(value => {
+        let order: Order = value.payload;
         order.userId = this.userId;
         order.dateProcessed = Date.now();
         order.enabled = true;
         this.orderService.putOrder(order).subscribe();
       })
     }
-    let outputList = this.list.filter(cutWaste => {
-      return cutWaste.id !== this.todo.id;
+    let outputList = this.list.filter(leftover => {
+      return leftover.id !== this.todo.id;
     })
-    this.doneOutput.emit(outputList);
-    this.close();
+    this.activeModal.close(outputList);
   }
 }

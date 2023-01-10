@@ -1,0 +1,72 @@
+.mainBox {
+  background-color: white;
+}
+
+.header {
+  border-bottom: #DCDDE1 2px solid;
+
+  h1 {
+    margin: 1rem;
+  }
+}
+
+
+.content {
+  margin: 3rem 1rem;
+  height: 100%;
+}
+
+.first {
+  width: 50%;
+}
+
+.list > li > h2 {
+  margin-top: 1rem;
+}
+
+.list > li {
+  display: flex;
+  list-style: none;
+  border-bottom: 1px solid #DCDDE1;
+  width: 80%;
+}
+
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+
+.doneButton {
+  position: absolute;
+  right: 3rem;
+  bottom: 3rem;
+}
+
+.doneButton {
+  border-radius: 5px;
+  font-family: 'Maven Pro', sans-serif;
+  color: black;
+  padding: .5rem;
+  border: none;
+  background-color: #4BC8B6;
+  transition: .5s;
+  font-size: 2rem;
+}
+
+.doneButton:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+.doneButton:hover {
+  background-color: #3da294;
+}
+
+.doneButton:active {
+  background-color: #94d3a2;
+}

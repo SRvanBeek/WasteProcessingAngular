@@ -1,18 +1,13 @@
 <div class="wasteProc">
   <div class="todoComp" [ngClass]="isDesktop? 'desktop' : 'mobile'">
     <div class="topBar">
-      <h1>Amount of waste to go: {{todoList.length}}</h1>
-<!--      modal button-->
-
-      <!-- Modal -->
-      <div class="modal fade" id="wasteDetails" tabindex="-1" aria-labelledby="Waste Details" aria-hidden="true">
-        <app-dashboard></app-dashboard>
+      <div class="topBarTitle">
+        <h1 style="margin-left: 1rem">Processing</h1>
       </div>
-        <button type="button"  id="detailsButton" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#wasteDetails">
-          Details
-        </button>
+      <div class="topBarContent">
+        <h1 style=" margin-left: 1rem">Leftovers Remaining: {{todoList.length}}</h1>
         <div class="selector">
-          <p>Type:</p>
+          <h1>Type:</h1>
           <select class="form-select" aria-label="Select type" (change)="setType(typeSelection.value)" #typeSelection>
             <option value="all" selected>All</option>
             <option value="order">Orders</option>
@@ -20,20 +15,41 @@
             <option value="storage">Storage</option>
           </select>
         </div>
-
+      </div>
+      <div class="listIdentifiers">
+        <h1 style="width: 20%;margin-left: 1rem">ID</h1>
+        <h1 style="width: 40%">Article Number</h1>
+        <h1 style="width: 30%">Type</h1>
+      </div>
     </div>
     <div class="todoList">
-      <ul>
+      <ul class="list">
         <li class="toDoItem" *ngFor="let todo of todoList; let i = index">
           <div class="toDoButton">
-            <span *ngIf="!isDesktop" data-bs-toggle="modal" data-bs-target="#todoModal"
+            <span *ngIf="!isDesktop"
                   (click)="todoDetail(todo,i)" [class.active]="selectedIndex === i">
-              <ng-template [ngIf]="todo.type != 'catWaste'">id: {{todo.id}}, Type:  {{todo.type}}</ng-template>
-              <ng-template [ngIf]="todo.type == 'catWaste'">id: {{todo.id}}, Type:  categorized waste</ng-template>
+              <ng-template [ngIf]="todo.type != 'catWaste'">
+                <p style="width: 20%; margin-left: 1rem">{{todo.id}}</p>
+                <p style="width: 40%">{{todo.artikelnummer}}</p>
+                <p style="width: 30%">{{todo.type}}</p>
+              </ng-template>
+              <ng-template [ngIf]="todo.type == 'catWaste'">
+                <p style="width: 20%; margin-left: 1rem">{{todo.id}}</p>
+                <p style="width: 40%">{{todo.artikelnummer}}</p>
+                <p style="width: 30%">categorized waste</p>
+              </ng-template>
             </span>
             <span *ngIf="isDesktop" (click)="todoDetail(todo, i)" [class.active]="selectedIndex === i">
-              <ng-template [ngIf]="todo.type != 'catWaste'">id: {{todo.id}}, Type:  {{todo.type}}</ng-template>
-              <ng-template [ngIf]="todo.type == 'catWaste'">id: {{todo.id}}, Type:  categorized waste</ng-template>
+              <ng-template [ngIf]="todo.type != 'catWaste'">
+                <p style="width: 20%; margin-left: 1rem">{{todo.id}}</p>
+                <p style="width: 40%">{{todo.artikelnummer}}</p>
+                <p style="width: 30%">{{todo.type}}</p>
+              </ng-template>
+              <ng-template [ngIf]="todo.type == 'catWaste'">
+                <p style="width: 20%; margin-left: 1rem">{{todo.id}}</p>
+                <p style="width: 40%">{{todo.artikelnummer}}</p>
+                <p style="width: 30%">categorized waste</p>
+              </ng-template>
             </span>
           </div>
         </li>
@@ -41,31 +57,7 @@
     </div>
   </div>
   <div *ngIf="isDesktop" class="todoShow">
-    <app-cut-waste-info-box [list]="todoList" [todo]="selectedTodo" [userId]="userID"
-                            (doneOutput)="refresh($event)"></app-cut-waste-info-box>
-  </div>
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="todoModal" tabindex="-1" aria-labelledby="todoModel"
-       aria-hidden="true">
-    <app-to-do-modal [list]="todoList" [userId]="userID" [todo]="selectedTodo" [type]="selectedType"
-                     [isShownInput]="showModal"
-                     (isShownOutput)="setShown($event)" (doneOutput)="refresh($event)"></app-to-do-modal>
-  </div>
-
-  <!-- Toast-->
-  <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
-    <div id="doneToast" class="toast text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-header  text-bg-primary">
-        <strong class="me-auto">Alert</strong>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        You've just processed something!<br>
-        Good job!
-      </div>
-    </div>
+    <app-leftover-info-box [list]="todoList" [todo]="selectedTodo" [userId]="userID"
+                           (doneOutput)="refresh($event)"></app-leftover-info-box>
   </div>
 </div>
