@@ -43,8 +43,17 @@
           <h2 class="first">Color:</h2>
           <h2>{{article.kleur}}</h2>
         </li>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Preview Label</button>
       </ng-template>
+
     </ul>
     <button class="doneButton" id="done" (click)="done()">Done!</button>
+
+
+
   </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <app-label-preview [todo]="todo"> </app-label-preview>
 </div>

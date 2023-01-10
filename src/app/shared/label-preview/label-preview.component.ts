@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import jsPDF from 'jspdf';
-import { CutWaste } from 'src/app/waste-processing/_models/cut-waste.model';
+import {Leftover} from "../_models/leftover.model";
 
 @Component({
   selector: 'app-label-preview',
@@ -8,7 +8,7 @@ import { CutWaste } from 'src/app/waste-processing/_models/cut-waste.model';
   styleUrls: ['./label-preview.component.scss']
 })
 export class LabelPreviewComponent {
-  @Input() todo: CutWaste;
+  @Input() todo: Leftover;
 
   @ViewChild('modal', { static: false }) el!:ElementRef;
 
@@ -17,7 +17,7 @@ export class LabelPreviewComponent {
 
     pdf.html(this.el.nativeElement, {
       callback: (pdf) => {
-        pdf.save('label.pdf');
+        pdf.save('OrderLabel'+ '.pdf');
       }
   });
 }

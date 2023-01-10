@@ -35,7 +35,8 @@ import {SettingsModule} from "./settings/settings.module";
     NgbModule,
     FormsModule,
     UsersModule,
-    SettingsModule
+    SettingsModule,
+
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

@@ -12,6 +12,8 @@ import {Waste} from "../../shared/_models/waste.model";
 import {Voorraad} from "../../shared/_models/voorraad";
 import {Order} from "../../shared/_models/order.model";
 
+
+
 /**
  * @Author Dino Yang
  */
@@ -31,7 +33,8 @@ export class LeftoverInfoBoxComponent {
 
   constructor(private articleService: ArticleService, private leftoverService: LeftoverService,
               private orderService: OrdersService, private wasteService: WasteService,
-              private categoryService: CategoryService, private voorraadService: VoorraadService) {
+              private categoryService: CategoryService, private voorraadService: VoorraadService,
+              ) {
   }
 
   ngOnChanges() {

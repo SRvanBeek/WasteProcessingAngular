@@ -7,6 +7,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatButtonModule} from "@angular/material/button";
 import {ModalModule} from "../shared/_modals/modal.module";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     MatButtonModule,
     ModalModule,
     MatSidenavModule,
+    SharedModule,
   ],
   exports: [
     WasteProcessingComponent,
