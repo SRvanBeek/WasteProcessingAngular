@@ -44,12 +44,12 @@ export class WasteLabelComponent {
 
   @ViewChild('modal', {static: false}) el!: ElementRef;
 
-  makePdf() {
+  makePdfWaste() {
     let pdf = new jsPDF('p', 'pt', 'a4');
 
     pdf.html(this.el.nativeElement, {
       callback: (pdf) => {
-        pdf.save('OrderLabel' + '.pdf');
+        pdf.save('Categorized Waste ID' + this.todo.id + '.pdf');
 
       }
     });

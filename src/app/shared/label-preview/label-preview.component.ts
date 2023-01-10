@@ -41,16 +41,15 @@ export class LabelPreviewComponent implements OnInit {
   @ViewChild('modal', { static: false }) el!:ElementRef;
 
   makePdf() {
-    let pdf= new jsPDF('p', 'pt', 'a4');
+    let pdfLabel= new jsPDF('p', 'pt', 'a4');
 
-    pdf.html(this.el.nativeElement, {
+    pdfLabel.html(this.el.nativeElement, {
       callback: (pdf) => {
-        pdf.save('OrderLabel'+ '.pdf');
+        pdf.save('Order Label ID'+ this.todo.id + '.pdf');
 
       }
   });
 }
-
   ngOnInit(): void {
     this.setArticle(this.todo.artikelnummer)
   }
