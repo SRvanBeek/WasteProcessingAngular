@@ -14,6 +14,7 @@ import {Order} from "../../shared/_models/order.model";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {LabelPreviewComponent} from "../../shared/label-preview/label-preview.component";
 import {CustomerService} from "../../shared/_services/customer.service";
+import {WasteLabelComponent} from "../../shared/waste-label/waste-label.component";
 
 
 /**
@@ -122,6 +123,10 @@ export class LeftoverInfoBoxComponent {
     labelModal.componentInstance.todo=this.todo
 
   }
+  openPreviewWaste() {
+    const labelModalWaste = this.modalService.open(WasteLabelComponent)
+    labelModalWaste.componentInstance.todo=this.todo
 
+  }
 
 }
