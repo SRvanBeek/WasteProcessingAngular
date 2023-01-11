@@ -27,7 +27,7 @@
         </li>
         <button type="button" class="previewButton" (click)="openPreviewWaste()">Preview Label</button>
       </ng-template>
-      <ng-template [ngIf]="todo.type != 'catWaste'">
+      <ng-template [ngIf]="todo.type != 'catWaste' && todo.type != 'order'">
         <li>
           <h2 class="first">Weight:</h2>
           <h2>{{todo.gewicht}} g</h2>

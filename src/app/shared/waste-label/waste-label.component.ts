@@ -5,7 +5,7 @@ import {Article} from "../_models/article";
 import {ArticleService} from "../_services/article.service";
 import {LeftoverService} from "../_services/leftover.service";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {CustomerService} from "../_services/customer.service";
+
 
 @Component({
   selector: 'app-waste-label',
@@ -23,9 +23,6 @@ export class WasteLabelComponent {
 
   article: Article
   leftover: Leftover
-  customerService: CustomerService
-
-
   constructor(private articleService: ArticleService, private leftoverService: LeftoverService, public activeModal: NgbActiveModal) {
   }
 
@@ -34,12 +31,6 @@ export class WasteLabelComponent {
       .subscribe(value => {
         this.article = value.payload;
       });
-  }
-
-  setCustomer(id: number) {
-    this.customerService.getCustomerByOrderID(id).subscribe(value => {
-      console.log(value)
-    })
   }
 
   @ViewChild('modal', {static: false}) el!: ElementRef;

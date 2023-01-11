@@ -34,11 +34,12 @@ export class LeftoverInfoBoxComponent {
   type: string;
   category: any;
 
+
   constructor(private articleService: ArticleService, private leftoverService: LeftoverService,
               private orderService: OrdersService, private wasteService: WasteService,
               private categoryService: CategoryService, private voorraadService: VoorraadService,
-              private modalService: NgbModal,
-              private customerService: CustomerService,
+              private modalService: NgbModal, private customerService: CustomerService
+
               ) {
   }
 
@@ -105,7 +106,7 @@ export class LeftoverInfoBoxComponent {
         order.dateProcessed = Date.now();
         order.enabled = true;
         this.orderService.putOrder(order).subscribe();
-          this.customerService.getCustomerByOrderID(order.id).subscribe(value =>{
+          this.customerService.getCustomerByLeftoverID(order.id).subscribe(value =>{
             console.log(value)
 
 
@@ -121,8 +122,11 @@ export class LeftoverInfoBoxComponent {
   openPreview() {
     const labelModal = this.modalService.open(LabelPreviewComponent)
     labelModal.componentInstance.todo=this.todo
+    this.customerService.getCustomerByLeftoverID(this.todo.id).subscribe(value =>{
+      console.log(value)
 
-  }
+  })}
+
   openPreviewWaste() {
     const labelModalWaste = this.modalService.open(WasteLabelComponent)
     labelModalWaste.componentInstance.todo=this.todo

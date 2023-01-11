@@ -11,9 +11,8 @@ export class CustomerService {
   constructor(private http: HttpClient) {
   }
 
-  getCustomerByOrderID(id: number): Observable<any> {
+  getCustomerByLeftoverID(id: number): Observable<any> {
     return this.http.get<any>(environment.apiUrl + "/api/orders/customer/" + id)
-
   }
 }
 

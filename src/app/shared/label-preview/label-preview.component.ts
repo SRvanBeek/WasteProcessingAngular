@@ -6,6 +6,7 @@ import {ArticleService} from "../_services/article.service";
 import {LeftoverService} from "../_services/leftover.service";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {CustomerService} from "../_services/customer.service";
+import {Customer} from "../_models/customer.model";
 
 
 @Component({
@@ -15,27 +16,42 @@ import {CustomerService} from "../_services/customer.service";
 })
 export class LabelPreviewComponent implements OnInit {
   @Input() todo: Leftover;
+  @Input() customerOrder: Customer
 
   article: Article
   leftover: Leftover
-  customerService: CustomerService
 
+  customer: Customer
 
-  constructor(private articleService: ArticleService, private leftoverService: LeftoverService, public activeModal: NgbActiveModal)
+  loading: boolean = true;
+
+  constructor(private articleService: ArticleService, private leftoverService: LeftoverService, public activeModal: NgbActiveModal, private customerService: CustomerService)
    {
   }
+  ngOnInit(): void {
+    this.initLabel(this.todo.artikelnummer, this.todo.id)
 
-  setArticle(id: string) {
-    this.articleService.getOneArticle(id)
+  }
+  initLabel(articleNumber: string, leftOverID: number) {
+    this.articleService.getOneArticle(articleNumber)
       .subscribe(value => {
+        console.log(value)
         this.article = value.payload;
-      });
+      },
+          error => {},
+        () => {this.setCustomer(leftOverID)});
   }
 
-  setCustomer(id: number){
-    this.customerService.getCustomerByOrderID(id).subscribe(value =>{
+  setCustomer(leftOverID: number){
+    console.log(leftOverID)
+    this.customerService.getCustomerByLeftoverID(leftOverID).subscribe(value =>{
       console.log(value)
-  })
+      this.customer = value.payload
+      console.log(value)
+
+
+  }, error => {},
+      () => {this.loading=false;})
   }
 
   @ViewChild('modal', { static: false }) el!:ElementRef;
@@ -50,8 +66,4 @@ export class LabelPreviewComponent implements OnInit {
       }
   });
 }
-  ngOnInit(): void {
-    this.setArticle(this.todo.artikelnummer)
-  }
 }
-

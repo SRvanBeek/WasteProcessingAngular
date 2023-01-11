@@ -3,7 +3,7 @@
           <h1 class="modal-title fs-5" id="exampleModalLabel">Preview Label</h1>
           <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
         </div>
-        <div class="modal-body" #modal *ngIf="article!=null && todo!=null">
+        <div class="modal-body" #modal *ngIf="article!=null && todo!=null && !loading">
           <table style="border-collapse:
             collapse;table-layout:fixed;width:314pt">
             <tbody>
@@ -50,7 +50,7 @@
               <td class="xl65" style="height:18.0pt" height="24"></td>
               <td class="xl69" style="border-top:none"></td>
               <td class="xl66">Klant:</td>
-              <td colspan="5" class="xl78"></td>
+              <td colspan="5" class="xl78">{{customer.customerID}}</td>
               <td class="xl70" style="border-top:none"></td>
             </tr>
             <tr style="mso-height-source:userset;height:6.0pt" height="8">
@@ -63,22 +63,21 @@
               <td class="xl65" style="height:18.0pt" height="24"></td>
               <td class="xl69" style="border-top:none"></td>
               <td class="xl66">Afleveren:</td>
-              <td colspan="5" class="xl91">TestDebiteur</td>
+              <td colspan="5" class="xl91">{{customer.address}}</td>
               <td class="xl70" style="border-top:none"></td>
             </tr>
             <tr style="mso-height-source:userset;height:18.0pt" height="24">
               <td class="xl65" style="height:18.0pt" height="24"></td>
               <td class="xl69" style="border-top:none"></td>
               <td class="xl65"></td>
-              <td colspan="5" class="xl93">Gordijnstraat 99</td>
+              <td colspan="5" class="xl93">{{customer.postalCode}} {{customer.city}}</td>
               <td class="xl70" style="border-top:none"></td>
             </tr>
             <tr style="mso-height-source:userset;height:18.0pt" height="24">
               <td class="xl65" style="height:18.0pt" height="24"></td>
               <td class="xl69" style="border-top:none"></td>
               <td class="xl66"></td>
-              <td colspan="5" class="xl93">9999AA<span style="mso-spacerun:yes">&nbsp;
-   </span>Gordijnstad
+              <td colspan="5" class="xl93">{{customer.country}}<span style="mso-spacerun:yes">&nbsp;</span>
               </td>
               <td class="xl70" style="border-top:none"></td>
             </tr>
@@ -86,7 +85,7 @@
               <td class="xl65" style="height:18.0pt" height="24"></td>
               <td class="xl69" style="border-top:none"></td>
               <td class="xl75">&nbsp;</td>
-              <td colspan="5" class="xl89">België</td>
+              <td colspan="5" class="xl89"></td>
               <td class="xl70" style="border-top:none"></td>
             </tr>
             <tr style="mso-height-source:userset;height:6.0pt" height="8">
@@ -155,7 +154,7 @@
               <td class="xl65" style="height:15.0pt" height="20"></td>
               <td class="xl69" style="border-top:none"></td>
               <td class="xl79">Metrage:</td>
-              <td class="xl78">x</td>
+              <td class="xl78">{{todo.metrage}}</td>
               <td colspan="4" class="xl78">m</td>
               <td class="xl70" style="border-top:none"></td>
             </tr>
