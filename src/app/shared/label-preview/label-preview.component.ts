@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import jsPDF from 'jspdf';
 import {Leftover} from "../_models/leftover.model";
 import {Article} from "../_models/article";
@@ -7,6 +7,7 @@ import {LeftoverService} from "../_services/leftover.service";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {CustomerService} from "../_services/customer.service";
 import {Customer} from "../_models/customer.model";
+import getDocumentElement from "@popperjs/core/lib/dom-utils/getDocumentElement";
 
 
 @Component({
@@ -17,20 +18,15 @@ import {Customer} from "../_models/customer.model";
 export class LabelPreviewComponent implements OnInit {
   @Input() todo: Leftover;
   @Input() customerOrder: Customer
-
   article: Article
   leftover: Leftover
-
   customer: Customer
-
   loading: boolean = true;
-
   constructor(private articleService: ArticleService, private leftoverService: LeftoverService, public activeModal: NgbActiveModal, private customerService: CustomerService)
    {
   }
   ngOnInit(): void {
     this.initLabel(this.todo.artikelnummer, this.todo.id)
-
   }
   initLabel(articleNumber: string, leftOverID: number) {
     this.articleService.getOneArticle(articleNumber)
@@ -41,7 +37,6 @@ export class LabelPreviewComponent implements OnInit {
           error => {},
         () => {this.setCustomer(leftOverID)});
   }
-
   setCustomer(leftOverID: number){
     console.log(leftOverID)
     this.customerService.getCustomerByLeftoverID(leftOverID).subscribe(value =>{
@@ -62,8 +57,7 @@ export class LabelPreviewComponent implements OnInit {
     pdfLabel.html(this.el.nativeElement, {
       callback: (pdf) => {
         pdf.save('Order Label ID'+ this.todo.id + '.pdf');
-
-      }
+          }
   });
-}
+  }
 }

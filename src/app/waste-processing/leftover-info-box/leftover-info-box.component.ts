@@ -15,6 +15,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {LabelPreviewComponent} from "../../shared/label-preview/label-preview.component";
 import {CustomerService} from "../../shared/_services/customer.service";
 import {WasteLabelComponent} from "../../shared/waste-label/waste-label.component";
+import {start} from "@popperjs/core";
 
 
 /**
@@ -30,9 +31,12 @@ export class LeftoverInfoBoxComponent {
   @Input() list: Leftover[];
   @Input() todo: Leftover;
   @Output() doneOutput = new EventEmitter<Leftover[]>();
+  @Input() enabled = false;
   article: Article;
   type: string;
   category: any;
+
+
 
 
   constructor(private articleService: ArticleService, private leftoverService: LeftoverService,
@@ -117,6 +121,8 @@ export class LeftoverInfoBoxComponent {
       return leftover.id !== this.todo.id;
     })
     this.doneOutput.emit(outputList);
+
+
   }
 
   openPreview() {
@@ -125,6 +131,7 @@ export class LeftoverInfoBoxComponent {
     this.customerService.getCustomerByLeftoverID(this.todo.id).subscribe(value =>{
       console.log(value)
 
+
   })}
 
   openPreviewWaste() {
@@ -132,5 +139,6 @@ export class LeftoverInfoBoxComponent {
     labelModalWaste.componentInstance.todo=this.todo
 
   }
+
 
 }
