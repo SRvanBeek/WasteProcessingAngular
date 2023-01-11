@@ -11,6 +11,10 @@ import {Waste} from "../../_models/waste.model";
 import {Voorraad} from "../../_models/voorraad";
 import {Order} from "../../_models/order.model";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {LabelPreviewComponent} from "../../label-preview/label-preview.component";
+import {CustomerService} from "../../_services/customer.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {WasteLabelComponent} from "../../waste-label/waste-label.component";
 
 /**
  * @Author Dino Yang
@@ -30,7 +34,7 @@ export class ToDoModalComponent implements OnInit {
 
   constructor(private articleService: ArticleService, private leftoverService: LeftoverService,
               private orderService: OrdersService, private wasteService: WasteService,
-              private categoryService: CategoryService, private voorraadService: VoorraadService, public activeModal: NgbActiveModal) {
+              private categoryService: CategoryService, private voorraadService: VoorraadService, public activeModal: NgbActiveModal, private customerService: CustomerService, public modalService: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -87,5 +91,19 @@ export class ToDoModalComponent implements OnInit {
       return leftover.id !== this.todo.id;
     })
     this.activeModal.close(outputList);
+  }
+
+  openPreview() {
+    const labelModal = this.modalService.open(LabelPreviewComponent)
+    labelModal.componentInstance.todo=this.todo
+    this.customerService.getCustomerByLeftoverID(this.todo.id).subscribe(value =>{
+      console.log(value)
+
+    })}
+
+  openPreviewWaste() {
+    const labelModalWaste = this.modalService.open(WasteLabelComponent)
+    labelModalWaste.componentInstance.todo=this.todo
+
   }
 }

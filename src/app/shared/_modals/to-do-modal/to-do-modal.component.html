@@ -10,6 +10,7 @@
       <h2>Type: Categorized Waste</h2>
       <h2 *ngIf="article !=null">Color:   {{article.kleur}}</h2>
       <h2>Category:   {{category}}</h2>
+      <button type="button" class="previewButton" (click)="openPreviewWaste()">Preview Label</button>
     </div>
   </ng-template>
   <ng-template [ngIf]="type == 'order'">
@@ -18,6 +19,7 @@
       <h2>Size:   {{todo.metrage}}m&#178;</h2>
       <h2>Type: Order</h2>
       <h2 *ngIf="article !=null">Color:   {{article.kleur}}</h2>
+      <button type="button" class="previewButton" (click)="openPreview()">Preview Label</button>
     </div>
   </ng-template>
   <ng-template [ngIf]="type == 'storage'">
