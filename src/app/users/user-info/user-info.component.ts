@@ -14,19 +14,32 @@ import {ToastService} from "../../shared/_services/toast.service";
 export class UserInfoComponent implements OnInit {
   @Input() user: User;
   isUserAdmin: boolean = false;
+  isSuperAdmin: boolean = false;
 
   constructor(private modelService: NgbModal, private userService: UserService, private toastService: ToastService) {
 
   }
 
   ngOnInit(): void {
-
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.user != null) {
       this.setIsUserAdmin();
+      this.setIsSuperAdmin();
     }
+  }
+
+  setIsSuperAdmin() {
+    this.userService.getRoles(this.user.username).subscribe({
+      next: roles => {
+        if (roles.filter((e: { name: string; }) => e.name === 'ROLE_SUPERADMIN').length > 0) {
+          this.isSuperAdmin = true;
+        } else {
+          this.isSuperAdmin = false;
+        }
+      }
+    });
   }
 
   setIsUserAdmin() {
