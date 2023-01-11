@@ -20,7 +20,7 @@
   </div>
   <div class="buttons">
     <button *ngIf="!isUserAdmin" class="pwdButton" (click)="openChangePass()">Change password</button>
-    <button [ngClass]="user.enabled ? 'disableBtn':'enableBtn' "
+    <button *ngIf="!isSuperAdmin" [ngClass]="user.enabled ? 'disableBtn':'enableBtn' "
             (click)="openConfirm()">{{user.enabled ? 'Disable' : 'Enable'}}</button>
   </div>
 </div>
