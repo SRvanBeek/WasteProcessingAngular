@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
@@ -10,16 +9,23 @@ import {SharedModule} from "./shared/shared.module";
 import {HeaderModule} from "./header/header.module";
 import {SidebarModule} from "./sidebar/sidebar.module";
 import {MatSidenavModule} from "@angular/material/sidenav";
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {FormsModule} from "@angular/forms";
 import {UsersModule} from "./users/users.module";
 import {SettingsModule} from "./settings/settings.module";
+import {FormsModule} from "@angular/forms";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {BrowserModule} from "@angular/platform-browser";
+import { HistoryComponent } from './history/history.component';
+import { HistoryItemComponent } from './history/history-item/history-item.component';
+import { HistoryOffcanvasComponent } from './history/history-offcanvas/history-offcanvas.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HistoryComponent,
+    HistoryItemComponent,
+    HistoryOffcanvasComponent
   ],
   imports: [
     BrowserModule,
