@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import jsPDF from 'jspdf';
 import {Leftover} from "../_models/leftover.model";
 import {Article} from "../_models/article";
@@ -23,10 +23,12 @@ export class WasteLabelComponent {
 })
   @Input() todo: Leftover;
   @Input() category: string;
+  public downloaded$: EventEmitter<boolean>;
 
   article: Article
   leftover: Leftover
   constructor(private articleService: ArticleService, private leftoverService: LeftoverService, public activeModal: NgbActiveModal) {
+    this.downloaded$ = new EventEmitter<boolean>;
   }
 
   setArticle(id: string) {
@@ -44,7 +46,7 @@ export class WasteLabelComponent {
     pdf.html(this.el.nativeElement, {
       callback: (pdf) => {
         pdf.save('Categorized Waste ID' + this.todo.id + '.pdf');
-
+        this.downloaded$.emit(true)
       }
     });
   }

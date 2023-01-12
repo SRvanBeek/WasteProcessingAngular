@@ -35,6 +35,7 @@ export class LeftoverInfoBoxComponent {
   article: Article;
   type: string;
   category: any;
+  downloaded: boolean;
 
 
 
@@ -138,6 +139,12 @@ export class LeftoverInfoBoxComponent {
     const labelModalWaste = this.modalService.open(WasteLabelComponent)
     labelModalWaste.componentInstance.todo=this.todo;
     labelModalWaste.componentInstance.category=this.category;
+    labelModalWaste.componentInstance.downloaded$
+      .subscribe({
+        next: (value: boolean) => {
+          console.log(value)
+          this.downloaded = value}
+      })
 
   }
 
