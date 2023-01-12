@@ -15,6 +15,7 @@ import {LabelPreviewComponent} from "../../label-preview/label-preview.component
 import {CustomerService} from "../../_services/customer.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {WasteLabelComponent} from "../../waste-label/waste-label.component";
+import {CategoryModel} from "../../_models/category.model";
 
 /**
  * @Author Dino Yang
@@ -43,6 +44,8 @@ export class ToDoModalComponent implements OnInit {
     if (this.todo.type == 'storage')
       this.downloaded = true;
     this.setArticle(this.todo.artikelnummer);
+    this.checkcategory()
+
 
   }
 
@@ -55,7 +58,19 @@ export class ToDoModalComponent implements OnInit {
     this.articleService.getOneArticle(id)
       .subscribe(value => {
         this.article = value.payload;
-      });
+            })
+  }
+
+  checkcategory() {
+    if (this.type === "catWaste") {
+      this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(value => {
+        let waste: Waste = value.payload;
+        this.categoryService.getCategoryNameById(waste.categoryId).subscribe(value => {
+          let category: CategoryModel = value.payload;
+          this.category = category.name;
+        })
+      })
+    }
   }
 
   /**
