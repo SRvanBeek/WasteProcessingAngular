@@ -136,7 +136,8 @@ export class LeftoverInfoBoxComponent {
 
   openPreviewWaste() {
     const labelModalWaste = this.modalService.open(WasteLabelComponent)
-    labelModalWaste.componentInstance.todo=this.todo
+    labelModalWaste.componentInstance.todo=this.todo;
+    labelModalWaste.componentInstance.category=this.category;
 
   }
 

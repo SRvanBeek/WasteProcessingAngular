@@ -5,7 +5,8 @@ import {Article} from "../_models/article";
 import {ArticleService} from "../_services/article.service";
 import {LeftoverService} from "../_services/leftover.service";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import{CategoryService} from "../_services/category.service";
+import {WasteService} from "../_services/waste.service";
+import {Waste} from "../_models/waste.model";
 
 
 @Component({
@@ -21,6 +22,7 @@ export class WasteLabelComponent {
   styleUrls: ['./label-preview.component.scss']
 })
   @Input() todo: Leftover;
+  @Input() category: string;
 
   article: Article
   leftover: Leftover
