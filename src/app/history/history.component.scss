@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
+  text-align: center;
   h1 {
     font-size: 1rem;
   }
@@ -13,7 +14,7 @@
 }
 .dropdownbar {
   margin-left: 30%;
-  width: 7rem;
+  width: 10rem;
 }
 .disableButton {
   width: 5rem;

@@ -1,10 +1,8 @@
 <li *ngIf="!loading" >
 
   <div class="row rowborder">
-    <div class="test">
-      <mat-checkbox></mat-checkbox>
-    </div>
-    <div class="row" (click)="openOffcanvas()">
+    <mat-checkbox class="col-sm-2"></mat-checkbox>
+    <div class="row col-sm-10"  (click)="openOffcanvas()">
     <div class="col-sm-2">{{leftover.artikelnummer}}</div>
     <div class="col-sm-2">{{customerName}}</div>
     <div class="col-sm-2">{{leftover.type}}</div>

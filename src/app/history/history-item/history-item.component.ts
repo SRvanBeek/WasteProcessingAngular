@@ -3,7 +3,6 @@ import {Leftover} from "../../shared/_models/leftover.model";
 import {OrdersService} from "../../shared/_services/orders.service";
 import {WasteService} from "../../shared/_services/waste.service";
 import {VoorraadService} from "../../shared/_services/voorraad.service";
-import {User} from "../../shared/_models/user";
 import {UserService} from "../../shared/_services/user.service";
 import {NgbOffcanvas} from "@ng-bootstrap/ng-bootstrap";
 import {HistoryOffcanvasComponent} from "../history-offcanvas/history-offcanvas.component";
@@ -22,15 +21,15 @@ export class HistoryItemComponent implements onInit {
   loading: boolean = true;
   employeeName: string;
   customerName: string;
-
   historyObject: any;
+
 
   constructor(private ordersService: OrdersService,
               private wasteService: WasteService,
               private voorraadService: VoorraadService,
               private userService: UserService,
               private offcanvasService: NgbOffcanvas,
-              private articleService: ArticleService) {
+              private articleService: ArticleService,) {
   }
 
 
@@ -68,7 +67,6 @@ export class HistoryItemComponent implements onInit {
   }
 
   getUser() {
-    console.log(this.historyObject)
     this.userService.getUsernameById(this.historyObject.userId)
       .subscribe({
         next: response => {
@@ -79,8 +77,7 @@ export class HistoryItemComponent implements onInit {
   }
 
   getCustomer(){
-    console.log(this.historyObject)
-    this.articleService.getCustomerByArticle(this.historyObject.articleNumber).subscribe({
+    this.articleService.getCustomerByArticle(this.leftover.artikelnummer).subscribe({
       next: response => {
         this.customerName = response.message;
         this.loading = false
@@ -92,5 +89,9 @@ export class HistoryItemComponent implements onInit {
     const offCanvas =  this.offcanvasService.open(HistoryOffcanvasComponent, {position: 'end'});
     offCanvas.componentInstance.historyObject = this.historyObject;
     offCanvas.componentInstance.articleNumber = this.leftover.artikelnummer;
+
   }
+
+
+
 }

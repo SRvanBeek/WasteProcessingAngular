@@ -19,6 +19,7 @@ import { HistoryComponent } from './history/history.component';
 import { HistoryItemComponent } from './history/history-item/history-item.component';
 import { HistoryOffcanvasComponent } from './history/history-offcanvas/history-offcanvas.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { HistorymodalComponent } from './history/historymodal/historymodal.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     AppComponent,
     HistoryComponent,
     HistoryItemComponent,
-    HistoryOffcanvasComponent
+    HistoryOffcanvasComponent,
+    HistorymodalComponent
   ],
     imports: [
         BrowserModule,

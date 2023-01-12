@@ -2,18 +2,18 @@
 <h2>History</h2>
 
 <div class="row filterheader">
-  <select class="form-select dropdownbar" aria-label="Select type"  #typeSelection>
+  <select class="form-select dropdownbar" aria-label="Select type" (change)="getType(typeSelection.value)" #typeSelection>
     <option value="all" selected>All</option>
-    <option value="order">Order</option>
+    <option value="order">Orders</option>
     <option value="catWaste">catWaste</option>
     <option value="storage">Storage</option>
   </select>
   <button class="disableButton" id="done" >Disable</button>
-  <input class="searchbar" type="text" placeholder="Search...">
+  <input class="searchbar" type="text" name="search" [(ngModel)]="searchText" placeholder="Search...">
 
 </div>
-<div class="row size">
-  <div class="listIdentifiers">
+<div class="row size col-sm-10">
+  <div class="listIdentifiers ">
     <h1 style="width: 20%;margin-left: 1rem"></h1>
     <h1 style="width: 40%">Article Number</h1>
     <h1 style="width: 30%">Customer</h1>
@@ -23,7 +23,7 @@
     <h1 style="width: 30%">Date</h1>
   </div>
 
-  <ul *ngFor="let leftover of leftovers">
+  <ul *ngFor="let leftover of leftovers | filter:searchText">
     <app-history-item [leftover]="leftover"></app-history-item>
   </ul>
 </div>
