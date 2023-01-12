@@ -7,6 +7,7 @@ import {User} from "../../shared/_models/user";
 import {UserService} from "../../shared/_services/user.service";
 import {NgbOffcanvas} from "@ng-bootstrap/ng-bootstrap";
 import {HistoryOffcanvasComponent} from "../history-offcanvas/history-offcanvas.component";
+import {ArticleService} from "../../shared/_services/article.service";
 
 interface onInit {
 }
@@ -20,6 +21,7 @@ export class HistoryItemComponent implements onInit {
   @Input() leftover: Leftover
   loading: boolean = true;
   employeeName: string;
+  customerName: string;
 
   historyObject: any;
 
@@ -27,7 +29,8 @@ export class HistoryItemComponent implements onInit {
               private wasteService: WasteService,
               private voorraadService: VoorraadService,
               private userService: UserService,
-              private offcanvasService: NgbOffcanvas) {
+              private offcanvasService: NgbOffcanvas,
+              private articleService: ArticleService) {
   }
 
 
@@ -38,6 +41,7 @@ export class HistoryItemComponent implements onInit {
           next: response => {
             this.historyObject = response.payload;
             this.getUser();
+            this.getCustomer();
           }
         })
     } else if (this.leftover.type === 'catWaste') {
@@ -46,6 +50,7 @@ export class HistoryItemComponent implements onInit {
           next: response => {
             this.historyObject = response.payload;
             this.getUser();
+            this.getCustomer();
           }
         })
     } else if (this.leftover.type === 'storage') {
@@ -54,6 +59,7 @@ export class HistoryItemComponent implements onInit {
           next: response => {
             this.historyObject = response.payload;
             this.getUser();
+            this.getCustomer();
           }
         })
     } else {
@@ -70,6 +76,16 @@ export class HistoryItemComponent implements onInit {
           this.loading = false
         }
       })
+  }
+
+  getCustomer(){
+    console.log(this.historyObject)
+    this.articleService.getCustomerByArticle(this.historyObject.articleNumber).subscribe({
+      next: response => {
+        this.customerName = response.message;
+        this.loading = false
+      }
+    })
   }
 
   openOffcanvas() {

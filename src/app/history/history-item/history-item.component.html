@@ -1,10 +1,16 @@
-<li *ngIf="!loading" (click)="openOffcanvas()">
-  <div class="row">
+<li *ngIf="!loading" >
+
+  <div class="row rowborder">
+    <div class="test">
+      <mat-checkbox></mat-checkbox>
+    </div>
+    <div class="row" (click)="openOffcanvas()">
     <div class="col-sm-2">{{leftover.artikelnummer}}</div>
-    <div class="col-sm-2">{{leftover.id}}</div>
+    <div class="col-sm-2">{{customerName}}</div>
     <div class="col-sm-2">{{leftover.type}}</div>
     <div class="col-sm-2">{{employeeName}}</div>
     <div class="col-sm-2">{{leftover.metrage}}</div>
     <div class="col-sm-2">{{historyObject.dateProcessed | date:'short'}} </div>
+    </div>
   </div>
 </li>

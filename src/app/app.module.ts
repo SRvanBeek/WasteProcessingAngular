@@ -18,6 +18,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import { HistoryComponent } from './history/history.component';
 import { HistoryItemComponent } from './history/history-item/history-item.component';
 import { HistoryOffcanvasComponent } from './history/history-offcanvas/history-offcanvas.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -27,22 +28,23 @@ import { HistoryOffcanvasComponent } from './history/history-offcanvas/history-o
     HistoryItemComponent,
     HistoryOffcanvasComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    LoginModule,
-    WasteProcessingModule,
-    SharedModule,
-    HeaderModule,
-    SidebarModule,
-    MatSidenavModule,
-    BrowserAnimationsModule,
-    NgbModule,
-    FormsModule,
-    UsersModule,
-    SettingsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        LoginModule,
+        WasteProcessingModule,
+        SharedModule,
+        HeaderModule,
+        SidebarModule,
+        MatSidenavModule,
+        BrowserAnimationsModule,
+        NgbModule,
+        FormsModule,
+        UsersModule,
+        SettingsModule,
+        MatCheckboxModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
   ],
