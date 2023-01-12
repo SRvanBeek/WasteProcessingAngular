@@ -50,6 +50,7 @@ export class LeftoverInfoBoxComponent {
 
   ngOnChanges() {
     if (this.todo != null) {
+      this.downloaded = false
       if (this.todo.type == 'catWaste') {
         this.type = 'Categorized Waste'
         this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(value => {
@@ -63,6 +64,7 @@ export class LeftoverInfoBoxComponent {
         this.type = 'Order';
       } else {
         this.type = 'Storage';
+        this.downloaded = true
       }
       this.setArticle(this.todo.artikelnummer);
     }
@@ -116,7 +118,6 @@ export class LeftoverInfoBoxComponent {
 
 
         });
-
     })}
     let outputList = this.list.filter(leftover => {
       return leftover.id !== this.todo.id;
@@ -130,10 +131,13 @@ export class LeftoverInfoBoxComponent {
     const labelModal = this.modalService.open(LabelPreviewComponent)
     labelModal.componentInstance.todo=this.todo
     this.customerService.getCustomerByLeftoverID(this.todo.id).subscribe(value =>{
-      console.log(value)
-
-
-  })}
+    })
+    labelModal.componentInstance.downloaded$
+      .subscribe({
+        next: (value: boolean) => {
+          console.log(value)
+          this.downloaded = value}
+      })}
 
   openPreviewWaste() {
     const labelModalWaste = this.modalService.open(WasteLabelComponent)

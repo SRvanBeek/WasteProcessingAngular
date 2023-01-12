@@ -32,7 +32,7 @@
   </ng-template>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary green" data-bs-dismiss="modal" id="modalDone" (click)="done()" >Done
+  <button type="button" [disabled]="!downloaded" class="btn btn-secondary green" data-bs-dismiss="modal" id="modalDone" (click)="done()" >Done
   </button>
 </div>
 

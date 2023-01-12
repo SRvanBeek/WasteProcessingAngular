@@ -65,10 +65,7 @@
         <button type="button" class="previewButton" (click)="openPreview()">Preview Label</button>
       </ng-template>
     </ul>
-    <button class="doneButton" id="done" (click)="done()" >Done!</button>
-
-
-
+    <button  [disabled]="!downloaded" class="doneButton" id="done" (click)="done()" >Done!</button>
   </div>
 </div>
 

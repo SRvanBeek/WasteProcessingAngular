@@ -31,6 +31,7 @@ export class ToDoModalComponent implements OnInit {
   @Input() type: string;
   article: Article;
   category: any;
+  downloaded: boolean;
 
   constructor(private articleService: ArticleService, private leftoverService: LeftoverService,
               private orderService: OrdersService, private wasteService: WasteService,
@@ -38,7 +39,11 @@ export class ToDoModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.downloaded = false
+    if (this.todo.type == 'storage')
+      this.downloaded = true;
     this.setArticle(this.todo.artikelnummer);
+
   }
 
 
@@ -97,13 +102,25 @@ export class ToDoModalComponent implements OnInit {
     const labelModal = this.modalService.open(LabelPreviewComponent)
     labelModal.componentInstance.todo=this.todo
     this.customerService.getCustomerByLeftoverID(this.todo.id).subscribe(value =>{
-      console.log(value)
+    })
+    labelModal.componentInstance.downloaded$
+      .subscribe({
+        next: (value: boolean) => {
+          console.log(value)
+          this.downloaded = value}
+      })}
 
-    })}
-
-  openPreviewWaste() {
+  openPreviewWaste()
+    {
     const labelModalWaste = this.modalService.open(WasteLabelComponent)
     labelModalWaste.componentInstance.todo=this.todo
+      labelModalWaste.componentInstance.category=this.category;
+      labelModalWaste.componentInstance.downloaded$
+        .subscribe({
+          next: (value: boolean) => {
+            console.log(value)
+            this.downloaded = value}
+        })
 
   }
 }

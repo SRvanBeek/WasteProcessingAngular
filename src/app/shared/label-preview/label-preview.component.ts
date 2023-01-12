@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, ViewChild} from '@angular/core';
 import jsPDF from 'jspdf';
 import {Leftover} from "../_models/leftover.model";
 import {Article} from "../_models/article";
@@ -7,8 +7,6 @@ import {LeftoverService} from "../_services/leftover.service";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {CustomerService} from "../_services/customer.service";
 import {Customer} from "../_models/customer.model";
-import getDocumentElement from "@popperjs/core/lib/dom-utils/getDocumentElement";
-
 
 @Component({
   selector: 'app-label-preview',
@@ -22,12 +20,16 @@ export class LabelPreviewComponent implements OnInit {
   leftover: Leftover
   customer: Customer
   loading: boolean = true;
+  public downloaded$: EventEmitter<boolean>;
   constructor(private articleService: ArticleService, private leftoverService: LeftoverService, public activeModal: NgbActiveModal, private customerService: CustomerService)
    {
+     this.downloaded$ = new EventEmitter<boolean>()
   }
+
   ngOnInit(): void {
     this.initLabel(this.todo.artikelnummer, this.todo.id)
   }
+
   initLabel(articleNumber: string, leftOverID: number) {
     this.articleService.getOneArticle(articleNumber)
       .subscribe(value => {
@@ -37,18 +39,14 @@ export class LabelPreviewComponent implements OnInit {
           error => {},
         () => {this.setCustomer(leftOverID)});
   }
+
   setCustomer(leftOverID: number){
     console.log(leftOverID)
     this.customerService.getCustomerByLeftoverID(leftOverID).subscribe(value =>{
-      console.log(value)
       this.customer = value.payload
-      console.log(value)
-
-
   }, error => {},
       () => {this.loading=false;})
   }
-
   @ViewChild('modal', { static: false }) el!:ElementRef;
 
   makePdf() {
@@ -56,7 +54,8 @@ export class LabelPreviewComponent implements OnInit {
 
     pdfLabel.html(this.el.nativeElement, {
       callback: (pdf) => {
-        pdf.save('Order Label ID'+ this.todo.id + '.pdf');
+        pdf.save('Order Label ID'+ this.todo.id + '.pdf')
+        this.downloaded$.emit(true);
           }
   });
   }
