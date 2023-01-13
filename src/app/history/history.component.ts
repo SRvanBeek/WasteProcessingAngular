@@ -12,12 +12,17 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class HistoryComponent implements OnInit {
   searchText: any;
+  searchList: string[] = [];
   leftovers: Leftover[] = [];
   filterList: string = 'all';
 
   constructor(private leftoverService: LeftoverService, public modalService: NgbModal) {
+
   }
 
+  /**
+   * this function gets all the leftovers from the database
+   */
   ngOnInit() {
     this.leftoverService.getAllLeftoversProcessed(true)
       .subscribe({next: value => {
@@ -25,9 +30,15 @@ export class HistoryComponent implements OnInit {
 
         }})
   }
+
+  /**
+   * this function checks what is selected in the dropdown menu
+   * and than calls the fillListAllTypes function if all is chosen
+   * or the fillByType if something else is chosen
+   * @param type is the selected tab in the dropdownmenu
+   */
   getType(type: string) {
     this.filterList = type;
-    console.log(type)
     if (type == 'all') {
       this.fillListAllTypes()
     } else {
@@ -36,7 +47,7 @@ export class HistoryComponent implements OnInit {
   }
 
   /**
-   * fillListAllTypes() fills the todoList with every leftover in the db.
+   * fillListAllTypes() fills the leftovers[] with every leftover in the db.
    */
   fillListAllTypes() {
     this.leftoverService.getAllLeftovers().subscribe({
@@ -55,8 +66,8 @@ export class HistoryComponent implements OnInit {
   }
 
   /**
-   * fillByType() fills the todoList with every leftover from a single type in the db.
-   * @param type of waste
+   * fillByType() fills the leftoverList with every leftover from a single type in the db.
+   * @param type of Leftover
    */
   fillByType(type: any) {
     this.leftoverService.getAllByType(type).subscribe({
@@ -70,7 +81,5 @@ export class HistoryComponent implements OnInit {
       }
     })
   }
-  OpenModal(){
-    this.modalService.open(HistorymodalComponent);
-  }
+
 }

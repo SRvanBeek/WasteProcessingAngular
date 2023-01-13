@@ -21,7 +21,10 @@ export class HistoryOffcanvasComponent {
     constructor(private articleService: ArticleService, public activeOffcanvas: NgbActiveOffcanvas, private leftoverService: LeftoverService, private userService: UserService) {
     }
 
-    ngOnInit() {
+  /**
+   * this function gets the extra information that is needed to display.
+   */
+  ngOnInit() {
       this.articleService.getOneArticle(this.articleNumber)
         .subscribe({next: response => {
           this.article = response.payload;

@@ -21,7 +21,9 @@ export class HistorymodalComponent implements OnInit{
 
   constructor(private articleService: ArticleService, public activeModal: NgbActiveModal, private leftoverService: LeftoverService, private userService: UserService, public ngbModal: NgbModal) {
   }
-
+  /**
+   * this function gets the extra information that is needed to display.
+   */
   ngOnInit() {
     this.articleService.getOneArticle(this.articleNumber)
       .subscribe({next: response => {
