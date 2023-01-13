@@ -8,7 +8,9 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {WasteService} from "../_services/waste.service";
 import {Waste} from "../_models/waste.model";
 
-
+/**
+ * @Author Roy van Delft
+ */
 @Component({
   selector: 'app-waste-label',
   templateUrl: './waste-label.component.html',
@@ -31,6 +33,10 @@ export class WasteLabelComponent {
     this.downloaded$ = new EventEmitter<boolean>;
   }
 
+  /**
+   * Sets the current article to be fetched, based on the article ID
+   * @param id
+   */
   setArticle(id: string) {
     this.articleService.getOneArticle(id)
       .subscribe(value => {
@@ -40,6 +46,10 @@ export class WasteLabelComponent {
 
   @ViewChild('modal', {static: false}) el!: ElementRef;
 
+  /**
+   * Generates a PDF of the Waste Label, which contains the data of the currently selected leftover, with the type 'categorized waste'
+   * Enables the 'Done!' button
+   */
   makePdfWaste() {
     let pdf = new jsPDF('p', 'pt', 'a4');
 

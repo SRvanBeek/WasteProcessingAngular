@@ -18,7 +18,7 @@ import {WasteLabelComponent} from "../../waste-label/waste-label.component";
 import {CategoryModel} from "../../_models/category.model";
 
 /**
- * @Author Dino Yang
+ * @Author Dino Yang, Roy van Delft
  */
 @Component({
   selector: 'app-to-do-modal',
@@ -39,16 +39,17 @@ export class ToDoModalComponent implements OnInit {
               private categoryService: CategoryService, private voorraadService: VoorraadService, public activeModal: NgbActiveModal, private customerService: CustomerService, public modalService: NgbModal) {
   }
 
+  /**
+   * disables the download button upon initiation, unless the type of the article is 'storage, and sets the current article based on the article ID
+   * also checks for the category of the selected article
+   */
   ngOnInit(): void {
     this.downloaded = false
     if (this.todo.type == 'storage')
       this.downloaded = true;
     this.setArticle(this.todo.artikelnummer);
     this.checkcategory()
-
-
   }
-
 
   /**
    * setArticle() sets article with the article that is connected to the selected cutWaste.
@@ -113,6 +114,10 @@ export class ToDoModalComponent implements OnInit {
     this.activeModal.close(outputList);
   }
 
+  /**@author Roy van Delft
+   * Opens a dialog window of the order label, filled with the data of the selected order. Also fetches the customer data on the selected leftover ID.
+   * Also checks if the download button has been pressed, to enable the 'Done!' button
+   */
   openPreview() {
     const labelModal = this.modalService.open(LabelPreviewComponent)
     labelModal.componentInstance.todo=this.todo
@@ -121,10 +126,13 @@ export class ToDoModalComponent implements OnInit {
     labelModal.componentInstance.downloaded$
       .subscribe({
         next: (value: boolean) => {
-          console.log(value)
           this.downloaded = value}
       })}
 
+  /**@author Roy van Delft
+   * Opens a dialog window for the waste label, and fetches the category by the selected leftover. Also enables the 'Done!' button when the download
+   * button is clicked.
+   */
   openPreviewWaste()
     {
     const labelModalWaste = this.modalService.open(WasteLabelComponent)

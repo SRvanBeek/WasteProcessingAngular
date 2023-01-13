@@ -16,7 +16,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "options": {
+          "options": { "allowedCommonJsDependencies": [
+            "jspdf"
+          ],
             "outputPath": "dist/waste-processing-angular",
             "index": "src/index.html",
             "main": "src/main.ts",

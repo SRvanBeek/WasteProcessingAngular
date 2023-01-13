@@ -19,7 +19,7 @@ import {start} from "@popperjs/core";
 
 
 /**
- * @Author Dino Yang
+ * @Author Dino Yang, Roy van Delft
  */
 @Component({
   selector: 'app-leftover-info-box',
@@ -127,6 +127,9 @@ export class LeftoverInfoBoxComponent {
 
   }
 
+  /**
+   * Opens the dialog window for the label, using the modal service to fetch the dialog template.
+   */
   openPreview() {
     const labelModal = this.modalService.open(LabelPreviewComponent)
     labelModal.componentInstance.todo=this.todo
@@ -135,10 +138,12 @@ export class LeftoverInfoBoxComponent {
     labelModal.componentInstance.downloaded$
       .subscribe({
         next: (value: boolean) => {
-          console.log(value)
           this.downloaded = value}
       })}
 
+  /**
+   * Opens the dialog window for the waste label, using the modalservice to fetch the waste label template.
+   */
   openPreviewWaste() {
     const labelModalWaste = this.modalService.open(WasteLabelComponent)
     labelModalWaste.componentInstance.todo=this.todo;
