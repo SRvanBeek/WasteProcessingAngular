@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {LeftoverService} from "../shared/_services/leftover.service";
 import {Leftover} from "../shared/_models/leftover.model";
-
+import {HistorymodalComponent} from "./historymodal/historymodal.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 
 @Component({
@@ -14,7 +15,7 @@ export class HistoryComponent implements OnInit {
   leftovers: Leftover[] = [];
   filterList: string = 'all';
 
-  constructor(private leftoverService: LeftoverService) {
+  constructor(private leftoverService: LeftoverService, public modalService: NgbModal) {
   }
 
   ngOnInit() {
@@ -68,5 +69,8 @@ export class HistoryComponent implements OnInit {
         }
       }
     })
+  }
+  OpenModal(){
+    this.modalService.open(HistorymodalComponent);
   }
 }
