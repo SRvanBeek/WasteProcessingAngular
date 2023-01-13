@@ -62,6 +62,9 @@ export class ToDoModalComponent implements OnInit {
             })
   }
 
+  /**
+   * Checks the category of the current leftover with the type 'catWaste', to fill in for the waste label
+   */
   checkcategory() {
     if (this.type === "catWaste") {
       this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(value => {
