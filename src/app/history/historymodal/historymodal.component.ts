@@ -15,6 +15,7 @@ import {UserService} from "../../shared/_services/user.service";
 export class HistorymodalComponent implements OnInit{
   @Input() historyObject: any;
   @Input() articleNumber: string;
+  @Input() leftoverid: number;
   article: Article;
   leftover: Leftover;
   employeeName: string
@@ -29,7 +30,7 @@ export class HistorymodalComponent implements OnInit{
       .subscribe({next: response => {
           this.article = response.payload;
         }})
-    this.leftoverService.getOneLeftover(this.historyObject.id).subscribe({next: response => {
+    this.leftoverService.getOneLeftover(this.leftoverid).subscribe({next: response => {
         this.leftover = response.payload;
         console.log(this.leftover)
       }})

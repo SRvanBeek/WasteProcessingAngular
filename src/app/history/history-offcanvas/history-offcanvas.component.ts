@@ -14,6 +14,7 @@ import {UserService} from "../../shared/_services/user.service";
 export class HistoryOffcanvasComponent {
     @Input() historyObject: any;
     @Input() articleNumber: string;
+    @Input() leftoverid: number;
     article: Article;
     leftover: Leftover;
     employeeName: string
@@ -25,13 +26,14 @@ export class HistoryOffcanvasComponent {
    * this function gets the extra information that is needed to display.
    */
   ngOnInit() {
+    console.log(this.historyObject.leftoverID)
       this.articleService.getOneArticle(this.articleNumber)
         .subscribe({next: response => {
           this.article = response.payload;
           }})
-      this.leftoverService.getOneLeftover(this.historyObject.id).subscribe({next: response => {
+      this.leftoverService.getOneLeftover(this.leftoverid).subscribe({next: response => {
+          console.log(response)
         this.leftover = response.payload;
-        console.log(this.leftover)
         }})
       this.userService.getUsernameById(this.historyObject.userId)
         .subscribe({

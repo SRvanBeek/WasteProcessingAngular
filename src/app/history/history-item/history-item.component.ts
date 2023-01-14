@@ -112,6 +112,7 @@ export class HistoryItemComponent implements onInit {
     const offCanvas =  this.offcanvasService.open(HistoryOffcanvasComponent, {position: 'end'});
     offCanvas.componentInstance.historyObject = this.historyObject;
     offCanvas.componentInstance.articleNumber = this.leftover.artikelnummer;
+    offCanvas.componentInstance.leftoverid = this.leftover.id;
 
   }
   /**
@@ -121,6 +122,7 @@ export class HistoryItemComponent implements onInit {
     const Modal = this.modalService.open(HistorymodalComponent,{size: "lg"});
     Modal.componentInstance.historyObject = this.historyObject;
     Modal.componentInstance.articleNumber = this.leftover.artikelnummer;
+    Modal.componentInstance.leftoverid = this.leftover.id;
   }
 
 
