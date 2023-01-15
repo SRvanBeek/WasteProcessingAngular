@@ -1,0 +1,45 @@
+.listIdentifiers {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  h1 {
+    font-size: 1rem;
+  }
+}
+
+.size {
+  width: 100%;
+
+}
+.dropdownbar {
+  margin-left: 30%;
+  width: 10rem;
+}
+.disableButton {
+  width: 5rem;
+  margin: 0 5rem;
+  border: none;
+  border-radius: 15px;
+  background-color: #4BC8B6;
+
+}
+.searchbar {
+  width: 30%;
+  border-radius: 8px;
+  border: 2px solid #E9E9E9;
+}
+.filterheader {
+  border-bottom: 2px solid #E9E9E9;
+  padding-bottom: 0.5rem;
+
+}
+.all{
+  background-color: white;
+  font-weight: 500;
+}
+
+@media only screen and (max-width: 654px){
+  .dropdownbar {
+    margin-left: 10%;
+  }
+}
