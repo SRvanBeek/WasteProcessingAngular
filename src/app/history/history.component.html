@@ -12,15 +12,17 @@
   <input class="searchbar" type="text" name="search" [(ngModel)]="searchText" placeholder="Search...">
 
 </div>
-<div class="row size col-sm-10">
-  <div class="listIdentifiers ">
-    <h1 style="width: 20%;margin-left: 1rem"></h1>
-    <h1 style="width: 40%">Article Number</h1>
-    <h1 style="width: 30%">Customer</h1>
-    <h1 style="width: 40%">Type</h1>
-    <h1 style="width: 30%">Employee</h1>
-    <h1 style="width: 40%">metrage</h1>
-    <h1 style="width: 30%">Date</h1>
+<div class="row size">
+  <div class="row">
+    <div style="width: 100px"></div>
+      <div class="listIdentifiers col-sm-10">
+        <h1 class="col-sm-2" style="margin-left: auto">Article Number</h1>
+        <h1 class="col-sm-2">Customer</h1>
+        <h1 class="col-sm-2">Type</h1>
+        <h1 class="col-sm-2">Employee</h1>
+        <h1 class="col-sm-2">metrage</h1>
+        <h1 class="col-sm-2">Date</h1>
+  </div>
   </div>
 
   <ul *ngFor="let leftover of leftovers | filter:searchText">
