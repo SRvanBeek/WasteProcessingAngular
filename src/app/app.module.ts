@@ -20,15 +20,13 @@ import { HistoryItemComponent } from './history/history-item/history-item.compon
 import { HistoryOffcanvasComponent } from './history/history-offcanvas/history-offcanvas.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { HistorymodalComponent } from './history/historymodal/historymodal.component';
+import {HistoryModule} from "./history/history.module";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HistoryComponent,
-    HistoryItemComponent,
-    HistoryOffcanvasComponent,
-    HistorymodalComponent
+
   ],
     imports: [
         BrowserModule,
@@ -45,7 +43,8 @@ import { HistorymodalComponent } from './history/historymodal/historymodal.compo
         FormsModule,
         UsersModule,
         SettingsModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        HistoryModule,
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
