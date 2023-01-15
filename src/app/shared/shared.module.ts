@@ -6,12 +6,16 @@ import {ModalModule} from "./_modals/modal.module";
 import {FilterPipe} from './_pipes/filter.pipe';
 import {ToastComponent} from './toast/toast.component';
 import {NgbToastModule} from "@ng-bootstrap/ng-bootstrap";
+import {LabelPreviewComponent} from "./label-preview/label-preview.component";
+import {WasteLabelComponent} from "./waste-label/waste-label.component";
 
 
 @NgModule({
   declarations: [
     FilterPipe,
-    ToastComponent
+    ToastComponent,
+    LabelPreviewComponent,
+    WasteLabelComponent,
   ],
   imports: [
     CommonModule,
@@ -21,7 +25,9 @@ import {NgbToastModule} from "@ng-bootstrap/ng-bootstrap";
   ],
   exports: [
     FilterPipe,
-    ToastComponent
+    ToastComponent,
+    LabelPreviewComponent,
+    WasteLabelComponent,
   ],
   entryComponents: [
     DashboardComponent

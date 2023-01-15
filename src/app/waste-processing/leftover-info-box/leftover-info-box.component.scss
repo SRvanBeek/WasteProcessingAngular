@@ -46,6 +46,23 @@ h2 {
   right: 3rem;
   bottom: 3rem;
 }
+.previewButton{
+  position: absolute;
+  right: 12rem;
+  bottom: 3rem;
+}
+
+.previewButton{
+  border-radius: 5px;
+  font-family: 'Maven Pro', sans-serif;
+  color: black;
+  padding: .5rem;
+  border: 2px solid #4BC8B6;
+  background-color: gray;
+  transition: .5s;
+  font-size: 2rem;
+  transition-duration: 0.4s;
+}
 
 .doneButton {
   border-radius: 5px;
@@ -56,6 +73,11 @@ h2 {
   background-color: #4BC8B6;
   transition: .5s;
   font-size: 2rem;
+}
+
+.previewButton:hover{
+  background-color: #4BC8B6;
+  color: black;
 }
 
 .doneButton:focus:not(:focus-visible):not(.focus-visible) {

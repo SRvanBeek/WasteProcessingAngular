@@ -1,0 +1,92 @@
+<div class="label-modal">
+  <div class="modal-header">
+    <h1 class="modal-title fs-5" id="exampleModalLabel">Preview Label</h1>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body" #modal *ngIf="article!=null && todo!=null">
+    <table style="border-collapse:
+            collapse;table-layout:fixed;width:314pt">
+      <tbody>
+      <tr>
+        <td class="xl65" style="height:15.0pt;width:15pt" height="20"></td>
+        <td class="xl67" style="width:16pt"></td>
+        <td class="xl65" style="width:65pt"></td>
+        <td class="xl65" style="width:45pt"></td>
+        <td class="xl65" style="width:45pt" ></td>
+        <td class="xl65" style="width:30pt"></td>
+        <td class="xl65" style="width:30pt"></td>
+        <td class="xl65" style="width:53pt"></td>
+        <td class="xl67" style="width:15pt"></td>
+      </tr>
+      <span style="mso-ignore:vglayout;
+   position:absolute;z-index:1;margin-left:25px;margin-top:16px;width:291px;
+   height:97px"><img src="/assets/images/logo_dark.png" alt='Logo of van der Lelie' width="300" height="101"></span><span style="mso-ignore:vglayout2"></span>
+      <td class="xl72" style="border-top:none;border-left:none"></td>
+      <td class="xl72" style="border-top:none;border-left:none"></td>
+      <td class="xl72" style="border-top:none;border-left:none"></td>
+      <td class="xl72" style="border-top:none;border-left:none"></td>
+      <td class="xl72" style="border-top:none;border-left:none"></td>
+      <td class="xl68" style="border-top:none;border-left:none">&nbsp;</td>
+
+      <tr style="mso-height-source:userset;height:3.0pt" height="4">
+        <td class="xl65" style="height:3.0pt" height="4"></td>
+        <td class="xl69" style="border-top:none"></td>
+        <td colspan="6" class="xl95"></td>
+        <td class="xl70" style="border-top:none"></td>
+      </tr>
+      <tr style="mso-height-source:userset;height:63.75pt" height="85">
+        <td class="xl65" style="height:63.75pt" height="85"></td>
+        <td class="xl69" style="border-top:none"></td>
+        <td colspan="6" class="xl67"></td>
+        <td class="xl70" style="border-top:none"></td>
+      </tr>
+      <tr style="mso-height-source:userset;height:18.0pt" height="24">
+        <td class="xl65" style="height:18.0pt" height="24"></td>
+        <td class="xl69" style="border-top:none"></td>
+        <td class="xl76">Artikel: </td>
+        <td colspan="4" class="xl94" style="width:150pt">{{article.artikelnummer}}</td>
+      </tr>
+      <tr style="mso-height-source:userset;height:18.0pt" height="24">
+        <td class="xl65" style="height:18.0pt" height="24"></td>
+        <td class="xl69" style="border-top:none"></td>
+        <td class="xl66">Afval: </td>
+        <td colspan="5" class="xl78">{{todo.gewicht}} g</td>
+        <td class="xl70" style="border-top:none"></td>
+      </tr>
+      <tr style="mso-height-source:userset;height:6.0pt" height="8">
+        <td class="xl65" style="height:6.0pt" height="8"></td>
+        <td class="xl69" style="border-top:none"></td>
+        <td colspan="6" class="xl90">&nbsp;</td>
+        <td class="xl70" style="border-top:none"></td>
+      </tr>
+      <tr style="mso-height-source:userset;height:18.0pt" height="24">
+        <td class="xl65" style="height:18.0pt" height="24"></td>
+        <td class="xl69" style="border-top:none"></td>
+        <td class="xl66">Categorie:</td>
+        <td colspan="5" class="xl91">{{category}}</td>
+        <td class="xl70" style="border-top:none"></td>
+      </tr>
+      <tr style="mso-height-source:userset;height:15.0pt" height="20">
+        <td class="xl65" style="height:15.0pt" height="20"></td>
+        <td class="xl69" style="border-top:none"></td>
+        <td class="xl66">Kleur:</td>
+        <td colspan="5" class="xl85">{{article.kleur}}</td>
+        <td class="xl70" style="border-top:none"></td>
+      </tr>
+      <tr style="mso-height-source:userset;height:15.0pt" height="20">
+        <td class="xl65" style="height:15.0pt" height="20"></td>
+        <td class="xl69" style="border-top:none"></td>
+        <td class="xl66">Metrage:</td>
+        <td colspan="5" class="xl85">{{todo.metrage}}</td>
+        <td class="xl70" style="border-top:none"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button (click)="makePdfWaste()" type="button" class="btn btn-primary">Download Label</button>
+    <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('close button click')">Close</button>
+  </div>
+</div>
+
+

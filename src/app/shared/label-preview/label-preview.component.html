@@ -1,0 +1,214 @@
+  <div class="label-modal">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Preview Label</h1>
+          <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body" #modal *ngIf="article!=null && todo!=null && !loading">
+          <table style="border-collapse:
+            collapse;table-layout:fixed;width:314pt">
+            <tbody>
+            <tr>
+              <td class="xl65" style="height:15.0pt;width:15pt" height="20"></td>
+              <td class="xl67" style="width:16pt"></td>
+              <td class="xl65" style="width:65pt"></td>
+              <td class="xl65" style="width:45pt"></td>
+              <td class="xl65" style="width:45pt" ></td>
+              <td class="xl65" style="width:30pt"></td>
+              <td class="xl65" style="width:30pt"></td>
+              <td class="xl65" style="width:53pt"></td>
+              <td class="xl67" style="width:15pt"></td>
+            </tr>
+    <span style="mso-ignore:vglayout;
+   position:absolute;z-index:1;margin-left:25px;margin-top:16px;width:291px;
+   height:97px"><img src="/assets/images/logo_dark.png" alt='Logo of van der Lelie' width="300" height="101"></span><span style="mso-ignore:vglayout2"></span>
+              <td class="xl72" style="border-top:none;border-left:none"></td>
+              <td class="xl72" style="border-top:none;border-left:none"></td>
+              <td class="xl72" style="border-top:none;border-left:none"></td>
+              <td class="xl72" style="border-top:none;border-left:none"></td>
+              <td class="xl72" style="border-top:none;border-left:none"></td>
+              <td class="xl68" style="border-top:none;border-left:none">&nbsp;</td>
+
+            <tr style="mso-height-source:userset;height:3.0pt" height="4">
+              <td class="xl65" style="height:3.0pt" height="4"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td colspan="6" class="xl95"></td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:63.75pt" height="85">
+              <td class="xl65" style="height:63.75pt" height="85"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td colspan="6" class="xl67"></td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:18.0pt" height="24">
+              <td class="xl65" style="height:18.0pt" height="24"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl76">Vervoerder:</td>
+              <td colspan="4" class="xl94" style="width:150pt">Van Der Lelie</td>
+            </tr>
+            <tr style="mso-height-source:userset;height:18.0pt" height="24">
+              <td class="xl65" style="height:18.0pt" height="24"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl66">Klant:</td>
+              <td colspan="5" class="xl78">{{customer.customerID}}</td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:6.0pt" height="8">
+              <td class="xl65" style="height:6.0pt" height="8"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td colspan="6" class="xl90">&nbsp;</td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:18.0pt" height="24">
+              <td class="xl65" style="height:18.0pt" height="24"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl66">Afleveren:</td>
+              <td colspan="5" class="xl91">{{customer.address}}</td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:18.0pt" height="24">
+              <td class="xl65" style="height:18.0pt" height="24"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl65"></td>
+              <td colspan="5" class="xl93">{{customer.postalCode}} {{customer.city}}</td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:18.0pt" height="24">
+              <td class="xl65" style="height:18.0pt" height="24"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl66"></td>
+              <td colspan="5" class="xl93">{{customer.country}}<span style="mso-spacerun:yes">&nbsp;</span>
+              </td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:18.0pt" height="24">
+              <td class="xl65" style="height:18.0pt" height="24"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl75">&nbsp;</td>
+              <td colspan="5" class="xl89"></td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:6.0pt" height="8">
+              <td class="xl65" style="height:6.0pt" height="8"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td colspan="6" class="xl87">&nbsp;</td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:15.0pt" height="20">
+              <td class="xl65" style="height:15.0pt" height="20"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl66">Order:</td>
+              <td colspan="5" class="xl85">{{article.artikelnummer}}</td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:15.0pt" height="20">
+              <td class="xl65" style="height:15.0pt" height="20"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl79">Referentie:</td>
+              <td colspan="5" class="xl78">xxx</td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:15.0pt" height="20">
+              <td class="xl65" style="height:15.0pt" height="20"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl79"></td>
+              <td colspan="5" class="xl78">yyy</td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:15.0pt" height="20">
+              <td class="xl65" style="height:15.0pt" height="20"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl79"></td>
+              <td colspan="5" class="xl78">zzz</td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:6.0pt" height="8">
+              <td class="xl65" style="height:6.0pt" height="8"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td colspan="6" class="xl80"></td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:15.0pt" height="20">
+              <td class="xl65" style="height:15.0pt" height="20"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl79">Product:</td>
+              <td colspan="5" class="xl86" style="width:203pt" >Rol retour</td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:15.0pt" height="20">
+              <td class="xl65" style="height:15.0pt" height="20"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl79">Artikel:</td>
+              <td colspan="2" class="xl78">{{article.omschrijving}}</td>
+              <td class="artikelkleur">Kleur: </td>
+              <td colspan="2" class="xl78">{{article.kleur}}</td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:6.0pt" height="8">
+              <td class="xl65" style="height:6.0pt" height="8"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td colspan="6" class="xl79"></td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:15.0pt" height="20">
+              <td class="xl65" style="height:15.0pt" height="20"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl79">Metrage:</td>
+              <td class="xl78">{{todo.metrage}}</td>
+              <td colspan="4" class="xl78">m</td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:15.0pt" height="20">
+              <td class="xl65" style="height:15.0pt" height="20"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl79"></td>
+              <td class="xl78"></td>
+              <td colspan="4" class="xl78"></td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:15.0pt" height="20">
+              <td class="xl65" style="height:15.0pt" height="20"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl79"></td>
+              <td class="xl78"></td>
+              <td colspan="4" class="xl78"></td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:18.0pt" height="24">
+              <td class="xl65" style="height:18.0pt" height="24"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl66">Verpakking:</td>
+              <td colspan="3" class="xl88">LLAA0048784</td>
+              <td colspan="2" class="xl85">Rol</td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:18.0pt" height="24">
+              <td class="xl65" style="height:18.0pt" height="24"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td class="xl66">Inhoud:</td>
+              <td class="xl71">1</td>
+              <td colspan="2" class="xl85">stuks</td>
+              <td class="xl65">Label:</td>
+              <td class="xl74">X/Y</td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+            <tr style="mso-height-source:userset;height:66.75pt" height="89">
+              <td class="xl65" style="height:66.75pt" height="89"></td>
+              <td class="xl69" style="border-top:none"></td>
+              <td colspan="6" class="xl84" style="width:268pt">*LLAA0048784*</td>
+              <td class="xl70" style="border-top:none"></td>
+            </tr>
+
+            <tr style="mso-height-source:userset;height:31.5pt" height="42">
+              <td class="xl65" style="height:31.5pt" height="42"></td>
+              <td colspan="8" class="xl67"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+            <button (click)="makePdf()" type="button" class="btn btn-primary">Download Label</button>
+          <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('close button click')">Close</button>
+        </div>
+  </div>
+

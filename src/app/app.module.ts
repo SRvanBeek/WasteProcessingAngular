@@ -28,6 +28,23 @@ import {HistoryModule} from "./history/history.module";
     AppComponent,
 
   ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    LoginModule,
+    WasteProcessingModule,
+    SharedModule,
+    HeaderModule,
+    SidebarModule,
+    MatSidenavModule,
+    BrowserAnimationsModule,
+    NgbModule,
+    FormsModule,
+    UsersModule,
+    SettingsModule,
+
+  ],
     imports: [
         BrowserModule,
         AppRoutingModule,
