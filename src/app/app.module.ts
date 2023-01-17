@@ -15,6 +15,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from "@angular/forms";
 import {UsersModule} from "./users/users.module";
 import {SettingsModule} from "./settings/settings.module";
+import {CategoriesModule} from "./categories/categories.module";
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import {SettingsModule} from "./settings/settings.module";
     FormsModule,
     UsersModule,
     SettingsModule,
-
+    CategoriesModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
