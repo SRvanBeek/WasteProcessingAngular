@@ -1,6 +1,10 @@
 import {Component, HostListener, ViewChild} from '@angular/core';
 import {CategoryService} from "../shared/_services/category.service";
 import {CategoryModel} from "../shared/_models/category.model";
+import {EditCategory} from "../shared/_models/edit-category.model";
+import {CategoryInfoBoxComponent} from "./category-info-box/category-info-box.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+
 
 
 
@@ -13,7 +17,8 @@ export class CategoriesComponent {
   isDesktop: boolean;
   screenLGSize: number = 992;
   categoriesList: CategoryModel[] = [];
-  selectedCategory: CategoryModel;
+  selectedCategory: EditCategory;
+  infoBox: CategoryInfoBoxComponent;
 
   constructor(private categoryService: CategoryService) {
   }

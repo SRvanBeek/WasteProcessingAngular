@@ -1,13 +1,13 @@
 export class CategoryModel {
   id: number;
   name: string;
-  conditions:string[];
+  voorwaarde:string;
   enabled:boolean;
 
-  constructor(id: number, name: string, conditions: string[], enabled: boolean) {
+  constructor(id: number, name: string, voorwaarde: string, enabled: boolean) {
     this.id = id;
     this.name = name;
-    this.conditions = conditions;
+    this.voorwaarde = voorwaarde;
     this.enabled = enabled;
   }
 

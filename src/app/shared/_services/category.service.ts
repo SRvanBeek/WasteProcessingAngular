@@ -23,4 +23,8 @@ export class CategoryService {
   putCategory(category: CategoryModel): Observable<string> {
     return this.http.put<string>(environment.apiUrl + '/api/categories/', category);
   }
+
+  postCategory(category: CategoryModel): Observable<string> {
+    return this.http.post<string>(environment.apiUrl + '/api/categories/', category);
+  }
 }

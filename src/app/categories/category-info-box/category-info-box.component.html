@@ -1,22 +1,28 @@
 <div class="mainBox">
-  <form (ngSubmit)="save()" #f="ngForm">
+  <form [formGroup]="form" (ngSubmit)="save()">
   <div class="header">
     <input type="text" class="categoryName" placeholder="Name"
-           value="{{category?.name}}" name="categoryName" ngModel required>
+           value="" formControlName="name" name="categoryName">
+    <span *ngIf="!form.get('name')?.valid && form.get('name')?.touched">Please enter a name!</span>
   </div>
   <div class="content">
     <div class="conditionsDiv">
       <h4>Conditions</h4>
       <div class="conditions">
         <div>
-        <input type="text" class="inputBox" value="" ngModel name="categoryVoorwaarde1" required>
+          <input type="text" class="inputBox" formControlName="condition" name="categoryVoorwaarde1" required>
+          <span *ngIf="!form.get('condition')?.valid && form.get('condition')?.touched">You need at least 1 condition!</span>
         </div>
       </div>
-      <div class="conditions" *ngFor="let condition of conditionsList; let i = index">
-        <br>
+      <div class="conditions">
+
+      <div formArrayName="extraConditions">
+        <div *ngFor="let conditionControl of getControls(); let i = index">
         <h5>Or</h5>
-        <input type="text" class="inputBox" value="{{condition}}" name="test{{i}}" ngModel required>
-        <button type="button" class="removeButton" (click)="removeCondition(condition)">Rem.</button>
+        <input type="text" class="inputBox"  name="condition" [formControlName]="'condition_' + i">
+        <button type="button" class="removeButton" (click)="removeCondition(i)">Rem.</button>
+        </div>
+      </div>
       </div>
 
       <button type="button" class="addButton" (click)="addInput()">Add</button>
@@ -25,7 +31,7 @@
       <h4>Enabled?</h4>
       <button type="button" class="trueButton">True</button>
     </div>
-    <button class="saveButton" type="submit" [disabled]="!f.valid">Save</button>
+    <button class="saveButton" type="submit" [disabled]="!form.get('name')?.valid">Save</button>
   </div>
   </form>
 </div>
