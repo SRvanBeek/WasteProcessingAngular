@@ -5,7 +5,7 @@
         <h1 style="margin-left: 1rem">Categories</h1>
       </div>
       <div class="topBarContent">
-        <button type="button" class="addButton">Add</button>
+        <button type="button" class="addButton" (click)="showInfoBox()">Add</button>
         <div class="selector">
           <h1>Search:</h1>
           <input type="text" class="searchbar">
@@ -18,13 +18,13 @@
       </div>
     </div>
     <div class="todoList">
-      <ul class="list">
+      <ul class="list" id="infoboxs">
         <li class="toDoItem" *ngFor="let category of categoriesList">
-          <div class="toDoButton">
-            <span class="overflowHidden">
+          <div class="categoryButton">
+            <span class="overflowHidden" (click)="showInfoBoxFilled(category.id)">
                 <p style="width: 20%; margin-left: 1rem">{{category.id}}</p>
                 <p style="width: 40%">{{category.name}}</p>
-                <p style="width: 30%">{{category.voorwaarde}}</p>
+                <p style="width: 30%">{{category.conditions}}</p>
             </span>
           </div>
         </li>
@@ -32,7 +32,7 @@
     </div>
   </div>
   <div *ngIf="isDesktop" class="todoShow">
-    <app-category-info-box></app-category-info-box>
+   <app-category-info-box id="infoBox" [category]="selectedCategory" class="hide"></app-category-info-box>
   </div>
 </div>
 

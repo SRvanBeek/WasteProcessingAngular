@@ -1,21 +1,32 @@
 <div class="mainBox">
+  <form (ngSubmit)="save()" #f="ngForm">
   <div class="header">
-    <input type="text" class="categoryName" placeholder="Name">
+    <input type="text" class="categoryName" placeholder="Name"
+           value="{{category?.name}}" name="categoryName" ngModel required>
   </div>
   <div class="content">
     <div class="conditionsDiv">
       <h4>Conditions</h4>
-      <div>
-        <input type="text" class="inputBox">
-        <button type="button" class="removeButton">Rem.</button>
+      <div class="conditions">
+        <div>
+        <input type="text" class="inputBox" value="" ngModel name="categoryVoorwaarde1" required>
+        </div>
       </div>
-      <button type="button" class="addButton">Add</button>
+      <div class="conditions" *ngFor="let condition of conditionsList; let i = index">
+        <br>
+        <h5>Or</h5>
+        <input type="text" class="inputBox" value="{{condition}}" name="test{{i}}" ngModel required>
+        <button type="button" class="removeButton" (click)="removeCondition(condition)">Rem.</button>
+      </div>
+
+      <button type="button" class="addButton" (click)="addInput()">Add</button>
     </div>
-    <div>
+    <div class="enabledDiv">
       <h4>Enabled?</h4>
       <button type="button" class="trueButton">True</button>
     </div>
-    <button class="saveButton">Save</button>
+    <button class="saveButton" type="submit" [disabled]="!f.valid">Save</button>
   </div>
+  </form>
 </div>
 

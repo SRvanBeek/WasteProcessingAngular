@@ -7,12 +7,24 @@
   width: 30%;
 }
 
+.enabledDiv {
+
+}
+
+.conditions {
+  display: block;
+}
+
 .conditionsDiv {
   height: 40vh;
+  margin-bottom: 10rem;
 }
 
 .mainBox {
   background-color: white;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100%;
 }
 
 .header {
@@ -94,6 +106,10 @@ h2 {
   position: absolute;
   right: 3rem;
   bottom: 3rem;
+}
+
+.saveButton:disabled{
+  background-color: gray;
 }
 
 .addButton {
