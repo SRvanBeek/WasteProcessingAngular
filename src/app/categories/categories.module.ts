@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import {CategoriesComponent} from "./categories.component";
 import {CategoryInfoBoxComponent} from "./category-info-box/category-info-box.component";
 import { ConditionInputComponent } from './category-info-box/condition-input/condition-input.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ConditionModalComponent } from './category-info-box/condition-modal/condition-modal.component';
+import {SharedModule} from "../shared/shared.module";
 
 
 
@@ -18,7 +19,9 @@ import { ConditionModalComponent } from './category-info-box/condition-modal/con
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    SharedModule
   ]
 })
 export class CategoriesModule { }

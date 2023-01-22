@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
@@ -7,6 +7,8 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ['./condition-modal.component.scss']
 })
 export class ConditionModalComponent {
+  @Output() addInputEvent = new EventEmitter<String[]>;
+  @ViewChild('condition') condition: ElementRef;
 
   andOrButton: boolean = true;
 
@@ -14,7 +16,18 @@ export class ConditionModalComponent {
   }
 
   closeModal() {
+    this.modalService.close();
+  }
 
+  createInput() {
+    let input = [];
+    if (this.andOrButton) {
+      input.push('Or');
+    } else {
+      input.push('And');
+    }
+    input.push(this.condition.nativeElement.value);
+    this.addInputEvent.emit(input);
     this.modalService.close();
   }
 

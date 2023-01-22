@@ -18,20 +18,23 @@
 
       <div formArrayName="extraConditions">
         <div *ngFor="let conditionControl of getControls(); let i = index">
-        <h5>Or</h5>
-        <input type="text" class="inputBox"  name="condition" [formControlName]="'condition_' + i">
+        <h5 *ngIf="conditionsList[i] == 'Or'">Or</h5>
+        <h5 *ngIf="conditionsList[i] == 'And'">And</h5>
+        <input type="text" class="inputBox"  name="condition" [formControlName]="i">
         <button type="button" class="removeButton" (click)="removeCondition(i)">Rem.</button>
         </div>
       </div>
       </div>
 
-      <button type="button" class="addButton" (click)="addInput()">Add</button>
+      <button type="button" class="addButton" [disabled]="!form.get('condition')?.valid" (click)="addInput()">Add</button>
     </div>
+    <footer>
     <div class="enabledDiv">
       <h4>Enabled?</h4>
-      <button type="button" class="trueButton">True</button>
+      <button type="button" class="trueButton" (click)="changeTrueButton()" #trueButton>True</button>
     </div>
-    <button class="saveButton" type="submit" [disabled]="!form.get('name')?.valid">Save</button>
+    <button class="saveButton" type="submit" [disabled]="!form.get('name')?.valid || !form.get('condition')?.valid">Save</button>
+    </footer>
   </div>
   </form>
 </div>

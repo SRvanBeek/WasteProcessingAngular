@@ -7,24 +7,24 @@
   width: 30%;
 }
 
-.enabledDiv {
-
-}
 
 .conditions {
   display: block;
 }
 
+.enabledDiv{
+  margin-top: 2rem;
+}
+
 .conditionsDiv {
-  height: 40vh;
-  margin-bottom: 10rem;
+  height: 45vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100%;
 }
 
 .mainBox {
   background-color: white;
-  overflow-y: auto;
-  overflow-x: hidden;
-  max-height: 100%;
 }
 
 .header {
@@ -124,9 +124,29 @@ h2 {
   margin-top: 1rem;
 }
 
+.addButton:disabled {
+  background-color: gray;
+}
+
+.addButton:hover:disabled {
+  background-color: gray;
+}
+
 .removeButton:hover{
   background-color: #4BC8B6;
   color: black;
+}
+
+.disabledTrueButton {
+  border-radius: 5px;
+  font-family: 'Maven Pro', sans-serif;
+  color: black;
+  padding: 0.5rem 2rem;
+  border: none;
+  background-color: gray;
+  transition: .5s;
+  font-size: 1.3rem;
+  margin-top: 1rem;
 }
 
 .saveButton:focus:not(:focus-visible):not(.focus-visible) {
@@ -136,6 +156,10 @@ h2 {
 
 .saveButton:hover {
   background-color: #3da294;
+}
+
+.saveButton:hover:disabled {
+  background-color: gray;
 }
 
 .saveButton:active {

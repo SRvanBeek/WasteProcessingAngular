@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
 import {CategoryModel} from "../../shared/_models/category.model";
 import {ConditionInputComponent} from "./condition-input/condition-input.component";
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
@@ -13,6 +13,7 @@ import {ConditionModalComponent} from "./condition-modal/condition-modal.compone
 })
 export class CategoryInfoBoxComponent implements OnInit {
   @Input() category: EditCategory;
+  @ViewChild('trueButton') trueButton: ElementRef;
 
   form: FormGroup;
 
@@ -29,8 +30,11 @@ export class CategoryInfoBoxComponent implements OnInit {
     });
   }
 
-  ngOnChanges(changes: EditCategory) {
-    this.form.get('name')?.patchValue(this.category.name);
+  ngOnChanges() {
+    if (this.category != null) {
+      this.form.get('name')?.patchValue(this.category.name);
+
+    }
   }
 
   save() {
@@ -42,12 +46,29 @@ export class CategoryInfoBoxComponent implements OnInit {
   }
 
   addInput() {
-    this.modalService.open(ConditionModalComponent, {size: 'sm', centered: true});
-
-  //  (<FormArray>this.form.get('extraConditions')).push(new FormControl(null, Validators.required))
+    this.modalService.open(ConditionModalComponent, {size: 'sm', centered: true}).
+    componentInstance.addInputEvent.subscribe((receivedEntry: String[]) => {
+      console.log(receivedEntry);
+      this.conditionsList.push(receivedEntry[0]);
+      (<FormArray>this.form.get('extraConditions')).push(new FormControl(receivedEntry[1], Validators.required));
+      }
+      );
   }
 
   removeCondition(conditionIndex: number) {
     (<FormArray>this.form.get('extraConditions')).removeAt(conditionIndex);
+    this.conditionsList.splice(conditionIndex, 1);
+  }
+
+  changeTrueButton() {
+    if (this.trueButton.nativeElement.innerText == 'True') {
+      this.trueButton.nativeElement.classList.add('disabledTrueButton');
+      this.trueButton.nativeElement.classList.remove('trueButton');
+      this.trueButton.nativeElement.innerText = 'False';
+    } else {
+      this.trueButton.nativeElement.classList.remove('disabledTrueButton');
+      this.trueButton.nativeElement.classList.add('trueButton');
+      this.trueButton.nativeElement.innerText = 'True';
+    }
   }
 }

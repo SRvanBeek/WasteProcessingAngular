@@ -8,7 +8,7 @@
         <button type="button" class="addButton" (click)="showInfoBox()">Add</button>
         <div class="selector">
           <h1>Search:</h1>
-          <input type="text" class="searchbar">
+          <input type="text" class="searchbar" placeholder="Search..." [(ngModel)]="searchText">
         </div>
       </div>
       <div class="listIdentifiers">
@@ -19,7 +19,7 @@
     </div>
     <div class="todoList">
       <ul class="list" id="infoboxs">
-        <li class="toDoItem" *ngFor="let category of categoriesList">
+        <li class="toDoItem" *ngFor="let category of categoriesList | filter:searchText">
           <div class="categoryButton">
             <span class="overflowHidden" (click)="showInfoBoxFilled(category.id)">
                 <p style="width: 20%; margin-left: 1rem">{{category.id}}</p>

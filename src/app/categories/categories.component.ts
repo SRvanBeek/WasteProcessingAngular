@@ -19,6 +19,7 @@ export class CategoriesComponent {
   categoriesList: CategoryModel[] = [];
   selectedCategory: EditCategory;
   infoBox: CategoryInfoBoxComponent;
+  searchText: any;
 
   constructor(private categoryService: CategoryService) {
   }
@@ -53,9 +54,7 @@ export class CategoriesComponent {
   showInfoBoxFilled(categoryId: number) {
     this.categoryService.getCategoryNameById(categoryId).subscribe({
       next: value => {
-        console.log(value);
         this.selectedCategory = value.payload;
-        console.log(this.selectedCategory.conditions);
       },
       error: err => {
         console.log(err);

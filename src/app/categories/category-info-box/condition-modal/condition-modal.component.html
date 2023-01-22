@@ -1,12 +1,15 @@
-<div class="mainbox">
-<h5>Add Voorwaarde</h5>
-<input type="text" class="inputBox">
-<div>
-  <button class="andOr" type="button" (click)="andOr()" [disabled]="andOrButton">Or</button>
-  <button class="andOr" type="button" (click)="andOr()" [disabled]="!andOrButton">And</button>
-</div>
-<div>
-  <button class="removeButton" (click)="closeModal()" type="button">Cancel</button>
-  <button class="addButton">Add</button>
-</div>
-</div>
+
+  <div class="modal-header">
+    <h5 class="modal-title">Add Voorwaarde</h5>
+  </div>
+  <div class="modal-body">
+    <input type="text" class="inputBox" #condition>
+    <div>
+      <button class="andOr" type="button" (click)="andOr()" [disabled]="andOrButton">Or</button>
+      <button class="andOr" type="button" (click)="andOr()" [disabled]="!andOrButton">And</button>
+    </div>
+    <div>
+      <button class="removeButton" (click)="closeModal()" type="button">Cancel</button>
+      <button class="addButton" (click)="createInput()" type="button">Add</button>
+    </div>
+  </div>
