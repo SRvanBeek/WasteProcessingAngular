@@ -1,12 +1,19 @@
 <div class="all">
-<h2>History</h2>
-
+  <div class="topbar">
+<h1 style="margin-left: 1rem">History</h1>
+  </div>
 <div class="row filterheader">
   <select class="form-select dropdownbar" aria-label="Select type" (change)="getType(typeSelection.value)" #typeSelection>
     <option value="all" selected>All</option>
     <option value="order">Orders</option>
     <option value="catWaste">catWaste</option>
     <option value="storage">Storage</option>
+  </select>
+  <select class="form-select dropdownbar" aria-label="Select Employee" >
+      <option *ngFor="let employee of userList; let i = index" value="{{employee.name}}" >{{employee.name}}</option>
+  </select>
+  <select class="form-select dropdownbar" aria-label="Select Customer" >
+    <option *ngFor="let customer of customerList; let i = index" value="{{customer.customerID}}" >{{customer.customerID}}</option>
   </select>
   <button class="disableButton" id="done" >Disable</button>
   <input class="searchbar" type="text" name="search" [(ngModel)]="searchText" placeholder="Search...">

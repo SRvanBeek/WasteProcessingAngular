@@ -3,6 +3,10 @@ import {LeftoverService} from "../shared/_services/leftover.service";
 import {Leftover} from "../shared/_models/leftover.model";
 import {HistorymodalComponent} from "./historymodal/historymodal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {User} from "../shared/_models/user";
+import {UserService} from "../shared/_services/user.service";
+import {CustomerService} from "../shared/_services/customer.service";
+import {Customer} from "../shared/_models/customer.model";
 
 
 @Component({
@@ -14,9 +18,12 @@ export class HistoryComponent implements OnInit {
   searchText: any;
   searchList: string[] = [];
   leftovers: Leftover[] = [];
+  userList: User[] = [];
   filterList: string = 'all';
+  customerList: Customer[]= [];
 
-  constructor(private leftoverService: LeftoverService, public modalService: NgbModal) {
+
+  constructor(private leftoverService: LeftoverService, public modalService: NgbModal, private userService: UserService, private customerService: CustomerService) {
 
   }
 
@@ -27,8 +34,21 @@ export class HistoryComponent implements OnInit {
     this.leftoverService.getAllLeftoversProcessed(true)
       .subscribe({next: value => {
         this.leftovers = value.payload;
-
         }})
+    this.fillEmployeeList()
+    this.fillCustomerList()
+  }
+
+  fillEmployeeList(){
+    this.userService.getAllUsers().subscribe({next: value => {
+      this.userList = value.payload;
+      }})
+  }
+
+  fillCustomerList(){
+    this.customerService.getAllCustomer().subscribe({next: value => {
+      this.customerList = value.payload;
+    }})
   }
 
   /**

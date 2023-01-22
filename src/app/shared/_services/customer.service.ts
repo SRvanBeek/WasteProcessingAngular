@@ -21,5 +21,8 @@ export class CustomerService {
   getCustomerByLeftoverID(id: number): Observable<any> {
     return this.http.get<any>(environment.apiUrl + "/api/orders/customer/" + id)
   }
+  getAllCustomer(): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + "/api/customers")
+  }
 }
 
