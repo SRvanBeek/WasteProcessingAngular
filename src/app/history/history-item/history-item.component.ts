@@ -8,6 +8,7 @@ import {NgbModal, NgbOffcanvas} from "@ng-bootstrap/ng-bootstrap";
 import {HistoryOffcanvasComponent} from "../history-offcanvas/history-offcanvas.component";
 import {ArticleService} from "../../shared/_services/article.service";
 import {HistorymodalComponent} from "../historymodal/historymodal.component";
+import {LeftoverService} from "../../shared/_services/leftover.service";
 
 interface onInit {
 }
@@ -25,6 +26,8 @@ export class HistoryItemComponent implements onInit {
   historyObject: any;
   isDesktop: boolean;
   screenLGSize: number = 992;
+  disableList: [];
+
 
 
   constructor(private ordersService: OrdersService,
@@ -33,7 +36,8 @@ export class HistoryItemComponent implements onInit {
               private userService: UserService,
               private offcanvasService: NgbOffcanvas,
               private articleService: ArticleService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private leftoverService: LeftoverService) {
   }
 
   /**
@@ -80,6 +84,13 @@ export class HistoryItemComponent implements onInit {
     } else {
       console.log("Something went very wrong!!")
     }
+  }
+
+  disable(){
+    if (confirm("Are you sure you want to disable this order?")) {
+      this.leftoverService.putDisableLeftover(this.leftover).subscribe()
+    }
+
   }
 
   /**

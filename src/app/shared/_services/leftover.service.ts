@@ -39,4 +39,11 @@ export class LeftoverService {
   getOneLeftover(id: number): Observable<any> {
     return this.http.get<any>(environment.apiUrl + '/api/leftover/id/' + id);
   }
+  getLeftoverByCustomerId(id: String): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/leftover/customer/' + id);
+  }
+  putDisableLeftover(leftover: Leftover): Observable<string>{
+    return this.http.put<string>(environment.apiUrl + '/api/leftover/disable', leftover)
+
+  }
 }

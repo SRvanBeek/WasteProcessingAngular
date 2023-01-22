@@ -20,7 +20,7 @@ export class HistoryComponent implements OnInit {
   leftovers: Leftover[] = [];
   userList: User[] = [];
   filterList: string = 'all';
-  customerList: Customer[]= [];
+  customerList: Customer[] = [];
 
 
   constructor(private leftoverService: LeftoverService, public modalService: NgbModal, private userService: UserService, private customerService: CustomerService) {
@@ -32,23 +32,34 @@ export class HistoryComponent implements OnInit {
    */
   ngOnInit() {
     this.leftoverService.getAllLeftoversProcessed(true)
-      .subscribe({next: value => {
-        this.leftovers = value.payload;
-        }})
+      .subscribe({
+        next: value => {
+          this.leftovers = [];
+          for (let leftover of value.payload) {
+            if (leftover.disable == false) {
+              this.leftovers.push(leftover);
+            }
+          }
+        }
+      })
     this.fillEmployeeList()
     this.fillCustomerList()
   }
 
-  fillEmployeeList(){
-    this.userService.getAllUsers().subscribe({next: value => {
-      this.userList = value.payload;
-      }})
+  fillEmployeeList() {
+    this.userService.getAllUsers().subscribe({
+      next: value => {
+        this.userList = value.payload;
+      }
+    })
   }
 
-  fillCustomerList(){
-    this.customerService.getAllCustomer().subscribe({next: value => {
-      this.customerList = value.payload;
-    }})
+  fillCustomerList() {
+    this.customerService.getAllCustomer().subscribe({
+      next: value => {
+        this.customerList = value.payload;
+      }
+    })
   }
 
   /**
@@ -74,7 +85,7 @@ export class HistoryComponent implements OnInit {
       next: value => {
         this.leftovers = [];
         for (let todo of value.payload) {
-          if (todo.processed == true) {
+          if (todo.processed == true && todo.disable == false) {
             this.leftovers.push(todo);
           }
         }
@@ -94,7 +105,7 @@ export class HistoryComponent implements OnInit {
       next: value => {
         this.leftovers = [];
         for (let todo of value.payload) {
-          if (todo.processed == true) {
+          if (todo.processed == true && todo.disable == false) {
             this.leftovers.push(todo);
           }
         }
@@ -102,4 +113,28 @@ export class HistoryComponent implements OnInit {
     })
   }
 
+  getCustomer(type: string) {
+    console.log(type)
+    this.filterList = type;
+    if (type == 'all') {
+      this.fillCustomerList()
+    } else {
+      this.fillByCustomer(type);
+    }
+  }
+
+  fillByCustomer(type: any) {
+    this.leftoverService.getLeftoverByCustomerId(type).subscribe({
+      next: value => {
+        this.leftovers = [];
+        for (let todo of value.payload) {
+          if (todo.processed == true && todo.disable == false) {
+            this.leftovers.push(todo);
+          }
+        }
+      }
+    })
+
+  }
 }
+
