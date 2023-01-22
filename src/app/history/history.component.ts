@@ -117,7 +117,7 @@ export class HistoryComponent implements OnInit {
     console.log(type)
     this.filterList = type;
     if (type == 'all') {
-      this.fillCustomerList()
+      this.fillListAllTypes();
     } else {
       this.fillByCustomer(type);
     }
