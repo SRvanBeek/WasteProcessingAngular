@@ -3,6 +3,7 @@ import {LeftoverService} from "../shared/_services/leftover.service";
 import {Leftover} from "../shared/_models/leftover.model";
 import {HistorymodalComponent} from "./historymodal/historymodal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {DashboardComponent} from "../shared/_modals/dashboard/dashboard.component";
 
 
 @Component({
@@ -82,4 +83,7 @@ export class HistoryComponent implements OnInit {
     })
   }
 
+  openDetails() {
+    this.modalService.open(DashboardComponent, {windowClass: 'modalWidth'});
+  }
 }
