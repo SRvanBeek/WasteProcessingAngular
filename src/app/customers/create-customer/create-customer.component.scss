@@ -1,0 +1,21 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.submitButton {
+  background-color: #4BC8B6;
+  border: none;
+  transition: .5s;
+  color: black;
+}
+
+.submitButton:hover {
+  background-color: #3da294;
+}
+
+.createUserBox {
+  font-family: 'Maven Pro', sans-serif;
+}
+
+

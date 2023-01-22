@@ -1,0 +1,42 @@
+<div class="mainBox" *ngIf="customer != null">
+  <div class="header">
+    <h1>{{customer.customerID}}</h1>
+  </div>
+  <div class="content">
+    <ul class="list">
+      <li>
+        <h2 class="first">Min Meter:</h2>
+        <h2>{{customer.min_meter}}</h2>
+      </li>
+      <li>
+        <h2 class="first">Max Meter:</h2>
+        <h2>{{customer.max_meter}}</h2>
+      </li>
+      <li>
+        <h2 class="first">Address:</h2>
+        <h2>{{customer.address}}</h2>
+      </li>
+      <li>
+        <h2 class="first">City:</h2>
+        <h2>{{customer.city}}</h2>
+      </li>
+      <li>
+        <h2 class="first">Country:</h2>
+        <h2>{{customer.country}}</h2>
+      </li>
+      <li>
+        <h2 class="first">Postal Code:</h2>
+        <h2>{{customer.postalCode}}</h2>
+      </li>
+      <li>
+        <h2 class="first">Enabled:</h2>
+        <h2>{{customer.enabled ? 'True' : 'False'}}</h2>
+      </li>
+    </ul>
+  </div>
+  <div class="buttons">
+    <button class="changeBtn" (click)="openChangeCustomer()">Change Customer</button>
+    <button [ngClass]="customer.enabled ? 'disableBtn':'enableBtn' "
+            (click)="openConfirm()">{{customer.enabled ? 'Disable' : 'Enable'}}</button>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h1 class="modal-title" id="modal-title">Profile deletion</h1>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close button"
+    aria-describedby="modal-title"
+    (click)="modal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <h2>
+    Are you sure you want to {{customer.enabled ? 'Disable' : 'Enable'}} <span
+    class="text-primary">{{customer.customerID}}</span>
+    profile?
+  </h2>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
+  <button type="button" class="btn btn-danger" (click)="modal.close('Yes')">yes</button>
+</div>
+

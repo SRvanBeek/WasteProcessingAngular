@@ -15,37 +15,34 @@ import {SettingsModule} from "./settings/settings.module";
 import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
-import { HistoryComponent } from './history/history.component';
-import { HistoryItemComponent } from './history/history-item/history-item.component';
-import { HistoryOffcanvasComponent } from './history/history-offcanvas/history-offcanvas.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import { HistorymodalComponent } from './history/historymodal/historymodal.component';
 import {HistoryModule} from "./history/history.module";
+import {CustomersModule} from "./customers/customers.module";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        LoginModule,
-        WasteProcessingModule,
-        SharedModule,
-        HeaderModule,
-        SidebarModule,
-        MatSidenavModule,
-        BrowserAnimationsModule,
-        NgbModule,
-        FormsModule,
-        UsersModule,
-        SettingsModule,
-        MatCheckboxModule,
-        HistoryModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    LoginModule,
+    WasteProcessingModule,
+    SharedModule,
+    HeaderModule,
+    SidebarModule,
+    MatSidenavModule,
+    BrowserAnimationsModule,
+    NgbModule,
+    FormsModule,
+    UsersModule,
+    SettingsModule,
+    MatCheckboxModule,
+    HistoryModule,
+    CustomersModule
+  ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
   ],
