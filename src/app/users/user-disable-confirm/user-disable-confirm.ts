@@ -3,11 +3,11 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {User} from "../../shared/_models/user";
 
 @Component({
-  selector: 'app-disable-confirm-dialog',
-  templateUrl: './disable-confirm-dialog.component.html',
-  styleUrls: ['./disable-confirm-dialog.component.scss']
+  selector: 'app-user-disable-confirm',
+  templateUrl: './user-disable-confirm.html',
+  styleUrls: ['./user-disable-confirm.scss']
 })
-export class DisableConfirmDialogComponent {
+export class UserDisableConfirm {
   @Input() user: User;
 
   constructor(public modal: NgbActiveModal) {

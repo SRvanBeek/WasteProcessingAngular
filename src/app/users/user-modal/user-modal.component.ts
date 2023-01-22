@@ -2,10 +2,13 @@ import {Component, Input, OnInit} from '@angular/core';
 import {User} from "../../shared/_models/user";
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ChangePassDialogComponent} from "../change-pass-dialog/change-pass-dialog.component";
-import {DisableConfirmDialogComponent} from "../disable-confirm-dialog/disable-confirm-dialog.component";
+import {UserDisableConfirm} from "../user-disable-confirm/user-disable-confirm";
 import {UserService} from "../../shared/_services/user.service";
 import {ToastService} from "../../shared/_services/toast.service";
 
+/**
+ * @author Dino Yang
+ */
 @Component({
   selector: 'app-user-modal',
   templateUrl: './user-modal.component.html',
@@ -15,13 +18,16 @@ export class UserModalComponent implements OnInit {
   @Input() user: User;
   isUserAdmin: boolean = false;
 
-  constructor(public activeModal: NgbActiveModal, private modelService: NgbModal, private userService: UserService, private toastService: ToastService) {
+  constructor(public activeModal: NgbActiveModal, private modalService: NgbModal, private userService: UserService, private toastService: ToastService) {
   }
 
   ngOnInit(): void {
     this.setIsUserAdmin();
   }
 
+  /**
+   * setIsUserAdmin() checks whether the logged in user is a admin or not.
+   */
   setIsUserAdmin() {
     this.userService.getRoles(this.user.username).subscribe({
       next: roles => {
@@ -34,14 +40,20 @@ export class UserModalComponent implements OnInit {
     });
   }
 
+  /**
+   * openChangePass() opens the change password modal.
+   */
   openChangePass() {
-    const modelRef = this.modelService.open(ChangePassDialogComponent, {size: "lg"})
+    const modelRef = this.modalService.open(ChangePassDialogComponent, {size: "lg"})
     modelRef.componentInstance.user = this.user;
   }
 
+  /**
+   * openConfirm() opens the confirm modal.
+   */
   openConfirm() {
-    const modelRef = this.modelService.open(DisableConfirmDialogComponent, {size: "lg"})
-    modelRef.componentInstance.user = this.user;
+    const modelRef = this.modalService.open(UserDisableConfirm, {size: "lg"})
+    modelRef.componentInstance.input = this.user;
     modelRef.result.then((data => {
       if (data === 'Yes') {
         this.user.enabled = !this.user.enabled;
@@ -52,6 +64,7 @@ export class UserModalComponent implements OnInit {
           this.toastService.show('', "You've just disabled user " + this.user.username);
         }
       }
-    }))
+    })).catch((res) => {
+    })
   }
 }
