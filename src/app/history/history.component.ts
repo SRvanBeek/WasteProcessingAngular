@@ -42,18 +42,12 @@ export class HistoryComponent implements OnInit {
           }
         }
       })
-    this.fillEmployeeList()
     this.fillCustomerList()
   }
 
-  fillEmployeeList() {
-    this.userService.getAllUsers().subscribe({
-      next: value => {
-        this.userList = value.payload;
-      }
-    })
-  }
-
+  /**
+   * this function gets all the customers
+   */
   fillCustomerList() {
     this.customerService.getAllCustomer().subscribe({
       next: value => {
@@ -113,6 +107,12 @@ export class HistoryComponent implements OnInit {
     })
   }
 
+  /**
+   * this function checks what is selected in the dropdown menu
+   * and than calls the fillCustomerList function if all is chosen
+   * or the fillByCustomer if something else is chosen
+   * @param type is the selected tab in the dropdownmenu
+   */
   getCustomer(type: string) {
     console.log(type)
     this.filterList = type;
@@ -123,6 +123,11 @@ export class HistoryComponent implements OnInit {
     }
   }
 
+  /**
+   * this function looks at what the type is and then gets the leftovers
+   * that belong to that type.
+   * @param type
+   */
   fillByCustomer(type: any) {
     this.leftoverService.getLeftoverByCustomerId(type).subscribe({
       next: value => {

@@ -20,11 +20,4 @@ export class Leftover {
     this._disable = disable;
   }
 
-  get disable(): boolean {
-    return this._disable;
-  }
-
-  set disable(value: boolean) {
-    this._disable = value;
-  }
 }

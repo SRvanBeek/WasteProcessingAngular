@@ -86,6 +86,9 @@ export class HistoryItemComponent implements onInit {
     }
   }
 
+  /**
+   * this function disable the chosen history item and shows a pop up before you disable it.
+   */
   disable(){
     if (confirm("Are you sure you want to disable this order?")) {
       this.leftoverService.putDisableLeftover(this.leftover).subscribe()
