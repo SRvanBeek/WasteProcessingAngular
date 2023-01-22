@@ -56,7 +56,7 @@
       </ul>
     </div>
   </div>
-  <div *ngIf="isDesktop" class="todoShow">
+  <div *ngIf="isDesktop && show" class="todoShow">
     <app-leftover-info-box [list]="todoList" [todo]="selectedTodo" [userId]="userID"
                            (doneOutput)="refresh($event)"></app-leftover-info-box>
   </div>
