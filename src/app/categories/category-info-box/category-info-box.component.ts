@@ -12,7 +12,7 @@ import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {EditCategory} from "../../shared/_models/edit-category.model";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ConditionModalComponent} from "./condition-modal/condition-modal.component";
-import {CategoryService} from "../../shared/_services/category.service";
+import {CategoryJSON, CategoryService, ConvMap} from "../../shared/_services/category.service";
 
 @Component({
   selector: 'app-category-info-box',
@@ -29,7 +29,7 @@ export class CategoryInfoBoxComponent implements OnInit {
   form: FormGroup;
   trueButtonBool = true;
 
-  conditionsList: String[] = [];
+  conditionsList: string[] = [];
 
   constructor(private modalService: NgbModal, private categoryService: CategoryService) {
   }
@@ -97,7 +97,7 @@ export class CategoryInfoBoxComponent implements OnInit {
   }
 
   mapConditions() {
-    let map = new Map<String, String[]>();
+    let map = new Map<string, string[]>();
 
     let conditionValue = (<String>this.form.get('condition')?.value);
     let extraConditionValue = (<FormArray>this.form.get('extraConditions'));
@@ -143,7 +143,21 @@ export class CategoryInfoBoxComponent implements OnInit {
 
     if (this.isCategoryNew) {
       console.log(category);
-      this.categoryService.postCategory(category).subscribe();
+      let conditions: Map<string, string[]> = category.conditions;
+
+      const convMap: ConvMap = {};
+      conditions.forEach((val: string[], key: string) => {
+        convMap[key] = val;
+      });
+
+      console.log(convMap)
+
+      let categoryJson: CategoryJSON = new CategoryJSON()
+      categoryJson.conditions = convMap;
+      categoryJson.name = category.name;
+      categoryJson.enabled = category.enabled;
+      console.log(categoryJson)
+      this.categoryService.postCategory(categoryJson).subscribe();
     } else {
       category.id = this.category.id;
       this.categoryService.putCategory(category).subscribe();
@@ -163,7 +177,7 @@ export class CategoryInfoBoxComponent implements OnInit {
 
   addInput() {
     this.modalService.open(ConditionModalComponent, {size: 'sm', centered: true}).
-    componentInstance.addInputEvent.subscribe((receivedEntry: String[]) => {
+    componentInstance.addInputEvent.subscribe((receivedEntry: string[]) => {
       this.conditionsList.push(receivedEntry[0]);
       (<FormArray>this.form.get('extraConditions')).push(new FormControl(receivedEntry[1], Validators.required));
       }

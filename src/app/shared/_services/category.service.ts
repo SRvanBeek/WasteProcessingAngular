@@ -5,10 +5,27 @@ import {HttpClient} from "@angular/common/http";
 import {CategoryModel} from "../_models/category.model";
 import {EditCategory} from "../_models/edit-category.model";
 
+export interface ConvMap {
+  [key: string]: string[];
+}
+
+export class CategoryJSON {
+  constructor() {
+
+  }
+
+  id: number;
+  name: string;
+  conditions: ConvMap;
+  enabled:boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
+
+
 
   constructor(private http: HttpClient) {
   }
@@ -25,7 +42,7 @@ export class CategoryService {
     return this.http.put<string>(environment.apiUrl + '/api/categories/', category);
   }
 
-  postCategory(category: EditCategory): Observable<string> {
-    return this.http.post<string>(environment.apiUrl + '/api/categories/', category);
+  postCategory(categoryJson: CategoryJSON): Observable<string> {
+    return this.http.post<string>(environment.apiUrl + '/api/categories', categoryJson);
   }
 }
