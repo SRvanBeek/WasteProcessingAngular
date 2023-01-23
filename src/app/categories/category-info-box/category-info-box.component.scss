@@ -86,12 +86,27 @@ h2 {
   font-family: 'Maven Pro', sans-serif;
   color: black;
   padding: 0 .5rem;
-  border: 2px solid #4BC8B6;
+  border: none;
   background-color: gray;
   transition: .5s;
   font-size: 1rem;
   transition-duration: 0.4s;
   margin-left: 1rem;
+}
+
+.cancelButton{
+  border-radius: 5px;
+  font-family: 'Maven Pro', sans-serif;
+  color: black;
+  padding: 0 .5rem;
+  border: none;
+  background-color: gray;
+  transition: .5s;
+  font-size: 1rem;
+  transition-duration: 0.4s;
+  position: absolute;
+  right: 10rem;
+  bottom: 3rem;
 }
 
 .saveButton {

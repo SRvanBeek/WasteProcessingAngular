@@ -10,7 +10,4 @@ export class EditCategory {
     this.conditions = conditions;
     this.enabled = enabled;
   }
-
-
-
 }

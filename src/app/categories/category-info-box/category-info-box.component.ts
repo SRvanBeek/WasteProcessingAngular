@@ -69,18 +69,20 @@ export class CategoryInfoBoxComponent implements OnInit {
         let firstCondition = true;
         for (let key of Object.keys(this.category.conditions)) {
           for (let i = 0; i < Object.values(this.category.conditions).at(index).length; i++) {
-            condition += Object.values(this.category.conditions).at(index)[i] + "%";
-            condition += " " + key;
-            if (firstCondition) {
-              this.form.get('condition')?.patchValue(condition);
-              firstCondition = false;
-            } else {
-              (<FormArray>this.form.get('extraConditions')).push(new FormControl(condition, Validators.required));
+            if (Object.values(this.category.conditions).at(index)[i] != "Overig") {
+              condition += Object.values(this.category.conditions).at(index)[i] + "%";
+              condition += " " + key;
+              if (firstCondition) {
+                this.form.get('condition')?.patchValue(condition);
+                firstCondition = false;
+              } else {
+                (<FormArray>this.form.get('extraConditions')).push(new FormControl(condition, Validators.required));
+              }
+              if (i + 1 < Object.values(this.category.conditions).at(index).length) {
+                this.conditionsList.push("And");
+              }
+              condition = '';
             }
-            if (i + 1 < Object.values(this.category.conditions).at(index).length) {
-              this.conditionsList.push("And");
-            }
-            condition = '';
           }
           if (index + 1 < Object.keys(this.category.conditions).length) {
             this.conditionsList.push("Or");
@@ -139,28 +141,25 @@ export class CategoryInfoBoxComponent implements OnInit {
 
   save() {
     let trueButton = this.trueButtonBool;
+
     let category = new EditCategory(this.form.get('name')?.value, this.mapConditions(), trueButton);
 
+    let conditions: Map<string, string[]> = category.conditions;
+    const convMap: ConvMap = {};
+    conditions.forEach((val: string[], key: string) => {
+      convMap[key] = val;
+    });
+
+    let categoryJson: CategoryJSON = new CategoryJSON();
+    categoryJson.conditions = convMap;
+    categoryJson.name = category.name;
+    categoryJson.enabled = category.enabled;
+
     if (this.isCategoryNew) {
-      console.log(category);
-      let conditions: Map<string, string[]> = category.conditions;
-
-      const convMap: ConvMap = {};
-      conditions.forEach((val: string[], key: string) => {
-        convMap[key] = val;
-      });
-
-      console.log(convMap)
-
-      let categoryJson: CategoryJSON = new CategoryJSON()
-      categoryJson.conditions = convMap;
-      categoryJson.name = category.name;
-      categoryJson.enabled = category.enabled;
-      console.log(categoryJson)
       this.categoryService.postCategory(categoryJson).subscribe();
     } else {
-      category.id = this.category.id;
-      this.categoryService.putCategory(category).subscribe();
+      categoryJson.id = this.category.id;
+      this.categoryService.putCategory(categoryJson).subscribe();
     }
 
     this.initializeForm();

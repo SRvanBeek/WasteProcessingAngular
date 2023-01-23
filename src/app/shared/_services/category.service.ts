@@ -38,7 +38,7 @@ export class CategoryService {
     return this.http.get<any>(environment.apiUrl + '/api/categories');
   }
 
-  putCategory(category: EditCategory): Observable<string> {
+  putCategory(category: CategoryJSON): Observable<string> {
     return this.http.put<string>(environment.apiUrl + '/api/categories/', category);
   }
 
