@@ -15,13 +15,14 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class CategoriesComponent {
   isDesktop: boolean;
+  isCategoryNew: boolean = true;
   screenLGSize: number = 992;
   categoriesList: CategoryModel[] = [];
   selectedCategory: EditCategory;
   infoBox: CategoryInfoBoxComponent;
   searchText: any;
 
-  constructor(private categoryService: CategoryService) {
+  constructor(private categoryService: CategoryService, private modalService: NgbModal) {
   }
 
   @HostListener("window:resize", []) updateIsDesktop() {
@@ -48,19 +49,45 @@ export class CategoriesComponent {
   }
 
   showInfoBox() {
-    document.getElementById("infoBox")!.classList.remove("hide");
+    this.isCategoryNew = true;
+    if (!this.isDesktop) {
+      this.modalService.open(CategoryInfoBoxComponent).componentInstance.isCategoryNew = this.isCategoryNew;
+    } else {
+      document.getElementById("infoBox")!.classList.remove("hide");
+    }
   }
 
+
   showInfoBoxFilled(categoryId: number) {
+    this.isCategoryNew = false;
     this.categoryService.getCategoryNameById(categoryId).subscribe({
       next: value => {
         this.selectedCategory = value.payload;
+        this.initModal(categoryId);
       },
       error: err => {
         console.log(err);
       }
     })
-    document.getElementById("infoBox")!.classList.remove("hide");
+
+  }
+
+  initModal(categoryId: number) {
+    if (!this.isDesktop) {
+      const modal = this.modalService.open(CategoryInfoBoxComponent);
+      modal.componentInstance.category = this.selectedCategory;
+      modal.componentInstance.isCategoryNew = this.isCategoryNew;
+    } else {
+      this.categoryService.getCategoryNameById(categoryId).subscribe({
+        next: value => {
+          this.selectedCategory = value.payload;
+        },
+        error: err => {
+          console.log(err);
+        }
+      })
+      document.getElementById("infoBox")!.classList.remove("hide");
+    }
   }
 
 }
