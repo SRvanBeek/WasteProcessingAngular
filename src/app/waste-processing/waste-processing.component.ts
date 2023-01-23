@@ -27,6 +27,7 @@ export class WasteProcessingComponent implements OnInit {
   show: boolean = true;
 
   @ViewChild(DashboardComponent) child !: DashboardComponent;
+  hdv: boolean = false;
 
   constructor(private leftoverService: LeftoverService, private modalService: NgbModal, private toastService: ToastService) {
   }
@@ -40,6 +41,12 @@ export class WasteProcessingComponent implements OnInit {
     this.fillListAllTypes();
     this.updateIsDesktop();
     this.setUserID();
+    this.setHDV();
+  }
+
+  setHDV() {
+    const hdvOption = localStorage.getItem('hdv');
+    this.hdv = hdvOption === 'enabled';
   }
 
   /**
