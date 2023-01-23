@@ -12,23 +12,39 @@
 
 }
 .dropdownbar {
-  margin-left: 30%;
   width: 10rem;
 }
 .disableButton {
   width: 5rem;
-  margin: 0 5rem;
+  margin: 0 1rem;
   border: none;
   border-radius: 15px;
   background-color: #4BC8B6;
-
 }
+
+.btnCtn {
+   margin-left: 2rem;
+}
+
+.detailsButton {
+  width: 5rem;
+  border: none;
+  border-radius: 15px;
+  background-color: #4BC8B6;
+}
+
+.btnCtn :hover {
+  opacity: 80%;
+}
+
 .searchbar {
   width: 30%;
   border-radius: 8px;
   border: 2px solid #E9E9E9;
+  margin-right: 2rem;
 }
 .filterheader {
+  justify-content: center;
   border-bottom: 2px solid #E9E9E9;
   padding-bottom: 0.5rem;
 
@@ -40,6 +56,5 @@
 
 @media only screen and (max-width: 654px){
   .dropdownbar {
-    margin-left: 10%;
   }
 }
