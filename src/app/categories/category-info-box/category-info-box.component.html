@@ -31,7 +31,7 @@
     <footer>
     <div class="enabledDiv">
       <h4>Enabled?</h4>
-      <button type="button" class="trueButton" (click)="changeTrueButton()" #trueButton>True</button>
+      <button type="button" (click)="changeTrueButton()" [innerText]="trueButtonBool? 'True':'False'" [ngClass]="trueButtonBool? 'trueButton':'disabledTrueButton'">True</button>
     </div>
       <button type="button" class="removeButton" (click)="test()" *ngIf="!isDesktop">Cancel</button>
     <button class="saveButton" type="submit" [disabled]="!form.get('name')?.valid || !form.get('condition')?.valid">Save</button>

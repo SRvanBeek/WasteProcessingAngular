@@ -21,6 +21,7 @@ export class CategoriesComponent {
   selectedCategory: EditCategory;
   infoBox: CategoryInfoBoxComponent;
   searchText: any;
+  hideInfoBox: boolean = true;
 
   constructor(private categoryService: CategoryService, private modalService: NgbModal) {
   }
@@ -86,7 +87,7 @@ export class CategoriesComponent {
           console.log(err);
         }
       })
-      document.getElementById("infoBox")!.classList.remove("hide");
+      this.hideInfoBox = false;
     }
   }
 

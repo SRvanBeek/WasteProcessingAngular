@@ -8,8 +8,6 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {CategoryModel} from "../../shared/_models/category.model";
-import {ConditionInputComponent} from "./condition-input/condition-input.component";
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {EditCategory} from "../../shared/_models/edit-category.model";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
@@ -25,11 +23,11 @@ export class CategoryInfoBoxComponent implements OnInit {
   @Input() category: EditCategory;
   @Input() isCategoryNew: boolean;
   @Input() categoryId: number;
-  @ViewChild('trueButton') trueButton: ElementRef;
 
   isDesktop: boolean;
   screenLGSize: number = 992;
   form: FormGroup;
+  trueButtonBool = true;
 
   conditionsList: String[] = [];
 
@@ -41,12 +39,10 @@ export class CategoryInfoBoxComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initializeForm();
     if (!this.isDesktop) {
-      console.log(this.category);
-      console.log(this.isCategoryNew);
       this.fillForm();
     }
-    this.initializeForm();
   }
 
   ngOnChanges() {
@@ -64,7 +60,6 @@ export class CategoryInfoBoxComponent implements OnInit {
 
   fillForm() {
     if (this.category != null) {
-      const trueButton = this.trueButton.nativeElement;
       this.conditionsList = [];
       (<FormArray>this.form.get('extraConditions')).clear();
       if (!this.isCategoryNew) {
@@ -92,51 +87,74 @@ export class CategoryInfoBoxComponent implements OnInit {
           }
           index++
         }
-        if (this.category.enabled) {
-          trueButton.classList.remove('disabledTrueButton');
-          trueButton.classList.add('trueButton');
-          trueButton.innerText = 'True';
-        } else {
-          trueButton.classList.add('disabledTrueButton');
-          trueButton.classList.remove('trueButton');
-          trueButton.innerText = 'False';
-        }
+        this.trueButtonBool = this.category.enabled;
       } else {
-        trueButton.classList.remove('disabledTrueButton');
-        trueButton.classList.add('trueButton');
-        trueButton.innerText = 'True';
+        this.trueButtonBool = true;
         this.initializeForm();
 
       }
     }
   }
 
-  save() {
-    let trueButton = this.trueButton.nativeElement.innerText == 'True';
+  mapConditions() {
+    let map = new Map<String, String[]>();
 
-    let testObject = this.form.get('condition')?.value;
+    let conditionValue = (<String>this.form.get('condition')?.value);
+    let extraConditionValue = (<FormArray>this.form.get('extraConditions'));
 
-    let testObject2 = this.form.get('name')?.value;
+    let key = conditionValue.slice(conditionValue.indexOf("%") + 2);
+    let item = conditionValue.slice(0, conditionValue.indexOf("%"));
+    let itemArray = [item];
 
-    let final = {
-      testObject,
-      testObject2
-    };
+    if (this.conditionsList.length > 0) {
+      let firstCondition = true;
+      for (let i = 0; i < this.conditionsList.length; i++) {
 
-    console.log(final);
-
-
-
-
-    let category = new EditCategory(this.form.get('name')?.value, this.form.get('condition')?.value, trueButton);
-    if (this.isCategoryNew) {
-
+        if (this.conditionsList.at(i) == "And") {
+          if (firstCondition) {
+            firstCondition = false;
+            i--;
+          } else {
+            itemArray.push(extraConditionValue.at(i).value.slice(0, extraConditionValue.at(i).value.indexOf("%")));
+            map.set(key, itemArray);
+          }
+        } else if (this.conditionsList.at(i) == "Or") {
+          if (firstCondition) {
+            firstCondition = false;
+            i--;
+          } else {
+            key = extraConditionValue.at(i).value.slice(extraConditionValue.at(i).value.indexOf("%") + 2);
+            itemArray = [];
+            itemArray.push(extraConditionValue.at(i).value.slice(0, extraConditionValue.at(i).value.indexOf("%")));
+          }
+          map.set(key, itemArray);
+        }
+      }
     } else {
-      category.id = this.category.id;
-      console.log(category);
-      console.log(testObject);
+      map.set(key, itemArray);
     }
 
+    return map;
+  }
+
+  save() {
+    let trueButton = this.trueButtonBool;
+    let category = new EditCategory(this.form.get('name')?.value, this.mapConditions(), trueButton);
+
+    if (this.isCategoryNew) {
+      console.log(category);
+      this.categoryService.postCategory(category).subscribe();
+    } else {
+      category.id = this.category.id;
+      this.categoryService.putCategory(category).subscribe();
+    }
+
+    this.initializeForm();
+    if (!this.isDesktop) {
+
+    } else {
+
+    }
   }
 
   getControls() {
@@ -146,7 +164,6 @@ export class CategoryInfoBoxComponent implements OnInit {
   addInput() {
     this.modalService.open(ConditionModalComponent, {size: 'sm', centered: true}).
     componentInstance.addInputEvent.subscribe((receivedEntry: String[]) => {
-      console.log(receivedEntry);
       this.conditionsList.push(receivedEntry[0]);
       (<FormArray>this.form.get('extraConditions')).push(new FormControl(receivedEntry[1], Validators.required));
       }
@@ -164,14 +181,6 @@ export class CategoryInfoBoxComponent implements OnInit {
   }
 
   changeTrueButton() {
-    if (this.trueButton.nativeElement.innerText == 'True') {
-      this.trueButton.nativeElement.classList.add('disabledTrueButton');
-      this.trueButton.nativeElement.classList.remove('trueButton');
-      this.trueButton.nativeElement.innerText = 'False';
-    } else {
-      this.trueButton.nativeElement.classList.remove('disabledTrueButton');
-      this.trueButton.nativeElement.classList.add('trueButton');
-      this.trueButton.nativeElement.innerText = 'True';
-    }
+    this.trueButtonBool = !this.trueButtonBool;
   }
 }

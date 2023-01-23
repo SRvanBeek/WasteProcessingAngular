@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {CategoryModel} from "../_models/category.model";
+import {EditCategory} from "../_models/edit-category.model";
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +21,11 @@ export class CategoryService {
     return this.http.get<any>(environment.apiUrl + '/api/categories');
   }
 
-  putCategory(category: CategoryModel): Observable<string> {
+  putCategory(category: EditCategory): Observable<string> {
     return this.http.put<string>(environment.apiUrl + '/api/categories/', category);
   }
 
-  postCategory(category: CategoryModel): Observable<string> {
+  postCategory(category: EditCategory): Observable<string> {
     return this.http.post<string>(environment.apiUrl + '/api/categories/', category);
   }
 }
