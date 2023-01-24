@@ -1,4 +1,4 @@
-import {Component, HostListener, Input} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
 import {Leftover} from "../../shared/_models/leftover.model";
 import {OrdersService} from "../../shared/_services/orders.service";
 import {WasteService} from "../../shared/_services/waste.service";
@@ -20,6 +20,7 @@ interface onInit {
 })
 export class HistoryItemComponent implements onInit {
   @Input() leftover: Leftover
+  @Output() refresh = new EventEmitter<Leftover>();
   loading: boolean = true;
   employeeName: string;
   customerName: string;
@@ -89,6 +90,7 @@ export class HistoryItemComponent implements onInit {
   disable(){
     if (confirm("Are you sure you want to disable this order?")) {
       this.leftoverService.putDisableLeftover(this.leftover).subscribe()
+      this.refresh.emit(this.leftover);
     }
 
   }

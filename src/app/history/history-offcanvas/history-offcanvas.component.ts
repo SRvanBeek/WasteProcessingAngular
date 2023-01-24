@@ -29,7 +29,11 @@ export class HistoryOffcanvasComponent {
       this.articleService.getOneArticle(this.articleNumber)
         .subscribe({next: response => {
           this.article = response.payload;
-          }})
+          },
+          complete(){
+            console.log("done")
+          }
+        })
       this.leftoverService.getOneLeftover(this.leftoverid).subscribe({next: response => {
           console.log(response)
         this.leftover = response.payload;
@@ -39,6 +43,7 @@ export class HistoryOffcanvasComponent {
           next: response => {
             this.employeeName = response.message;
           }
+
         })
     }
 

@@ -26,10 +26,10 @@ export class HistorymodalComponent implements OnInit{
    * this function gets the extra information that is needed to display.
    */
   ngOnInit() {
-    console.log(this.articleNumber)
     this.articleService.getOneArticle(this.articleNumber).subscribe({next: response => {
           this.article = response.payload;
-        }})
+        }
+    })
     this.leftoverService.getOneLeftover(this.leftoverid).subscribe({next: response => {
         this.leftover = response.payload;
       }})
