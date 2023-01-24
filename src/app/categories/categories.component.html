@@ -32,7 +32,7 @@
     </div>
   </div>
   <div *ngIf="isDesktop" class="todoShow">
-   <app-category-info-box id="infoBox" [category]="selectedCategory" [isCategoryNew]="isCategoryNew" [ngClass]="hideInfoBox? 'hide' : ''"></app-category-info-box>
+   <app-category-info-box id="infoBox" (refresh)="refresh()" [category]="selectedCategory" [isCategoryNew]="isCategoryNew" [ngClass]="hideInfoBox? 'hide' : ''"></app-category-info-box>
   </div>
 </div>
 

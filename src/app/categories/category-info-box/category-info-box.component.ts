@@ -1,18 +1,19 @@
 import {
   Component,
-  ElementRef,
+  ElementRef, EventEmitter,
   HostListener,
   Input,
-  OnInit,
+  OnInit, Output,
   TemplateRef,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {EditCategory} from "../../shared/_models/edit-category.model";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ConditionModalComponent} from "./condition-modal/condition-modal.component";
 import {CategoryJSON, CategoryService, ConvMap} from "../../shared/_services/category.service";
+import {ToastService} from "../../shared/_services/toast.service";
 
 @Component({
   selector: 'app-category-info-box',
@@ -23,15 +24,16 @@ export class CategoryInfoBoxComponent implements OnInit {
   @Input() category: EditCategory;
   @Input() isCategoryNew: boolean;
   @Input() categoryId: number;
+  @Output() refresh = new EventEmitter<void>();
 
   isDesktop: boolean;
   screenLGSize: number = 992;
   form: FormGroup;
-  trueButtonBool = true;
+  trueButtonBool: boolean = true;
 
   conditionsList: string[] = [];
 
-  constructor(private modalService: NgbModal, private categoryService: CategoryService) {
+  constructor(private modalService: NgbModal, private categoryService: CategoryService, private toastService: ToastService) {
   }
 
   @HostListener("window:resize", []) updateIsDesktop() {
@@ -53,9 +55,35 @@ export class CategoryInfoBoxComponent implements OnInit {
   initializeForm() {
     this.form = new FormGroup({
       'name': new FormControl(null, Validators.required),
-      'condition': new FormControl(null, Validators.required),
+      'condition': new FormControl(null, [Validators.required, this.createPercentValidator(), this.createBracketValidator()]),
       'extraConditions': new FormArray([])
     });
+  }
+
+  createPercentValidator(): ValidatorFn {
+    return (control:AbstractControl) : ValidationErrors | null => {
+      const value = control.value;
+      if (!value) {
+        return null;
+      }
+
+      const hasPercentage = /%+/.test(value);
+
+      return !hasPercentage ? {noPercentage:true}: null;
+    }
+  }
+
+  createBracketValidator(): ValidatorFn {
+    return (control:AbstractControl) : ValidationErrors | null => {
+      const value = control.value;
+      if (!value) {
+        return null;
+      }
+
+      const hasBracket = /[<>]+/.test(value);
+
+      return !hasBracket && !value.includes("100") ? {noBracket:true}: null;
+    }
   }
 
   fillForm() {
@@ -92,7 +120,7 @@ export class CategoryInfoBoxComponent implements OnInit {
         this.trueButtonBool = this.category.enabled;
       } else {
         this.trueButtonBool = true;
-        this.initializeForm();
+        this.form.reset();
 
       }
     }
@@ -139,7 +167,9 @@ export class CategoryInfoBoxComponent implements OnInit {
     return map;
   }
 
+
   save() {
+
     let trueButton = this.trueButtonBool;
 
     let category = new EditCategory(this.form.get('name')?.value, this.mapConditions(), trueButton);
@@ -155,18 +185,30 @@ export class CategoryInfoBoxComponent implements OnInit {
     categoryJson.name = category.name;
     categoryJson.enabled = category.enabled;
 
+    let message: string;
+    let header: string;
+
+    console.log(categoryJson);
+    console.log(this.isCategoryNew);
+
     if (this.isCategoryNew) {
+      console.log(categoryJson);
       this.categoryService.postCategory(categoryJson).subscribe();
+      message = "You added category " + this.form.get('name')?.value;
+      header = "Category added!";
     } else {
       categoryJson.id = this.category.id;
       this.categoryService.putCategory(categoryJson).subscribe();
+      message = "You updated category " + this.form.get('name')?.value;
+      header = "Category updated!";
     }
 
-    this.initializeForm();
+    this.toastService.show(header , message);
+    this.form.reset();
     if (!this.isDesktop) {
 
     } else {
-
+      this.refresh.emit();
     }
   }
 
@@ -188,9 +230,8 @@ export class CategoryInfoBoxComponent implements OnInit {
     this.conditionsList.splice(conditionIndex, 1);
   }
 
-  test() {
-    console.log("this works");
-    console.log(this.category);
+  closeModal() {
+    console.log("hi");
   }
 
   changeTrueButton() {

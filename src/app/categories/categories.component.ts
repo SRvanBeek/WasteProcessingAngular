@@ -58,6 +58,11 @@ export class CategoriesComponent {
     }
   }
 
+  refresh() {
+    setTimeout(() => {
+      this.fillCategoryList();
+    }, 100)
+  }
 
   showInfoBoxFilled(categoryId: number) {
     this.isCategoryNew = false;
@@ -75,7 +80,7 @@ export class CategoriesComponent {
 
   initModal(categoryId: number) {
     if (!this.isDesktop) {
-      const modal = this.modalService.open(CategoryInfoBoxComponent);
+      const modal = this.modalService.open(CategoryInfoBoxComponent, {fullscreen: true});
       modal.componentInstance.category = this.selectedCategory;
       modal.componentInstance.isCategoryNew = this.isCategoryNew;
     } else {
