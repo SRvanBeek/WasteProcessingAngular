@@ -38,11 +38,12 @@ export class CategoryService {
     return this.http.get<any>(environment.apiUrl + '/api/categories');
   }
 
-  putCategory(category: CategoryJSON): Observable<string> {
+  putCategory(category: CategoryJSON): Observable<any> {
     return this.http.put<string>(environment.apiUrl + '/api/categories/', category);
   }
 
-  postCategory(categoryJson: CategoryJSON): Observable<string> {
+  postCategory(categoryJson: CategoryJSON): Observable<any> {
+    console.log("asdghyufvbjk");
     return this.http.post<string>(environment.apiUrl + '/api/categories', categoryJson);
   }
 }

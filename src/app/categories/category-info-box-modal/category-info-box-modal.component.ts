@@ -11,17 +11,17 @@ import {
 import {AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {EditCategory} from "../../shared/_models/edit-category.model";
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {ConditionModalComponent} from "./condition-modal/condition-modal.component";
 import {CategoryJSON, CategoryService, ConvMap} from "../../shared/_services/category.service";
 import {ToastService} from "../../shared/_services/toast.service";
 import {first} from "rxjs";
+import {ConditionModalComponent} from "../category-info-box/condition-modal/condition-modal.component";
 
 @Component({
-  selector: 'app-category-info-box',
-  templateUrl: './category-info-box.component.html',
-  styleUrls: ['./category-info-box.component.scss']
+  selector: 'app-category-info-box-modal',
+  templateUrl: './category-info-box-modal.component.html',
+  styleUrls: ['./category-info-box-modal.component.scss']
 })
-export class CategoryInfoBoxComponent implements OnInit {
+export class CategoryInfoBoxModalComponent implements OnInit {
   @Input() category: EditCategory;
   @Input() isCategoryNew: boolean;
   @Input() categoryId: number;
@@ -33,7 +33,8 @@ export class CategoryInfoBoxComponent implements OnInit {
   trueButtonBool: boolean = true;
   conditionsList: string[] = [];
 
-  constructor(public modalService: NgbModal, private categoryService: CategoryService, private toastService: ToastService) {
+  constructor(public modalService: NgbModal, private categoryService: CategoryService,
+              private toastService: ToastService, public ActiveModalService: NgbActiveModal) {
   }
 
   @HostListener("window:resize", []) updateIsDesktop() {
@@ -169,7 +170,6 @@ export class CategoryInfoBoxComponent implements OnInit {
 
 
   save() {
-
     let trueButton = this.trueButtonBool;
 
     let category = new EditCategory(this.form.get('name')?.value, this.mapConditions(), trueButton);
@@ -190,7 +190,6 @@ export class CategoryInfoBoxComponent implements OnInit {
 
 
     if (this.isCategoryNew) {
-      console.log(categoryJson);
       this.categoryService.postCategory(categoryJson).pipe(first()).subscribe({
         next: response => {
           if (response.code == "ACCEPTED") {
@@ -228,11 +227,7 @@ export class CategoryInfoBoxComponent implements OnInit {
     }
 
     this.form.reset();
-    if (!this.isDesktop) {
-
-    } else {
-      this.refresh.emit();
-    }
+    this.ActiveModalService.close();
   }
 
   getControls() {
@@ -242,19 +237,15 @@ export class CategoryInfoBoxComponent implements OnInit {
   addInput() {
     this.modalService.open(ConditionModalComponent, {size: 'sm', centered: true}).
     componentInstance.addInputEvent.subscribe((receivedEntry: string[]) => {
-      this.conditionsList.push(receivedEntry[0]);
-      (<FormArray>this.form.get('extraConditions')).push(new FormControl(receivedEntry[1], Validators.required));
+        this.conditionsList.push(receivedEntry[0]);
+        (<FormArray>this.form.get('extraConditions')).push(new FormControl(receivedEntry[1], Validators.required));
       }
-      );
+    );
   }
 
   removeCondition(conditionIndex: number) {
     (<FormArray>this.form.get('extraConditions')).removeAt(conditionIndex);
     this.conditionsList.splice(conditionIndex, 1);
-  }
-
-  closeModal() {
-    console.log("hi");
   }
 
   changeTrueButton() {

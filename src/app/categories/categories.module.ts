@@ -5,6 +5,7 @@ import {CategoryInfoBoxComponent} from "./category-info-box/category-info-box.co
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ConditionModalComponent } from './category-info-box/condition-modal/condition-modal.component';
 import {SharedModule} from "../shared/shared.module";
+import { CategoryInfoBoxModalComponent } from './category-info-box-modal/category-info-box-modal.component';
 
 
 
@@ -13,7 +14,8 @@ import {SharedModule} from "../shared/shared.module";
   declarations: [
     CategoriesComponent,
     CategoryInfoBoxComponent,
-    ConditionModalComponent
+    ConditionModalComponent,
+    CategoryInfoBoxModalComponent
   ],
   imports: [
     CommonModule,

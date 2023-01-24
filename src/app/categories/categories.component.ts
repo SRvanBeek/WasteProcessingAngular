@@ -1,11 +1,10 @@
-import {Component, HostListener, ViewChild} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {CategoryService} from "../shared/_services/category.service";
 import {CategoryModel} from "../shared/_models/category.model";
 import {EditCategory} from "../shared/_models/edit-category.model";
 import {CategoryInfoBoxComponent} from "./category-info-box/category-info-box.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-
-
+import {CategoryInfoBoxModalComponent} from "./category-info-box-modal/category-info-box-modal.component";
 
 
 @Component({
@@ -52,7 +51,11 @@ export class CategoriesComponent {
   showInfoBox() {
     this.isCategoryNew = true;
     if (!this.isDesktop) {
-      this.modalService.open(CategoryInfoBoxComponent).componentInstance.isCategoryNew = this.isCategoryNew;
+      const modal = this.modalService.open(CategoryInfoBoxModalComponent, {fullscreen: true});
+      modal.componentInstance.isCategoryNew = this.isCategoryNew;
+      modal.result.finally((() => {
+        this.refresh();
+      }));
     } else {
       document.getElementById("infoBox")!.classList.remove("hide");
     }
@@ -80,9 +83,12 @@ export class CategoriesComponent {
 
   initModal(categoryId: number) {
     if (!this.isDesktop) {
-      const modal = this.modalService.open(CategoryInfoBoxComponent, {fullscreen: true});
+      const modal = this.modalService.open(CategoryInfoBoxModalComponent, {fullscreen: true});
       modal.componentInstance.category = this.selectedCategory;
       modal.componentInstance.isCategoryNew = this.isCategoryNew;
+      modal.result.finally(() => {
+        this.refresh();
+      });
     } else {
       this.categoryService.getCategoryNameById(categoryId).subscribe({
         next: value => {
