@@ -26,9 +26,6 @@ export class HistoryItemComponent implements onInit {
   historyObject: any;
   isDesktop: boolean;
   screenLGSize: number = 992;
-  disableList: [];
-
-
 
   constructor(private ordersService: OrdersService,
               private wasteService: WasteService,

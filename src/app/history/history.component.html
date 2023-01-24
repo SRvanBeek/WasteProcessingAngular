@@ -13,6 +13,7 @@
     <option value="all" selected>All-Customers</option>
     <option *ngFor="let customer of customerList; let i = index" value="{{customer.customerID}}" >{{customer.customerID}}</option>
   </select>
+  <button class="disableButton col-sm-2" id="done" (click)="refresh()">Refresh</button>
   <input class="searchbar" type="text" name="search" [(ngModel)]="searchText" placeholder="Search...">
 
 </div>

@@ -141,5 +141,8 @@ export class HistoryComponent implements OnInit {
     })
 
   }
+  refresh(){
+    this.fillListAllTypes()
+  }
 }
 

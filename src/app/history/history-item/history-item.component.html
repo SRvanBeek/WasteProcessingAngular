@@ -1,7 +1,7 @@
 <div [ngClass]="isDesktop? 'desktop' : 'mobile'">
     <li *ngIf="!loading && !isDesktop"  >
       <div class="row rowborder">
-        <mat-checkbox style="width: 100px" (change)="disable()"></mat-checkbox>
+        <mat-checkbox style="width: 100px" (change)="disable()" ></mat-checkbox>
         <div class="row col-sm-10"  (click)="OpenModal()">
         <div class="col-sm-2 overflow-hidden">{{leftover.artikelnummer}}</div>
         <div class="col-sm-2 overflow-hidden">{{customerName}}</div>
