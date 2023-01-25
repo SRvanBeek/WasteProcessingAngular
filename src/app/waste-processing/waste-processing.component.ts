@@ -137,7 +137,6 @@ export class WasteProcessingComponent implements OnInit {
 
   private openMobileInfo() {
     const modalRef = this.modalService.open(ToDoModalComponent, {fullscreen: true});
-    console.log(this.userID)
     modalRef.componentInstance.userId = this.userID;
     modalRef.componentInstance.list = this.todoList;
     modalRef.componentInstance.todo = this.selectedTodo;
