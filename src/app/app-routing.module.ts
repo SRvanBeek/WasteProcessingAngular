@@ -8,7 +8,6 @@ import {CategoriesComponent} from "./categories/categories.component";
 import {HistoryComponent} from "./history/history.component";
 import {CustomersComponent} from "./customers/customers.component";
 
-
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'wasteProc', component: WasteProcessingComponent},
@@ -21,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
