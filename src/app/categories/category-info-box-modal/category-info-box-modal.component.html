@@ -4,7 +4,7 @@
         <input type="text" class="categoryName" placeholder="Name"
                value="" formControlName="name" name="categoryName">
         <button type="button" class="cross" (click)="ActiveModalService.close()" *ngIf="!isDesktop">&#10005;</button>
-        <span *ngIf="!form.get('name')?.valid && form.get('name')?.touched">Please enter a name!</span>
+        <span *ngIf="!form.get('name')?.valid && form.get('name')?.touched" style="color: red;">Please enter a name!</span>
       </div>
       <div class="content">
         <div class="conditionsDiv">
@@ -12,7 +12,7 @@
           <div class="conditions">
             <div>
               <input type="text" class="inputBox" formControlName="condition" name="categoryVoorwaarde1" required>
-              <span style="font-size: 0.8rem; margin-left: 1rem;" *ngIf="!form.get('condition')?.valid && form.get('condition')?.touched">You need at least 1 condition!
+              <span style="font-size: 0.8rem; margin-left: 1rem; color: red;" *ngIf="!form.get('condition')?.valid && form.get('condition')?.touched">You need at least 1 condition!
             You need at least 1 of the following: < or > and %</span>
             </div>
           </div>
@@ -24,7 +24,7 @@
                 <h5 *ngIf="conditionsList[i] == 'And'">And</h5>
                 <input type="text" class="inputBox"  name="condition" [formControlName]="i">
                 <button type="button" class="removeButton" (click)="removeCondition(i)">Rem.</button>
-                <span style="font-size: 0.8rem; margin-left: 1rem;" *ngIf="!conditionControl.valid && conditionControl.touched">You need at least 1 of the following: < or > and %</span>
+                <span style="font-size: 0.8rem; margin-left: 1rem; color: red;" *ngIf="!conditionControl.valid && conditionControl.touched">You need at least 1 of the following: < or > and %</span>
               </div>
             </div>
           </div>
