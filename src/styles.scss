@@ -13,6 +13,11 @@ span {
   font-family: 'Maven Pro', sans-serif;
 }
 
+.cdk-overlay-container {
+  position: fixed;
+  z-index: 1000000;
+}
+
 p {
   font-family: 'Maven Pro', sans-serif;
   font-size: 10px;
@@ -46,22 +51,35 @@ h3 {
   border-radius: 10px;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 
 #inputForm {
   .mat-mdc-form-field:not(.mat-form-field-no-animations) .mdc-floating-label {
     font-family: 'Maven Pro', sans-serif;
   }
+
   .mat-mdc-checkbox label {
     font-family: 'Maven Pro', sans-serif;
   }
-  .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background, .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate~.mdc-checkbox__background, .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control[data-indeterminate=true]:enabled~.mdc-checkbox__background {
+
+  .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background, .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate ~ .mdc-checkbox__background, .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control[data-indeterminate=true]:enabled ~ .mdc-checkbox__background {
     border-color: #4BC8B6;
     background-color: #4BC8B6;
   }
-  .mat-mdc-checkbox.mat-accent .mdc-checkbox--selected~.mdc-checkbox__ripple {
+
+  .mat-mdc-checkbox.mat-accent .mdc-checkbox--selected ~ .mdc-checkbox__ripple {
     background: #F4812B;
   }
+}
+
+.modalWidth .modal-dialog {
+  max-width: 600px;
 }

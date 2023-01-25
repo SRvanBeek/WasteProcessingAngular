@@ -1,14 +1,12 @@
-import {post} from "jquery";
-
 export class Customer {
   customerID: string;
   min_meter: number;
-  max_meter:number;
+  max_meter: number;
   address: string;
   country: string;
   postalCode: string;
   city: string;
-  enabled:boolean
+  enabled: boolean
 
 
   constructor(customerID: string, min_meter: number, max_meter: number, address: string, country: string, postalCode: string, city: string, enabled: boolean) {

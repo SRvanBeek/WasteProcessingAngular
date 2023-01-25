@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {DashboardService} from "./service/dashboard.service";
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 
 /**
  * @author Stijn van Beek
@@ -19,7 +20,7 @@ export class DashboardComponent {
   categories: string[];
   composition: string[];
 
-  constructor(public dashboardService: DashboardService) {
+  constructor(public dashboardService: DashboardService, public modal: NgbActiveModal) {
   }
 
   ngOnInit() {
@@ -79,5 +80,9 @@ export class DashboardComponent {
         this.composition = value.payload;
       }
     });
+  }
+
+  ConvertNumber(string: string) {
+    return Number(string);
   }
 }

@@ -38,7 +38,7 @@
       </ul>
     </div>
   </div>
-  <div *ngIf="isDesktop" class="userShow">
+  <div *ngIf="isDesktop && show" class="userShow">
     <app-user-info [user]="selectedUser"></app-user-info>
   </div>
 </div>

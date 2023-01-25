@@ -19,4 +19,8 @@ export class ArticleService {
   getOneArticle(id: string): Observable<any> {
     return this.http.get<any>(environment.apiUrl + '/api/articles/' + id);
   }
+
+  getCustomerByArticle(id: string): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/articles/byArticleId/' + id);
+  }
 }
