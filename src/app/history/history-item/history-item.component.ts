@@ -1,4 +1,4 @@
-import {Component, HostListener, Input} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
 import {Leftover} from "../../shared/_models/leftover.model";
 import {OrdersService} from "../../shared/_services/orders.service";
 import {WasteService} from "../../shared/_services/waste.service";
@@ -8,6 +8,7 @@ import {NgbModal, NgbOffcanvas} from "@ng-bootstrap/ng-bootstrap";
 import {HistoryOffcanvasComponent} from "../history-offcanvas/history-offcanvas.component";
 import {ArticleService} from "../../shared/_services/article.service";
 import {HistorymodalComponent} from "../historymodal/historymodal.component";
+import {LeftoverService} from "../../shared/_services/leftover.service";
 
 interface onInit {
 }
@@ -19,6 +20,7 @@ interface onInit {
 })
 export class HistoryItemComponent implements onInit {
   @Input() leftover: Leftover
+  @Output() refresh = new EventEmitter<Leftover>();
   loading: boolean = true;
   employeeName: string;
   customerName: string;
@@ -26,14 +28,14 @@ export class HistoryItemComponent implements onInit {
   isDesktop: boolean;
   screenLGSize: number = 992;
 
-
   constructor(private ordersService: OrdersService,
               private wasteService: WasteService,
               private voorraadService: VoorraadService,
               private userService: UserService,
               private offcanvasService: NgbOffcanvas,
               private articleService: ArticleService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private leftoverService: LeftoverService) {
   }
 
   /**
@@ -80,6 +82,17 @@ export class HistoryItemComponent implements onInit {
     } else {
       console.log("Something went very wrong!!")
     }
+  }
+
+  /**
+   * this function disable the chosen history item and shows a pop up before you disable it.
+   */
+  disable(){
+    if (confirm("Are you sure you want to disable this order?")) {
+      this.leftoverService.putDisableLeftover(this.leftover).subscribe()
+      this.refresh.emit(this.leftover);
+    }
+
   }
 
   /**

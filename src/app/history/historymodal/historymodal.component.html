@@ -2,8 +2,8 @@
   <h4 class="modal-title">Article: {{articleNumber}}</h4>
   <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.close()"></button>
 </div>
-<div class="modal-body">
-    <h5 class="col-sm-2 top" ><b>{{this.leftover.type}}</b></h5>
+<div class="modal-body" *ngIf="leftover != null && article != null && employeeName != null">
+    <h5 class="col-sm-2 top" ><b>{{leftover.type}}</b></h5>
     <div class="flexbox canvas">
       <div>
         <p> ID:</p>
@@ -25,7 +25,7 @@
   </div>
 
 
-  <div class="margin">
+  <div class="margin" *ngIf="leftover != null && article != null && employeeName != null">
     <h5 class="col-sm-2 top" ><b>Article</b></h5>
     <div class="flexbox canvas">
       <div>

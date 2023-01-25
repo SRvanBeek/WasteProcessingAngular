@@ -6,6 +6,10 @@
     font-size: 1rem;
   }
 }
+.topbar{
+  margin-top: .5rem;
+  margin-bottom: 2rem;
+}
 
 .size {
   width: 100%;
@@ -13,6 +17,12 @@
 }
 .dropdownbar {
   width: 10rem;
+}
+
+.dropdownbar2 {
+  margin-left: 1%;
+  width: 10rem;
+  margin-right: 1%;
 }
 .disableButton {
   width: 5rem;
@@ -38,7 +48,7 @@
 }
 
 .searchbar {
-  width: 30%;
+  width: 25%;
   border-radius: 8px;
   border: 2px solid #E9E9E9;
   margin-right: 2rem;

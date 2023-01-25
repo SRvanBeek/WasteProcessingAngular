@@ -3,7 +3,12 @@ import {LeftoverService} from "../shared/_services/leftover.service";
 import {Leftover} from "../shared/_models/leftover.model";
 import {HistorymodalComponent} from "./historymodal/historymodal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {User} from "../shared/_models/user";
+import {UserService} from "../shared/_services/user.service";
+import {CustomerService} from "../shared/_services/customer.service";
+import {Customer} from "../shared/_models/customer.model";
 import {DashboardComponent} from "../shared/_modals/dashboard/dashboard.component";
+
 
 
 @Component({
@@ -15,9 +20,12 @@ export class HistoryComponent implements OnInit {
   searchText: any;
   searchList: string[] = [];
   leftovers: Leftover[] = [];
+  userList: User[] = [];
   filterList: string = 'all';
+  customerList: Customer[] = [];
 
-  constructor(private leftoverService: LeftoverService, public modalService: NgbModal) {
+
+  constructor(private leftoverService: LeftoverService, public modalService: NgbModal, private userService: UserService, private customerService: CustomerService) {
 
   }
 
@@ -26,10 +34,28 @@ export class HistoryComponent implements OnInit {
    */
   ngOnInit() {
     this.leftoverService.getAllLeftoversProcessed(true)
-      .subscribe({next: value => {
-        this.leftovers = value.payload;
+      .subscribe({
+        next: value => {
+          this.leftovers = [];
+          for (let leftover of value.payload) {
+            if (leftover.disable == false) {
+              this.leftovers.push(leftover);
+            }
+          }
+        }
+      })
+    this.fillCustomerList()
+  }
 
-        }})
+  /**
+   * this function gets all the customers
+   */
+  fillCustomerList() {
+    this.customerService.getAllCustomer().subscribe({
+      next: value => {
+        this.customerList = value.payload;
+      }
+    })
   }
 
   /**
@@ -55,7 +81,7 @@ export class HistoryComponent implements OnInit {
       next: value => {
         this.leftovers = [];
         for (let todo of value.payload) {
-          if (todo.processed == true) {
+          if (todo.processed == true && todo.disable == false) {
             this.leftovers.push(todo);
           }
         }
@@ -75,7 +101,7 @@ export class HistoryComponent implements OnInit {
       next: value => {
         this.leftovers = [];
         for (let todo of value.payload) {
-          if (todo.processed == true) {
+          if (todo.processed == true && todo.disable == false) {
             this.leftovers.push(todo);
           }
         }
@@ -83,7 +109,54 @@ export class HistoryComponent implements OnInit {
     })
   }
 
+  /**
+   * this function checks what is selected in the dropdown menu
+   * and than calls the fillCustomerList function if all is chosen
+   * or the fillByCustomer if something else is chosen
+   * @param type is the selected tab in the dropdownmenu
+   */
+  getCustomer(type: string) {
+    console.log(type)
+    this.filterList = type;
+    if (type == 'all') {
+      this.fillListAllTypes();
+    } else {
+      this.fillByCustomer(type);
+    }
+  }
+
+  /**
+   * this function looks at what the type is and then gets the leftovers
+   * that belong to that type.
+   * @param type
+   */
+  fillByCustomer(type: any) {
+    this.leftoverService.getLeftoverByCustomerId(type).subscribe({
+      next: value => {
+        this.leftovers = [];
+        for (let todo of value.payload) {
+          if (todo.processed == true && todo.disable == false) {
+            this.leftovers.push(todo);
+          }
+        }
+      }
+    })
+
+  }
+
+  /**
+   * refreshes the view if something got deleted
+   */
+  refresh() {
+    setTimeout(() => {
+      this.fillListAllTypes()
+    }, 100);
+  }
+
+
   openDetails() {
     this.modalService.open(DashboardComponent, {windowClass: 'modalWidth'});
+
   }
 }
+

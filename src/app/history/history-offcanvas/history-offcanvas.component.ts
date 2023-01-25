@@ -26,13 +26,11 @@ export class HistoryOffcanvasComponent {
    * this function gets the extra information that is needed to display.
    */
   ngOnInit() {
-    console.log(this.historyObject.leftoverID)
       this.articleService.getOneArticle(this.articleNumber)
         .subscribe({next: response => {
           this.article = response.payload;
           }})
       this.leftoverService.getOneLeftover(this.leftoverid).subscribe({next: response => {
-          console.log(response)
         this.leftover = response.payload;
         }})
       this.userService.getUsernameById(this.historyObject.userId)
@@ -42,5 +40,4 @@ export class HistoryOffcanvasComponent {
           }
         })
     }
-
 }

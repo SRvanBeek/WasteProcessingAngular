@@ -38,6 +38,10 @@ export class CustomerService {
   customerExists(id: string): Observable<any> {
     return this.http.get<any>(environment.apiUrl + "/api/customers/exist/" + id);
   }
+  getAllCustomer(): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + "/api/customers")
+
+  }
 }
 
 
