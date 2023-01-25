@@ -147,10 +147,11 @@ export class HistoryComponent implements OnInit {
   /**
    * refreshes the view if something got deleted
    */
-  refresh(){
+  refresh() {
     setTimeout(() => {
       this.fillListAllTypes()
     }, 100);
+  }
 
 
   openDetails() {
