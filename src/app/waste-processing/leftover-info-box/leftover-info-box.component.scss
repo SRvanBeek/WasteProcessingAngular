@@ -81,8 +81,9 @@ h2 {
   color: black;
 }
 
-.doneButton:disabled{
+.disabled{
   background-color: gray;
+  cursor: default;
 }
 
 .doneButton:focus:not(:focus-visible):not(.focus-visible) {
