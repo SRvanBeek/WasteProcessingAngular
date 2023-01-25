@@ -7,6 +7,10 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {CategoryInfoBoxModalComponent} from "./category-info-box-modal/category-info-box-modal.component";
 
 
+/**
+ * @Author Noah Elstgeest
+ */
+
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
@@ -34,6 +38,10 @@ export class CategoriesComponent {
     this.fillCategoryList();
   }
 
+  /**
+   * fillCategoryList() gets all the categories from the database and puts them into categorieslist.
+   */
+
   fillCategoryList() {
     this.categoryService.getAllCategories().subscribe({
       next: value => {
@@ -48,6 +56,10 @@ export class CategoriesComponent {
     })
   }
 
+  /**
+   * showInfoBox() shows the infobox component with an empty form. If it's not opened on desktop it will open a modal instead.
+   */
+
   showInfoBox() {
     this.isCategoryNew = true;
     if (!this.isDesktop) {
@@ -57,15 +69,26 @@ export class CategoriesComponent {
         this.refresh();
       }));
     } else {
-      document.getElementById("infoBox")!.classList.remove("hide");
+      this.hideInfoBox = false;
     }
   }
+
+  /**
+   * refresh() refreshes the categoriesList.
+   */
 
   refresh() {
     setTimeout(() => {
       this.fillCategoryList();
     }, 100)
   }
+
+  /**
+   * showInfoBoxFilled() shows the infobox component with a form filled with the given category data.
+   * If it's not opened on desktop, it calls initModal instead.
+   *
+   * @param categoryId category to fill the form with.
+   */
 
   showInfoBoxFilled(categoryId: number) {
     this.isCategoryNew = false;
@@ -81,9 +104,15 @@ export class CategoriesComponent {
 
   }
 
+  /**
+   * initializes the modal and gives the category to the infoboxmodal component.
+   *
+   * @param categoryId category to fill the form with.
+   */
+
   initModal(categoryId: number) {
     if (!this.isDesktop) {
-      const modal = this.modalService.open(CategoryInfoBoxModalComponent, {fullscreen: true});
+      const modal = this.modalService.open(CategoryInfoBoxModalComponent, {size: "lg"});
       modal.componentInstance.category = this.selectedCategory;
       modal.componentInstance.isCategoryNew = this.isCategoryNew;
       modal.result.finally(() => {

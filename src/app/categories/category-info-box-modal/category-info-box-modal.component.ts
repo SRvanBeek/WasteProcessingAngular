@@ -1,12 +1,9 @@
 import {
   Component,
-  ElementRef, EventEmitter,
+  EventEmitter,
   HostListener,
   Input,
   OnInit, Output,
-  TemplateRef,
-  ViewChild,
-  ViewContainerRef
 } from '@angular/core';
 import {AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {EditCategory} from "../../shared/_models/edit-category.model";
@@ -15,6 +12,10 @@ import {CategoryJSON, CategoryService, ConvMap} from "../../shared/_services/cat
 import {ToastService} from "../../shared/_services/toast.service";
 import {first} from "rxjs";
 import {ConditionModalComponent} from "../category-info-box/condition-modal/condition-modal.component";
+
+/**
+ * @author Noah Elstgeest
+ */
 
 @Component({
   selector: 'app-category-info-box-modal',
@@ -53,6 +54,10 @@ export class CategoryInfoBoxModalComponent implements OnInit {
     this.fillForm();
   }
 
+  /**
+   * initializeForm() initializes the reactive form.
+   */
+
   initializeForm() {
     this.form = new FormGroup({
       'name': new FormControl(null, Validators.required),
@@ -60,6 +65,10 @@ export class CategoryInfoBoxModalComponent implements OnInit {
       'extraConditions': new FormArray([])
     });
   }
+
+  /**
+   * createPercentValidator() creates a custom validator that checks whether the input has a %.
+   */
 
   createPercentValidator(): ValidatorFn {
     return (control:AbstractControl) : ValidationErrors | null => {
@@ -74,6 +83,11 @@ export class CategoryInfoBoxModalComponent implements OnInit {
     }
   }
 
+  /**
+   * createPercentValidator() creates a custom validator that checks whether the input has a < or a >
+   * and checks if the value is not 100.
+   */
+
   createBracketValidator(): ValidatorFn {
     return (control:AbstractControl) : ValidationErrors | null => {
       const value = control.value;
@@ -86,6 +100,11 @@ export class CategoryInfoBoxModalComponent implements OnInit {
       return !hasBracket && !value.includes("100") ? {noBracket:true}: null;
     }
   }
+
+  /**
+   * fillForm() fills the form with the category that is given via the input. For each condition that is in the category,
+   * a new form control gets created in the extraConditions form array with the value (which is also manipulated) inside.
+   */
 
   fillForm() {
     if (this.category != null) {
@@ -126,6 +145,13 @@ export class CategoryInfoBoxModalComponent implements OnInit {
       }
     }
   }
+
+  /**
+   * mapConditions() takes the conditions of the values inside the condition and extra conditions form controls
+   * and puts them inside a map.
+   *
+   * @return A map with the conditions inside.
+   */
 
   mapConditions() {
     let map = new Map<string, string[]>();
@@ -168,6 +194,10 @@ export class CategoryInfoBoxModalComponent implements OnInit {
     return map;
   }
 
+  /**
+   * save() puts or posts all the values from the form and the map and gives a toast when it succeeds of fails.
+   * It then resets the form, closes the modal and refreshes the categories.
+   */
 
   save() {
     let trueButton = this.trueButtonBool;
@@ -230,9 +260,20 @@ export class CategoryInfoBoxModalComponent implements OnInit {
     this.ActiveModalService.close();
   }
 
+  /**
+   * getControls() gives form controls of the extraConditions.
+   *
+   * @return form controls of the extraConditions.
+   */
+
   getControls() {
     return (<FormArray>this.form.get('extraConditions')).controls;
   }
+
+  /**
+   * addInput() opens the condition modal and creates a new input in the extra conditions form array.
+   * It then puts the received data of the condition modal inside the extra Conditions input.
+   */
 
   addInput() {
     this.modalService.open(ConditionModalComponent, {size: 'sm', centered: true}).
@@ -243,10 +284,20 @@ export class CategoryInfoBoxModalComponent implements OnInit {
     );
   }
 
+  /**
+   *  removeCondition() removes an input from the extra conditions.
+   *
+   * @param conditionIndex Index of the input that needs to be deleted inside the extra conditions form array.
+   */
+
   removeCondition(conditionIndex: number) {
     (<FormArray>this.form.get('extraConditions')).removeAt(conditionIndex);
     this.conditionsList.splice(conditionIndex, 1);
   }
+
+  /**
+   * changeTrueButton() changes the true or false button to true or false.
+   */
 
   changeTrueButton() {
     this.trueButtonBool = !this.trueButtonBool;

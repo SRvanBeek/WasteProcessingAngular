@@ -3,7 +3,6 @@
   <div class="header flexBox">
     <input type="text" class="categoryName" placeholder="Name"
            value="" formControlName="name" name="categoryName">
-    <button type="button" class="cross" (click)="closeModal()" *ngIf="!isDesktop">&#10005;</button>
     <span *ngIf="!form.get('name')?.valid && form.get('name')?.touched">Please enter a name!</span>
   </div>
   <div class="content">
