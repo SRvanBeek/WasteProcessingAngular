@@ -34,7 +34,7 @@ export class UserInfoComponent implements OnInit {
   }
 
   /**
-   * setIsSuperAdmin() checks whether the logged in user is a SuperAdmin or not.
+   * setIsSuperAdmin() checks whether the selected user is a SuperAdmin or not.
    */
   setIsSuperAdmin() {
     this.userService.getRoles(this.user.username).subscribe({
@@ -49,7 +49,7 @@ export class UserInfoComponent implements OnInit {
   }
 
   /**
-   * setIsUserAdmin() checks whether the logged in user is a admin or not.
+   * setIsUserAdmin() checks whether the selected user is a admin or not.
    */
   setIsUserAdmin() {
     this.userService.getRoles(this.user.username).subscribe({

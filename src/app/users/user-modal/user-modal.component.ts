@@ -17,12 +17,14 @@ import {ToastService} from "../../shared/_services/toast.service";
 export class UserModalComponent implements OnInit {
   @Input() user: User;
   isUserAdmin: boolean = false;
+  isSuperAdmin: boolean = false;
 
   constructor(public activeModal: NgbActiveModal, private modalService: NgbModal, private userService: UserService, private toastService: ToastService) {
   }
 
   ngOnInit(): void {
     this.setIsUserAdmin();
+    this.setIsSuperAdmin();
   }
 
   /**
@@ -35,6 +37,22 @@ export class UserModalComponent implements OnInit {
           this.isUserAdmin = true;
         } else {
           this.isUserAdmin = false;
+        }
+      }
+    });
+  }
+
+
+  /**
+   * setIsSuperAdmin() checks whether the selected user is a SuperAdmin or not.
+   */
+  setIsSuperAdmin() {
+    this.userService.getRoles(this.user.username).subscribe({
+      next: roles => {
+        if (roles.filter((e: { name: string; }) => e.name === 'ROLE_SUPERADMIN').length > 0) {
+          this.isSuperAdmin = true;
+        } else {
+          this.isSuperAdmin = false;
         }
       }
     });
