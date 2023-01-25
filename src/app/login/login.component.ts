@@ -49,12 +49,10 @@ export class LoginComponent implements OnInit, OnDestroy{
       if (this.isDesktop && (window.innerWidth < this.desktopWidth || window.innerHeight < this.desktopHeight)) {
         this.initLoginForm()
         this.isDesktop = false;
-        console.log(this.isDesktop)
       }
       if (!this.isDesktop && (window.innerWidth >= this.desktopWidth && window.innerHeight >= this.desktopHeight)) {
         this.initLoginForm()
         this.isDesktop = true;
-        console.log(this.isDesktop)
       }
     })
   }
@@ -70,10 +68,12 @@ export class LoginComponent implements OnInit, OnDestroy{
     return this.loginForm.controls;
   }
 
+  /**
+   * attempts to log in the user with the credentials received from the form
+   */
   login() {
     this.submitted = true;
 
-    // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
     }
@@ -85,7 +85,6 @@ export class LoginComponent implements OnInit, OnDestroy{
       .pipe(first())
       .subscribe({
         next: () => {
-          // get return url from route parameters or default to '/'
           const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/wasteProc';
           this.router.navigate([returnUrl]);
         },
