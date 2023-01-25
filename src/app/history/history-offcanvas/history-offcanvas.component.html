@@ -9,8 +9,8 @@
 </div>
 <hr style="margin: 0">
 <div class="offcanvas-body">
-  <div>
-    <h5 class="col-sm-2 top" ><b>{{leftover.type}}</b></h5>
+  <div *ngIf="leftover!= null && article!= null && employeeName != null">
+    <h5 class="col-sm-2 top" ><b>{{this.leftover.type}}</b></h5>
     <div class="flexbox canvas">
       <div>
         <p> ID:</p>
@@ -32,7 +32,7 @@
   </div>
 
 
-  <div class="margin">
+  <div class="margin" *ngIf="leftover != null && article != null && employeeName != null">
     <h5 class="col-sm-2 top" ><b>Article</b></h5>
     <div class="flexbox canvas">
     <div>

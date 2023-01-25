@@ -40,6 +40,7 @@ export class CustomerService {
   }
   getAllCustomer(): Observable<any> {
     return this.http.get<any>(environment.apiUrl + "/api/customers")
+
   }
 }
 

@@ -7,6 +7,8 @@ import {User} from "../shared/_models/user";
 import {UserService} from "../shared/_services/user.service";
 import {CustomerService} from "../shared/_services/customer.service";
 import {Customer} from "../shared/_models/customer.model";
+import {DashboardComponent} from "../shared/_modals/dashboard/dashboard.component";
+
 
 
 @Component({
@@ -145,10 +147,15 @@ export class HistoryComponent implements OnInit {
   /**
    * refreshes the view if something got deleted
    */
-  refresh(){
+  refresh() {
     setTimeout(() => {
       this.fillListAllTypes()
     }, 100);
+  }
+
+
+  openDetails() {
+    this.modalService.open(DashboardComponent, {windowClass: 'modalWidth'});
 
   }
 }
