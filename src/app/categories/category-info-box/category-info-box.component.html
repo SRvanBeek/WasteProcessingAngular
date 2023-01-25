@@ -12,7 +12,7 @@
         <div>
           <input type="text" class="inputBox" formControlName="condition" name="categoryVoorwaarde1" required>
           <span style="font-size: 0.8rem; margin-left: 1rem; color: red;" *ngIf="!form.get('condition')?.valid && form.get('condition')?.touched">You need at least 1 condition!
-            You need at least 1 of the following: < or > and %</span>
+            You need at least 1 of the following: < or > and %. Also a value of 100 cannot have < or >. Example: >50%, <40% or 100%</span>
         </div>
       </div>
       <div class="conditions">
