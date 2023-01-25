@@ -15,7 +15,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {LabelPreviewComponent} from "../../shared/label-preview/label-preview.component";
 import {CustomerService} from "../../shared/_services/customer.service";
 import {WasteLabelComponent} from "../../shared/waste-label/waste-label.component";
-import {start} from "@popperjs/core";
+import {ToastService} from "../../shared/_services/toast.service";
 
 
 /**
@@ -41,7 +41,8 @@ export class LeftoverInfoBoxComponent {
   constructor(private articleService: ArticleService, private leftoverService: LeftoverService,
               private orderService: OrdersService, private wasteService: WasteService,
               private categoryService: CategoryService, private voorraadService: VoorraadService,
-              private modalService: NgbModal, private customerService: CustomerService
+              private modalService: NgbModal, private customerService: CustomerService,
+              private toastService: ToastService
   ) {
   }
 
@@ -82,6 +83,10 @@ export class LeftoverInfoBoxComponent {
    * done() sets the processed attribute of the selected leftover to true and updates the catWaste/storage/order with the right userId, date and enabled.
    */
   done() {
+    if (!this.downloaded) {
+      this.toastService.show('', 'You need to download the label first!');
+      return ;
+    }
     this.leftoverService.getOneLeftover(this.todo.id).subscribe(value => {
       let leftover: Leftover = value.payload;
       leftover.processed = true;
@@ -117,6 +122,7 @@ export class LeftoverInfoBoxComponent {
     let outputList = this.list.filter(leftover => {
       return leftover.id !== this.todo.id;
     })
+    this.toastService.show('', "You've just processed a Leftover.\n Good Job!");
     this.doneOutput.emit(outputList);
   }
 

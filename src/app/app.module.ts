@@ -12,12 +12,14 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {UsersModule} from "./users/users.module";
 import {SettingsModule} from "./settings/settings.module";
+import {CategoriesModule} from "./categories/categories.module";
 import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {HistoryModule} from "./history/history.module";
 import {CustomersModule} from "./customers/customers.module";
+
 
 
 @NgModule({
@@ -39,9 +41,11 @@ import {CustomersModule} from "./customers/customers.module";
     FormsModule,
     UsersModule,
     SettingsModule,
+    CategoriesModule,
     MatCheckboxModule,
     HistoryModule,
     CustomersModule
+
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

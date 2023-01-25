@@ -5,8 +5,6 @@ import {Article} from "../_models/article";
 import {ArticleService} from "../_services/article.service";
 import {LeftoverService} from "../_services/leftover.service";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {WasteService} from "../_services/waste.service";
-import {Waste} from "../_models/waste.model";
 
 /**
  * @Author Roy van Delft

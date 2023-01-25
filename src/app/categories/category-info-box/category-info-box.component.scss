@@ -1,0 +1,203 @@
+.categoryName {
+  margin: 1.3rem;
+  padding: 0.5rem;
+  border: 2px solid #DCDDE1;
+  border-radius: 5px;
+  font-size: 2rem;
+  width: 30%;
+}
+
+.cross {
+  border: none;
+  background-color: white;
+  font-size: 3rem;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+.conditions {
+  display: block;
+}
+
+.enabledDiv{
+  margin-top: 2rem;
+}
+
+.conditionsDiv {
+  height: 45vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100%;
+}
+
+.mainBox {
+  background-color: white;
+}
+
+.header {
+  border-bottom: #DCDDE1 2px solid;
+
+  h1 {
+    margin: 1rem;
+  }
+}
+
+.inputBox {
+  border: 2px solid #DCDDE1;
+  border-radius: 5px;
+}
+
+.content {
+  margin: 3rem 1rem;
+  height: 100%;
+}
+
+.first {
+  width: 50%;
+}
+
+.list > li > h2 {
+  margin-top: 1rem;
+}
+
+.list > li {
+  display: flex;
+  list-style: none;
+  border-bottom: 1px solid #DCDDE1;
+  width: 80%;
+}
+
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+.trueButton {
+  border-radius: 5px;
+  font-family: 'Maven Pro', sans-serif;
+  color: black;
+  padding: 0.5rem 2rem;
+  border: none;
+  background-color: #4BC8B6;
+  transition: .5s;
+  font-size: 1.3rem;
+  margin-top: 1rem;
+}
+
+.removeButton{
+  border-radius: 5px;
+  font-family: 'Maven Pro', sans-serif;
+  color: black;
+  padding: 0 .5rem;
+  border: none;
+  background-color: gray;
+  transition: .5s;
+  font-size: 1rem;
+  transition-duration: 0.4s;
+  margin-left: 1rem;
+}
+
+.cancelButton{
+  border-radius: 5px;
+  font-family: 'Maven Pro', sans-serif;
+  color: black;
+  padding: 0 .5rem;
+  border: none;
+  background-color: gray;
+  transition: .5s;
+  font-size: 1rem;
+  transition-duration: 0.4s;
+  position: absolute;
+  right: 10rem;
+  bottom: 3rem;
+}
+
+.saveButton {
+  border-radius: 5px;
+  font-family: 'Maven Pro', sans-serif;
+  color: black;
+  padding: .5rem;
+  border: none;
+  background-color: #4BC8B6;
+  transition: .5s;
+  font-size: 2rem;
+  position: absolute;
+  right: 3rem;
+  bottom: 3rem;
+}
+
+.saveButton:disabled{
+  background-color: gray;
+}
+
+.addButton {
+  border-radius: 5px;
+  font-family: 'Maven Pro', sans-serif;
+  color: black;
+  padding: 0 .5rem;
+  border: none;
+  background-color: #4BC8B6;
+  transition: .5s;
+  font-size: 1.3rem;
+  margin-top: 1rem;
+}
+
+.addButton:disabled {
+  background-color: gray;
+}
+
+.addButton:hover:disabled {
+  background-color: gray;
+}
+
+.removeButton:hover{
+  background-color: #4BC8B6;
+  color: black;
+}
+
+.disabledTrueButton {
+  border-radius: 5px;
+  font-family: 'Maven Pro', sans-serif;
+  color: black;
+  padding: 0.5rem 2rem;
+  border: none;
+  background-color: gray;
+  transition: .5s;
+  font-size: 1.3rem;
+  margin-top: 1rem;
+}
+
+.saveButton:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+.saveButton:hover {
+  background-color: #3da294;
+}
+
+.saveButton:hover:disabled {
+  background-color: gray;
+}
+
+.saveButton:active {
+  background-color: #94d3a2;
+}
+
+.addButton:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+.addButton:hover {
+  background-color: #3da294;
+}
+
+.addButton:active {
+  background-color: #94d3a2;
+}

@@ -27,6 +27,7 @@ export class HistoryItemComponent implements onInit {
   historyObject: any;
   isDesktop: boolean;
   screenLGSize: number = 992;
+  isAdmin: boolean;
 
   constructor(private ordersService: OrdersService,
               private wasteService: WasteService,
@@ -82,6 +83,7 @@ export class HistoryItemComponent implements onInit {
     } else {
       console.log("Something went very wrong!!")
     }
+    this.setAdmin();
   }
 
   /**
@@ -93,6 +95,17 @@ export class HistoryItemComponent implements onInit {
       this.refresh.emit(this.leftover);
     }
 
+  }
+
+  setAdmin(): void {
+    let jwt = localStorage.getItem('JwtToken');
+    if (jwt) {
+      let jwtData = jwt.split('.')[1];
+      let decodedJwtJsonData = window.atob(jwtData);
+      let decodedJwtData = JSON.parse(decodedJwtJsonData);
+      let roles = decodedJwtData.roles;
+      this.isAdmin = roles[0] == 'ROLE_ADMIN';
+    }
   }
 
   /**
