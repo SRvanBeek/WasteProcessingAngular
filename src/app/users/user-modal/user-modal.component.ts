@@ -17,12 +17,17 @@ import {ToastService} from "../../shared/_services/toast.service";
 export class UserModalComponent implements OnInit {
   @Input() user: User;
   isUserAdmin: boolean = false;
+  isUserSuperAdmin: boolean = false;
+
+  isSuperAdmin: boolean = false;
 
   constructor(public activeModal: NgbActiveModal, private modalService: NgbModal, private userService: UserService, private toastService: ToastService) {
   }
 
   ngOnInit(): void {
+    this.checkLoggedInUser();
     this.setIsUserAdmin();
+    this.setIsSuperAdmin();
   }
 
   /**
@@ -31,13 +36,43 @@ export class UserModalComponent implements OnInit {
   setIsUserAdmin() {
     this.userService.getRoles(this.user.username).subscribe({
       next: roles => {
-        if (roles.filter((e: { name: string; }) => e.name === 'ROLE_ADMIN').length > 0) {
+        if (roles.payload.filter((e: { name: string; }) => e.name === 'ROLE_ADMIN').length > 0) {
           this.isUserAdmin = true;
         } else {
           this.isUserAdmin = false;
         }
       }
     });
+  }
+
+
+  /**
+   * setIsSuperAdmin() checks whether the selected user is a SuperAdmin or not.
+   */
+  setIsSuperAdmin() {
+    this.userService.getRoles(this.user.username).subscribe({
+      next: roles => {
+        if (roles.payload.filter((e: { name: string; }) => e.name === 'ROLE_SUPERADMIN').length > 0) {
+          this.isUserSuperAdmin = true;
+        } else {
+          this.isUserSuperAdmin = false;
+        }
+      }
+    });
+  }
+
+  checkLoggedInUser() {
+    let jwt = localStorage.getItem('JwtToken');
+    if (jwt) {
+      let jwtData = jwt.split('.')[1];
+      let decodedJwtJsonData = window.atob(jwtData);
+      let decodedJwtData = JSON.parse(decodedJwtJsonData);
+      let roles: any = decodedJwtData.roles;
+
+      if (roles.includes("ROLE_SUPERADMIN")) {
+        this.isSuperAdmin = true;
+      }
+    }
   }
 
   /**
@@ -52,8 +87,9 @@ export class UserModalComponent implements OnInit {
    * openConfirm() opens the confirm modal.
    */
   openConfirm() {
+    console.log(this.user)
     const modelRef = this.modalService.open(UserDisableConfirm, {size: "lg"})
-    modelRef.componentInstance.input = this.user;
+    modelRef.componentInstance.user = this.user;
     modelRef.result.then((data => {
       if (data === 'Yes') {
         this.user.enabled = !this.user.enabled;

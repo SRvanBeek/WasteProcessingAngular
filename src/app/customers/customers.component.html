@@ -30,7 +30,7 @@
               <p style="width: 20%">{{customer.enabled ? 'True' : 'False'}}</p>
             </span>
             <span *ngIf="isDesktop" (click)="customerDetail(customer, i)" [class.active]="selectedIndex === i">
-              <p style="width: 30%; margin-left: 1rem">{{customer.customerID}}</p>
+              <p style="width: 30%; margin-left: 1rem">{{(customer.customerID.length > 10) ? (customer.customerID | slice:0:10) + '...' : (customer.customerID)}}</p>
               <p style="width: 20%">{{customer.min_meter}}</p>
               <p style="width: 20%">{{customer.max_meter}}</p>
               <p style="width: 20%">{{customer.enabled ? 'True' : 'False'}}</p>

@@ -115,7 +115,6 @@ export class HistoryComponent implements OnInit {
    * @param type is the selected tab in the dropdownmenu
    */
   getCustomer(type: string) {
-    console.log(type)
     this.filterList = type;
     if (type == 'all') {
       this.fillListAllTypes();

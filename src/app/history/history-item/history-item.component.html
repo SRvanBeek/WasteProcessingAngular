@@ -1,4 +1,4 @@
-<div [ngClass]="isDesktop? 'desktop' : 'mobile'">
+<div [ngClass]="isDesktop? 'desktop' : 'mobile'" *ngIf="leftover != null && employeeName != null && historyObject != null">
     <li *ngIf="!loading && !isDesktop"  >
       <div class="row rowborder">
         <div style="width: 100px" >

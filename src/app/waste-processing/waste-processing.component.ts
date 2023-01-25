@@ -116,9 +116,11 @@ export class WasteProcessingComponent implements OnInit {
     this.leftoverService.getAllByType(type).subscribe({
       next: value => {
         this.todoList = [];
-        for (let todo of value.payload) {
-          if (!todo.processed) {
-            this.todoList.push(todo);
+        if (value.payload) {
+          for (let todo of value.payload) {
+            if (!todo.processed) {
+              this.todoList.push(todo);
+            }
           }
         }
       }
