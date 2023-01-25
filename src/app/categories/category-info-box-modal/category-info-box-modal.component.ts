@@ -126,7 +126,7 @@ export class CategoryInfoBoxModalComponent implements OnInit {
                 this.form.get('condition')?.patchValue(condition);
                 firstCondition = false;
               } else {
-                (<FormArray>this.form.get('extraConditions')).push(new FormControl(condition, Validators.required));
+                (<FormArray>this.form.get('extraConditions')).push(new FormControl(condition, [Validators.required, this.createPercentValidator(), this.createBracketValidator()]));
               }
               if (i + 1 < Object.values(this.category.conditions).at(index).length) {
                 this.conditionsList.push("And");
@@ -226,6 +226,8 @@ export class CategoryInfoBoxModalComponent implements OnInit {
         next: response => {
           if (response.code == "ACCEPTED") {
             header = "Category added!";
+            this.form.reset();
+            this.ActiveModalService.close();
           } else {
             header = "Failed to add category!";
           }
@@ -244,6 +246,8 @@ export class CategoryInfoBoxModalComponent implements OnInit {
         next: response => {
           if (response.code == "ACCEPTED") {
             header = "Category updated!";
+            this.form.reset();
+            this.ActiveModalService.close();
           } else {
             header = "Update failed!";
           }
@@ -258,8 +262,6 @@ export class CategoryInfoBoxModalComponent implements OnInit {
       });
     }
 
-    this.form.reset();
-    this.ActiveModalService.close();
   }
 
   /**
@@ -281,7 +283,7 @@ export class CategoryInfoBoxModalComponent implements OnInit {
     this.modalService.open(ConditionModalComponent, {size: 'sm', centered: true}).
     componentInstance.addInputEvent.subscribe((receivedEntry: string[]) => {
         this.conditionsList.push(receivedEntry[0]);
-        (<FormArray>this.form.get('extraConditions')).push(new FormControl(receivedEntry[1], Validators.required));
+        (<FormArray>this.form.get('extraConditions')).push(new FormControl(receivedEntry[1], [Validators.required, this.createPercentValidator(), this.createBracketValidator()]));
       }
     );
   }

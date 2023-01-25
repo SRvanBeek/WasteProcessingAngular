@@ -221,11 +221,12 @@ export class CategoryInfoBoxComponent implements OnInit {
 
 
     if (this.isCategoryNew) {
-      console.log(categoryJson);
       this.categoryService.postCategory(categoryJson).pipe(first()).subscribe({
         next: response => {
           if (response.code == "ACCEPTED") {
             header = "Category added!";
+            this.form.reset();
+            this.refresh.emit();
           } else {
             header = "Failed to add category!";
           }
@@ -244,6 +245,8 @@ export class CategoryInfoBoxComponent implements OnInit {
         next: response => {
           if (response.code == "ACCEPTED") {
             header = "Category updated!";
+            this.form.reset();
+            this.refresh.emit();
           } else {
             header = "Update failed!";
           }
@@ -257,9 +260,6 @@ export class CategoryInfoBoxComponent implements OnInit {
         }
       });
     }
-
-    this.form.reset();
-    this.refresh.emit();
   }
 
   /**

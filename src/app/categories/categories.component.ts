@@ -63,7 +63,7 @@ export class CategoriesComponent {
   showInfoBox() {
     this.isCategoryNew = true;
     if (!this.isDesktop) {
-      const modal = this.modalService.open(CategoryInfoBoxModalComponent, {fullscreen: true});
+      const modal = this.modalService.open(CategoryInfoBoxModalComponent, {size: "lg"});
       modal.componentInstance.isCategoryNew = this.isCategoryNew;
       modal.result.finally((() => {
         this.refresh();
@@ -80,7 +80,8 @@ export class CategoriesComponent {
   refresh() {
     setTimeout(() => {
       this.fillCategoryList();
-    }, 100)
+      this.hideInfoBox = true;
+    }, 100);
   }
 
   /**
