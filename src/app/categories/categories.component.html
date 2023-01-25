@@ -24,7 +24,7 @@
             <span class="overflowHidden" (click)="showInfoBoxFilled(category.id)">
                 <p style="width: 20%; margin-left: 1.2rem">{{category.id}}</p>
                 <p style="width: 30%">{{category.name}}</p>
-                <p style="width: 40%">{{category.voorwaarde}}</p>
+                <p style="width: 40%">{{(category.voorwaarde.length > 30) ? (category.voorwaarde | slice:0:30) + '...' : (category.voorwaarde)}}</p>
             </span>
           </div>
         </li>
