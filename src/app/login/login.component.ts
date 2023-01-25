@@ -3,8 +3,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from "../shared/_services/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {first, fromEvent, Observable, Subscription} from "rxjs";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {environment} from "../../environments/environment";
+import {HttpClient} from "@angular/common/http";
+
+/**
+ * @author Stijn van Beek
+ */
 
 @Component({
   selector: 'app-login',

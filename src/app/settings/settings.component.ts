@@ -5,6 +5,10 @@ import {CutProgramService} from "../shared/_services/cut-program.service";
 import {first, Observable} from "rxjs";
 import {Tooltip} from "bootstrap";
 
+/**
+ * @author Stijn van Beek
+ */
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
