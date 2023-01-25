@@ -8,7 +8,9 @@ import {
 import {AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {EditCategory} from "../../shared/_models/edit-category.model";
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {CategoryJSON, CategoryService, ConvMap} from "../../shared/_services/category.service";
+import {CategoryService} from "../../shared/_services/category.service";
+import {CategoryJSON} from "../../shared/_models/category-json.model";
+import {ConvMap} from "../../shared/_models/conv-map";
 import {ToastService} from "../../shared/_services/toast.service";
 import {first} from "rxjs";
 import {ConditionModalComponent} from "../category-info-box/condition-modal/condition-modal.component";

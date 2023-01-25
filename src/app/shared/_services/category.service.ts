@@ -2,23 +2,8 @@ import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {CategoryModel} from "../_models/category.model";
-import {EditCategory} from "../_models/edit-category.model";
+import {CategoryJSON} from "../_models/category-json.model";
 
-export interface ConvMap {
-  [key: string]: string[];
-}
-
-export class CategoryJSON {
-  constructor() {
-
-  }
-
-  id: number;
-  name: string;
-  conditions: ConvMap;
-  enabled:boolean;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +28,6 @@ export class CategoryService {
   }
 
   postCategory(categoryJson: CategoryJSON): Observable<any> {
-    console.log("asdghyufvbjk");
     return this.http.post<string>(environment.apiUrl + '/api/categories', categoryJson);
   }
 }
