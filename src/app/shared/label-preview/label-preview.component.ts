@@ -55,7 +55,6 @@ export class LabelPreviewComponent implements OnInit {
    * @param leftOverID The ID of the selected leftover
    */
   setCustomer(leftOverID: number){
-    console.log(leftOverID)
     this.customerService.getCustomerByLeftoverID(leftOverID).subscribe(value =>{
       this.customer = value.payload
   }, error => {},
