@@ -6,6 +6,9 @@ import {User} from "../../shared/_models/user";
 import {UserService} from "../../shared/_services/user.service";
 import {ToastService} from "../../shared/_services/toast.service";
 
+/**
+ * @author Dino Yang
+ */
 @Component({
   selector: 'app-change-pass-dialog',
   templateUrl: './change-pass-dialog.component.html',
@@ -46,6 +49,9 @@ export class ChangePassDialogComponent implements OnInit {
     return this.password.controls;
   }
 
+  /**
+   * onSubmit() checks whether there are any errors in the form. If there are none, it puts the user to API.
+   */
   onSubmit() {
     if (this.password.invalid) {
       return;

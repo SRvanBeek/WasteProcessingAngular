@@ -5,6 +5,10 @@ import {CutProgramService} from "../shared/_services/cut-program.service";
 import {first, Observable} from "rxjs";
 import {Tooltip} from "bootstrap";
 
+/**
+ * @author Stijn van Beek
+ */
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -13,7 +17,6 @@ import {Tooltip} from "bootstrap";
 export class SettingsComponent {
   leftoverForm: FormGroup;
   randomLeftoverForm: FormGroup;
-  toolTipMessage: string = "tooltip";
   loading: boolean = false;
   toastMessage: string;
   isAdmin: boolean;
@@ -47,6 +50,10 @@ export class SettingsComponent {
     this.setAdmin();
   }
 
+  /**
+   * validates if value is a number or not
+   * @param control
+   */
   numberValidator(control: FormControl): Promise<any> | Observable<any> {
     return new Promise<any>((resolve) => {
       if (isNaN(control.value)) {
@@ -57,7 +64,9 @@ export class SettingsComponent {
     });
   };
 
-
+  /**
+   * checks if logged-in user is an admin
+   */
   setAdmin(): void {
     let jwt = localStorage.getItem('JwtToken');
     if (jwt) {
@@ -77,6 +86,9 @@ export class SettingsComponent {
     return this.randomLeftoverForm.controls
   }
 
+  /**
+   * submits a leftover to the database
+   */
   addLeftover() {
     this.loading = true;
     let metrage: number = +(this.leftoverFormControls['metrage'].value);
@@ -87,13 +99,12 @@ export class SettingsComponent {
           if (response.code == "ACCEPTED") {
             this.toastMessage = response.message;
             this.success = true
-          }
-          else {
+          } else {
             this.toastMessage = response.message;
             this.success = false
           }
         },
-        error: err =>  {
+        error: err => {
           console.log(err)
           this.loading = false
         },
@@ -105,21 +116,24 @@ export class SettingsComponent {
 
   }
 
+  /**
+   * adds a given amount of randomly generated leftovers to the database.
+   */
   addRandomLeftovers() {
     this.loading = true;
     this.cutProgram.addRandomLeftovers(this.randomLeftoverFormControls['leftoverAmount'].value)
       .pipe(first())
-      .subscribe({next: response => {
+      .subscribe({
+        next: response => {
           if (response.code == "ACCEPTED") {
             this.toastMessage = response.message;
             this.success = true
-          }
-          else {
+          } else {
             this.toastMessage = response.message;
             this.success = false
           }
         },
-        error: err =>  {
+        error: err => {
           console.log(err)
           this.loading = false
         },
@@ -139,14 +153,15 @@ export class SettingsComponent {
     }
   }
 
+  /**
+   * sets high distance view settings in localstorage to enaled or false.
+   */
   changeDistanceView() {
     if (localStorage.getItem("hdv") !== SettingsComponent.enabled) {
       localStorage.setItem("hdv", SettingsComponent.enabled)
-    }
-    else {
-      localStorage.setItem("hdv", '')
+    } else {
+      localStorage.setItem("hdv", 'False')
     }
     this.highDistanceView = localStorage.getItem("hdv")
-    console.log(this.highDistanceView)
   }
 }

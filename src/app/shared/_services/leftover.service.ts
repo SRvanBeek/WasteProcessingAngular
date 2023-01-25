@@ -16,6 +16,10 @@ export class LeftoverService {
     return this.http.get<any>(environment.apiUrl + '/api/leftover');
   }
 
+  getAllLeftoversProcessed(processed: boolean): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/leftover/byProcessed/' + processed);
+  }
+
   postLeftover(leftover: Leftover): Observable<Leftover> {
     return this.http.post<Leftover>(environment.apiUrl + '/api/leftover', leftover);
   }
@@ -34,5 +38,12 @@ export class LeftoverService {
 
   getOneLeftover(id: number): Observable<any> {
     return this.http.get<any>(environment.apiUrl + '/api/leftover/id/' + id);
+  }
+  getLeftoverByCustomerId(id: String): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/leftover/customer/' + id);
+  }
+  putDisableLeftover(leftover: Leftover): Observable<string>{
+    return this.http.put<string>(environment.apiUrl + '/api/leftover/disable', leftover)
+
   }
 }

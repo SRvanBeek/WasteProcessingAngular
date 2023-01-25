@@ -10,7 +10,8 @@
 </div>
 <div class="modal-body">
   <h2>
-    Are you sure you want to {{user.enabled ? 'Disable' : 'Enable'}} <span class="text-primary">{{user.name}}</span>
+    Are you sure you want to {{customer.enabled ? 'Disable' : 'Enable'}} <span
+    class="text-primary">{{customer.customerID}}</span>
     profile?
   </h2>
 </div>
@@ -18,3 +19,4 @@
   <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
   <button type="button" class="btn btn-danger" (click)="modal.close('Yes')">yes</button>
 </div>
+

@@ -24,8 +24,10 @@ export class WasteProcessingComponent implements OnInit {
   showInfoBox: boolean = false;
   userID: number;
   filterList: string = 'all';
+  show: boolean = true;
 
   @ViewChild(DashboardComponent) child !: DashboardComponent;
+  hdv: boolean = false;
 
   constructor(private leftoverService: LeftoverService, private modalService: NgbModal, private toastService: ToastService) {
   }
@@ -39,6 +41,12 @@ export class WasteProcessingComponent implements OnInit {
     this.fillListAllTypes();
     this.updateIsDesktop();
     this.setUserID();
+    this.setHDV();
+  }
+
+  setHDV() {
+    const hdvOption = localStorage.getItem('hdv');
+    this.hdv = hdvOption === 'enabled';
   }
 
   /**
@@ -108,9 +116,11 @@ export class WasteProcessingComponent implements OnInit {
     this.leftoverService.getAllByType(type).subscribe({
       next: value => {
         this.todoList = [];
-        for (let todo of value.payload) {
-          if (!todo.processed) {
-            this.todoList.push(todo);
+        if (value.payload) {
+          for (let todo of value.payload) {
+            if (!todo.processed) {
+              this.todoList.push(todo);
+            }
           }
         }
       }
@@ -119,12 +129,16 @@ export class WasteProcessingComponent implements OnInit {
 
   refresh(list: Leftover[]) {
     this.todoList = list;
-    this.selectedIndex = -1;
+    this.selectedIndex = 0;
+    this.show = false;
+    setTimeout(() => {
+      this.todoDetail(this.todoList[0], 0);
+      this.show = true;
+    }, 100);
   }
 
   private openMobileInfo() {
     const modalRef = this.modalService.open(ToDoModalComponent, {fullscreen: true});
-    console.log(this.userID)
     modalRef.componentInstance.userId = this.userID;
     modalRef.componentInstance.list = this.todoList;
     modalRef.componentInstance.todo = this.selectedTodo;

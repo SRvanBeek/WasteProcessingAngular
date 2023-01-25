@@ -6,6 +6,9 @@ import {UserService} from "../../shared/_services/user.service";
 import {User} from "../../shared/_models/user";
 import {ToastService} from "../../shared/_services/toast.service";
 
+/**
+ * @author Dino Yang
+ */
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
@@ -28,7 +31,7 @@ export class CreateUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setAdmin();
+    this.setSuperAdmin();
     this.user = this.formBuilder.group(
       {
         fullName: [
@@ -64,7 +67,10 @@ export class CreateUserComponent implements OnInit {
     )
   }
 
-  setAdmin(): void {
+  /**
+   * setAdmin() checks whether the logged in user is a SuperAdmin or not.
+   */
+  setSuperAdmin(): void {
     let jwt = localStorage.getItem('JwtToken');
     if (jwt) {
       let jwtData = jwt.split('.')[1];
@@ -81,14 +87,17 @@ export class CreateUserComponent implements OnInit {
     return this.user.controls;
   }
 
+  /**
+   * onSubmit() checks whether there are any errors in the form. If there are none, it posts the user to API.
+   */
   onSubmit(): void {
     if (this.user.get('username')?.value !== '') {
       this.userService.checkUsername(this.user.value.username).subscribe({
         next: value => {
           if (value) {
             this.user.get('username')?.setErrors({duplicate: true});
+            return;
           }
-          return;
         }
       })
     }
@@ -99,16 +108,16 @@ export class CreateUserComponent implements OnInit {
       let newUser = User.createUserWithoutId(this.user.value.fullName, this.user.value.username, this.user.value.password, this.user.value.enabled);
       this.userService.registerUser(newUser).subscribe({
         next: value => {
+          this.activeModal.close('created');
           this.toastService.show("", "You've just created user with username " + this.user.value.username);
-          this.activeModal.close('Close click');
         }
       });
     } else {
       let newUser = User.createUserWithoutId(this.user.value.fullName, this.user.value.username, this.user.value.password, this.user.value.enabled);
       this.userService.registerAdmin(newUser).subscribe({
         next: value => {
+          this.activeModal.close('created');
           this.toastService.show("", "You've just created user with username " + this.user.value.username);
-          this.activeModal.close('Close click');
         }
       });
     }

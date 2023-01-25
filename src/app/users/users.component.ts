@@ -5,6 +5,9 @@ import {CreateUserComponent} from "./create-user/create-user.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {UserModalComponent} from "./user-modal/user-modal.component";
 
+/**
+ * @author Dino Yang
+ */
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -17,6 +20,7 @@ export class UsersComponent implements OnInit {
   userList: User[];
   selectedUser: User;
   searchText: any;
+  show: boolean = true;
 
 
   @HostListener("window:resize", []) updateIsDesktop() {
@@ -32,6 +36,11 @@ export class UsersComponent implements OnInit {
     this.updateIsDesktop();
   }
 
+  /**
+   * userDetails() sets selectedIndex and selectedUser with the right values after clicking on a User.
+   * @param user selected User.
+   * @param index in the list.
+   */
   userDetail(user: User, index: number): void {
     this.selectedIndex = index;
     this.selectedUser = user;
@@ -40,21 +49,46 @@ export class UsersComponent implements OnInit {
     }
   }
 
+  /**
+   * fillUserList() fills the userList with every user in the db.
+   */
   fillUserList() {
     this.userService.getAllUsers().subscribe({
       next: value => {
         this.userList = value.payload;
       },
-      error: err => {
-        console.log(err);
-      }
     })
   }
 
-  openCreateUser() {
-    this.modalService.open(CreateUserComponent, {size: "lg"});
+  /**
+   * refresh() refreshes the view.
+   */
+  refresh() {
+    this.fillUserList();
+    this.show = false;
+    setTimeout(() => {
+      this.userDetail(this.userList[this.selectedIndex], this.selectedIndex);
+      this.show = true;
+    }, 100);
   }
 
+  /**
+   * openCreateUser() opens the create user modal.
+   */
+  openCreateUser() {
+    const modalRef = this.modalService.open(CreateUserComponent, {size: "lg"});
+    modalRef.result.then((data => {
+        if (data === 'created') {
+          this.refresh();
+        }
+      })
+    ).catch((res) => {
+    });
+  }
+
+  /**
+   * openMobileUserInfo() opens the user info modal on mobiles.
+   */
   openMobileUserInfo() {
     const modalRef = this.modalService.open(UserModalComponent, {fullscreen: true});
     modalRef.componentInstance.user = this.selectedUser;

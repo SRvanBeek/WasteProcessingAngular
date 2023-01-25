@@ -2,10 +2,13 @@ import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
 import {User} from "../../shared/_models/user";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ChangePassDialogComponent} from "../change-pass-dialog/change-pass-dialog.component";
-import {DisableConfirmDialogComponent} from "../disable-confirm-dialog/disable-confirm-dialog.component";
+import {UserDisableConfirm} from "../user-disable-confirm/user-disable-confirm";
 import {UserService} from "../../shared/_services/user.service";
 import {ToastService} from "../../shared/_services/toast.service";
 
+/**
+ * @author Dino Yang
+ */
 @Component({
   selector: 'app-user-info',
   templateUrl: './user-info.component.html',
@@ -14,13 +17,16 @@ import {ToastService} from "../../shared/_services/toast.service";
 export class UserInfoComponent implements OnInit {
   @Input() user: User;
   isUserAdmin: boolean = false;
+  isUserSuperAdmin: boolean = false;
+
   isSuperAdmin: boolean = false;
 
-  constructor(private modelService: NgbModal, private userService: UserService, private toastService: ToastService) {
+  constructor(private modalService: NgbModal, private userService: UserService, private toastService: ToastService) {
 
   }
 
   ngOnInit(): void {
+    this.checkLoggedInUser()
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -30,22 +36,28 @@ export class UserInfoComponent implements OnInit {
     }
   }
 
+  /**
+   * setIsSuperAdmin() checks whether the selected user is a SuperAdmin or not.
+   */
   setIsSuperAdmin() {
     this.userService.getRoles(this.user.username).subscribe({
       next: roles => {
-        if (roles.filter((e: { name: string; }) => e.name === 'ROLE_SUPERADMIN').length > 0) {
-          this.isSuperAdmin = true;
+        if (roles.payload.filter((e: { name: string; }) => e.name === 'ROLE_SUPERADMIN').length > 0) {
+          this.isUserSuperAdmin = true;
         } else {
-          this.isSuperAdmin = false;
+          this.isUserSuperAdmin = false;
         }
       }
     });
   }
 
+  /**
+   * setIsUserAdmin() checks whether the selected user is a admin or not.
+   */
   setIsUserAdmin() {
     this.userService.getRoles(this.user.username).subscribe({
       next: roles => {
-        if (roles.filter((e: { name: string; }) => e.name === 'ROLE_ADMIN').length > 0) {
+        if (roles.payload.filter((e: { name: string; }) => e.name === 'ROLE_ADMIN').length > 0) {
           this.isUserAdmin = true;
         } else {
           this.isUserAdmin = false;
@@ -54,13 +66,34 @@ export class UserInfoComponent implements OnInit {
     });
   }
 
+  checkLoggedInUser() {
+    let jwt = localStorage.getItem('JwtToken');
+    if (jwt) {
+      let jwtData = jwt.split('.')[1];
+      let decodedJwtJsonData = window.atob(jwtData);
+      let decodedJwtData = JSON.parse(decodedJwtJsonData);
+      let roles: any = decodedJwtData.roles;
+
+      if (roles.includes("ROLE_SUPERADMIN")) {
+        this.isSuperAdmin = true;
+      }
+    }
+  }
+
+
+  /**
+   * openChangePass() opens the change password modal.
+   */
   openChangePass() {
-    const modelRef = this.modelService.open(ChangePassDialogComponent, {size: "lg"})
+    const modelRef = this.modalService.open(ChangePassDialogComponent, {size: "lg"})
     modelRef.componentInstance.user = this.user;
   }
 
+  /**
+   * openConfirm() opens the confirm modal.
+   */
   openConfirm() {
-    const modelRef = this.modelService.open(DisableConfirmDialogComponent, {size: "lg"})
+    const modelRef = this.modalService.open(UserDisableConfirm, {size: "lg"})
     modelRef.componentInstance.user = this.user;
     modelRef.result.then((data => {
       if (data === 'Yes') {

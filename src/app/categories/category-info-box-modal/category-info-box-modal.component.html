@@ -1,0 +1,46 @@
+ <div class="mainBox">
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="header flexBox">
+        <input type="text" class="categoryName" placeholder="Name"
+               value="" formControlName="name" name="categoryName">
+        <button type="button" class="cross" (click)="ActiveModalService.close()" *ngIf="!isDesktop">&#10005;</button>
+        <span *ngIf="!form.get('name')?.valid && form.get('name')?.touched" style="color: red;">Please enter a name!</span>
+      </div>
+      <div class="content">
+        <div class="conditionsDiv">
+          <h4>Conditions</h4>
+          <div class="conditions">
+            <div>
+              <input type="text" class="inputBox" formControlName="condition" name="categoryVoorwaarde1" required>
+              <br>
+              <span style="font-size: 0.8rem; color: red;" *ngIf="!form.get('condition')?.valid && form.get('condition')?.touched">You need at least 1 condition!
+            You need at least 1 of the following: < or > and %. <br> Also a value of 100 cannot have < or >. Example: >50%, <40% or 100%</span>
+            </div>
+          </div>
+          <div class="conditions">
+
+            <div formArrayName="extraConditions">
+              <div *ngFor="let conditionControl of getControls(); let i = index">
+                <h5 *ngIf="conditionsList[i] == 'Or'">Or</h5>
+                <h5 *ngIf="conditionsList[i] == 'And'">And</h5>
+                <input type="text" class="inputBox"  name="condition" [formControlName]="i">
+                <button type="button" class="removeButton" (click)="removeCondition(i)">Rem.</button>
+                <br>
+                <span style="font-size: 0.8rem; color: red;" *ngIf="!conditionControl.valid && conditionControl.touched">You need at least 1 of the following: < or > and %.
+                  <br> Also a value of 100 cannot have < or >. Example: >50%, <40% or 100%</span>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="addButton" [disabled]="!form.get('condition')?.valid" (click)="addInput()">Add</button>
+        </div>
+        <footer>
+          <div class="enabledDiv">
+            <h4>Enabled?</h4>
+            <button type="button" (click)="changeTrueButton()" [innerText]="trueButtonBool? 'True':'False'" [ngClass]="trueButtonBool? 'trueButton':'disabledTrueButton'">True</button>
+          </div>
+          <button class="saveButton" type="submit" [disabled]="!form.get('name')?.valid || !form.get('condition')?.valid">Save</button>
+        </footer>
+      </div>
+    </form>
+  </div>

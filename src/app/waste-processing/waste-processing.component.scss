@@ -22,6 +22,7 @@
 .topBarTitle {
   margin-top: .5rem;
   margin-bottom: 2rem;
+  font-weight: 500;
 }
 
 .topBarContent {
@@ -48,6 +49,7 @@
   display: flex;
   flex-direction: row;
   width: 100%;
+
   h1 {
     font-size: 1rem;
   }
@@ -74,6 +76,7 @@
   font-size: 1rem;
   margin-bottom: 0;
 }
+
 
 .todoShow {
   margin: 2rem;
@@ -134,6 +137,17 @@
   p {
     margin-bottom: 0;
     font-size: 1rem;
+  }
+}
+
+.hdv {
+  p {
+    font-size: 1.5rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
   }
 }
 

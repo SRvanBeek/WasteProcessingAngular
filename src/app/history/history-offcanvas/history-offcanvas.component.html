@@ -1,0 +1,76 @@
+<div class="offcanvas-header">
+  <h5 class="offcanvas-title">{{articleNumber}}</h5>
+  <button
+    type="button"
+    class="btn-close text-reset"
+    aria-label="Close"
+    (click)="activeOffcanvas.dismiss('Cross click')"
+  ></button>
+</div>
+<hr style="margin: 0">
+<div class="offcanvas-body">
+  <div *ngIf="leftover!= null && article!= null && employeeName != null">
+    <h5 class="col-sm-2 top" ><b>{{this.leftover.type}}</b></h5>
+    <div class="flexbox canvas">
+      <div>
+        <p> ID:</p>
+        <p> Metrage:</p>
+        <p> Weight:</p>
+        <p> Customer:</p>
+        <p> Employee:</p>
+        <p> Date_Processed:</p>
+      </div>
+      <div class="flexenditem">
+        <p>{{this.historyObject.id}}</p>
+        <p>{{this.leftover.metrage}}</p>
+        <p>{{this.article.gewicht}}</p>
+        <p>{{this.article.leverancier}}</p>
+        <p>{{employeeName}} </p>
+        <p>{{this.leftover.dateCut | date: "short"}}</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="margin" *ngIf="leftover != null && article != null && employeeName != null">
+    <h5 class="col-sm-2 top" ><b>Article</b></h5>
+    <div class="flexbox canvas">
+    <div>
+      <p> ArticleNumber:</p>
+      <p> Product_Group:</p>
+      <p> EanCode:</p>
+      <p> Description:</p>
+      <p> Colour:</p>
+      <p> Fabric_width:</p>
+      <p> Pattern_Length:</p>
+      <p> Pattern_Width:</p>
+      <p> Material_Type:</p>
+      <p> opmaak:</p>
+      <p> WashingCode:</p>
+      <p> Composition:</p>
+      <p> Weight:</p>
+      <p> Not_Tiltable:</p>
+      <p> StockRL:</p>
+      <p> min:</p>
+    </div>
+      <div class="flexenditem">
+        <p>{{articleNumber}}</p>
+        <p>{{this.article.productgroep}}</p>
+        <p>{{this.article.eancode}}</p>
+        <p>{{this.article.omschrijving}}</p>
+        <p>{{this.article.kleur}}</p>
+        <p>{{this.article.stofbreedte}}</p>
+        <p>{{this.article.patroonlengte}}</p>
+        <p>{{this.article.patroonbreedte}}</p>
+        <p>{{this.article.soort}}</p>
+        <p>{{this.article.opmaak}}</p>
+        <p>{{this.article.wascode}}</p>
+        <p>{{this.article.samenstelling}}</p>
+        <p>{{this.article.gewicht}}</p>
+        <p>{{this.article.nietkantelmaar}}</p>
+        <p>{{this.article.stockRl}}</p>
+        <p>{{this.article.min}}</p>
+      </div>
+  </div>
+  </div>
+</div>

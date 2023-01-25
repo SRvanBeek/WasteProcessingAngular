@@ -1,0 +1,38 @@
+<div class="categories">
+  <div class="todoComp" [ngClass]="isDesktop? 'desktop' : 'mobile'">
+    <div class="topBar">
+      <div class="topBarTitle">
+        <h1 style="margin-left: 1rem">Categories</h1>
+      </div>
+      <div class="topBarContent">
+        <button type="button" class="addButton" (click)="showInfoBox()">Add</button>
+        <div class="selector">
+          <h1>Search:</h1>
+          <input type="text" class="searchbar" placeholder="Search..." [(ngModel)]="searchText">
+        </div>
+      </div>
+      <div class="listIdentifiers">
+        <h1 style="width: 20%;margin-left: 1rem">ID</h1>
+        <h1 style="width: 40%">Category</h1>
+        <h1 style="width: 30%">Condition</h1>
+      </div>
+    </div>
+    <div class="todoList">
+      <ul class="list" id="infoboxs">
+        <li class="toDoItem" *ngFor="let category of categoriesList | filter:searchText">
+          <div class="categoryButton">
+            <span class="overflowHidden" (click)="showInfoBoxFilled(category.id)">
+                <p style="width: 20%; margin-left: 1.2rem">{{category.id}}</p>
+                <p style="width: 30%">{{category.name}}</p>
+                <p style="width: 40%">{{(category.voorwaarde.length > 30) ? (category.voorwaarde | slice:0:30) + '...' : (category.voorwaarde)}}</p>
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div *ngIf="isDesktop" class="todoShow">
+   <app-category-info-box id="infoBox" (refresh)="refresh()" [category]="selectedCategory" [isCategoryNew]="isCategoryNew" [ngClass]="hideInfoBox? 'hide' : ''"></app-category-info-box>
+  </div>
+</div>
+

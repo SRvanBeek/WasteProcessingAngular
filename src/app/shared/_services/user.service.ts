@@ -39,4 +39,8 @@ export class UserService {
   getRoles(username: string | undefined): Observable<any> {
     return this.http.get<any>(environment.apiUrl + '/api/users/roles/' + username);
   }
+
+  getUsernameById(id: number): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/api/users/byId/' + id);
+  }
 }

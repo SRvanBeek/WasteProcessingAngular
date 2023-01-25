@@ -1,0 +1,76 @@
+<div class="createUserBox">
+  <div class="modal-header">
+    <h4 class="modal-title">Create Customer</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="customer" (ngSubmit)="onSubmit()" id="inputForm" class="form">
+      <mat-form-field>
+        <mat-label>Customer Name</mat-label>
+        <input matInput formControlName="customerId">
+        <mat-error *ngIf="this.f['customerId'].errors?.['required']">Name is required</mat-error>
+        <mat-error *ngIf="this.f['customerId'].errors?.['duplicate']">Name already exists!</mat-error>
+        <mat-error *ngIf="this.f['customerId'].errors?.['minlength']">Name must be at least 3 characters
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Minimum Meter</mat-label>
+        <input matInput formControlName="minMeter">
+        <mat-error *ngIf="this.f['minMeter'].errors?.['required']">Minimum meter is required</mat-error>
+        <mat-error *ngIf="this.f['minMeter'].errors?.['min']">Minimum meter can't be 0 or lower!</mat-error>
+        <mat-error *ngIf="this.f['minMeter'].errors?.['pattern']">Only numbers allowed!</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Maximum Meter</mat-label>
+        <input matInput formControlName="maxMeter">
+        <mat-error *ngIf="this.f['maxMeter'].errors?.['required']">Maximum meter is required</mat-error>
+        <mat-error *ngIf="this.f['maxMeter'].errors?.['pattern']">Only numbers allowed!</mat-error>
+        <mat-error *ngIf="this.f['maxMeter'].errors?.['small']">Maximum meter can't be lower than minimum!</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address">
+        <mat-error *ngIf="this.f['address'].errors?.['required']">Address is required</mat-error>
+        <mat-error *ngIf="this.f['address'].errors?.['pattern']">Please input both letters and numbers!</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city">
+        <mat-error *ngIf="this.f['city'].errors?.['required']">City is required</mat-error>
+        <mat-error *ngIf="this.f['city'].errors?.['pattern']">Only letters allowed!</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Postal Code</mat-label>
+        <input matInput formControlName="postalCode">
+        <mat-error *ngIf="this.f['postalCode'].errors?.['required']">Postal Code is required</mat-error>
+        <mat-error *ngIf="this.f['postalCode'].errors?.['pattern']">Thats not a valid Postal Code</mat-error>
+      </mat-form-field>
+
+      <mat-select-country appearance="outline"
+                          formControlName="country"
+                          [language]="'en'"
+                          [autocomplete]="'yes'"
+                          label="Country"
+                          [cleareable]="true"
+                          [value]="defaultValue">
+      </mat-select-country>
+      <mat-error *ngIf="this.f['country'].errors?.['required']">Country is required</mat-error>
+
+      <mat-checkbox labelPosition="after" formControlName="enabled">Enabled?</mat-checkbox>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary submitButton" (click)="onSubmit()">Create Customer</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>
+</div>
+
+
+
+
+

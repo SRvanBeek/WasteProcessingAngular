@@ -46,25 +46,49 @@ h2 {
   right: 3rem;
   bottom: 3rem;
 }
+.previewButton{
+  position: fixed;
+  right: 14rem;
+  bottom: 5rem;
+}
 
-.doneButton {
+.previewButton{
   border-radius: 5px;
   font-family: 'Maven Pro', sans-serif;
   color: black;
   padding: .5rem;
-  border: none;
+  border: 2px solid #4BC8B6;
   background-color: #4BC8B6;
   transition: .5s;
   font-size: 2rem;
+  transition-duration: 0.4s;
+}
+
+.doneButton{
+  font-family: 'Maven Pro', sans-serif;
+  padding: .5rem;
+  font-size: 2rem;
+  background-color: #4BC8B6;
+  border: 2px solid #4BC8B6;
+  border-radius: 6px;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.previewButton:hover{
+  background-color: #94d3a2;
+  color: black;
+}
+
+.disabled{
+  background-color: gray;
+  cursor: default;
 }
 
 .doneButton:focus:not(:focus-visible):not(.focus-visible) {
   box-shadow: none;
   outline: none;
-}
-
-.doneButton:hover {
-  background-color: #3da294;
 }
 
 .doneButton:active {

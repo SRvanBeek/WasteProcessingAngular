@@ -11,9 +11,15 @@ import {CategoryModel} from "../../shared/_models/category.model";
 import {Waste} from "../../shared/_models/waste.model";
 import {Voorraad} from "../../shared/_models/voorraad";
 import {Order} from "../../shared/_models/order.model";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {LabelPreviewComponent} from "../../shared/label-preview/label-preview.component";
+import {CustomerService} from "../../shared/_services/customer.service";
+import {WasteLabelComponent} from "../../shared/waste-label/waste-label.component";
+import {ToastService} from "../../shared/_services/toast.service";
+
 
 /**
- * @Author Dino Yang
+ * @Author Dino Yang, Roy van Delft
  */
 @Component({
   selector: 'app-leftover-info-box',
@@ -25,19 +31,26 @@ export class LeftoverInfoBoxComponent {
   @Input() list: Leftover[];
   @Input() todo: Leftover;
   @Output() doneOutput = new EventEmitter<Leftover[]>();
+  @Input() enabled = false;
   article: Article;
   type: string;
   category: any;
+  downloaded: boolean;
+
 
   constructor(private articleService: ArticleService, private leftoverService: LeftoverService,
               private orderService: OrdersService, private wasteService: WasteService,
-              private categoryService: CategoryService, private voorraadService: VoorraadService) {
+              private categoryService: CategoryService, private voorraadService: VoorraadService,
+              private modalService: NgbModal, private customerService: CustomerService,
+              private toastService: ToastService
+  ) {
   }
 
   ngOnChanges() {
     if (this.todo != null) {
+      this.downloaded = false;
       if (this.todo.type == 'catWaste') {
-        this.type = 'Categorized Waste'
+        this.type = 'Categorized Waste';
         this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(value => {
           let waste: Waste = value.payload;
           this.categoryService.getCategoryNameById(waste.categoryId).subscribe(value => {
@@ -49,6 +62,7 @@ export class LeftoverInfoBoxComponent {
         this.type = 'Order';
       } else {
         this.type = 'Storage';
+        this.downloaded = true
       }
       this.setArticle(this.todo.artikelnummer);
     }
@@ -69,6 +83,10 @@ export class LeftoverInfoBoxComponent {
    * done() sets the processed attribute of the selected leftover to true and updates the catWaste/storage/order with the right userId, date and enabled.
    */
   done() {
+    if (!this.downloaded) {
+      this.toastService.show('', 'You need to download the label first!');
+      return ;
+    }
     this.leftoverService.getOneLeftover(this.todo.id).subscribe(value => {
       let leftover: Leftover = value.payload;
       leftover.processed = true;
@@ -97,11 +115,45 @@ export class LeftoverInfoBoxComponent {
         order.dateProcessed = Date.now();
         order.enabled = true;
         this.orderService.putOrder(order).subscribe();
+        this.customerService.getCustomerByLeftoverID(order.id).subscribe(value => {
+        });
       })
     }
     let outputList = this.list.filter(leftover => {
       return leftover.id !== this.todo.id;
     })
+    this.toastService.show('', "You've just processed a Leftover.\n Good Job!");
     this.doneOutput.emit(outputList);
+  }
+
+  /**
+   * Opens the dialog window for the label, using the modal service to fetch the dialog template.
+   */
+  openPreview() {
+    const labelModal = this.modalService.open(LabelPreviewComponent)
+    labelModal.componentInstance.todo = this.todo
+    this.customerService.getCustomerByLeftoverID(this.todo.id).subscribe(value => {
+    })
+    labelModal.componentInstance.downloaded$
+      .subscribe({
+        next: (value: boolean) => {
+          this.downloaded = value
+        }
+      })
+  }
+
+  /**
+   * Opens the dialog window for the waste label, using the modalservice to fetch the waste label template.
+   */
+  openPreviewWaste() {
+    const labelModalWaste = this.modalService.open(WasteLabelComponent)
+    labelModalWaste.componentInstance.todo = this.todo;
+    labelModalWaste.componentInstance.category = this.category;
+    labelModalWaste.componentInstance.downloaded$
+      .subscribe({
+        next: (value: boolean) => {
+          this.downloaded = value
+        }
+      })
   }
 }

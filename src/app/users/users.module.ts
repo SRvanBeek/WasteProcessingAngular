@@ -9,9 +9,9 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatInputModule} from "@angular/material/input";
-import {DisableConfirmDialogComponent} from './disable-confirm-dialog/disable-confirm-dialog.component';
 import {UserModalComponent} from "./user-modal/user-modal.component";
 import {CreateUserComponent} from "./create-user/create-user.component";
+import {UserDisableConfirm} from "./user-disable-confirm/user-disable-confirm";
 
 
 @NgModule({
@@ -19,7 +19,7 @@ import {CreateUserComponent} from "./create-user/create-user.component";
     UsersComponent,
     UserInfoComponent,
     ChangePassDialogComponent,
-    DisableConfirmDialogComponent,
+    UserDisableConfirm,
     UserModalComponent,
     CreateUserComponent
   ],

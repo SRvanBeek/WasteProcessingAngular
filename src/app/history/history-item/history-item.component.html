@@ -1,0 +1,33 @@
+<div [ngClass]="isDesktop? 'desktop' : 'mobile'" *ngIf="leftover != null && employeeName != null && historyObject != null">
+    <li *ngIf="!loading && !isDesktop"  >
+      <div class="row rowborder">
+        <div style="width: 100px" >
+        <mat-checkbox *ngIf="isAdmin" (change)="disable()" ></mat-checkbox>
+        </div>
+        <div class="row col-sm-10"  (click)="OpenModal()">
+        <div class="col-sm-2 overflow-hidden">{{(leftover.artikelnummer.length > 6) ? (leftover.artikelnummer | slice:0:10) + '...' : (leftover.artikelnummer)}}</div>
+        <div class="col-sm-2 overflow-hidden">{{customerName}}</div>
+        <div class="col-sm-2 overflow-hidden">{{leftover.type}}</div>
+        <div class="col-sm-2 overflow-hidden">{{employeeName}}</div>
+        <div class="col-sm-2 overflow-hidden">{{leftover.metrage}}</div>
+        <div class="col-sm-2 overflow-hidden">{{historyObject.dateProcessed | date:'short'}} </div>
+        </div>
+      </div>
+    </li>
+
+  <li *ngIf="!loading && isDesktop"  >
+    <div class="row rowborder">
+      <div style="width: 100px" >
+        <mat-checkbox *ngIf="isAdmin" (change)="disable()" ></mat-checkbox>
+      </div>
+      <div class="row col-sm-10"  (click)="openOffcanvas()">
+        <div class="col-sm-2 overflow-hidden">{{(leftover.artikelnummer.length > 6) ? (leftover.artikelnummer | slice:0:14) + '...' : (leftover.artikelnummer)}}</div>
+        <div class="col-sm-2 overflow-hidden">{{customerName}}</div>
+        <div class="col-sm-2 overflow-hidden">{{leftover.type}}</div>
+        <div class="col-sm-2 overflow-hidden">{{employeeName}}</div>
+        <div class="col-sm-2 overflow-hidden">{{leftover.metrage}}</div>
+        <div class="col-sm-2 overflow-hidden">{{historyObject.dateProcessed | date:'short'}} </div>
+      </div>
+    </div>
+  </li>
+</div>
