@@ -96,8 +96,8 @@ export class CreateUserComponent implements OnInit {
         next: value => {
           if (value) {
             this.user.get('username')?.setErrors({duplicate: true});
+            return;
           }
-          return;
         }
       })
     }
