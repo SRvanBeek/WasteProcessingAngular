@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Article} from "../../shared/_models/article";
 import {Leftover} from "../../shared/_models/leftover.model";
 import {ArticleService} from "../../shared/_services/article.service";
-import {NgbActiveModal, NgbActiveOffcanvas, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {LeftoverService} from "../../shared/_services/leftover.service";
 import {UserService} from "../../shared/_services/user.service";
 
