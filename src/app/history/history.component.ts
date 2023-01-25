@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LeftoverService} from "../shared/_services/leftover.service";
 import {Leftover} from "../shared/_models/leftover.model";
-import {HistorymodalComponent} from "./historymodal/historymodal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {User} from "../shared/_models/user";
 import {UserService} from "../shared/_services/user.service";
