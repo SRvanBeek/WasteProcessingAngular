@@ -1,0 +1,198 @@
+.addButton {
+  border-radius: 5px;
+  font-family: 'Maven Pro', sans-serif;
+  color: black;
+  border: none;
+  background-color: #4BC8B6;
+  transition: .5s;
+  font-size: 1.3rem;
+  padding: 0 1rem;
+  margin-left: auto;
+  align-self: flex-end;
+  margin-right: 1rem;
+}
+
+.overflowHidden {
+  overflow: hidden;
+}
+
+.categories {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+}
+
+.mobile {
+  width: 100%;
+}
+
+.desktop {
+  width: 40%;
+}
+
+.topBar {
+  display: flex;
+  border-bottom: 2px solid #DCDDE1;
+  flex-direction: column;
+}
+
+.hide {
+  display: none;
+}
+
+.topBarTitle {
+  margin-top: .5rem;
+  margin-bottom: 2rem;
+}
+
+.topBarContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.topBarContent > h1 {
+  font-size: 1rem;
+}
+
+.topBarTitle > h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.topBar > p {
+  font-size: 1rem;
+}
+
+.listIdentifiers {
+  border-top: 2px solid #DCDDE1;
+  padding-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  h1 {
+    font-size: 1rem;
+  }
+}
+
+#detailsButton {
+  display: flex;
+  margin-left: auto;
+  justify-content: center;
+  flex-direction: column;
+  align-self: flex-end;
+  margin-right: 1rem;
+}
+
+.searchbar {
+  border: 2px solid #DCDDE1;
+  border-radius: 5px;
+}
+
+.selector {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  margin-right: 1rem;
+}
+
+.selector > h1 {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.todoShow {
+  margin: 2rem;
+  position: relative;
+  width: 60%;
+  background-color: white;
+  border: #DCDDE1 1px solid;
+}
+
+.todoShow:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.todoShowContent {
+  position: absolute;
+  height: 100%;
+}
+
+.todoComp {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: white;
+  border-right: 2px solid #DCDDE1;
+}
+
+
+.todoList {
+  display: flex;
+  flex: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  justify-content: center;
+}
+
+.list {
+  width: 100%;
+  padding: 0;
+}
+
+.toDoItem {
+  display: flex;
+}
+
+.categoryButton {
+  display: flex;
+  width: 100%;
+  height: 4rem;
+  border-bottom: #DCDDE1 2px solid;
+  -webkit-transition: all 0.3s 0s ease;
+  -moz-transition: all 0.3s 0s ease;
+  -o-transition: all 0.3s 0s ease;
+  transition: all 0.3s 0s ease;
+  color: black;
+  cursor: pointer;
+
+  p {
+    margin-bottom: 0;
+    font-size: 1rem;
+  }
+}
+
+.categoryButton > .active {
+  background-color: #E9E9E9;
+  font-weight: bold;
+}
+
+.categoryButton > span {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+@media (hover: hover) {
+  .categoryButton:hover {
+    background-color: #E9E9E9;
+    font-weight: bold;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .topBarTitle {
+    margin-bottom: 0;
+  }
+  .wasteProc {
+    height: 85vh;
+  }
+}
+
+
+

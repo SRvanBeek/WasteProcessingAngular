@@ -1,0 +1,76 @@
+
+.inputBox {
+  border: 2px solid #DCDDE1;
+  border-radius: 5px;
+}
+
+.andOrDiv {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.flexBox {
+  display: flex;
+}
+
+.button {
+  border-radius: 5px;
+  font-family: 'Maven Pro', sans-serif;
+  color: black;
+  border: none;
+  padding: 0 .5rem;
+  transition: .5s;
+}
+
+.andOr {
+  border-radius: 5px;
+  font-family: 'Maven Pro', sans-serif;
+  color: black;
+  width: 5rem;
+  border: none;
+  background-color: #c56222;
+  transition: .5s;
+  font-size: 1rem;
+  transition-duration: 0.4s;
+}
+
+.space {
+  margin-left: 0.5rem;
+}
+
+.andOr:disabled {
+  background-color: #ff8a3f;
+  cursor: pointer;
+}
+
+.cancelButton{
+  background-color: gray;
+  margin-top: 1rem;
+  margin-right: auto;
+  font-size: 1rem;
+}
+
+.addButton {
+  background-color: #4BC8B6;
+  margin-top: 1rem;
+  margin-left: auto;
+  font-size: 1.3rem;
+}
+
+.removeButton:hover{
+  background-color: #4BC8B6;
+  color: black;
+}
+
+.addButton:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+.addButton:hover {
+  background-color: #3da294;
+}
+
+.addButton:active {
+  background-color: #94d3a2;
+}
