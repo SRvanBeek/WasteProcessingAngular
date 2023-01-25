@@ -1,4 +1,4 @@
-<div class="mainBox" *ngIf="todo != null && article!= null">
+<div class="mainBox" *ngIf="todo != null && article!= null ">
   <div class="header">
     <h1>{{article.artikelnummer}}</h1>
   </div>
@@ -65,7 +65,7 @@
         <button type="button" class="previewButton" (click)="openPreview()">Preview Label</button>
       </ng-template>
     </ul>
-    <button  [disabled]="!downloaded" class="doneButton" id="done" (click)="done()" >Done!</button>
+    <button [disabled]="!downloaded" class="doneButton" id="done" (click)="done()">Done!</button>
   </div>
 </div>
 

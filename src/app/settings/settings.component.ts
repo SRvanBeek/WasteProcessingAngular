@@ -87,13 +87,12 @@ export class SettingsComponent {
           if (response.code == "ACCEPTED") {
             this.toastMessage = response.message;
             this.success = true
-          }
-          else {
+          } else {
             this.toastMessage = response.message;
             this.success = false
           }
         },
-        error: err =>  {
+        error: err => {
           console.log(err)
           this.loading = false
         },
@@ -109,17 +108,17 @@ export class SettingsComponent {
     this.loading = true;
     this.cutProgram.addRandomLeftovers(this.randomLeftoverFormControls['leftoverAmount'].value)
       .pipe(first())
-      .subscribe({next: response => {
+      .subscribe({
+        next: response => {
           if (response.code == "ACCEPTED") {
             this.toastMessage = response.message;
             this.success = true
-          }
-          else {
+          } else {
             this.toastMessage = response.message;
             this.success = false
           }
         },
-        error: err =>  {
+        error: err => {
           console.log(err)
           this.loading = false
         },
@@ -142,11 +141,9 @@ export class SettingsComponent {
   changeDistanceView() {
     if (localStorage.getItem("hdv") !== SettingsComponent.enabled) {
       localStorage.setItem("hdv", SettingsComponent.enabled)
-    }
-    else {
-      localStorage.setItem("hdv", '')
+    } else {
+      localStorage.setItem("hdv", 'False')
     }
     this.highDistanceView = localStorage.getItem("hdv")
-    console.log(this.highDistanceView)
   }
 }

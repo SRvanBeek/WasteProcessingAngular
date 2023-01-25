@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-material-extensions/select-country": "^8.1.0",
     "@angular/animations": "^15.0.0",
     "@angular/cdk": "^15.0.0",
     "@angular/common": "^15.0.0",
@@ -29,6 +30,7 @@
     "jspdf": "^2.5.1",
     "ngx-toastr": "^16.0.1",
     "rxjs": "~7.5.0",
+    "svg-country-flags": "^1.2.10",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
   },

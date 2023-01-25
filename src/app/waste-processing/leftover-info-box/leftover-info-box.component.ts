@@ -38,21 +38,18 @@ export class LeftoverInfoBoxComponent {
   downloaded: boolean;
 
 
-
-
   constructor(private articleService: ArticleService, private leftoverService: LeftoverService,
               private orderService: OrdersService, private wasteService: WasteService,
               private categoryService: CategoryService, private voorraadService: VoorraadService,
               private modalService: NgbModal, private customerService: CustomerService
-
-              ) {
+  ) {
   }
 
   ngOnChanges() {
     if (this.todo != null) {
-      this.downloaded = false
+      this.downloaded = false;
       if (this.todo.type == 'catWaste') {
-        this.type = 'Categorized Waste'
+        this.type = 'Categorized Waste';
         this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(value => {
           let waste: Waste = value.payload;
           this.categoryService.getCategoryNameById(waste.categoryId).subscribe(value => {
@@ -113,18 +110,14 @@ export class LeftoverInfoBoxComponent {
         order.dateProcessed = Date.now();
         order.enabled = true;
         this.orderService.putOrder(order).subscribe();
-          this.customerService.getCustomerByLeftoverID(order.id).subscribe(value =>{
-            console.log(value)
-
-
+        this.customerService.getCustomerByLeftoverID(order.id).subscribe(value => {
         });
-    })}
+      })
+    }
     let outputList = this.list.filter(leftover => {
       return leftover.id !== this.todo.id;
     })
     this.doneOutput.emit(outputList);
-
-
   }
 
   /**
@@ -132,30 +125,29 @@ export class LeftoverInfoBoxComponent {
    */
   openPreview() {
     const labelModal = this.modalService.open(LabelPreviewComponent)
-    labelModal.componentInstance.todo=this.todo
-    this.customerService.getCustomerByLeftoverID(this.todo.id).subscribe(value =>{
+    labelModal.componentInstance.todo = this.todo
+    this.customerService.getCustomerByLeftoverID(this.todo.id).subscribe(value => {
     })
     labelModal.componentInstance.downloaded$
       .subscribe({
         next: (value: boolean) => {
-          this.downloaded = value}
-      })}
+          this.downloaded = value
+        }
+      })
+  }
 
   /**
    * Opens the dialog window for the waste label, using the modalservice to fetch the waste label template.
    */
   openPreviewWaste() {
     const labelModalWaste = this.modalService.open(WasteLabelComponent)
-    labelModalWaste.componentInstance.todo=this.todo;
-    labelModalWaste.componentInstance.category=this.category;
+    labelModalWaste.componentInstance.todo = this.todo;
+    labelModalWaste.componentInstance.category = this.category;
     labelModalWaste.componentInstance.downloaded$
       .subscribe({
         next: (value: boolean) => {
-          console.log(value)
-          this.downloaded = value}
+          this.downloaded = value
+        }
       })
-
   }
-
-
 }

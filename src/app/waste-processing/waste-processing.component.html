@@ -16,7 +16,7 @@
           </select>
         </div>
       </div>
-      <div class="listIdentifiers">
+      <div class="listIdentifiers" [ngClass]="hdv ? 'hdv':''">
         <h1 style="width: 20%;margin-left: 1rem">ID</h1>
         <h1 style="width: 40%">Article Number</h1>
         <h1 style="width: 30%">Type</h1>
@@ -39,15 +39,18 @@
                 <p style="width: 30%">categorized waste</p>
               </ng-template>
             </span>
-            <span *ngIf="isDesktop" (click)="todoDetail(todo, i)" [class.active]="selectedIndex === i">
+            <span *ngIf="isDesktop" (click)="todoDetail(todo, i)" [class.active]="selectedIndex === i"
+                  [ngClass]="hdv ? 'hdv':''">
               <ng-template [ngIf]="todo.type != 'catWaste'">
                 <p style="width: 20%; margin-left: 1rem">{{todo.id}}</p>
-                <p style="width: 40%">{{todo.artikelnummer}}</p>
+                <p
+                  style="width: 40%"> {{ (todo.artikelnummer.length > 6) ? (todo.artikelnummer | slice:0:15) + '...' : (todo.artikelnummer) }}</p>
                 <p style="width: 30%">{{todo.type}}</p>
               </ng-template>
               <ng-template [ngIf]="todo.type == 'catWaste'">
                 <p style="width: 20%; margin-left: 1rem">{{todo.id}}</p>
-                <p style="width: 40%">{{todo.artikelnummer}}</p>
+                <p
+                  style="width: 40%">{{(todo.artikelnummer.length > 6) ? (todo.artikelnummer | slice:0:15) + '...' : (todo.artikelnummer) }}</p>
                 <p style="width: 30%">categorized waste</p>
               </ng-template>
             </span>
@@ -56,7 +59,7 @@
       </ul>
     </div>
   </div>
-  <div *ngIf="isDesktop" class="todoShow">
+  <div *ngIf="isDesktop && show" class="todoShow">
     <app-leftover-info-box [list]="todoList" [todo]="selectedTodo" [userId]="userID"
                            (doneOutput)="refresh($event)"></app-leftover-info-box>
   </div>
