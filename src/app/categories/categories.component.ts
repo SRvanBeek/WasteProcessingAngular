@@ -52,6 +52,9 @@ export class CategoriesComponent {
       },
       error: err => {
         console.log(err);
+      },
+      complete: () => {
+        this.categoriesList.sort((a,b) => a.name > b.name ? 1 : -1)
       }
     })
   }
