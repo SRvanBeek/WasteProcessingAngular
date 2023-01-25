@@ -83,6 +83,10 @@ export class LeftoverInfoBoxComponent {
    * done() sets the processed attribute of the selected leftover to true and updates the catWaste/storage/order with the right userId, date and enabled.
    */
   done() {
+    if (!this.downloaded) {
+      this.toastService.show('', 'You need to download the label first!');
+      return ;
+    }
     this.leftoverService.getOneLeftover(this.todo.id).subscribe(value => {
       let leftover: Leftover = value.payload;
       leftover.processed = true;
