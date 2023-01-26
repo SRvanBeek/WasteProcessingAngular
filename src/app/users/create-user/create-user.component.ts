@@ -98,28 +98,30 @@ export class CreateUserComponent implements OnInit {
             this.user.get('username')?.setErrors({duplicate: true});
             return;
           }
+        },
+        complete: () => {
+          if (this.user.invalid) {
+            return;
+          }
+          if (this.user.value.admin == false) {
+            let newUser = User.createUserWithoutId(this.user.value.fullName, this.user.value.username, this.user.value.password, this.user.value.enabled);
+            this.userService.registerUser(newUser).subscribe({
+              next: value => {
+                this.activeModal.close('created');
+                this.toastService.show("", "You've just created user with username " + this.user.value.username);
+              }
+            });
+          } else {
+            let newUser = User.createUserWithoutId(this.user.value.fullName, this.user.value.username, this.user.value.password, this.user.value.enabled);
+            this.userService.registerAdmin(newUser).subscribe({
+              next: value => {
+                this.activeModal.close('created');
+                this.toastService.show("", "You've just created user with username " + this.user.value.username);
+              }
+            });
+          }
         }
       })
-    }
-    if (this.user.invalid) {
-      return;
-    }
-    if (this.user.value.admin == false) {
-      let newUser = User.createUserWithoutId(this.user.value.fullName, this.user.value.username, this.user.value.password, this.user.value.enabled);
-      this.userService.registerUser(newUser).subscribe({
-        next: value => {
-          this.activeModal.close('created');
-          this.toastService.show("", "You've just created user with username " + this.user.value.username);
-        }
-      });
-    } else {
-      let newUser = User.createUserWithoutId(this.user.value.fullName, this.user.value.username, this.user.value.password, this.user.value.enabled);
-      this.userService.registerAdmin(newUser).subscribe({
-        next: value => {
-          this.activeModal.close('created');
-          this.toastService.show("", "You've just created user with username " + this.user.value.username);
-        }
-      });
     }
   }
 }
