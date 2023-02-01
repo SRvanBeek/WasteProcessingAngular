@@ -1,30 +1,27 @@
-# WasteProcessingAngular
+<h1>FRONTEND: ANGULAR</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
 
-## Bootstrap
-Run : `npm install bootstrap bootstrap-icons` when pulling this repository for the first time.
+Installeer de benodigde packages om de Angular webapplicatie te kunnen builden: 
 
-## Development server
+1: download NodeJS, van de website https://nodejs.org/en/download/ (download de meest recente versie). Volg de stappen van de installatietool. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+2: zodra NodeJS is geinstalleerd, download Angular CLI, van de website van Angular 
 
-## Code scaffolding
+https://angular.io/cli, open de Terminal(in Admin) en run het commando ‘npm install -g @angular/cli’ 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+3: Van de aangemaakte repository is een kopie gemaakt, die aangeleverd zal worden. 
 
-## Build
+ pull de master branch in de locale IDE(Webstorm, VSCode, etc). Zorg dat de Spring Boot backend runned en aanstaat, en een connectie heeft met de eerder geconfigureerde database. 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Zodra deze repository open staat, run ‘npm install’ binnen de bestandslocatie, om alle benodigde packages te downloaden die in het project zitten. 
 
-## Running unit tests
+In de map environments, navigeer naar environment.prod.ts, en verander de api url ‘localhost:8080’ naar de url van de eigen backend. <br>
+![chrome_jUFJ92sxyN](https://user-images.githubusercontent.com/30380030/215520939-048db81f-02b6-4701-b9bf-94f2092e2a40.png)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Zodra deze instellingen gewijzigd zijn, open de terminal, navigeer naar de folder waar het project instaat. Run het commando ‘ng build’, en het project is klaar om te deployen.
+Node.js
+Download | Node.js
+Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.
+Image
+Image
