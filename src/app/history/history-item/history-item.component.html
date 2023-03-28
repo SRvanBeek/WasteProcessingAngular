@@ -12,7 +12,7 @@
         <div class="col-sm-2 overflow-hidden">{{leftover.metrage}}</div>
         <div class="col-sm-2 overflow-hidden">{{historyObject.dateProcessed | date:'short'}} </div>
         </div>
-        <button type="button" class="btn labelButton" *ngIf="leftover.type === 'catWaste' || leftover.type === 'order'">Label</button>
+        <button type="button" class="btn labelButton" *ngIf="leftover.type === 'catWaste' || leftover.type === 'order'" (click)="openLabelModal()">Label</button>
       </div>
     </li>
 
