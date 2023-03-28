@@ -12,15 +12,16 @@
         <div class="col-sm-2 overflow-hidden">{{leftover.metrage}}</div>
         <div class="col-sm-2 overflow-hidden">{{historyObject.dateProcessed | date:'short'}} </div>
         </div>
+        <button type="button" class="btn labelButton" *ngIf="leftover.type === 'catWaste' || leftover.type === 'order'">Label</button>
       </div>
     </li>
 
   <li *ngIf="!loading && isDesktop"  >
     <div class="row rowborder">
-      <div style="width: 100px" >
+      <div class="mt-2" style="width: 100px" >
         <mat-checkbox *ngIf="isAdmin" (change)="disable()" ></mat-checkbox>
       </div>
-      <div class="row col-sm-10"  (click)="openOffcanvas()">
+      <div class="mt-3 row col-sm-10"  (click)="openOffcanvas()">
         <div class="col-sm-2 overflow-hidden">{{(leftover.artikelnummer.length > 6) ? (leftover.artikelnummer | slice:0:14) + '...' : (leftover.artikelnummer)}}</div>
         <div class="col-sm-2 overflow-hidden">{{customerName}}</div>
         <div class="col-sm-2 overflow-hidden">{{leftover.type}}</div>
@@ -28,6 +29,7 @@
         <div class="col-sm-2 overflow-hidden">{{leftover.metrage}}</div>
         <div class="col-sm-2 overflow-hidden">{{historyObject.dateProcessed | date:'short'}} </div>
       </div>
+      <button type="button" class="btn labelButton" *ngIf="leftover.type === 'catWaste' || leftover.type === 'order'" (click)="openLabelModal()">Label</button>
     </div>
   </li>
 </div>
