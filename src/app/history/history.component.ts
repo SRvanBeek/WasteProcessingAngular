@@ -128,6 +128,12 @@ export class HistoryComponent implements OnInit {
     }
   }
 
+
+  /**
+   * this function checks the dropdown menu and checks what is selected. If enabled, all the enabled leftovers will show.
+   * If disabled, all the disabled leftovers will show.
+   * @param enabled is the selected tab in the dropdownmenu
+   */
   getEnabledDisabled(enabled: string){
     this.shownLeftovers = [];
     if (enabled === 'Enabled') {
