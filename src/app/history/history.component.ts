@@ -24,6 +24,7 @@ export class HistoryComponent implements OnInit {
   userList: User[] = [];
   filterList: string = 'all';
   customerList: Customer[] = [];
+  enabled: boolean = true;
 
 
   constructor(private leftoverService: LeftoverService, public modalService: NgbModal, private userService: UserService, private customerService: CustomerService) {
@@ -84,10 +85,20 @@ export class HistoryComponent implements OnInit {
     this.leftoverService.getAllLeftovers().subscribe({
       next: value => {
         this.leftovers = [];
+        this.disabledLeftovers = [];
+
         for (let todo of value.payload) {
           if (todo.processed == true && todo.disable == false) {
             this.leftovers.push(todo);
+          } else if (todo.processed == true && todo.disable == true) {
+            this.disabledLeftovers.push(todo);
           }
+        }
+
+        if (this.enabled) {
+          this.shownLeftovers = this.leftovers;
+        } else {
+          this.shownLeftovers = this.disabledLeftovers;
         }
       },
       error: err => {
@@ -138,8 +149,10 @@ export class HistoryComponent implements OnInit {
     this.shownLeftovers = [];
     if (enabled === 'Enabled') {
       this.shownLeftovers = this.leftovers;
+      this.enabled = true;
     } else {
       this.shownLeftovers = this.disabledLeftovers;
+      this.enabled = false;
     }
   }
 
