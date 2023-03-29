@@ -28,7 +28,6 @@ interface onInit {
 })
 export class HistoryItemComponent implements onInit {
   @Input() leftover: Leftover
-  @Output() refresh = new EventEmitter<Leftover>();
   @Output() disableInfo = new EventEmitter<Leftover>();
   loading: boolean = true;
   employeeName: string;

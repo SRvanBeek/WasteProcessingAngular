@@ -149,6 +149,7 @@ export class HistoryComponent implements OnInit {
    */
   getEnabledDisabled(enabled: string){
     this.shownLeftovers = [];
+    this.disableChecklist = [];
     if (enabled === 'Enabled') {
       this.shownLeftovers = this.leftovers;
       this.enabledDropdown = true;
@@ -192,11 +193,33 @@ export class HistoryComponent implements OnInit {
   }
 
   /**
+   * Enables items in disableChecklist and refreshes page
+   * @param enabled This is used to check if you're trying to enable or disable leftovers
+   */
+  checkEnableOrDisable(enabled: string) {
+    if (enabled === "Enabled") {
+      this.disable();
+    } else if (enabled === "Disabled") {
+      this.enable();
+    }
+  }
+
+  /**
    * Disables items in disableChecklist and refreshes page
    */
   disable() {
     for (let i = 0; i < this.disableChecklist.length; i++) {
       this.leftoverService.putDisableLeftover(this.disableChecklist[i]).subscribe();
+    }
+    this.refresh();
+  }
+
+  /**
+   * Enables items in disableChecklist and refreshes page
+   */
+  enable() {
+    for (let i = 0; i < this.disableChecklist.length; i++) {
+      this.leftoverService.putEnableLeftover(this.disableChecklist[i]).subscribe();
     }
     this.refresh();
   }

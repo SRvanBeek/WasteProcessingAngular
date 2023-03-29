@@ -4,7 +4,8 @@
   </div>
 <div class="row filterheader">
   <div class="btnCtn col-sm-2">
-    <button class="btn disableButton" (click)="disable()" [disabled]="disableChecklist.length === 0">Disable</button>
+    <button class="btn disableButton" (click)="checkEnableOrDisable(enabled.value)" [disabled]="disableChecklist.length === 0">
+      {{ enabled.value == 'Enabled' ? 'Disable' : 'Enable'}}</button>
   </div>
   <div class="btnCtn col-sm-2">
     <button class="btn detailsButton" (click)="openDetails()">Details</button>
@@ -38,7 +39,7 @@
   </div>
 
   <ul *ngFor="let leftover of shownLeftovers | filter:searchText">
-    <app-history-item [leftover]="leftover" (refresh)="refresh()" (disableInfo)="checklistItems($event)" ></app-history-item>
+    <app-history-item [leftover]="leftover" (disableInfo)="checklistItems($event)" ></app-history-item>
   </ul>
 </div>
 </div>
