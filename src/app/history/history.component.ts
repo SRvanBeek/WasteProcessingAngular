@@ -18,10 +18,13 @@ import {DashboardComponent} from "../shared/_modals/dashboard/dashboard.componen
 export class HistoryComponent implements OnInit {
   searchText: any;
   searchList: string[] = [];
+  shownLeftovers: Leftover[] = [];
   leftovers: Leftover[] = [];
+  disabledLeftovers: Leftover[] = [];
   userList: User[] = [];
   filterList: string = 'all';
   customerList: Customer[] = [];
+  enabled: boolean = true;
 
 
   constructor(private leftoverService: LeftoverService, public modalService: NgbModal, private userService: UserService, private customerService: CustomerService) {
@@ -39,6 +42,9 @@ export class HistoryComponent implements OnInit {
           for (let leftover of value.payload) {
             if (leftover.disable == false) {
               this.leftovers.push(leftover);
+              this.shownLeftovers.push(leftover);
+            } else {
+              this.disabledLeftovers.push(leftover);
             }
           }
         }
@@ -79,10 +85,20 @@ export class HistoryComponent implements OnInit {
     this.leftoverService.getAllLeftovers().subscribe({
       next: value => {
         this.leftovers = [];
+        this.disabledLeftovers = [];
+
         for (let todo of value.payload) {
           if (todo.processed == true && todo.disable == false) {
             this.leftovers.push(todo);
+          } else if (todo.processed == true && todo.disable == true) {
+            this.disabledLeftovers.push(todo);
           }
+        }
+
+        if (this.enabled) {
+          this.shownLeftovers = this.leftovers;
+        } else {
+          this.shownLeftovers = this.disabledLeftovers;
         }
       },
       error: err => {
@@ -120,6 +136,23 @@ export class HistoryComponent implements OnInit {
       this.fillListAllTypes();
     } else {
       this.fillByCustomer(type);
+    }
+  }
+
+
+  /**
+   * this function checks the dropdown menu and checks what is selected. If enabled, all the enabled leftovers will show.
+   * If disabled, all the disabled leftovers will show.
+   * @param enabled is the selected tab in the dropdownmenu
+   */
+  getEnabledDisabled(enabled: string){
+    this.shownLeftovers = [];
+    if (enabled === 'Enabled') {
+      this.shownLeftovers = this.leftovers;
+      this.enabled = true;
+    } else {
+      this.shownLeftovers = this.disabledLeftovers;
+      this.enabled = false;
     }
   }
 

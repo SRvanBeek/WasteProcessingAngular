@@ -13,9 +13,9 @@
     <option value="storage">Storage</option>
   </select>
 
-  <select class="form-select dropdownbar2" aria-label="Select Customer" (change)="getCustomer(customerSelection.value)" #customerSelection >
-    <option value="all" selected>All-Customers</option>
-    <option *ngFor="let customer of customerList; let i = index" value="{{customer.customerID}}" >{{customer.customerID}}</option>
+  <select class="form-select dropdownbar2" aria-label="Select Enabled" (change)="getEnabledDisabled(enabled.value)" #enabled >
+    <option>Enabled</option>
+    <option>Disabled</option>
   </select>
   <input class="searchbar" type="text" name="search" [(ngModel)]="searchText" placeholder="Search...">
 
@@ -34,7 +34,7 @@
   </div>
   </div>
 
-  <ul *ngFor="let leftover of leftovers | filter:searchText">
+  <ul *ngFor="let leftover of shownLeftovers | filter:searchText">
     <app-history-item [leftover]="leftover" (refresh)="refresh()"></app-history-item>
   </ul>
 </div>
