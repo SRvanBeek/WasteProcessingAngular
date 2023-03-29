@@ -21,10 +21,12 @@ export class HistoryComponent implements OnInit {
   shownLeftovers: Leftover[] = [];
   leftovers: Leftover[] = [];
   disabledLeftovers: Leftover[] = [];
+  disableChecklist: Leftover[] = [];
   userList: User[] = [];
   filterList: string = 'all';
   customerList: Customer[] = [];
-  enabled: boolean = true;
+  enabledDropdown: boolean = true;
+  disableButton: boolean = false;
 
 
   constructor(private leftoverService: LeftoverService, public modalService: NgbModal, private userService: UserService, private customerService: CustomerService) {
@@ -95,7 +97,7 @@ export class HistoryComponent implements OnInit {
           }
         }
 
-        if (this.enabled) {
+        if (this.enabledDropdown) {
           this.shownLeftovers = this.leftovers;
         } else {
           this.shownLeftovers = this.disabledLeftovers;
@@ -149,10 +151,10 @@ export class HistoryComponent implements OnInit {
     this.shownLeftovers = [];
     if (enabled === 'Enabled') {
       this.shownLeftovers = this.leftovers;
-      this.enabled = true;
+      this.enabledDropdown = true;
     } else {
       this.shownLeftovers = this.disabledLeftovers;
-      this.enabled = false;
+      this.enabledDropdown = false;
     }
   }
 
@@ -187,7 +189,28 @@ export class HistoryComponent implements OnInit {
 
   openDetails() {
     this.modalService.open(DashboardComponent, {windowClass: 'modalWidth'});
-
   }
+
+  disable() {
+    for (let i = 0; i < this.disableChecklist.length; i++) {
+      this.leftoverService.putDisableLeftover(this.disableChecklist[i]).subscribe();
+    }
+    this.refresh();
+  }
+
+  checklistItems(leftover: Leftover) {
+    let isSpliced = false;
+    for (let i = 0; i < this.disableChecklist.length; i++) {
+      if (this.disableChecklist[i] === leftover) {
+        this.disableChecklist.splice(i, 1);
+        isSpliced = true;
+      }
+    }
+    if (!isSpliced) {
+      this.disableChecklist.push(leftover);
+    }
+  }
+
 }
+
 

@@ -29,6 +29,7 @@ interface onInit {
 export class HistoryItemComponent implements onInit {
   @Input() leftover: Leftover
   @Output() refresh = new EventEmitter<Leftover>();
+  @Output() disableInfo = new EventEmitter<Leftover>();
   loading: boolean = true;
   employeeName: string;
   customerName: string;
@@ -105,12 +106,8 @@ export class HistoryItemComponent implements onInit {
   /**
    * this function disable the chosen history item and shows a pop up before you disable it.
    */
-  disable(){
-    if (confirm("Are you sure you want to disable this order?")) {
-      this.leftoverService.putDisableLeftover(this.leftover).subscribe()
-      this.refresh.emit(this.leftover);
-    }
-
+  disableSendInfo(){
+    this.disableInfo.emit(this.leftover);
   }
 
   setAdmin(): void {
