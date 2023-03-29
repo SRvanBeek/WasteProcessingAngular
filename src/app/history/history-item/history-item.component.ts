@@ -104,7 +104,7 @@ export class HistoryItemComponent implements onInit {
   }
 
   /**
-   * this function disable the chosen history item and shows a pop up before you disable it.
+   * this function sends leftover info to the parent
    */
   disableSendInfo(){
     this.disableInfo.emit(this.leftover);

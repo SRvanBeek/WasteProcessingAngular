@@ -191,6 +191,9 @@ export class HistoryComponent implements OnInit {
     this.modalService.open(DashboardComponent, {windowClass: 'modalWidth'});
   }
 
+  /**
+   * Disables items in disableChecklist and refreshes page
+   */
   disable() {
     for (let i = 0; i < this.disableChecklist.length; i++) {
       this.leftoverService.putDisableLeftover(this.disableChecklist[i]).subscribe();
@@ -198,12 +201,17 @@ export class HistoryComponent implements OnInit {
     this.refresh();
   }
 
+  /**
+   * Puts incoming leftovers from the child component into or out of the disableChecklist.
+   * @param leftover The leftover that's either added or removed from the disableChecklist
+   */
   checklistItems(leftover: Leftover) {
     let isSpliced = false;
     for (let i = 0; i < this.disableChecklist.length; i++) {
       if (this.disableChecklist[i] === leftover) {
         this.disableChecklist.splice(i, 1);
         isSpliced = true;
+        break;
       }
     }
     if (!isSpliced) {
