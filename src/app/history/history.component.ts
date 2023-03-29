@@ -18,7 +18,9 @@ import {DashboardComponent} from "../shared/_modals/dashboard/dashboard.componen
 export class HistoryComponent implements OnInit {
   searchText: any;
   searchList: string[] = [];
+  shownLeftovers: Leftover[] = [];
   leftovers: Leftover[] = [];
+  disabledLeftovers: Leftover[] = [];
   userList: User[] = [];
   filterList: string = 'all';
   customerList: Customer[] = [];
@@ -39,6 +41,9 @@ export class HistoryComponent implements OnInit {
           for (let leftover of value.payload) {
             if (leftover.disable == false) {
               this.leftovers.push(leftover);
+              this.shownLeftovers.push(leftover);
+            } else {
+              this.disabledLeftovers.push(leftover);
             }
           }
         }
@@ -120,6 +125,15 @@ export class HistoryComponent implements OnInit {
       this.fillListAllTypes();
     } else {
       this.fillByCustomer(type);
+    }
+  }
+
+  getEnabledDisabled(enabled: string){
+    this.shownLeftovers = [];
+    if (enabled === 'Enabled') {
+      this.shownLeftovers = this.leftovers;
+    } else {
+      this.shownLeftovers = this.disabledLeftovers;
     }
   }
 
