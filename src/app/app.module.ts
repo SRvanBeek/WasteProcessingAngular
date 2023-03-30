@@ -22,6 +22,7 @@ import {CustomersModule} from "./customers/customers.module";
 import { ChangeNameDialogComponent } from './users/change-name-dialog/change-name-dialog.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import { ChangeUsernameDialogComponent } from './users/change-username-dialog/change-username-dialog.component';
 
 
 
@@ -29,6 +30,7 @@ import {MatInputModule} from "@angular/material/input";
   declarations: [
     AppComponent,
     ChangeNameDialogComponent,
+    ChangeUsernameDialogComponent,
   ],
     imports: [
         BrowserModule,

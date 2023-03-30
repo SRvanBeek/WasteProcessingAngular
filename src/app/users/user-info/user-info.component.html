@@ -21,6 +21,7 @@
   <div class="buttons">
     <button *ngIf="!isUserAdmin" class="pwdButton" (click)="openChangePass()">Change password</button>
     <button *ngIf="!isUserAdmin" class="pwdButton" (click)="openChangeName()">Change name</button>
+    <button *ngIf="!isUserAdmin" class="pwdButton" (click)="openChangeUsername()">Change username</button>
     <button *ngIf="((!isUserSuperAdmin && !isSuperAdmin && !isUserAdmin) || (isSuperAdmin && !isUserSuperAdmin))" [ngClass]="user.enabled ? 'disableBtn':'enableBtn' "
             (click)="openConfirm()">{{user.enabled ? 'Disable' : 'Enable'}}</button>
   </div>
