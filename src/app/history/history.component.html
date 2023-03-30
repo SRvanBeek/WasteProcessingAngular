@@ -4,6 +4,10 @@
   </div>
 <div class="row filterheader">
   <div class="btnCtn col-sm-2">
+    <button class="btn disableButton" (click)="checkEnableOrDisable(enabled.value)" [disabled]="disableChecklist.length === 0">
+      {{ enabled.value == 'Enabled' ? 'Disable' : 'Enable'}}</button>
+  </div>
+  <div class="btnCtn col-sm-2">
     <button class="btn detailsButton" (click)="openDetails()">Details</button>
   </div>
   <select class="form-select dropdownbar col-sm-2" aria-label="Select type" (change)="getType(typeSelection.value)" #typeSelection>
@@ -35,7 +39,7 @@
   </div>
 
   <ul *ngFor="let leftover of shownLeftovers | filter:searchText">
-    <app-history-item [leftover]="leftover" (refresh)="refresh()"></app-history-item>
+    <app-history-item [leftover]="leftover" (disableInfo)="checklistItems($event)" ></app-history-item>
   </ul>
 </div>
 </div>

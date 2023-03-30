@@ -44,6 +44,8 @@ export class LeftoverService {
   }
   putDisableLeftover(leftover: Leftover): Observable<string>{
     return this.http.put<string>(environment.apiUrl + '/api/leftover/disable', leftover)
-
+  }
+  putEnableLeftover(leftover: Leftover): Observable<string>{
+    return this.http.put<string>(environment.apiUrl + '/api/leftover/enable', leftover)
   }
 }
