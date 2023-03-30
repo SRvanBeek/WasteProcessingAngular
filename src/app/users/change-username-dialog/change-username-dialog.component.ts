@@ -42,7 +42,6 @@ export class ChangeUsernameDialogComponent {
     this.user.username = this.username.value.username;
     this.userService.putUser(this.user).subscribe({
       next: value => {
-        console.log("check")
         this.toastService.show("", "You've just changed the name for " + this.user.name);
         this.activeModal.close('Close click');
       }
