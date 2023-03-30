@@ -8,6 +8,7 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {CustomerService} from "../_services/customer.service";
 import {Customer} from "../_models/customer.model";
 
+
 /**
  * @Author Roy van Delft
  */
@@ -26,7 +27,7 @@ export class LabelPreviewComponent implements OnInit {
   public downloaded$: EventEmitter<boolean>;
   constructor(private articleService: ArticleService, private leftoverService: LeftoverService, public activeModal: NgbActiveModal, private customerService: CustomerService)
    {
-     this.downloaded$ = new EventEmitter<boolean>()
+
   }
 
   /**

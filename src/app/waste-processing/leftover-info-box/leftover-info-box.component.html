@@ -25,7 +25,6 @@
           <h2 class="first">Category:</h2>
           <h2>{{category}}</h2>
         </li>
-        <button type="button" class="previewButton" (click)="openPreviewWaste()">Preview Label</button>
       </ng-template>
       <ng-template [ngIf]="todo.type != 'catWaste' && todo.type != 'order'">
         <li>
@@ -62,10 +61,9 @@
           <h2 class="first">Color:</h2>
           <h2>{{article.kleur}}</h2>
         </li>
-        <button type="button" class="previewButton" (click)="openPreview()">Preview Label</button>
       </ng-template>
     </ul>
-    <button [ngClass]="downloaded? '' : 'disabled'" class="doneButton" id="done" (click)="done()">Done!</button>
+    <button class="doneButton" id="done" (click)="done()">Done!</button>
   </div>
 </div>
 

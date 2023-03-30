@@ -12,11 +12,8 @@ import {Waste} from "../../shared/_models/waste.model";
 import {Voorraad} from "../../shared/_models/voorraad";
 import {Order} from "../../shared/_models/order.model";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {LabelPreviewComponent} from "../../shared/label-preview/label-preview.component";
 import {CustomerService} from "../../shared/_services/customer.service";
-import {WasteLabelComponent} from "../../shared/waste-label/waste-label.component";
 import {ToastService} from "../../shared/_services/toast.service";
-
 
 /**
  * @Author Dino Yang, Roy van Delft
@@ -83,15 +80,13 @@ export class LeftoverInfoBoxComponent {
    * done() sets the processed attribute of the selected leftover to true and updates the catWaste/storage/order with the right userId, date and enabled.
    */
   done() {
-    if (!this.downloaded) {
-      this.toastService.show('', 'You need to download the label first!');
-      return ;
-    }
     this.leftoverService.getOneLeftover(this.todo.id).subscribe(value => {
       let leftover: Leftover = value.payload;
       leftover.processed = true;
       this.leftoverService.putLeftover(leftover).subscribe();
     })
+
+
     if (this.todo.type == 'catWaste') {
       this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(value => {
         let waste: Waste = value.payload;
@@ -126,34 +121,4 @@ export class LeftoverInfoBoxComponent {
     this.doneOutput.emit(outputList);
   }
 
-  /**
-   * Opens the dialog window for the label, using the modal service to fetch the dialog template.
-   */
-  openPreview() {
-    const labelModal = this.modalService.open(LabelPreviewComponent)
-    labelModal.componentInstance.todo = this.todo
-    this.customerService.getCustomerByLeftoverID(this.todo.id).subscribe(value => {
-    })
-    labelModal.componentInstance.downloaded$
-      .subscribe({
-        next: (value: boolean) => {
-          this.downloaded = value
-        }
-      })
-  }
-
-  /**
-   * Opens the dialog window for the waste label, using the modalservice to fetch the waste label template.
-   */
-  openPreviewWaste() {
-    const labelModalWaste = this.modalService.open(WasteLabelComponent)
-    labelModalWaste.componentInstance.todo = this.todo;
-    labelModalWaste.componentInstance.category = this.category;
-    labelModalWaste.componentInstance.downloaded$
-      .subscribe({
-        next: (value: boolean) => {
-          this.downloaded = value
-        }
-      })
-  }
 }
