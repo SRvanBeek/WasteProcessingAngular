@@ -33,19 +33,35 @@ export class ChangeUsernameDialogComponent {
       },
     )
   }
-
+  /**
+   * this function checks if all the validators are ticked of
+   */
   get f(): { [key: string]: AbstractControl } {
     return this.username.controls;
   }
-
+  /**
+   * this function submits the new name to the APIcall
+   */
   onSubmit() {
-    this.user.username = this.username.value.username;
-    this.userService.putUser(this.user).subscribe({
+    this.userService.checkUsername(this.username.value.username).subscribe({
       next: value => {
-        this.toastService.show("", "You've just changed the name for " + this.user.name);
-        this.activeModal.close('Close click');
+        if(value == true){
+          this.toastService.show("", "this username already exist")
+        }
+        else {
+          this.user.username = this.username.value.username;
+          this.userService.putUser(this.user).subscribe({
+            next: value => {
+              this.toastService.show("", "You've just changed the name for " + this.user.name);
+              this.activeModal.close('Close click');
+            }
+          });
+        }
+
+
       }
-    });
+    })
+
   }
 
 }

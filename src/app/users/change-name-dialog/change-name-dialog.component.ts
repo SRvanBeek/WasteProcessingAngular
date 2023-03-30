@@ -35,10 +35,16 @@ export class ChangeNameDialogComponent {
     )
   }
 
+  /**
+   * this function checks if all the validators are ticked of
+   */
     get f(): { [key: string]: AbstractControl } {
       return this.name.controls;
     }
 
+  /**
+   * this function submits the new name to the APIcall
+   */
   onSubmit() {
     this.user.name = this.name.value.name;
     this.userService.putUser(this.user).subscribe({
