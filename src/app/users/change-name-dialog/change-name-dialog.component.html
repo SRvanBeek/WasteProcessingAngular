@@ -1,0 +1,23 @@
+<div class="changenameBox ">
+  <div class="modal-header">
+    <h4 class="modal-title">Change Name</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body"></div>
+  <form [formGroup]="name" (ngSubmit)="onSubmit()" style="display: flex;flex-direction: column" id="inputForm"
+        class="form">
+  <mat-form-field>
+    <mat-label>New Name</mat-label>
+    <input matInput placeholder="new name" formControlName="name">
+    <mat-error *ngIf="this.f['name'].errors?.['required']">Name is required</mat-error>
+    <mat-error *ngIf="this.f['name'].errors?.['duplicate']">Name already exists!</mat-error>
+    <mat-error *ngIf="this.f['name'].errors?.['minlength']">Name must be at least 3 characters
+    </mat-error>
+  </mat-form-field>
+  </form>
+
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary submitButton" (click)="onSubmit()">Change Name</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+  </div>
+</div>

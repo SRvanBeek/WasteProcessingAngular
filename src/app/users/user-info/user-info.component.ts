@@ -5,6 +5,7 @@ import {ChangePassDialogComponent} from "../change-pass-dialog/change-pass-dialo
 import {UserDisableConfirm} from "../user-disable-confirm/user-disable-confirm";
 import {UserService} from "../../shared/_services/user.service";
 import {ToastService} from "../../shared/_services/toast.service";
+import {ChangeNameDialogComponent} from "../change-name-dialog/change-name-dialog.component";
 
 /**
  * @author Dino Yang
@@ -86,6 +87,10 @@ export class UserInfoComponent implements OnInit {
    */
   openChangePass() {
     const modelRef = this.modalService.open(ChangePassDialogComponent, {size: "lg"})
+    modelRef.componentInstance.user = this.user;
+  }
+  openChangeName() {
+    const modelRef = this.modalService.open(ChangeNameDialogComponent, {size: "lg"})
     modelRef.componentInstance.user = this.user;
   }
 

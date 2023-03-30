@@ -13,40 +13,47 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {UsersModule} from "./users/users.module";
 import {SettingsModule} from "./settings/settings.module";
 import {CategoriesModule} from "./categories/categories.module";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {BrowserModule} from "@angular/platform-browser";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {HistoryModule} from "./history/history.module";
 import {CustomersModule} from "./customers/customers.module";
+import { ChangeNameDialogComponent } from './users/change-name-dialog/change-name-dialog.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    ChangeNameDialogComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    LoginModule,
-    WasteProcessingModule,
-    SharedModule,
-    HeaderModule,
-    SidebarModule,
-    MatSidenavModule,
-    BrowserAnimationsModule,
-    NgbModule,
-    FormsModule,
-    UsersModule,
-    SettingsModule,
-    CategoriesModule,
-    MatCheckboxModule,
-    HistoryModule,
-    CustomersModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        LoginModule,
+        WasteProcessingModule,
+        SharedModule,
+        HeaderModule,
+        SidebarModule,
+        MatSidenavModule,
+        BrowserAnimationsModule,
+        NgbModule,
+        FormsModule,
+        UsersModule,
+        SettingsModule,
+        CategoriesModule,
+        MatCheckboxModule,
+        HistoryModule,
+        CustomersModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatInputModule
 
-  ],
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
   ],
