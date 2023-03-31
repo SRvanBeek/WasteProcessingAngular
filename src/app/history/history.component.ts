@@ -7,6 +7,9 @@ import {UserService} from "../shared/_services/user.service";
 import {CustomerService} from "../shared/_services/customer.service";
 import {Customer} from "../shared/_models/customer.model";
 import {DashboardComponent} from "../shared/_modals/dashboard/dashboard.component";
+import {HistoryObject} from "../shared/_models/history-object.model";
+import {OrdersService} from "../shared/_services/orders.service";
+import {WasteService} from "../shared/_services/waste.service";
 
 
 
@@ -22,6 +25,7 @@ export class HistoryComponent implements OnInit {
   leftovers: Leftover[] = [];
   disabledLeftovers: Leftover[] = [];
   disableChecklist: Leftover[] = [];
+  historyObject: HistoryObject[] = [];
   userList: User[] = [];
   filterList: string = 'all';
   customerList: Customer[] = [];
@@ -29,8 +33,7 @@ export class HistoryComponent implements OnInit {
   disableButton: boolean = false;
 
 
-  constructor(private leftoverService: LeftoverService, public modalService: NgbModal, private userService: UserService, private customerService: CustomerService) {
-
+  constructor(private wasteService: WasteService, private ordersService: OrdersService, private leftoverService: LeftoverService, public modalService: NgbModal, private userService: UserService, private customerService: CustomerService) {
   }
 
   /**
