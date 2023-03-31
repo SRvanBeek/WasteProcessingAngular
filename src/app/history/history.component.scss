@@ -1,4 +1,5 @@
 .listIdentifiers {
+  margin-top: 5px;
   display: flex;
   flex-direction: row;
   text-align: center;
@@ -6,6 +7,7 @@
     font-size: 1rem;
   }
 }
+
 .topbar{
   margin-top: .5rem;
   margin-bottom: 2rem;
@@ -13,7 +15,8 @@
 
 .size {
   width: 100%;
-
+  border-left: solid 3px #E9E9E9;
+  border-right: solid 3px #E9E9E9;
 }
 .dropdownbar {
   width: 10rem;
@@ -56,10 +59,26 @@
   justify-content: center;
   border-bottom: 2px solid #E9E9E9;
   padding-bottom: 0.5rem;
-
 }
 .all{
   background-color: white;
   font-weight: 500;
 }
 
+@media only screen and (min-width: 654px) {
+  .size {
+    width: 80%;
+    margin-left: 10%;
+  }
+
+  .filterheader {
+    max-width: 85.7vw;
+  }
+
+  .history {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 77vh;
+  }
+
+}

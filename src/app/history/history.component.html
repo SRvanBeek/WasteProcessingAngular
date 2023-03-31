@@ -23,23 +23,24 @@
   </select>
   <input class="searchbar" type="text" name="search" [(ngModel)]="searchText" placeholder="Search...">
 
-
 </div>
 <div class="row size">
   <div class="row">
-    <div style="width: 100px"></div>
+    <div style="width: 95px"></div>
     <div class="listIdentifiers col-sm-10">
       <h1 class="col-sm-2" style="margin-left: auto">Article Number</h1>
       <h1 class="col-sm-2">Customer</h1>
       <h1 class="col-sm-2">Type</h1>
       <h1 class="col-sm-2">Employee</h1>
-      <h1 class="col-sm-2">metrage</h1>
+      <h1 class="col-sm-2">Metrage</h1>
       <h1 class="col-sm-2">Date</h1>
   </div>
   </div>
 
-  <ul *ngFor="let leftover of shownLeftovers | filter:searchText">
-    <app-history-item [leftover]="leftover" (disableInfo)="checklistItems($event)" ></app-history-item>
-  </ul>
+  <div class="history">
+    <ul class="list-unstyled" *ngFor="let leftover of shownLeftovers | filter:searchText">
+      <app-history-item [leftover]="leftover" (disableInfo)="checklistItems($event)" ></app-history-item>
+    </ul>
+  </div>
 </div>
 </div>
