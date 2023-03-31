@@ -8,15 +8,12 @@ import {NgbModal, NgbOffcanvas} from "@ng-bootstrap/ng-bootstrap";
 import {HistoryOffcanvasComponent} from "../history-offcanvas/history-offcanvas.component";
 import {ArticleService} from "../../shared/_services/article.service";
 import {HistorymodalComponent} from "../historymodal/historymodal.component";
-import {LeftoverService} from "../../shared/_services/leftover.service";
-import {
-  CategoryInfoBoxModalComponent
-} from "../../categories/category-info-box-modal/category-info-box-modal.component";
 import {LabelPreviewComponent} from "../../shared/label-preview/label-preview.component";
 import {WasteLabelComponent} from "../../shared/waste-label/waste-label.component";
 import {Waste} from "../../shared/_models/waste.model";
 import {CategoryModel} from "../../shared/_models/category.model";
 import {CategoryService} from "../../shared/_services/category.service";
+import {formatDate} from "@angular/common";
 
 interface onInit {
 }
@@ -27,7 +24,7 @@ interface onInit {
   styleUrls: ['./history-item.component.scss']
 })
 export class HistoryItemComponent implements onInit {
-  @Input() leftover: Leftover
+  @Input() leftover: Leftover;
   @Output() disableInfo = new EventEmitter<Leftover>();
   loading: boolean = true;
   employeeName: string;
@@ -45,8 +42,7 @@ export class HistoryItemComponent implements onInit {
               private userService: UserService,
               private offcanvasService: NgbOffcanvas,
               private articleService: ArticleService,
-              private modalService: NgbModal,
-              private leftoverService: LeftoverService) {
+              private modalService: NgbModal) {
   }
 
   /**
@@ -68,6 +64,8 @@ export class HistoryItemComponent implements onInit {
         .subscribe({
           next: response => {
             this.historyObject = response.payload;
+            this.leftover.dateProc = formatDate(this.historyObject.dateProcessed, 'short', 'en-us');
+            console.log(this.leftover.dateProc);
             this.getUser();
             this.getCustomer();
           }
@@ -77,6 +75,8 @@ export class HistoryItemComponent implements onInit {
         .subscribe({
           next: response => {
             this.historyObject = response.payload;
+            this.leftover.dateProc = formatDate(this.historyObject.dateProcessed, 'short', 'en-us');
+            console.log(this.leftover.dateProc);
             this.getUser();
             this.getCustomer();
             let waste : Waste = response.payload;
@@ -92,6 +92,8 @@ export class HistoryItemComponent implements onInit {
         .subscribe({
           next: response => {
             this.historyObject = response.payload;
+            this.leftover.dateProc = formatDate(this.historyObject.dateProcessed, 'short', 'en-us');
+            console.log(this.leftover.dateProc);
             this.getUser();
             this.getCustomer();
           }
@@ -129,6 +131,7 @@ export class HistoryItemComponent implements onInit {
         next: response => {
           this.employeeName = response.message;
           this.loading = false
+          this.leftover.employee = this.employeeName;
         }
       })
   }
@@ -140,6 +143,7 @@ export class HistoryItemComponent implements onInit {
       next: response => {
         this.customerName = response.message;
         this.loading = false
+        this.leftover.customer = this.customerName;
       }
     })
   }
