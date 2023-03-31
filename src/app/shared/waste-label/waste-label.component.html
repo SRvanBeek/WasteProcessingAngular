@@ -1,7 +1,6 @@
 <div class="label-modal">
   <div class="modal-header">
     <h1 class="modal-title fs-5" id="exampleModalLabel">Preview Label</h1>
-    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body" #modal *ngIf="article!=null && todo!=null">
     <table style="border-collapse:
@@ -85,7 +84,6 @@
   </div>
   <div class="modal-footer">
     <button (click)="makePdfWaste()" type="button" class="btn btn-primary">Download Label</button>
-    <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss('close button click')">Close</button>
   </div>
 </div>
 

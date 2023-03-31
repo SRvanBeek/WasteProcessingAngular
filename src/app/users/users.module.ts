@@ -12,7 +12,8 @@ import {MatInputModule} from "@angular/material/input";
 import {UserModalComponent} from "./user-modal/user-modal.component";
 import {CreateUserComponent} from "./create-user/create-user.component";
 import {UserDisableConfirm} from "./user-disable-confirm/user-disable-confirm";
-
+import {ChangeUsernameDialogComponent} from "./change-username-dialog/change-username-dialog.component";
+import {ChangeNameDialogComponent} from "./change-name-dialog/change-name-dialog.component";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,9 @@ import {UserDisableConfirm} from "./user-disable-confirm/user-disable-confirm";
     ChangePassDialogComponent,
     UserDisableConfirm,
     UserModalComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    ChangeUsernameDialogComponent,
+    ChangeNameDialogComponent
   ],
   imports: [
     CommonModule,
