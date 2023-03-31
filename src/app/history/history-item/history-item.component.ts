@@ -8,7 +8,12 @@ import {NgbModal, NgbOffcanvas} from "@ng-bootstrap/ng-bootstrap";
 import {HistoryOffcanvasComponent} from "../history-offcanvas/history-offcanvas.component";
 import {ArticleService} from "../../shared/_services/article.service";
 import {HistorymodalComponent} from "../historymodal/historymodal.component";
-import {LeftoverService} from "../../shared/_services/leftover.service";
+import {LabelPreviewComponent} from "../../shared/label-preview/label-preview.component";
+import {WasteLabelComponent} from "../../shared/waste-label/waste-label.component";
+import {Waste} from "../../shared/_models/waste.model";
+import {CategoryModel} from "../../shared/_models/category.model";
+import {CategoryService} from "../../shared/_services/category.service";
+import {formatDate} from "@angular/common";
 
 interface onInit {
 }
@@ -19,24 +24,25 @@ interface onInit {
   styleUrls: ['./history-item.component.scss']
 })
 export class HistoryItemComponent implements onInit {
-  @Input() leftover: Leftover
-  @Output() refresh = new EventEmitter<Leftover>();
+  @Input() leftover: Leftover;
+  @Output() disableInfo = new EventEmitter<Leftover>();
   loading: boolean = true;
   employeeName: string;
   customerName: string;
   historyObject: any;
+  category: any;
   isDesktop: boolean;
   screenLGSize: number = 992;
   isAdmin: boolean;
 
   constructor(private ordersService: OrdersService,
               private wasteService: WasteService,
+              private categoryService: CategoryService,
               private voorraadService: VoorraadService,
               private userService: UserService,
               private offcanvasService: NgbOffcanvas,
               private articleService: ArticleService,
-              private modalService: NgbModal,
-              private leftoverService: LeftoverService) {
+              private modalService: NgbModal) {
   }
 
   /**
@@ -58,6 +64,8 @@ export class HistoryItemComponent implements onInit {
         .subscribe({
           next: response => {
             this.historyObject = response.payload;
+            this.leftover.dateProc = formatDate(this.historyObject.dateProcessed, 'short', 'en-us');
+            console.log(this.leftover.dateProc);
             this.getUser();
             this.getCustomer();
           }
@@ -67,15 +75,25 @@ export class HistoryItemComponent implements onInit {
         .subscribe({
           next: response => {
             this.historyObject = response.payload;
+            this.leftover.dateProc = formatDate(this.historyObject.dateProcessed, 'short', 'en-us');
+            console.log(this.leftover.dateProc);
             this.getUser();
             this.getCustomer();
+            let waste : Waste = response.payload;
+            this.categoryService.getCategoryNameById(waste.categoryId).subscribe(value => {
+              let category: CategoryModel = value.payload;
+              this.category = category.name;
+            });
           }
         })
+
     } else if (this.leftover.type === 'storage') {
       this.voorraadService.getOneVoorraadByLeftoverID(this.leftover.id)
         .subscribe({
           next: response => {
             this.historyObject = response.payload;
+            this.leftover.dateProc = formatDate(this.historyObject.dateProcessed, 'short', 'en-us');
+            console.log(this.leftover.dateProc);
             this.getUser();
             this.getCustomer();
           }
@@ -87,14 +105,10 @@ export class HistoryItemComponent implements onInit {
   }
 
   /**
-   * this function disable the chosen history item and shows a pop up before you disable it.
+   * this function sends leftover info to the parent
    */
-  disable(){
-    if (confirm("Are you sure you want to disable this order?")) {
-      this.leftoverService.putDisableLeftover(this.leftover).subscribe()
-      this.refresh.emit(this.leftover);
-    }
-
+  disableSendInfo(){
+    this.disableInfo.emit(this.leftover);
   }
 
   setAdmin(): void {
@@ -117,6 +131,7 @@ export class HistoryItemComponent implements onInit {
         next: response => {
           this.employeeName = response.message;
           this.loading = false
+          this.leftover.employee = this.employeeName;
         }
       })
   }
@@ -128,6 +143,7 @@ export class HistoryItemComponent implements onInit {
       next: response => {
         this.customerName = response.message;
         this.loading = false
+        this.leftover.customer = this.customerName;
       }
     })
   }
@@ -151,6 +167,14 @@ export class HistoryItemComponent implements onInit {
     Modal.componentInstance.leftoverid = this.leftover.id;
   }
 
-
-
+  openLabelModal(){
+    let modal;
+    if (this.leftover.type === "catWaste") {
+      modal = this.modalService.open(WasteLabelComponent, {size: "lg"});
+      modal.componentInstance.category = this.category;
+    } else {
+      modal = this.modalService.open(LabelPreviewComponent, {size: "lg"});
+    }
+    modal.componentInstance.todo = this.leftover;
+  }
 }

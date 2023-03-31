@@ -7,6 +7,8 @@ import {UserService} from "../shared/_services/user.service";
 import {CustomerService} from "../shared/_services/customer.service";
 import {Customer} from "../shared/_models/customer.model";
 import {DashboardComponent} from "../shared/_modals/dashboard/dashboard.component";
+import {OrdersService} from "../shared/_services/orders.service";
+import {WasteService} from "../shared/_services/waste.service";
 
 
 
@@ -18,14 +20,18 @@ import {DashboardComponent} from "../shared/_modals/dashboard/dashboard.componen
 export class HistoryComponent implements OnInit {
   searchText: any;
   searchList: string[] = [];
+  shownLeftovers: Leftover[] = [];
   leftovers: Leftover[] = [];
+  disabledLeftovers: Leftover[] = [];
+  disableChecklist: Leftover[] = [];
   userList: User[] = [];
   filterList: string = 'all';
   customerList: Customer[] = [];
+  enabledDropdown: boolean = true;
+  disableButton: boolean = false;
 
 
-  constructor(private leftoverService: LeftoverService, public modalService: NgbModal, private userService: UserService, private customerService: CustomerService) {
-
+  constructor(private wasteService: WasteService, private ordersService: OrdersService, private leftoverService: LeftoverService, public modalService: NgbModal, private userService: UserService, private customerService: CustomerService) {
   }
 
   /**
@@ -39,6 +45,9 @@ export class HistoryComponent implements OnInit {
           for (let leftover of value.payload) {
             if (leftover.disable == false) {
               this.leftovers.push(leftover);
+              this.shownLeftovers.push(leftover);
+            } else {
+              this.disabledLeftovers.push(leftover);
             }
           }
         }
@@ -79,10 +88,20 @@ export class HistoryComponent implements OnInit {
     this.leftoverService.getAllLeftovers().subscribe({
       next: value => {
         this.leftovers = [];
+        this.disabledLeftovers = [];
+
         for (let todo of value.payload) {
           if (todo.processed == true && todo.disable == false) {
             this.leftovers.push(todo);
+          } else if (todo.processed == true && todo.disable == true) {
+            this.disabledLeftovers.push(todo);
           }
+        }
+
+        if (this.enabledDropdown) {
+          this.shownLeftovers = this.leftovers;
+        } else {
+          this.shownLeftovers = this.disabledLeftovers;
         }
       },
       error: err => {
@@ -123,6 +142,24 @@ export class HistoryComponent implements OnInit {
     }
   }
 
+
+  /**
+   * this function checks the dropdown menu and checks what is selected. If enabled, all the enabled leftovers will show.
+   * If disabled, all the disabled leftovers will show.
+   * @param enabled is the selected tab in the dropdownmenu
+   */
+  getEnabledDisabled(enabled: string){
+    this.shownLeftovers = [];
+    this.disableChecklist = [];
+    if (enabled === 'Enabled') {
+      this.shownLeftovers = this.leftovers;
+      this.enabledDropdown = true;
+    } else {
+      this.shownLeftovers = this.disabledLeftovers;
+      this.enabledDropdown = false;
+    }
+  }
+
   /**
    * this function looks at what the type is and then gets the leftovers
    * that belong to that type.
@@ -154,7 +191,58 @@ export class HistoryComponent implements OnInit {
 
   openDetails() {
     this.modalService.open(DashboardComponent, {windowClass: 'modalWidth'});
-
   }
+
+  /**
+   * Enables items in disableChecklist and refreshes page
+   * @param enabled This is used to check if you're trying to enable or disable leftovers
+   */
+  checkEnableOrDisable(enabled: string) {
+    if (enabled === "Enabled") {
+      this.disable();
+    } else if (enabled === "Disabled") {
+      this.enable();
+    }
+  }
+
+  /**
+   * Disables items in disableChecklist and refreshes page
+   */
+  disable() {
+    for (let i = 0; i < this.disableChecklist.length; i++) {
+      this.leftoverService.putDisableLeftover(this.disableChecklist[i]).subscribe();
+    }
+    this.refresh();
+  }
+
+  /**
+   * Enables items in disableChecklist and refreshes page
+   */
+  enable() {
+    for (let i = 0; i < this.disableChecklist.length; i++) {
+      this.leftoverService.putEnableLeftover(this.disableChecklist[i]).subscribe();
+    }
+    this.refresh();
+  }
+
+  /**
+   * Puts incoming leftovers from the child component into or out of the disableChecklist.
+   * @param leftover The leftover that's either added or removed from the disableChecklist
+   */
+  checklistItems(leftover: Leftover) {
+    let isSpliced = false;
+    for (let i = 0; i < this.disableChecklist.length; i++) {
+      if (this.disableChecklist[i] === leftover) {
+        this.disableChecklist.splice(i, 1);
+        isSpliced = true;
+        break;
+      }
+    }
+    if (!isSpliced) {
+      this.disableChecklist.push(leftover);
+    }
+  }
+
 }
+
 

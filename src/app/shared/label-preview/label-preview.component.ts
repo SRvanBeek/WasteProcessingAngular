@@ -34,6 +34,7 @@ export class LabelPreviewComponent implements OnInit {
    */
   ngOnInit(): void {
     this.initLabel(this.todo.artikelnummer, this.todo.id)
+    this.makePdf()
   }
 
   /**
@@ -73,6 +74,7 @@ export class LabelPreviewComponent implements OnInit {
       callback: (pdf) => {
         pdf.save('Order Label ID'+ this.todo.id + '.pdf')
         this.downloaded$.emit(true);
+        this.activeModal.close();
           }
   });
   }

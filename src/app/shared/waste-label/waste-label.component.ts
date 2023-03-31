@@ -55,6 +55,7 @@ export class WasteLabelComponent {
       callback: (pdf) => {
         pdf.save('Categorized Waste ID' + this.todo.id + '.pdf');
         this.downloaded$.emit(true)
+        this.activeModal.close();
       }
     });
   }

@@ -5,6 +5,8 @@ import {ChangePassDialogComponent} from "../change-pass-dialog/change-pass-dialo
 import {UserDisableConfirm} from "../user-disable-confirm/user-disable-confirm";
 import {UserService} from "../../shared/_services/user.service";
 import {ToastService} from "../../shared/_services/toast.service";
+import {ChangeNameDialogComponent} from "../change-name-dialog/change-name-dialog.component";
+import {ChangeUsernameDialogComponent} from "../change-username-dialog/change-username-dialog.component";
 
 /**
  * @author Dino Yang
@@ -34,6 +36,7 @@ export class UserModalComponent implements OnInit {
    * setIsUserAdmin() checks whether the logged in user is a admin or not.
    */
   setIsUserAdmin() {
+
     this.userService.getRoles(this.user.username).subscribe({
       next: roles => {
         if (roles.payload.filter((e: { name: string; }) => e.name === 'ROLE_ADMIN').length > 0) {
@@ -80,6 +83,14 @@ export class UserModalComponent implements OnInit {
    */
   openChangePass() {
     const modelRef = this.modalService.open(ChangePassDialogComponent, {size: "lg"})
+    modelRef.componentInstance.user = this.user;
+  }
+  openChangeName() {
+    const modelRef = this.modalService.open(ChangeNameDialogComponent, {size: "lg"})
+    modelRef.componentInstance.user = this.user;
+  }
+  openChangeUsername() {
+    const modelRef = this.modalService.open(ChangeUsernameDialogComponent, {size: "lg"})
     modelRef.componentInstance.user = this.user;
   }
 

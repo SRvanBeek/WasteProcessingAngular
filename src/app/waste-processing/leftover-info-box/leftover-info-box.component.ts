@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Leftover} from "../../shared/_models/leftover.model";
 import {ArticleService} from "../../shared/_services/article.service";
 import {Article} from "../../shared/_models/article";
@@ -16,6 +16,7 @@ import {LabelPreviewComponent} from "../../shared/label-preview/label-preview.co
 import {CustomerService} from "../../shared/_services/customer.service";
 import {WasteLabelComponent} from "../../shared/waste-label/waste-label.component";
 import {ToastService} from "../../shared/_services/toast.service";
+import jsPDF from "jspdf";
 
 
 /**
@@ -83,47 +84,52 @@ export class LeftoverInfoBoxComponent {
    * done() sets the processed attribute of the selected leftover to true and updates the catWaste/storage/order with the right userId, date and enabled.
    */
   done() {
-    if (!this.downloaded) {
-      this.toastService.show('', 'You need to download the label first!');
-      return ;
+    if(this.todo.type != 'storage' && this.todo.type != 'catWaste') {
+      this.openPreview()
     }
-    this.leftoverService.getOneLeftover(this.todo.id).subscribe(value => {
-      let leftover: Leftover = value.payload;
-      leftover.processed = true;
-      this.leftoverService.putLeftover(leftover).subscribe();
-    })
-    if (this.todo.type == 'catWaste') {
-      this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(value => {
-        let waste: Waste = value.payload;
-        waste.userId = this.userId;
-        waste.dateProcessed = Date.now();
-        waste.enabled = true;
-        this.wasteService.putWaste(waste).subscribe();
-      });
-    } else if (this.todo.type == 'storage') {
-      this.voorraadService.getOneVoorraadByLeftoverID(this.todo.id).subscribe(value => {
-        let voorraad: Voorraad = value.payload;
-        voorraad.userId = this.userId;
-        voorraad.dateProcessed = Date.now();
-        voorraad.enabled = true;
-        this.voorraadService.putVoorraad(voorraad).subscribe();
+    if(this.todo.type == 'catWaste'){
+      this.openPreviewWaste()
+    }
+    this.downloaded = true;
+    if (this.downloaded || this.todo.type == 'storage') {
+      this.leftoverService.getOneLeftover(this.todo.id).subscribe(value => {
+        let leftover: Leftover = value.payload;
+        leftover.processed = true;
+        this.leftoverService.putLeftover(leftover).subscribe();
       })
-    } else {
-      this.orderService.getOrderByLeftoverID(this.todo.id).subscribe(value => {
-        let order: Order = value.payload;
-        order.userId = this.userId;
-        order.dateProcessed = Date.now();
-        order.enabled = true;
-        this.orderService.putOrder(order).subscribe();
-        this.customerService.getCustomerByLeftoverID(order.id).subscribe(value => {
+      if (this.todo.type == 'catWaste') {
+        this.wasteService.getOneWasteByLeftoverID(this.todo.id).subscribe(value => {
+          let waste: Waste = value.payload;
+          waste.userId = this.userId;
+          waste.dateProcessed = Date.now();
+          waste.enabled = true;
+          this.wasteService.putWaste(waste).subscribe();
         });
+      } else if (this.todo.type == 'storage') {
+        this.voorraadService.getOneVoorraadByLeftoverID(this.todo.id).subscribe(value => {
+          let voorraad: Voorraad = value.payload;
+          voorraad.userId = this.userId;
+          voorraad.dateProcessed = Date.now();
+          voorraad.enabled = true;
+          this.voorraadService.putVoorraad(voorraad).subscribe();
+        })
+      } else {
+        this.orderService.getOrderByLeftoverID(this.todo.id).subscribe(value => {
+          let order: Order = value.payload;
+          order.userId = this.userId;
+          order.dateProcessed = Date.now();
+          order.enabled = true;
+          this.orderService.putOrder(order).subscribe();
+          this.customerService.getCustomerByLeftoverID(order.id).subscribe(value => {
+          });
+        })
+      }
+      let outputList = this.list.filter(leftover => {
+        return leftover.id !== this.todo.id;
       })
+      this.toastService.show('', "You've just processed a Leftover.\n Good Job!");
+      this.doneOutput.emit(outputList);
     }
-    let outputList = this.list.filter(leftover => {
-      return leftover.id !== this.todo.id;
-    })
-    this.toastService.show('', "You've just processed a Leftover.\n Good Job!");
-    this.doneOutput.emit(outputList);
   }
 
   /**

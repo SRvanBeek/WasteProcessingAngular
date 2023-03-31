@@ -4,6 +4,10 @@
   </div>
 <div class="row filterheader">
   <div class="btnCtn col-sm-2">
+    <button class="btn disableButton" (click)="checkEnableOrDisable(enabled.value)" [disabled]="disableChecklist.length === 0">
+      {{ enabled.value == 'Enabled' ? 'Disable' : 'Enable'}}</button>
+  </div>
+  <div class="btnCtn col-sm-2">
     <button class="btn detailsButton" (click)="openDetails()">Details</button>
   </div>
   <select class="form-select dropdownbar col-sm-2" aria-label="Select type" (change)="getType(typeSelection.value)" #typeSelection>
@@ -13,29 +17,30 @@
     <option value="storage">Storage</option>
   </select>
 
-  <select class="form-select dropdownbar2" aria-label="Select Customer" (change)="getCustomer(customerSelection.value)" #customerSelection >
-    <option value="all" selected>All-Customers</option>
-    <option *ngFor="let customer of customerList; let i = index" value="{{customer.customerID}}" >{{customer.customerID}}</option>
+  <select class="form-select dropdownbar2" aria-label="Select Enabled" (change)="getEnabledDisabled(enabled.value)" #enabled >
+    <option>Enabled</option>
+    <option>Disabled</option>
   </select>
   <input class="searchbar" type="text" name="search" [(ngModel)]="searchText" placeholder="Search...">
-
 
 </div>
 <div class="row size">
   <div class="row">
-    <div style="width: 100px"></div>
+    <div style="width: 95px"></div>
     <div class="listIdentifiers col-sm-10">
       <h1 class="col-sm-2" style="margin-left: auto">Article Number</h1>
       <h1 class="col-sm-2">Customer</h1>
       <h1 class="col-sm-2">Type</h1>
       <h1 class="col-sm-2">Employee</h1>
-      <h1 class="col-sm-2">metrage</h1>
+      <h1 class="col-sm-2">Metrage</h1>
       <h1 class="col-sm-2">Date</h1>
   </div>
   </div>
 
-  <ul *ngFor="let leftover of leftovers | filter:searchText">
-    <app-history-item [leftover]="leftover" (refresh)="refresh()"></app-history-item>
-  </ul>
+  <div class="history">
+    <ul class="list-unstyled" *ngFor="let leftover of shownLeftovers | filter:searchText">
+      <app-history-item [leftover]="leftover" (disableInfo)="checklistItems($event)" ></app-history-item>
+    </ul>
+  </div>
 </div>
 </div>
