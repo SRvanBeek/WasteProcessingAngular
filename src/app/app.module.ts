@@ -19,18 +19,14 @@ import {BrowserModule} from "@angular/platform-browser";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {HistoryModule} from "./history/history.module";
 import {CustomersModule} from "./customers/customers.module";
-import { ChangeNameDialogComponent } from './users/change-name-dialog/change-name-dialog.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import { ChangeUsernameDialogComponent } from './users/change-username-dialog/change-username-dialog.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChangeNameDialogComponent,
-    ChangeUsernameDialogComponent,
   ],
     imports: [
         BrowserModule,
